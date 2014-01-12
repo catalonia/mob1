@@ -22,16 +22,26 @@
     __weak IBOutlet UIScrollView *scrollViewCuisine, *scrollViewPrice;
     __weak IBOutlet UIButton *btSaved, *btFavs, *btDeals, *btShow, *btHide;
     __weak IBOutlet UILabel *lbSaved, *lbFaved;
-    __weak IBOutlet UISegmentedControl *segCtrCuisine, *segCtrPrice;
     
     int _rating;
     BOOL saved, favs , deals, restaurantChains;
     
-    RateCustom *rateCustom;
     NSMutableDictionary *filterDict;
     
     __weak IBOutlet UILabel *lbCusine, *lbPrice, *lbRating, *lbShowOnlyThese;
     
+    
+    NSMutableArray *arrDataAsk;
+    NSMutableArray *arrayCuisine;
+    NSMutableArray *arrayAmbience;
+    NSMutableArray *arrayWhoWithYou;
+    NSMutableArray *arrayPrice;
+    NSMutableArray *arrayCity;
+    
+    IBOutlet UIView* _elementView;
+    IBOutlet UIView* _cuisineView;
+    IBOutlet UITableView* _tableViewPrice;
+    IBOutlet UITableView* _tableViewCuisine;
 }
 
 @property (nonatomic, strong) NSMutableArray *arrData, *arrDataFilter , *arrDataRestaurant , *arrDataRegion;

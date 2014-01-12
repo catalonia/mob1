@@ -14,6 +14,9 @@
 #import "TSCuisineObj.h"
 #import "LoadDataCell.h"
 #import "Flurry.h"
+#import "AskObject.h"
+
+#define DELTAHEIGHT 170
 
 @interface RestaurantVC ()
 {
@@ -61,6 +64,77 @@ typedef enum _TFSelect
         // Custom initialization
     }
     return self;
+}
+
+- (void) initUI
+{
+    [self actionHide:nil];
+    
+    scrollViewMain.delegate = self;
+    
+    viewFilterExtends.hidden = YES;
+    [self refreshView];
+    
+    arrDataAsk = [[NSMutableArray alloc] init];
+    _arrDataFilter = [[NSMutableArray alloc]init];
+    arrayCuisine = [[NSMutableArray alloc]init];
+    arrayAmbience = [[NSMutableArray alloc]init];
+    arrayWhoWithYou = [[NSMutableArray alloc]init];
+    arrayPrice = [[NSMutableArray alloc]init];
+    arrayCity = [[NSMutableArray alloc]init];
+    
+    for (TSGlobalObj* global in [CommonHelpers appDelegate].arrCuisine) {
+        AskObject* obj = [[AskObject alloc]init];
+        obj.object = global;
+        obj.selected = NO;
+        [arrayCuisine addObject:obj];
+    }
+    for (TSGlobalObj* global in [CommonHelpers appDelegate].arrDropdown) {
+        int i = 0;
+        for (TSGlobalObj* globalCuisine1 in [CommonHelpers appDelegate].arrCuisine) {
+            NSString* str1 = [NSString stringWithFormat:@"%@", global.name];
+            NSString* str2 = [NSString stringWithFormat:@"%@", globalCuisine1.name];
+            i++;
+            if ([str1 isEqualToString:str2]) {
+                break;
+            }
+        }
+        if (i == [CommonHelpers appDelegate].arrCuisine.count) {
+            AskObject* obj = [[AskObject alloc]init];
+            obj.object = global;
+            obj.selected = NO;
+            [arrayCuisine addObject:obj];
+        }
+    }
+    [arrayAmbience removeAllObjects];
+    for (TSGlobalObj* global in [CommonHelpers appDelegate].arrayAmbience) {
+        AskObject* obj = [[AskObject alloc]init];
+        obj.selected = NO;
+        obj.object = global;
+        [arrayAmbience addObject:obj];
+    }
+    
+    for (TSGlobalObj* global in [CommonHelpers appDelegate].arrWhoAreUWith) {
+        AskObject* obj = [[AskObject alloc]init];
+        obj.selected = NO;
+        obj.object = global;
+        [arrayWhoWithYou addObject:obj];
+    }
+    
+    for (TSGlobalObj* global in [CommonHelpers appDelegate].arrPrice) {
+        AskObject* obj = [[AskObject alloc]init];
+        obj.selected = NO;
+        obj.object = global;
+        [arrayPrice addObject:obj];
+    }
+    
+    _elementView.frame = CGRectMake(0, 44, self.view.frame.size.width, [UIScreen mainScreen].bounds.size.height - 44);
+    [self.view addSubview:_elementView];
+    _elementView.hidden = YES;
+    
+    _cuisineView.frame = CGRectMake(0, 44, self.view.frame.size.width, [UIScreen mainScreen].bounds.size.height - 44);
+    [self.view addSubview:_cuisineView];
+    _cuisineView.hidden = YES;
 }
 
 - (void)viewDidLoad
@@ -113,82 +187,6 @@ typedef enum _TFSelect
     // Dispose of any resources that can be recreated.
 }
 
-- (void) initUI
-{
-    
-    [self actionHide:nil];
-   
-    scrollViewMain.delegate = self;
-    
-    viewFilterExtends.hidden = YES;
-    
-    rateCustom = [[RateCustom alloc] initWithFrame:CGRectMake(20, 220, 150, 30)];
-    [viewFilterExtends addSubview:rateCustom];
-    rateCustom.delegate = self;
-    rateCustom.allowedRate = YES;
-    
-    
-    for (int i= 0; i< [[[CommonHelpers appDelegate] arrPrice] count]; i++) {
-        
-        TSGlobalObj* price = [[[CommonHelpers appDelegate ] arrPrice ] objectAtIndex:i];
-        if (i < 5)
-            [segCtrPrice setTitle:price.name forSegmentAtIndex:i];
-        else
-            [segCtrPrice insertSegmentWithTitle:price.name atIndex:i animated:NO];
-        
-        
-    }
-    
-    for (int i = 0; i< [[[CommonHelpers appDelegate] arrCuisine] count]; i++){
-        TSGlobalObj* cuisine = [[[CommonHelpers appDelegate] arrCuisine] objectAtIndex:i];
-        if (i < 5)
-            [segCtrCuisine setTitle:cuisine.name forSegmentAtIndex:i];
-        else
-            [segCtrCuisine insertSegmentWithTitle:cuisine.name atIndex:i animated:NO];
-    }
-    [self resizeSegmentsToFitTitles:segCtrCuisine];
-    
-    
-    
-    [segCtrCuisine addTarget:self action:@selector(actionSegmentControl:) forControlEvents:UIControlEventValueChanged];
-    
-    
-    [self fixSegmentedControlForiOS7:segCtrCuisine];
-    [segCtrPrice addTarget:self action:@selector(actionSegmentControl:) forControlEvents:UIControlEventValueChanged];
-    [self fixSegmentedControlForiOS7:segCtrPrice];
-    
-    NSMutableDictionary *textAttributes = [[NSMutableDictionary alloc] init];
-    [textAttributes setObject:[UIColor whiteColor] forKey:UITextAttributeTextColor];
-    
-    [segCtrCuisine setTintColor:SEGNMENT_COLOR];
-    [segCtrCuisine setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    [segCtrPrice setTintColor:SEGNMENT_COLOR];
-    [segCtrPrice setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    
-    segCtrCuisine.selectedSegmentIndex = -1;
-    segCtrPrice.selectedSegmentIndex = -1;
-
-    [self resizeSegmentsToFitTitles:segCtrPrice];
-    if ([CommonHelpers isiOS6]) {
-//        NSDictionary *underlinerAtt =@{NSUnderlineStyleAttributeName : @1};
-        lbCusine.attributedText = [[NSAttributedString alloc] initWithString:@"Cuisine"];
-        lbPrice.attributedText = [[NSAttributedString alloc] initWithString:@"Price"];
-        lbRating.attributedText = [[NSAttributedString alloc] initWithString:@"Rating"];
-        lbShowOnlyThese.attributedText = [[NSAttributedString alloc] initWithString:@"Show only these"];
-    }
-    
-    [self refreshView];
-    
-//    if ([CommonHelpers isPhone5]) {
-//        tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, 270);
-//    }
-//    else
-//    {
-//        tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, 180);
-//    }
-    
-}
-
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -234,6 +232,8 @@ typedef enum _TFSelect
             numberPage = [CommonHelpers appDelegate].numberPage;
             isRestaurantRequest = YES;
             [tbvResult reloadData];
+            tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
+            scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
         }
         
         
@@ -345,6 +345,8 @@ typedef enum _TFSelect
         currentPage = 1;
         [_arrData removeAllObjects];
         [tbvResult reloadData];
+        tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
+        scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
         [self requestRestaurant];
     }
     
@@ -553,15 +555,17 @@ typedef enum _TFSelect
     if (filterExtendsShown) {
         viewFilterExtends.hidden = NO;
         viewFilterSmall.hidden = YES;
-        [scrollViewMain setContentSize:CGSizeMake(320, 360)];
         [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 450, tbvResult.frame.size.width, 180)];
+        tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
+        scrollViewMain.contentSize = CGSizeMake(320, tbvResult.contentSize.height + DELTAHEIGHT);
     }
     else
     {
         viewFilterExtends.hidden = YES;
         viewFilterSmall.hidden = NO;
-        [scrollViewMain setContentSize:CGSizeMake(320, 730)];
         [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 110, tbvResult.frame.size.width, 520)];
+        tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
+        scrollViewMain.contentSize = CGSizeMake(320, tbvResult.contentSize.height + DELTAHEIGHT);
     }
 }
 
@@ -600,10 +604,6 @@ typedef enum _TFSelect
         total += segWidth;
         [segCtrl setWidth:segWidth forSegmentAtIndex:i];
     }
-    if (segCtrl == segCtrCuisine)
-        [scrollViewCuisine setContentSize:CGSizeMake(segCtrCuisine.frame.size.width + 40, 30)];
-    else
-        [scrollViewPrice setContentSize:CGSizeMake(total + 5, 30)];
 }
 
 #pragma mark - IBAction Define
@@ -628,14 +628,14 @@ typedef enum _TFSelect
     if (favs) {
         favs = NO;
         [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_bt_addtomyfaves.png"] forButton:btFavs];
-        lbFaved.text = @"Add to Fav";
+        lbFaved.text = @"Favs";
         
     }
     else
     {
         favs = YES;
         [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_bt_addedtomyfaves.png"] forButton:btFavs];
-        lbFaved.text = @"Added to Fav";
+        lbFaved.text = @"Favs";
         
     }
 }
@@ -676,20 +676,6 @@ typedef enum _TFSelect
     
     
     TSGlobalObj *strObj;
-    
-
-    
-    if (segCtr == segCtrCuisine) {
-        strObj = [[[CommonHelpers appDelegate] arrCuisine] objectAtIndex:segCtr.selectedSegmentIndex];
-    }
-    else
-        if (segCtr == segCtrPrice) {
-        strObj =[[[CommonHelpers appDelegate] arrPrice] objectAtIndex:segCtr.selectedSegmentIndex];
-        }
-        else
-        {
-        
-        }
 
     if ([arrDataStickFilter containsObject:strObj]) {
         [arrDataStickFilter removeObject:strObj];
@@ -740,6 +726,7 @@ typedef enum _TFSelect
 {
     if (tableView==tbvResult) {
         if (_arrData) {
+            
             if (currentPage >= numberPage || _restaurantSearch)
                 return _arrData.count;
             else
@@ -860,6 +847,8 @@ typedef enum _TFSelect
             lbTypingRestaurant.hidden = YES;
             restaurant = obj;
             [tbvResult reloadData];
+            tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
+            scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
             [arrayResID addObject:obj.uid];
         }
         else if (TFSelected == TFRegion)
@@ -1054,13 +1043,8 @@ typedef enum _TFSelect
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if (scrollView == scrollViewMain) {
-        
-        //debug(@"scrollViewMain ->scrollViewDidEndDragging");
-    }
-    else if(scrollView == tbvResult)
-    {
-        if(scrollView.contentOffset.y == scrollView.contentSize.height - tbvResult.frame.size.height)
+
+        if(scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.frame.size.height)
         {
             currentPage++;
             
@@ -1073,7 +1057,7 @@ typedef enum _TFSelect
             }
             
         }
-    }
+    
 }
 
 #pragma mark response Data
@@ -1116,6 +1100,8 @@ typedef enum _TFSelect
             tbvFilter.hidden = NO;
             [tbvFilter reloadData];
             [tbvResult reloadData];
+            tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
+            scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
         }
     }
     if (key == 2) {
@@ -1151,6 +1137,8 @@ typedef enum _TFSelect
             tbvFilter.hidden = NO;
             [tbvFilter reloadData];
             [tbvResult reloadData];
+            tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
+            scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
         }
     }
     if (key == 3) {
@@ -1192,6 +1180,8 @@ typedef enum _TFSelect
         }
         //_arrData = _arrDataRestaurant;
         [tbvResult reloadData];
+        tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
+        scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
         
         
     }
@@ -1237,6 +1227,8 @@ typedef enum _TFSelect
         numberPage = [CommonHelpers appDelegate].numberPage;
         _arrData = [[NSMutableArray alloc]initWithArray:[CommonHelpers appDelegate].arrayRestaurant];
         [tbvResult reloadData];
+        tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
+        scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
     }
 }
 
@@ -1251,4 +1243,12 @@ typedef enum _TFSelect
 }
 
 
+-(IBAction)cuisinePress:(id)sender
+{
+    
+}
+-(IBAction)ambiencePress:(id)sender
+{
+    
+}
 @end

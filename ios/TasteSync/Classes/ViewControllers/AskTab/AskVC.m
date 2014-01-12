@@ -27,6 +27,7 @@
     NSMutableArray *arrayWhoWithYou;
     NSMutableArray *arrayPrice;
     NSMutableArray *arrayCity;
+    
     TSGlobalObj *region;
     NSString* cityLocal;
     BOOL isCuisine;
@@ -185,7 +186,6 @@
             [arrayCuisine addObject:obj];
         }
     }
-    //[self sortArray:arrayCuisine];
     [arrayAmbience removeAllObjects];
     for (TSGlobalObj* global in [CommonHelpers appDelegate].arrayAmbience) {
         AskObject* obj = [[AskObject alloc]init];
@@ -193,20 +193,6 @@
         obj.object = global;
         [arrayAmbience addObject:obj];
     }
-    
-//    for (TSGlobalObj* global in [CommonHelpers appDelegate].arrTheme) {
-//        AskObject* obj = [[AskObject alloc]init];
-//        obj.selected = NO;
-//        obj.object = global;
-//        [arrayAmbience addObject:obj];
-//    }
-//    
-//    for (TSGlobalObj* global in [CommonHelpers appDelegate].arrTypeOfRestaurant) {
-//        AskObject* obj = [[AskObject alloc]init];
-//        obj.selected = NO;
-//        obj.object = global;
-//        [arrayAmbience addObject:obj];
-//    }
     
     for (TSGlobalObj* global in [CommonHelpers appDelegate].arrWhoAreUWith) {
         AskObject* obj = [[AskObject alloc]init];
