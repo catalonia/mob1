@@ -974,9 +974,6 @@ typedef enum _TFSelect
                 [request setFormPostValue:region1.cityObj.uid forKey:@"cityid"];
             [request startFormRequest];
         }
-        if (txt.length >= 1) {
-            [tbvFilter setFrame:CGRectMake(20, tbvFilter.frame.origin.y, tbvFilter.frame.size.width, tbvFilter.frame.size.height)];
-        }
         
     }
     else if(TFSelected == TFRegion)
@@ -990,9 +987,6 @@ typedef enum _TFSelect
             [request startFormRequest];
         }
         
-        if (txt.length >= 1) {
-            [tbvFilter setFrame:CGRectMake(160, tbvFilter.frame.origin.y, tbvFilter.frame.size.width, tbvFilter.frame.size.height)];
-        }
         
     }
     else
@@ -1089,14 +1083,6 @@ typedef enum _TFSelect
         _arrDataFilter = [[NSMutableArray alloc]initWithArray:_arrDataRestaurant];
         _arrData = [[NSMutableArray alloc]initWithArray:_arrDataRestaurant];
         if (self.arrDataFilter.count>0) {
-            CGRect frame = tbvFilter.frame;
-            if (self.arrDataFilter.count > 5) {
-                frame.size.height = 5*44;
-                
-            }
-            else{
-                frame.size.height = (_arrDataFilter.count) *44;
-            }
             tbvFilter.hidden = NO;
             [tbvFilter reloadData];
             [tbvResult reloadData];
@@ -1126,14 +1112,6 @@ typedef enum _TFSelect
         }
         _arrDataFilter = [[NSMutableArray alloc]initWithArray:_arrDataRegion];
         if (self.arrDataFilter.count>0) {
-            CGRect frame = tbvFilter.frame;
-            if (self.arrDataFilter.count > 5) {
-                frame.size.height = 5*44;
-                
-            }
-            else{
-                frame.size.height = (_arrDataFilter.count) *44;
-            }
             tbvFilter.hidden = NO;
             [tbvFilter reloadData];
             [tbvResult reloadData];
@@ -1245,10 +1223,54 @@ typedef enum _TFSelect
 
 -(IBAction)cuisinePress:(id)sender
 {
-    
+    _cuisineView.hidden = NO;
 }
 -(IBAction)ambiencePress:(id)sender
 {
+    _elementView.hidden = NO;
+}
+-(IBAction)doneAction:(id)sender
+{
+    [self showTabBar:self.tabBarController];
+    [_textFieldSearch resignFirstResponder];
+    _elementView.hidden = YES;
+    _cuisineView.hidden = YES;
+}
+- (void)showTabBar:(UITabBarController *)tabbarcontroller
+{
+    tabbarcontroller.tabBar.hidden = NO;
+    [UIView animateWithDuration:0.3 animations:^{
+        for (UIView *view in tabbarcontroller.view.subviews) {
+            if ([view isKindOfClass:[UITabBar class]]) {
+                [view setFrame:CGRectMake(view.frame.origin.x, [UIScreen mainScreen].bounds.size.height - 49.0f, view.frame.size.width, view.frame.size.height)];
+            }
+            else {
+                NSLog(@"view.frame.size.height-49.f: %f", view.frame.size.height);
+                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, [UIScreen mainScreen].bounds.size.height-49.f)];
+            }
+        }
+    } completion:^(BOOL finished) {
+        //do smth after animation finishes
+    }];
+}
+- (void)hideTabBar:(UITabBarController *)tabbarcontroller
+{
     
+    [UIView animateWithDuration:0.3 animations:^{
+        for (UIView *view in tabbarcontroller.view.subviews) {
+            if ([view isKindOfClass:[UITabBar class]]) {
+                [view setFrame:CGRectMake(view.frame.origin.x, [UIScreen mainScreen].bounds.size.height, view.frame.size.width, view.frame.size.height)];
+            }
+            else {
+                NSLog(@"view.frame.size.height-49.f: %f", view.frame.size.height);
+                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, [UIScreen mainScreen].bounds.size.height)];
+            }
+        }
+    } completion:^(BOOL finished) {
+        //do smth after animation finishes
+        tabbarcontroller.tabBar.hidden = YES;
+    }];
+    scrollViewMain.frame = CGRectMake(0, 0, self.view.frame.size.width, [UIScreen mainScreen].bounds.size.height - 44);
+    _cuisineImage.frame = CGRectMake(0, 0, self.view.frame.size.width, [UIScreen mainScreen].bounds.size.height - 44);
 }
 @end

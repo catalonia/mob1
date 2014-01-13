@@ -42,6 +42,8 @@
     IBOutlet UIView* _cuisineView;
     IBOutlet UITableView* _tableViewPrice;
     IBOutlet UITableView* _tableViewCuisine;
+    __weak IBOutlet UIImageView* _cuisineImage;
+    IBOutlet UITextField* _textFieldSearch;
 }
 
 @property (nonatomic, strong) NSMutableArray *arrData, *arrDataFilter , *arrDataRestaurant , *arrDataRegion;
