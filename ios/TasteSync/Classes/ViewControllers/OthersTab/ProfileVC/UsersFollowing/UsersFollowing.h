@@ -16,6 +16,7 @@
     __weak IBOutlet UITextField *tfSearch;
     __weak IBOutlet UILabel *lbTitle, *lbSwipe;
     __weak IBOutlet UIView *viewSearch;
+    __weak IBOutlet UIScrollView *scrollView;
 }
 
 

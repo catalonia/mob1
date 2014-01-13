@@ -596,13 +596,16 @@
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (actionSheet.tag == 1) {
-        [self sendEmailWithAddress:_contactObj ForIndex:(buttonIndex - 1)];
+    if (buttonIndex != 0) {
+        if (actionSheet.tag == 1) {
+            [self sendEmailWithAddress:_contactObj ForIndex:(buttonIndex - 1)];
+        }
+        else
+        {
+            [self sendMessageWithPhonenumber:_contactObj ForIndex:(buttonIndex - 1)];
+        }
     }
-    else
-    {
-        [self sendMessageWithPhonenumber:_contactObj ForIndex:(buttonIndex - 1)];
-    }
+    
 }
 -(IBAction)actionBack
 {

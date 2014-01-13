@@ -4338,8 +4338,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Deepinder Gulati (5HB37YQTV3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Deepinder Gulati (5HB37YQTV3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ha Phuoc Viet (ZWR3632EW5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ha Phuoc Viet (ZWR3632EW5)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -4361,8 +4361,8 @@
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
+				PROVISIONING_PROFILE = "770C18F3-81E2-421B-B0AC-DAC9AE891936";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "770C18F3-81E2-421B-B0AC-DAC9AE891936";
 				SDKROOT = iphoneos6.1;
 			};
 			name = Debug;
@@ -4376,8 +4376,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Deepinder Gulati (5HB37YQTV3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Deepinder Gulati (5HB37YQTV3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ha Phuoc Viet (ZWR3632EW5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ha Phuoc Viet (ZWR3632EW5)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -4393,8 +4393,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
+				PROVISIONING_PROFILE = "770C18F3-81E2-421B-B0AC-DAC9AE891936";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "770C18F3-81E2-421B-B0AC-DAC9AE891936";
 				SDKROOT = iphoneos6.1;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4403,9 +4403,9 @@
 		5E7D2C8116D3532A00D85642 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Phan Phu (X53F2TT9AQ)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Deepinder Gulati (5HB37YQTV3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Deepinder Gulati (5HB37YQTV3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ha Phuoc Viet (ZWR3632EW5)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Ha Phuoc Viet (ZWR3632EW5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ha Phuoc Viet (ZWR3632EW5)";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TasteSync/TasteSync-Prefix.pch";
@@ -4418,9 +4418,9 @@
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3E40DECC-7245-4890-9308-B46FD35651E9";
-				"PROVISIONING_PROFILE[sdk=*]" = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
+				PROVISIONING_PROFILE = "770C18F3-81E2-421B-B0AC-DAC9AE891936";
+				"PROVISIONING_PROFILE[sdk=*]" = "770C18F3-81E2-421B-B0AC-DAC9AE891936";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "770C18F3-81E2-421B-B0AC-DAC9AE891936";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4429,8 +4429,8 @@
 		5E7D2C8216D3532A00D85642 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Deepinder Gulati (5HB37YQTV3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Deepinder Gulati (5HB37YQTV3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ha Phuoc Viet (ZWR3632EW5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ha Phuoc Viet (ZWR3632EW5)";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TasteSync/TasteSync-Prefix.pch";
@@ -4443,8 +4443,8 @@
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
+				PROVISIONING_PROFILE = "770C18F3-81E2-421B-B0AC-DAC9AE891936";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "770C18F3-81E2-421B-B0AC-DAC9AE891936";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

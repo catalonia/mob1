@@ -13,7 +13,7 @@
 #import "UserProfileCell.h"
 #import "JSONKit.h"
 
-@interface UsersFollowing ()<UserProfileCellDelegate>
+@interface UsersFollowing ()<UserProfileCellDelegate,UIGestureRecognizerDelegate>
 {
 }
 - (IBAction)actionBack:(id)sender;
@@ -35,8 +35,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    
+    
     [CommonHelpers setBackgroudImageForView:self.view];
+    
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    NSLog(@"abcde");
+    return YES;
     
 }
 
@@ -270,7 +279,7 @@
                               delay:0
                             options: UIViewAnimationCurveEaseIn
                          animations:^{
-                             self.view.frame=CGRectMake(self.view.frame.origin.x,-200,self.view.frame.size.width, self.view.frame.size.height);
+                             scrollView.contentOffset = CGPointMake(0, 240);
                          }
                          completion:^(BOOL finished){
                              debug(@"move done");
@@ -287,6 +296,7 @@
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
     //    [self onClickLookup:nil];
+    tbvFilter.hidden = YES;
     [self hideKeyBoard];
     return YES;
 }
@@ -310,7 +320,6 @@
     return TRUE;
     
 }
-
 # pragma mark - Others
 
 
@@ -341,13 +350,13 @@
                           delay:0
                         options: UIViewAnimationCurveEaseIn
                      animations:^{
-                         self.view.frame=CGRectMake(self.view.frame.origin.x,0,self.view.frame.size.width, self.view.frame.size.height);
+                        scrollView.contentOffset = CGPointMake(0, 0);
                      }
                      completion:^(BOOL finished){
                          debug(@"move done");
                          
                      }];
-    
+    tfSearch.text = @"Search for people by name";
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

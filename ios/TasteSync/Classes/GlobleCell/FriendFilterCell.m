@@ -115,8 +115,11 @@
 
 -(void)loadAvatar
 {
-    userObj.avatar = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:userObj.avatarUrl]]];
-    ivAvatar.image = userObj.avatar;
+    @autoreleasepool {
+        userObj.avatar = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:userObj.avatarUrl]]];
+        ivAvatar.image = userObj.avatar;
+    }
+    
 }
 
 @end
