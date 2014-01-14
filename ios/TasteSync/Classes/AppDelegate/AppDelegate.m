@@ -168,6 +168,7 @@ askSubmited=_askSubmited;
     self.arrWhoAreUWith = [[NSMutableArray alloc] init];
     self.arrDropdown = [[NSMutableArray alloc] init];
     self.arrDataFBFriends = [[NSMutableArray alloc] init];
+    self.arrRate = [[NSMutableArray alloc] init];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -348,7 +349,20 @@ askSubmited=_askSubmited;
             [self.arrWhoAreUWith addObject:obj];
         }
         
-        
+        //parse Rate
+        NSArray* arrayRate = [dic objectForKey:@"rate"];
+        for (NSDictionary* dic in arrayRate) {
+            AskObject* askObject = [[AskObject alloc]init];
+            TSGlobalObj* obj = [[TSGlobalObj alloc]init];
+            obj.type = GlobalDataRate;
+            obj.uid = [dic objectForKey:@"id"];
+            obj.name = [dic objectForKey:@"name"];
+            askObject.object = obj;
+            askObject.selected = NO;
+
+            
+            [self.arrRate addObject:askObject];
+        }
         
         NSLog(@"arrCuisine: %d"                     , [self.arrCuisine count]);
         NSLog(@"arrOccasion: %d"                  , [self.arrOccasion count]);

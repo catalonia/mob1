@@ -123,6 +123,7 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+     [self showTabBar:self.tabBarController];
     NSLog(@"%d %d %d %d %d - %d", number_ambience, number_cuisine, number_neighborhood, number_whoareyou, number_price, number_recomendation);
     
     NSDictionary *askhomeParams =
@@ -325,11 +326,6 @@
     
     
 }
-
-
-
-
-
 - (IBAction)actionGetLiveRecommendations:(id)sender
 {
     [CommonHelpers appDelegate].askSubmited = YES;
@@ -727,10 +723,11 @@
     [UIView animateWithDuration:0.3 animations:^{
         for (UIView *view in tabbarcontroller.view.subviews) {
             if ([view isKindOfClass:[UITabBar class]]) {
-                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y-49.f, view.frame.size.width, view.frame.size.height)];
+                [view setFrame:CGRectMake(view.frame.origin.x, [UIScreen mainScreen].bounds.size.height - 49.0f, view.frame.size.width, view.frame.size.height)];
             }
             else {
-                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, view.frame.size.height-49.f)];
+                NSLog(@"view.frame.size.height-49.f: %f", view.frame.size.height);
+                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, [UIScreen mainScreen].bounds.size.height-49.f)];
             }
         }
     } completion:^(BOOL finished) {
@@ -739,14 +736,15 @@
 }
 - (void)hideTabBar:(UITabBarController *)tabbarcontroller
 {
-
+    
     [UIView animateWithDuration:0.3 animations:^{
         for (UIView *view in tabbarcontroller.view.subviews) {
             if ([view isKindOfClass:[UITabBar class]]) {
-                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y+49.f, view.frame.size.width, view.frame.size.height)];
+                [view setFrame:CGRectMake(view.frame.origin.x, [UIScreen mainScreen].bounds.size.height, view.frame.size.width, view.frame.size.height)];
             }
             else {
-                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, view.frame.size.height+49.f)];
+                NSLog(@"view.frame.size.height-49.f: %f", view.frame.size.height);
+                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, [UIScreen mainScreen].bounds.size.height)];
             }
         }
     } completion:^(BOOL finished) {

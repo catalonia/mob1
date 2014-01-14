@@ -15,6 +15,8 @@
 #import "LoadDataCell.h"
 #import "Flurry.h"
 #import "AskObject.h"
+#import "AskCell.h"
+#import "AskContactCell.h"
 
 #define DELTAHEIGHT 170
 
@@ -75,13 +77,16 @@ typedef enum _TFSelect
     viewFilterExtends.hidden = YES;
     [self refreshView];
     
-    arrDataAsk = [[NSMutableArray alloc] init];
-    _arrDataFilter = [[NSMutableArray alloc]init];
+    arrDataFilterSelect = [[NSMutableArray alloc]init];
+    arrayFilterBoxData = [[NSMutableArray alloc]init];
     arrayCuisine = [[NSMutableArray alloc]init];
     arrayAmbience = [[NSMutableArray alloc]init];
     arrayWhoWithYou = [[NSMutableArray alloc]init];
     arrayPrice = [[NSMutableArray alloc]init];
     arrayCity = [[NSMutableArray alloc]init];
+    arrayCity = [[NSMutableArray alloc]initWithArray:[CommonHelpers appDelegate].arrayNeighberhood];
+    arrayRate = [[NSMutableArray alloc]init];
+    arrayRate = [[NSMutableArray alloc]initWithArray:[CommonHelpers appDelegate].arrRate];
     
     for (TSGlobalObj* global in [CommonHelpers appDelegate].arrCuisine) {
         AskObject* obj = [[AskObject alloc]init];
@@ -734,8 +739,11 @@ typedef enum _TFSelect
         }
     }else
     {
-        if (_arrDataFilter) {
+        if (_arrDataFilter && tableView == tbvFilter) {
             return _arrDataFilter.count;
+        }
+        if ((tableView == _tableViewCuisine || tableView == _tableViewPrice) && arrayFilterBoxData) {
+            return arrayFilterBoxData.count;
         }
     }
     
@@ -772,7 +780,7 @@ typedef enum _TFSelect
 //        cell.delegate =self;
         return cell;
     }
-    else
+    if (tableView==tbvFilter)
     {
         static NSString *CellIndentifier = @"cell";
         
@@ -792,7 +800,52 @@ typedef enum _TFSelect
         
         return cell;
     }
-    
+    if (tableView == _tableViewPrice) {
+        static NSString *CellIndentifier = @"AskCell";
+        
+        AskCell *cell = (AskCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
+        
+        if (cell==nil) {
+            NSLog(@"cell is nil");
+            cell =(AskCell *) [[[NSBundle mainBundle ] loadNibNamed:CellIndentifier owner:self options:nil] objectAtIndex:0];
+        }
+        AskObject* obj = [arrayFilterBoxData objectAtIndex:indexPath.row];
+        cell.name.text = obj.object.name;
+        //this is code resize image
+        NSString *fileName = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:[NSString stringWithFormat:@"/%@",obj.object.imageURL]];
+        cell.image.image = [CommonHelpers generateThumbnailFromImage:[UIImage imageWithContentsOfFile:fileName] withSize:CGSizeMake(290, 94)];
+        //not resize
+        //cell.image.image = [CommonHelpers getImageFromName:@"images.jpeg"];
+        if (obj.selected) {
+            cell.selectImage.hidden = NO;
+        }
+        else
+        {
+            cell.selectImage.hidden = YES;
+        }
+        
+        return cell;
+    }
+    else
+    {
+        static NSString* CellIndentifier = @"AskContactCell";
+        AskContactCell *cell = (AskContactCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
+        
+        if (cell==nil) {
+            cell =(AskContactCell *) [[[NSBundle mainBundle ] loadNibNamed:CellIndentifier owner:self options:nil] objectAtIndex:0];
+        }
+        AskObject* obj = [arrayFilterBoxData objectAtIndex:indexPath.row];
+        if (obj.selected) {
+            [cell.buttonright setImage:[CommonHelpers getImageFromName:@"Tick mark icon.png"] forState:UIControlStateHighlighted];
+            [cell.buttonright setImage:[CommonHelpers getImageFromName:@"Tick mark icon.png"] forState:UIControlStateNormal];
+        }
+        cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.3];
+        cell.name.text = obj.object.name;
+        cell.name.textColor = [UIColor whiteColor];
+        //cell.name.font = [UIFont systemFontOfSize:14];
+        cell.name.frame = CGRectMake(cell.name.frame.origin.x, cell.name.frame.origin.y, cell.name.frame.size.width + 20, cell.name.frame.size.height);
+        return cell;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -821,7 +874,7 @@ typedef enum _TFSelect
         cell.isJustName = _restaurantSearch;
         return [cell getHeight:obj.restaurantObj];
     }
-    else
+    if (tableView==tbvFilter)
     {
         static NSString *CellIndentifier = @"cell";
         
@@ -833,6 +886,26 @@ typedef enum _TFSelect
         
         return cell.frame.size.height;
     }
+    if (tableView == _tableViewPrice) {
+        static NSString *CellIndentifier = @"AskCell";
+        AskCell *cell = (AskCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
+        if (cell==nil) {
+            NSLog(@"cell is nil");
+            cell =(AskCell *) [[[NSBundle mainBundle ] loadNibNamed:@"AskCell" owner:self options:nil] objectAtIndex:0];
+        }
+        return cell.frame.size.height;
+    }
+    else
+    {
+        static NSString* CellIndentifier = @"AskContactCell";
+        AskContactCell *cell = (AskContactCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
+        
+        if (cell==nil) {
+            cell =(AskContactCell *) [[[NSBundle mainBundle ] loadNibNamed:@"AskContactCell" owner:self options:nil] objectAtIndex:0];
+        }
+        return cell.frame.size.height;
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -871,7 +944,7 @@ typedef enum _TFSelect
        
         [self.arrDataFilter removeAllObjects];
     }
-    else
+    if (tableView == tbvResult)
     {
         if (indexPath.row < _arrData.count) {
             TSGlobalObj* obj = [_arrData objectAtIndex:indexPath.row];
@@ -886,6 +959,49 @@ typedef enum _TFSelect
             [self.navigationController pushViewController:vc animated:YES];
         }
         
+    }
+    if (tableView == _tableViewCuisine) {
+        if (isCuisine) {
+            AskObject* obj = [arrayFilterBoxData objectAtIndex:indexPath.row];
+            obj.selected = !obj.selected;
+            [_tableViewCuisine reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        else
+        {
+            AskObject* obj = [arrayFilterBoxData objectAtIndex:indexPath.row];
+            if (obj.selected == YES) {
+                obj.selected = NO;
+                if (isRate) {
+                    ratesObject = nil;
+                }
+                else
+                    neighberhoodObject = nil;
+            }
+            else
+            {
+                obj.selected = YES;
+                if (isRate) {
+                    if (ratesObject != nil) {
+                        ratesObject.selected = NO;
+                    }
+                    ratesObject = obj;
+                }
+                else
+                {
+                    if (neighberhoodObject != nil) {
+                        neighberhoodObject.selected = NO;
+                    }
+                    neighberhoodObject = obj;
+                }
+            }
+            
+            [_tableViewCuisine reloadData];
+        }
+    }
+    if (tableView == _tableViewPrice) {
+        AskObject* obj = [arrayFilterBoxData objectAtIndex:indexPath.row];
+        obj.selected = !obj.selected;
+        [_tableViewPrice reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
@@ -993,9 +1109,6 @@ typedef enum _TFSelect
     {
         
     }
-    
-
-    
 }
 
 
@@ -1037,7 +1150,7 @@ typedef enum _TFSelect
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-
+    if (scrollView != _tableViewPrice && scrollView != _tableViewCuisine) {
         if(scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.frame.size.height)
         {
             currentPage++;
@@ -1051,6 +1164,8 @@ typedef enum _TFSelect
             }
             
         }
+    }
+    
     
 }
 
@@ -1210,6 +1325,121 @@ typedef enum _TFSelect
     }
 }
 
+-(IBAction)doneAction:(id)sender
+{
+    [self showTabBar:self.tabBarController];
+    [_textFieldSearch resignFirstResponder];
+    _elementView.hidden = YES;
+    _cuisineView.hidden = YES;
+    UIButton* button = (UIButton*)sender;
+    if (button.tag == 0) {
+        
+        ambienceImage.hidden = YES;
+        for (AskObject* obj in arrayAmbience) {
+            if (obj.selected == YES && ![arrDataFilterSelect containsObject:obj.object]) {
+                [arrDataFilterSelect addObject:obj.object];
+                ambienceImage.hidden = NO;
+            }
+            if (obj.selected == NO)
+            {
+                [arrDataFilterSelect removeObject:obj.object];
+            }
+            else
+            {
+                ambienceImage.hidden = NO;
+            }
+        }
+        
+        priceImage.hidden = YES;
+        for (AskObject* obj in arrayPrice) {
+            if (obj.selected == YES && ![arrDataFilterSelect containsObject:obj.object]) {
+                [arrDataFilterSelect addObject:obj.object];
+                priceImage.hidden = NO;
+            }
+            if (obj.selected == NO)
+            {
+                [arrDataFilterSelect removeObject:obj.object];
+            }
+            else
+            {
+                priceImage.hidden = NO;
+            }
+        }
+        
+        whoareyouImage.hidden = YES;
+        for (AskObject* obj in arrayWhoWithYou) {
+            if (obj.selected == YES && ![arrDataFilterSelect containsObject:obj.object]) {
+                [arrDataFilterSelect addObject:obj.object];
+                whoareyouImage.hidden = NO;
+            }
+            if (obj.selected == NO)
+            {
+                [arrDataFilterSelect removeObject:obj.object];
+            }
+            else
+            {
+                whoareyouImage.hidden = NO;
+            }
+        }
+    }
+    else
+    {
+        neighberhoodImage.hidden = YES;
+        for (AskObject* obj in arrayCity) {
+            if (obj.selected == YES && ![arrDataFilterSelect containsObject:obj.object]) {
+                [arrDataFilterSelect addObject:obj.object];
+            }
+            if (obj.selected == NO)
+            {
+                [arrDataFilterSelect removeObject:obj.object];
+            }
+            else
+            {
+                neighberhoodImage.hidden = NO;
+            }
+            
+        }
+        
+        rateImage.hidden = YES;
+        for (AskObject* obj in arrayRate) {
+            if (obj.selected == YES && ![arrDataFilterSelect containsObject:obj.object]) {
+                [arrDataFilterSelect addObject:obj.object];
+            }
+            if (obj.selected == NO)
+            {
+                [arrDataFilterSelect removeObject:obj.object];
+            }
+            else
+            {
+                rateImage.hidden = NO;
+            }
+            
+        }
+        
+        cuisineDataImage.hidden = YES;
+        for (AskObject* obj in arrayCuisine) {
+            if (obj.selected == YES && ![arrDataFilterSelect containsObject:obj.object]) {
+                [arrDataFilterSelect addObject:obj.object];
+                cuisineDataImage.hidden = NO;
+            }
+            if (obj.selected == NO)
+            {
+                [arrDataFilterSelect removeObject:obj.object];
+            }
+            else
+            {
+                cuisineDataImage.hidden = NO;
+            }
+        }
+        
+    }
+    
+    [arrayFilterBoxData removeAllObjects];
+    [_tableViewPrice reloadData];
+    [_tableViewCuisine reloadData];
+    
+}
+
 -(BOOL)isExist:(NSMutableArray*)array RestaurantID:(NSString*)uid
 {
     for (RestaurantObj* obj in array) {
@@ -1223,18 +1453,62 @@ typedef enum _TFSelect
 
 -(IBAction)cuisinePress:(id)sender
 {
+    [self hideTabBar:self.tabBarController];
     _cuisineView.hidden = NO;
+    [arrayFilterBoxData removeAllObjects];
+    _textFieldSearch.placeholder = @"Search Cuisines";
+    NSString *fileName = [[[NSBundle mainBundle] bundlePath] stringByAppendingString:[NSString stringWithFormat:@"/cuisine_popup_back.png"]];
+    _cuisineImage.image = [CommonHelpers generateThumbnailFromImage:[UIImage imageWithContentsOfFile:fileName] withSize:CGSizeMake(_cuisineImage.frame.size.width, _cuisineImage.frame.size.height)];
+    UIButton* button = (UIButton*)sender;
+    switch (button.tag) {
+        case 0:
+            arrayFilterBoxData = [[NSMutableArray alloc]initWithArray:arrayCuisine];
+            isCuisine = YES;
+            break;
+        case 1:
+            arrayFilterBoxData = [[NSMutableArray alloc]initWithArray:arrayCity];
+            isCuisine = NO;
+            isRate = NO;
+            break;
+        case 2:
+            arrayFilterBoxData = [[NSMutableArray alloc]initWithArray:arrayRate];
+            isCuisine = NO;
+            isRate = YES;
+            break;
+        default:
+            break;
+    }
+    
+    [_tableViewCuisine reloadData];
+    
 }
 -(IBAction)ambiencePress:(id)sender
 {
+    [self hideTabBar:self.tabBarController];
     _elementView.hidden = NO;
-}
--(IBAction)doneAction:(id)sender
-{
-    [self showTabBar:self.tabBarController];
-    [_textFieldSearch resignFirstResponder];
-    _elementView.hidden = YES;
-    _cuisineView.hidden = YES;
+    [arrayFilterBoxData removeAllObjects];
+    _textFieldSearch.placeholder = @"Search Cuisines";
+    UIButton* button = (UIButton*)sender;
+    switch (button.tag) {
+        case 0:
+            arrayFilterBoxData = [[NSMutableArray alloc]initWithArray:arrayAmbience];
+            isCuisine = YES;
+            break;
+        case 1:
+            arrayFilterBoxData = [[NSMutableArray alloc]initWithArray:arrayWhoWithYou];
+            isCuisine = NO;
+            isRate = NO;
+            break;
+        case 2:
+            arrayFilterBoxData = [[NSMutableArray alloc]initWithArray:arrayPrice];
+            isCuisine = NO;
+            isRate = YES;
+            break;
+        default:
+            break;
+    }
+    [_tableViewPrice reloadData];
+    
 }
 - (void)showTabBar:(UITabBarController *)tabbarcontroller
 {
@@ -1270,7 +1544,7 @@ typedef enum _TFSelect
         //do smth after animation finishes
         tabbarcontroller.tabBar.hidden = YES;
     }];
-    scrollViewMain.frame = CGRectMake(0, 0, self.view.frame.size.width, [UIScreen mainScreen].bounds.size.height - 44);
+    _scrollPriceView.frame = CGRectMake(0, 0, self.view.frame.size.width, [UIScreen mainScreen].bounds.size.height - 44);
     _cuisineImage.frame = CGRectMake(0, 0, self.view.frame.size.width, [UIScreen mainScreen].bounds.size.height - 44);
 }
 @end

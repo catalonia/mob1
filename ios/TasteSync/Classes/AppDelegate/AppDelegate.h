@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSMutableArray *arrDataFBFriends;
 @property (nonatomic, strong) NSMutableArray *arrayAmbience;
 
-@property (nonatomic, strong) NSMutableArray *arrWhoAreUWith, *arrOccasion, *arrTypeOfRestaurant, *arrCuisine, *arrPrice, *arrTheme;
+@property (nonatomic, strong) NSMutableArray *arrWhoAreUWith, *arrOccasion, *arrTypeOfRestaurant, *arrCuisine, *arrPrice, *arrTheme, *arrRate;
 
 @property (nonatomic, strong) NSMutableArray *arrDropdown, *arrayNeighberhood;
 

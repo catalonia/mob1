@@ -10,6 +10,7 @@
 #import "RateCustom.h"
 #import "CRequest.h"
 #import "JSONKit.h"
+#import "AskObject.h"
 
 @interface RestaurantVC : UIViewController<UITableViewDataSource, UITableViewDelegate,RateCustomDelegate, UIScrollViewDelegate, RequestDelegate,UITextFieldDelegate>
 {
@@ -31,12 +32,15 @@
     __weak IBOutlet UILabel *lbCusine, *lbPrice, *lbRating, *lbShowOnlyThese;
     
     
-    NSMutableArray *arrDataAsk;
+    NSMutableArray *arrDataFilterSelect;
     NSMutableArray *arrayCuisine;
     NSMutableArray *arrayAmbience;
     NSMutableArray *arrayWhoWithYou;
     NSMutableArray *arrayPrice;
     NSMutableArray *arrayCity;
+    NSMutableArray *arrayRate;
+    
+    NSMutableArray *arrayFilterBoxData;
     
     IBOutlet UIView* _elementView;
     IBOutlet UIView* _cuisineView;
@@ -44,6 +48,11 @@
     IBOutlet UITableView* _tableViewCuisine;
     __weak IBOutlet UIImageView* _cuisineImage;
     IBOutlet UITextField* _textFieldSearch;
+    __weak IBOutlet UIScrollView* _scrollPriceView;
+    IBOutlet UIImageView* cuisineDataImage, *neighberhoodImage, *ambienceImage, *priceImage, *whoareyouImage, *rateImage;
+    BOOL isCuisine, isRate;
+    AskObject* neighberhoodObject;
+    AskObject* ratesObject;
 }
 
 @property (nonatomic, strong) NSMutableArray *arrData, *arrDataFilter , *arrDataRestaurant , *arrDataRegion;

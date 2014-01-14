@@ -19,7 +19,8 @@ typedef enum GlobalDataType {
     GlobalDataTypeOfRestaurant  =   5,
     GlobalDataWhoAreUWith  =   6,
     GlobalDataCity = 7,
-    GlobalDataRestaurant = 8
+    GlobalDataRestaurant = 8,
+    GlobalDataRate = 9
     
 } GlobalDataType;
 
