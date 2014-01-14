@@ -1,0 +1,57 @@
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Light" />
+    <!-- Base application theme is the default theme. -->
+    <style name="Theme" parent="android:Theme"></style>
+
+    <!-- Variation on the Light theme that turns off the title -->
+    <style name="Theme.Basic" parent="android:style/Theme.Light">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    <!-- TitleBar style -->
+    <style name="TitleBar">
+        <item name="android:id">@id/titlebar_container</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/topbar</item>
+        <!-- titlebar_bg -->
+    </style>
+
+    <style name="fRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:minHeight">48dip</item>
+        <item name="android:maxHeight">48dip</item>
+    </style>
+
+    <style name="RatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_ratingbar_selector</item>
+        <item name="android:minHeight">28dp</item>
+        <item name="android:maxHeight">48dp</item>
+    </style>
+
+    <style name="Body">
+        <item name="android:layout_below">@id/titlebar_container</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
+
+    <style name="full_screen_dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+
+    <style name="AnimationPopup">
+        <item name="@android:windowEnterAnimation">@anim/appear</item>
+        <item name="@android:windowExitAnimation">@anim/disappear</item>
+    </style>
+    <style name="AnimationPopupTopBottom">
+        <item name="@android:windowEnterAnimation">@anim/appear_top</item>
+        <item name="@android:windowExitAnimation">@anim/disappear_bottom</item>
+    </style>
+
+</resources>
