@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	    <string name="app_name">TasteSync</string>
+    
+    <string name="app_name">TasteSync</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_aa">AAActivity</string>
+    <string name="title_activity_notification">NotificationActivity</string>
+    <string name="notification_fisrt_title">TasteSync Would Like to Send You Push Notifications</string>
+    <string name="notification_fisrt_content">Notifications may include alerts, sounds and icon badges. These can be configured in Settings.</string>
+    <string name="notification_second_title">TasteSync Would Like to Use Your Current Location</string>
+    <string name="btn_done">Don\'t</string>
+    <string name="btn_done_allow">Don\'t Allow</string>
+    <string name="btn_ok">OK</string>
+    <string name="txt_ask">Ask</string>
+    <string name="txt_open">Open Now</string>
+    <string name="txt_buy">Buy</string>
+    <string name="txt_deal">Deal: </string>
+    <string name="txt_more">More</string>
+    <string name="txt_tip">Leave Tip</string>
+    <string name="txt_follow">Follow</string>
+    <string name="txt_liked">Liked</string>
+    <string name="txt_people_like">people like this.</string>
+    <string name="txt_send_mail">Send</string>
+    <!-- Setting -->
+
+    <string name="txt_title_setting">Settings</string>
+    <string name="txt_setting_location">Search Location</string>
+    <string name="txt_setting_network">Social Networks</string>
+    <string name="txt_setting_notification">Notification Settings</string>
+    <string name="txt_setting_privacy">Privacy Settings</string>
+    <string name="txt_setting_about">About TasteSync</string>
+    <string name="txt_setting_contact">Contact TasteSync</string>
+    <string name="txt_setting_rate">Rate this App</string>
+    <string name="txt_setting_logout">Logout</string>
+    <string name="txt_setting_signin">Sign In</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="txt_title_recommnedation">Recommendations and messages</string>
+    <string name="txt_title_recommnedation_other">Other Notifications</string>
+    <string name="txt_title_recommnedation_1">When friends ask for recommendations</string>
+    <string name="txt_title_recommnedation_2">When people I follow ask for recommendations</string>
+    <string name="txt_title_recommnedation_3">When other people ask for recommendations</string>
+    <string name="txt_title_recommnedation_4">When people like my recommendtions</string>
+    <string name="txt_title_recommnedation_5">When people ask me follow for recommendations</string>
+    <string name="txt_title_recommnedation_6">When friends send me a recommendations</string>
+    <string name="txt_title_recommnedation_7">When people like or comment on my tips</string>
+    <string name="txt_title_recommnedation_8">When friends post a question to the forum</string>
+    <string name="txt_title_recommnedation_9">When friends join TasteSync</string>
+    <string name="txt_title_recommnedation_10">Newsletters and Digests from TasteSync</string>
+    <string name="txt_other">Other</string>
+    <!-- Connections -->
+
+    <string name="txt_title_connection">CONNECTIONS</string>
+    <string name="txt_connection_facebook">Facebook</string>
+    <string name="txt_connection_twitter">Twitter</string>
+    <string name="txt_connection_foursquare">FourSquare</string>
+    <string name="txt_connection_tumbir">Tumblr</string>
+    <string name="txt_connection_title_2">Auto publishing</string>
+    <string name="txt_connection_content_1">My Favorite Spots</string>
+    <string name="txt_connection_content_2">My Tips</string>
+    <string name="txt_connection_content_3">My Ratings</string>
+    <string name="txt_connection_content_4">Recommendations I give to others</string>
+
+    <!-- Wellcome -->
+
+    <string name="txt_skip">Skip this > </string>
+    <string name="txt_wellcome_tastesync">Wellcome to TasteSync!</string>
+    <string name="txt_wellcome_notification_1">We will never post to your wall without your permission</string>
+    <string name="txt_wellcome_or">OR</string>
+    <string name="txt_wellcome_create_profile">Create a Profile</string>
+    <string name="applicationId">294920113915602</string>
+    <!-- Login -->
+
+    <string name="txt_login_email">Email ID</string>
+    <string name="txt_login_password">Password</string>
+    <string name="txt_login">Login</string>
+    <string name="txt_login_create_user">Create New User</string>
+    <string name="txt_login_single_friend">Friend that you trust most for restaurant recommendations</string>
+    <string name="txt_login_single_title">Personalize your Experience!</string>
+    <string name="txt_login_single_cusine">Favorite cuisine</string>
+    <string name="txt_login_single_restaurants_top">Top 5 Restaurants</string>
+    <string name="txt_login_single_done">I\'m Done!</string>
+	<string name="txt_forgot_password">Forgot password ?</string>
+	<string name="title_forgot_password">Please input your email to retrieval your password</string>
+	<string name="title_hint_forgot_password">Enter password...</string>
+    <!-- Register -->
+
+    <string name="txt_register_photo">Take Photo</string>
+    <string name="txt_register_gallery">Gallery</string>
+    <string name="txt_register_email">Email ID</string>
+    <string name="txt_register_password">Password</string>
+    <string name="txt_register_first_name">First Name</string>
+    <string name="txt_register_last_name">Last Name</string>
+    <string name="txt_register_city">City</string>
+    <string name="txt_register_state">State</string>
+    <string name="txt_register_gender">Gender</string>
+    <string name="txt_register_male">Male</string>
+    <string name="txt_register_femail">Female</string>
+    <string name="txt_register_signup">Sign Up</string>
+    <string name="crop_image_no_app">Can not find Crop Image App in your device.</string>
+    <string name="crop_image_dialog_title">Choose Crop Image App</string>
+    <!-- Login -->
+    <string name="txt_login_step_1_title">Sign-up: Step 1 of</string>
+    <string name="txt_login_step_2_title">Sign-up: Step 2 of</string>
+    <string name="txt_login_step_3_title">Sign-up: Step 3 of</string>
+    <string name="txt_login_step_2_title_1">Native Cusine</string>
+    <string name="txt_login_step_2_title_2">Other favourite Cusines</string>
+    <string name="txt_login_step_1_notifiacation">Which friends do you trust for restaurant recommendations?</string>
+    <string name="btn_login_step_2">Step 2-</string>
+    <string name="btn_login_step_3">Step 3-</string>
+    <string name="btn_login_step_done">Done</string>
+
+    <string-array name="native_cusine_array">
+        <item>American</item>
+        <item>Chinese</item>
+        <item>Italian</item>
+        <item>Ethiopian</item>
+        <item>Indian</item>
+        <item>Vietnam</item>
+    </string-array>
+    <string-array name="mood_array">
+        <item>My phone</item>
+        <item>A Date</item>
+        <item>Friends</item>
+        <item>Family</item>
+        <item>Kids</item>
+        <item>Teens</item>
+        <item>Pets</item>
+        <item>Colleagues</item>
+    </string-array>
+
+    <string name="btn_donee">Done</string>
+    <string name="txt_login_step_3_title_1">Favorite Spots</string>
+    <string name="txt_login_step_3_breakfast">Breakfast</string>
+
+    <string-array name="favorite_spots_array">
+        <item>Marco Pepe</item>
+        <item>Starbusks</item>
+        <item>Amiya</item>
+        <item>Cosi</item>
+        <item>Pipa</item>
+        <item>Ms_</item>
+    </string-array>
+    <string-array name="favorite_spots_string_array">
+        <item>Breakfast</item>
+        <item>Coffee</item>
+        <item>Dinner</item>
+        <item>Brunch</item>
+        <item>Lunch</item>
+    </string-array>
+
+    <!-- Privacy Setting -->
+
+    <string name="txt_title_privacy">Privacy Settings</string>
+    <string name="txt_title_privacy_1">Display link to my Facebook, Twitter and Tumblr pages on my TasteSync profile</string>
+    <string name="txt_title_privacy_2">Allow TasteSync users to view my Facebook friends</string>
+    <string name="txt_title_privacy_3">Allow TasteSync users to view recommendations I get</string>
+    <string name="txt_title_privacy_4">Allow TasteSync users to view recommendations I give</string>
+    <string name="txt_title_privacy_5">Makes my comments and likes visible on my profile to :</string>
+    <string name="txt_title_privacy_6">Friends</string>
+    <string name="txt_title_privacy_7">Followers</string>
+    <string name="txt_title_privacy_8">Everyone else</string>
+
+    <!-- About setting -->
+
+    <string name="txt_title_about">About TasteSync</string>
+    <string name="txt_title_about_1">TasteSync version 1.0.0</string>
+    <string name="txt_about_btn_1">Frequently Asked Questions</string>
+    <string name="txt_about_btn_2">Terms of Service</string>
+    <string name="txt_about_btn_3">Privacy Policy</string>
+    <string name="txt_about_btn_4">Attribution</string>
+
+    <!-- Contact -->
+
+    <string name="txt_title_contact">Contact TasteSync</string>
+    <string name="txt_btn_submit">Submit</string>
+
+    <!-- Rate -->
+
+    <string name="txt_title_rate">Rate this App</string>
+    <string name="txt_rate_text">Standard iOS/Android</string>
+
+    <!-- Review -->
+
+    <string name="txt_restaurant">Restaurant</string>
+    <string name="txt_review_food">FOOD</string>
+    <string name="txt_review_menu">MENU</string>
+    <string name="txt_review_service">SERVICE $ COURTSEY</string>
+    <string name="txt_review_ambience">AMBIENCE</string>
+    <string name="txt_review_cost">COST</string>
+    <string name="txt_review_facilities">FACILITIES</string>
+    <string name="txt_review_hygiene">HYGIENE</string>
+    <string name="txt_review_location">LOCATION</string>
+    <string name="txt_review_write">Write a review</string>
+
+    <string-array name="review_spinner_array">
+        <item>Liked For</item>
+        <item>Dinner</item>
+        <item>Lunch</item>
+        <item>Birthday</item>
+        <item>Date</item>
+    </string-array>
+
+    <string name="txt_review_food_title_1">Nutritional Quality</string>
+    <string name="txt_review_food_title_2">Portion Size</string>
+    <string name="txt_review_food_title_3">Presentation</string>
+    <string name="txt_review_food_title_4">Taste</string>
+    <string name="txt_review_food_title_5">Temperature</string>
+    <string name="txt_review_menu_title_1">Appetizers</string>
+    <string name="txt_review_menu_title_2">Entree</string>
+    <string name="txt_review_menu_title_3">Dessert</string>
+    <string name="txt_review_menu_title_4">Wine and Spirits</string>
+    <string name="txt_review_menu_title_5">Readability</string>
+    <string name="txt_review_service_title_1">Accessibility</string>
+    <string name="txt_review_service_title_3">Friendliness Off Staff</string>
+    <string name="txt_review_service_title_4">Communication/ Knowlege of Servers</string>
+    <string name="txt_review_cost_title_1">Appetizers</string>
+    <string name="txt_review_cost_title_2">Entree</string>
+    <string name="txt_review_cost_title_3">Dessert</string>
+    <string name="txt_review_facilities_title_1">Parking</string>
+    <string name="txt_review_facilities_title_2">Restrooms</string>
+    <string name="txt_review_facilities_title_3">General Assistance</string>
+    <string name="txt_review_facilities_title_4">Facilities For Special Needs</string>
+    <string name="txt_review_hygiene_title_1">Food</string>
+    <string name="txt_review_hygiene_title_2">Restrooms</string>
+    <string name="txt_review_hygiene_title_3">Kitchen</string>
+    <string name="txt_review_location_title_1">Neighbourhood</string>
+    <string name="txt_review_location_title_2">Accessibility</string>
+    <string name="txt_review_location_title_3">View</string>
+    <string name="txt_review_submit_title_1">Your Review has been saved.</string>
+    <string name="txt_review_submit_title_2">Share your review</string>
+    <string name="txt_review_ambience_title_2">Seating/ Layout</string>
+    <string name="txt_review_ambience_title_3">Lighting</string>
+    <string name="txt_review_ambience_title_4">Music</string>
+    <string name="txt_review_ambience_title_5">Noise Level</string>
+
+    <!-- Profile -->
+    <string name="txt_profile_following">Following</string>
+    <string name="txt_profile_Followers">Followers</string>
+    <string name="txt_profile_Friends">Friends</string>
+    <string name="txt_profile_Points">Points</string>
+    <string name="txt_profile_restaurents">and 19 more restaurants</string>
+    <string name="txt_profile_abour_me">About Me</string>
+    <string name="txt_profile_title">Profile</string>
+    <string name="txt_profile_user">User</string>
+    <string name="txt_profile_setting">Setting</string>
+	 <string name="txt_profile_title_1">Recent Activity</string>
+    <!-- Ask -->
+
+    <string name="txt_ask_title_mood">What are you in the mood for?</string>
+    <string name="txt_ask_filters">Filters</string>
+    <string name="txt_ask_skip_ahead">Skip Ahead</string>
+    <string name="txt_ask_got_it">Got It</string>
+    <string name="txt_ask_goit">Got It! Ready to start the search...</string>
+    <string name="txt_ask_signup">Please Sign-up to help us get you the right recommendations!</string>
+    <string name="txt_ask_post">We will never post to your wall without your permission</string>
+    <string name="txt_ask_advance">Advanced</string>
+    <string name="txt_ask_location">New York, Nk</string>
+    <string name="txt_ask_chinese">Chinese</string>
+    <string name="txt_ask_italian">Italian</string>
+    <string name="txt_ask_mexican">Mexican</string>
+    <string name="txt_ask_mediterranean">Mediterranean</string>
+    <string name="txt_ask_thai">Thai</string>
+    <string name="txt_ask_asian">Asian</string>
+    <string name="txt_ask_american">American</string>
+    <string name="txt_ask_latin">Latin American</string>
+    <string name="txt_ask_regional">Regional American</string>
+    <string name="txt_ask_indian">Indian</string>
+    <string name="txt_ask_vegatarian">Vegetarian</string>
+    <string name="txt_ask_organic">Organic</string>
+    <string name="txt_ask_french">French</string>
+    <string name="txt_ask_spanish">Spanish</string>
+    <string name="txt_ask_japanese">Japanese</string>
+    <string name="txt_ask_middle_astern">Middle Eastern</string>
+    <string name="txt_ask_dessert">Dessert</string>
+    <string name="txt_ask_seafood">Seafood</string>
+    <string name="txt_ask_kosher">Kosher</string>
+    <string name="txt_ask_halal">Halal</string>
+    <string name="txt_ask_european">European</string>
+    <string name="txt_ask_anniversary">Anniversary</string>
+    <string name="txt_ask_date">Date</string>
+    <string name="txt_ask_birthday">Birthday</string>
+    <string name="txt_ask_drinks">Drinks</string>
+    <string name="txt_ask_dinner">Dinner</string>
+    <string name="txt_ask_lunch">Lunch</string>
+    <string name="txt_ask_coffee">Coffee</string>
+    <string name="txt_ask_quick">Quick Bite</string>
+    <string name="txt_ask_brunch">Brunch</string>
+    <string name="txt_ask_breakfast">Breakfast</string>
+    <string name="txt_ask_liquid">Liquid Lunch</string>
+    <string name="txt_ask_who_my_phone">My Phone</string>
+    <string name="txt_ask_who_date">A Date</string>
+    <string name="txt_ask_who_friends">Friends</string>
+    <string name="txt_ask_who_family">Family</string>
+    <string name="txt_ask_who_kids">Kids</string>
+    <string name="txt_ask_who_teens">Teens</string>
+    <string name="txt_ask_who_pets">Pets</string>
+    <string name="txt_ask_who_colleagues">Colleagues</string>
+    <string name="txt_ask_price_1">$</string>
+    <string name="txt_ask_price_2">$$</string>
+    <string name="txt_ask_price_3">$$$</string>
+    <string name="txt_ask_price_4">$$$$</string>
+    <string name="txt_ask_price_5">$$$$$</string>
+    <string name="txt_ask_theme1_romantic">Romantic</string>
+    <string name="txt_ask_theme2_fine">Fine Dining</string>
+    <string name="txt_ask_theme3_modern">Modern</string>
+    <string name="txt_ask_theme4_business">Business Friendly</string>
+    <string name="txt_ask_theme5_live">Live Music</string>
+    <string name="txt_ask_theme6_bar">Bar Scene</string>
+    <string name="txt_ask_theme7_casual">Casual</string>
+    <string name="txt_ask_theme8_outdoor">Outdoor Seating</string>
+    <string name="txt_ask_theme9_rooftop">Rooftop</string>
+    <string name="txt_ask_theme10_kid">Kid Friendly</string>
+    <string name="txt_ask_theme11_formal">Formal</string>
+    <string name="txt_ask_theme12_pet">Pet Friendly</string>
+    <string name="txt_ask_theme13_group">Group Friendly</string>
+    <string name="txt_ask_theme14_family">Family Friendly</string>
+    <string name="txt_ask_theme15_traditional">Traditional</string>
+    <string name="txt_ask_restaurant1_bbq">BBQ joint</string>
+    <string name="txt_ask_restaurant2_steakhouse">Steakhouse</string>
+    <string name="txt_ask_restaurant3_gourmet">Gourmet restaurant</string>
+    <string name="txt_ask_restaurant4_cafe">Cafe</string>
+    <string name="txt_ask_contacting">Contacting friends for recommendations</string>
+    <string name="txt_ask_restaurant5_bakery">Bakery</string>
+    <string name="txt_ask_restaurant6_bistro">Bistro</string>
+    <string name="txt_ask_restaurant7_diner">Diner</string>
+    <string name="txt_ask_restaurant8_grill">Grill</string>
+    <string name="txt_ask_restaurant9_byob">BYOB restaurant</string>
+    <string name="txt_ask_restaurant10_wine_list">Restaurant with Extensive Wine List</string>
+    <string name="txt_ask_restaurant11_teahouse">Teahouse</string>
+    <string name="txt_ask_restaurant12_live_kitchen">Restaurant with Live kitchen</string>
+    <string name="txt_ask_get_recommendations">GET RECOMMENDATIONS</string>
+    <string name="txt_get_recommendations_sentence_1">We are searching for</string>
+    <string name="txt_get_recommendations_sentence_2">recommendations from people</string>
+    <string name="txt_get_recommendations_sentence_3">with similar tastes</string>
+    <string name="txt_recommendation_friends_title">Check with Friends for recommendations for Chinese; Thai; Birthday; Affordable; in Chinatown, New York, NY</string>
+    <string name="txt_recommendation_friends_post">Post on Facebook</string>
+    <string name="btn_recommendation_friends_friends">Recommendations from Friends</string>
+    <string name="txt_hint_friend">Add a friend</string>
+    <string name="txt_hint_restaurants">I am looking for Chinese restaurants in Njius, Chjas, CA...</string>
+	<string name="txt_ask_friends">Ask Friends</string>   
+<!-- Restaurant -->
+
+    <string name="txt_restaurant_find_text">While you wait for recommendations, you may find these restaurants interesting....</string>
+    <string name="txt_filter">Filters</string>
+    <string name="txt_restaurant_ask_title">Ask About this Restaurant</string>
+    <string name="txt_restaurant_ask_spicy">How spicy is the food here?</string>
+    <string name="txt_restaurant_ask_post">Post Question on Forum</string>
+    <string name="txt_friends">Friends</string>
+    <string name="txt_send_message">Send Message</string>
+    <string name="txt_restaurant_title_2">Example : How spicy is the food here?</string>
+    <string name="txt_restaurant_title_20">Example: The Mojitos here are awesome!</string>
+
+    <!-- Profile -->
+    <string name="txt_signup_to_start">Please Sign-up to start</string>
+    <string name="txt_signup_permission">We will never post to your wall without your permission</string>
+    <string name="txt_signup_see">See how profiles of same of</string>
+	<string name="txt_profile_title_2">Recent Activity</string>
+	<string name="txt_profile_title_3">Invite Suggestions</string>
+	<string name="txt_profile_title_4">Invite Friends to TasteSync</string>
+	<string name="txt_profile_title_5">Friends on TasteSync</string>
+	<string name="txt_profile_title_6">Enter name here</string>
+	<string name="txt_profile_title_7">Your follow Robert</string>
+	<string name="txt_profile_title_8">Add Friend</string>
+	<string name="txt_profile_title_9">Search for people by name</string>
+	
+	<!-- Newsfeed -->
+	<string name="txt_newsfeed_title_1">Write a comment...</string>
+	<string name="txt_recommemdation_title_1">Restaurants Recommemded for you:</string>
+	
+</resources>

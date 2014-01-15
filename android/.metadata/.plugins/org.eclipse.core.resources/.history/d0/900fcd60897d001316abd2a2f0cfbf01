@@ -1,0 +1,50 @@
+package com.activity;
+
+import com.facebook.android.AsyncFacebookRunner;
+import com.facebook.android.Facebook;
+import com.tastesync.R;
+
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+
+public class WelcomeActivity extends Activity {
+	private static String APP_ID = "799093966782887";
+	// Instance of Facebook Class
+	private Facebook facebook = new Facebook(APP_ID);
+	private AsyncFacebookRunner mAsyncRunner;
+	String FILENAME = "AndroidSSO_data";
+	private SharedPreferences mPrefs;
+	
+	Button btn_login;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_welcome);
+		init();
+		handle();
+	}
+
+	private void init() {
+		// TODO Auto-generated method stub
+		btn_login = (Button)findViewById(R.id.btn_login_facebook);
+	}
+
+	private void handle() {
+		// TODO Auto-generated method stub
+		btn_login.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
+
+}

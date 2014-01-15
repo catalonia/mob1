@@ -224,16 +224,9 @@
     detail.replyRecomendationObj = replyObject;
     
     RestaurantObj* restaurantObj = [self.arrData objectAtIndex:(index - 1)];
-    if (restaurantObj != nil) {
-        detail.restaurantObj = restaurantObj;
-        detail.replyRecomendation = YES;
-        detail.fromRecomendation = YES;
-    }
-    else
-    {
-        detail.replyRecomendation = NO;
-        detail.fromRecomendation = YES;
-    }
+    detail.restaurantObj = restaurantObj;
+    
+    detail.fromRecomendation = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }
 @end
