@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="titlebar_container" type="id"/>
+    <item name="content_body" type="id"/>
+	<item name="frame_bottom" type="id"/>
+</resources>
