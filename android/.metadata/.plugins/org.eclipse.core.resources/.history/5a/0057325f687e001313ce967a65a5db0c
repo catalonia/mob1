@@ -1,0 +1,18 @@
+package com.activity;
+
+import com.tastesync.R;
+
+import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.app.Activity;
+
+public class AskActivity extends Activity {
+	LinearLayout click_cuisine;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_ask);
+	}
+
+}
