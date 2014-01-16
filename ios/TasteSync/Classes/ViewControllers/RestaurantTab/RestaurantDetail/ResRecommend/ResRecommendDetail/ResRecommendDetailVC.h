@@ -21,5 +21,6 @@
 @property (nonatomic, strong) RestaurantObj *restaurantObj;
 @property (nonatomic, strong) ReplyRecomendationObj *replyRecomendationObj;
 @property (nonatomic, assign) BOOL fromRecomendation;
+@property (nonatomic, assign) BOOL replyRecomendation;
 
 @end
