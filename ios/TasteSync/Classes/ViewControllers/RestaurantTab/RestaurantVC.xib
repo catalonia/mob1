@@ -131,7 +131,7 @@
                                     <rect key="frame" x="0.0" y="50" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="C575BA49-B024-40B9-95DA-6A79D1891B99" id="40">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="03A2AB76-9FD6-4688-9893-25C8037261D1" id="40">
                                             <rect key="frame" x="10" y="0.0" width="300" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
@@ -571,7 +571,7 @@
         </view>
     </objects>
     <resources>
-        <image name="C575BA49-B024-40B9-95DA-6A79D1891B99" width="300" height="44">
+        <image name="03A2AB76-9FD6-4688-9893-25C8037261D1" width="300" height="44">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

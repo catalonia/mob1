@@ -11,8 +11,10 @@
 #import "RestaurantObj.h"
 #import "TextView.h"
 #import "ReplyRecomendationObj.h"
+#import "CRequest.h"
+#import "JSONKit.h"
 
-@interface ResRecommendDetailVC : UIViewController<TextviewDelegate>
+@interface ResRecommendDetailVC : UIViewController<TextviewDelegate,RequestDelegate>
 
 @property (nonatomic, strong) NSMutableArray *arrData;
 @property (nonatomic, strong) ResRecommendObj *resRecommendObj;

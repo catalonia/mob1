@@ -25,7 +25,8 @@
     __weak IBOutlet UIButton *btFollow,*btSearch ,*btBack;
     __weak IBOutlet UITextField /**tfSearch*/*tfMsg;
     __weak IBOutlet UITableView *tbvFilter,*tbvResult;
-    __strong IBOutlet UIScrollView *scrollViewMain;
+    __weak IBOutlet UIScrollView *scrollViewMain;
+    __weak IBOutlet UIImageView *imageView;
     __weak IBOutlet UIView *view1,*view2,*view3,*viewMsgSent,*viewMain;
     UITextField *cTextField;
     FilterRestaurant *filterView;
@@ -75,6 +76,12 @@ arrDataFilter=_arrDataFilter;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if([CommonHelpers isPhone5])
+    {
+        tvLongMsg.frame = CGRectMake(tvLongMsg.frame.origin.x, tvLongMsg.frame.origin.y, tvLongMsg.frame.size.width, tvLongMsg.frame.size.height + 95);
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height + 95);
+    }
     
     _notificationObj.unread = NO;
     
@@ -708,6 +715,11 @@ arrDataFilter=_arrDataFilter;
 -(void)beginEditting
 {
     [scrollViewMain setContentOffset:CGPointMake(0, 190) animated:YES];
+}
+
+-(void)enterCharacter:(NSString *)text
+{
+    
 }
 
 -(void)responseData:(NSData *)data WithKey:(int)key UserData:(id)userData

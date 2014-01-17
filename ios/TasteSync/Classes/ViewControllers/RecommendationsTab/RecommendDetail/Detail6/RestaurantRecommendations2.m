@@ -99,7 +99,10 @@
         cell.delegate = self;
     }
     else
+    {
         cell.haveRestaurant = YES;
+        cell.delegate = self;
+    }
     
     
     NSLog(@"%d",restaurantObj.recommendArray.count);
@@ -219,6 +222,10 @@
 {
     ResRecommendDetailVC* detail = [[ResRecommendDetailVC alloc]initWithNibName:@"ResRecommendDetailVC" bundle:nil];
     detail.replyRecomendationObj = replyObject;
+    
+    RestaurantObj* restaurantObj = [self.arrData objectAtIndex:(index - 1)];
+    detail.restaurantObj = restaurantObj;
+    
     detail.fromRecomendation = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }

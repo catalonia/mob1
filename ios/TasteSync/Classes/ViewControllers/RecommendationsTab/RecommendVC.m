@@ -168,12 +168,10 @@
     
     return 1;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return _arrData.count;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIndentifier = @"NotificationCell";
@@ -189,8 +187,6 @@
         }
         cell.tag = indexPath.row;
         [cell initForView:[_arrData objectAtIndex:indexPath.row]];
-        
-        
         return cell;
     }
     else
@@ -209,8 +205,6 @@
         return cell;
 
     }
-
-   
 }
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -226,10 +220,6 @@
     }
    
 }
-
-
-// load more cell automatic when scroll to bottom of table view
-
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     float offset = (scrollView.contentOffset.y) - (scrollView.contentSize.height - scrollView.frame.size.height);

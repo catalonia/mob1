@@ -236,12 +236,6 @@ arrDataFilter=_arrDataFilter;;
                 [request setFormPostValue:[UserDefault userDefault].userID forKey:@"newmessagesenderuserid"];
                 [request setFormPostValue:listRestaurant                                 forKey:@"restaurantidlist"];
                 
-                NSLog(@"newmessagetext: %@", tvMsg.text);
-                NSLog(@"previousmessageid: %@", self.notificationObj.linkId);
-                NSLog(@"newmessagerecipientuserid: %@", self.notificationObj.user.uid);
-                NSLog(@"newmessagesenderuserid: %@", [UserDefault userDefault].userID);
-                NSLog(@"restaurantidlist: %@", listRestaurant);
-                
                 [request startFormRequest];
             }
             if (self.notificationObj.type == NotificationFollowUpQuestion) {
@@ -252,11 +246,6 @@ arrDataFilter=_arrDataFilter;;
                 [request setFormPostValue:tvMsg.text                                                forKey:@"replytext"];
                 [request setFormPostValue:listRestaurant                                          forKey:@"restaurantidlist"];
                 
-                NSLog(@"userid: %@", [UserDefault userDefault].userID );
-                NSLog(@"questiondid: %@", self.notificationObj.linkId);
-                NSLog(@"replytext: %@", tvMsg.text);
-                NSLog(@"restaurantidlist: %@", listRestaurant);
-                
                 [request startFormRequest];
             }
             if (self.notificationObj.type == NotificationRecorequestNeeded) {
@@ -266,11 +255,6 @@ arrDataFilter=_arrDataFilter;;
                 [request setFormPostValue:self.notificationObj.linkId                        forKey:@"recorequestid"];
                 [request setFormPostValue:tvMsg.text                                                forKey:@"replytext"];
                 [request setFormPostValue:listRestaurant                                          forKey:@"restaurantidlist"];
-                
-                NSLog(@"recommenderuserid: %@", [UserDefault userDefault].userID );
-                NSLog(@"recorequestid: %@", self.notificationObj.linkId);
-                NSLog(@"replytext: %@", tvMsg.text);
-                NSLog(@"restaurantidlist: %@", listRestaurant);
                 
                 [request startFormRequest];
             }

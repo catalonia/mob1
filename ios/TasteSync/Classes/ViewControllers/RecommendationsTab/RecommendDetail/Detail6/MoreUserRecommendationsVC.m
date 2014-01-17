@@ -86,8 +86,6 @@
     if (cell==nil) {
         NSLog(@"cell is nil");
         cell =(RecommendationCell *) [[[NSBundle mainBundle ] loadNibNamed:@"RecommendationCell" owner:self options:nil] objectAtIndex:0];
-        
-        
     }
     
     [cell setUI:[_arrData objectAtIndex:indexPath.row]];
