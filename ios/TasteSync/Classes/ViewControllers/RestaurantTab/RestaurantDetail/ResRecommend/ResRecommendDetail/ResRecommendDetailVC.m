@@ -248,9 +248,13 @@ restaurantObj=_restaurantObj;
 - (void) configView
 {
     if (self.fromRecomendation) {
-        //lbName.hidden = YES;
-        //lbDetail.hidden = YES;
-        //lbLikes.text = [NSString stringWithFormat:@"%d people like this.",_resRecommendObj.numberOfLikes];
+        if(!self.replyRecomendation)
+        {
+            replyView.hidden = YES;
+            lbName.hidden = YES;
+            lbDetail.hidden = YES;
+            lbLikes.text = [NSString stringWithFormat:@"%d people like this.",_resRecommendObj.numberOfLikes];
+        }
         
         lbName.text = _restaurantObj.name;
         lbDetail.text = [CommonHelpers getInformationRestaurant:self.restaurantObj];
@@ -270,8 +274,9 @@ restaurantObj=_restaurantObj;
         if (_restaurantObj) {
             lbName.text = _restaurantObj.name;
             lbDetail.text = [CommonHelpers getInformationRestaurant:self.restaurantObj];
-            
+            replyView.hidden = YES;
             if (_resRecommendObj.tipID == TipNone) {
+                replyView.hidden = NO;
                 lbTitle.text = _resRecommendObj.title;
                 tvDetail.text = [NSString stringWithFormat:@"%@ \n in response to your question - %@",_resRecommendObj.detail, _resRecommendObj.recotext];
             }
