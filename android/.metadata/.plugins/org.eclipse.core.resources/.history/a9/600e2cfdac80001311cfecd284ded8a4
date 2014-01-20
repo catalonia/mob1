@@ -1,0 +1,34 @@
+package com.activity;
+
+import com.tastesync.R;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.AutoCompleteTextView;
+
+public class FistLoginActivity extends Activity {
+	AutoCompleteTextView au_cuisine, au_restaurant1, au_reataurant2,
+			au_reataurant3, au_reataurant4, au_reataurant5;
+	String[] cuisine = {};
+	String[] restaurants = {};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_firstlogin);
+		init();
+		hanlde();
+	}
+
+	private void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void hanlde() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

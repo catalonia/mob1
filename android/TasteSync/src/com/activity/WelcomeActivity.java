@@ -94,7 +94,7 @@ public class WelcomeActivity extends Activity {
 							editor.commit();
 
 							Intent mIntent = new Intent(WelcomeActivity.this,
-									MainActivity.class);
+									FistLoginActivity.class);
 							startActivity(mIntent);
 						}
 

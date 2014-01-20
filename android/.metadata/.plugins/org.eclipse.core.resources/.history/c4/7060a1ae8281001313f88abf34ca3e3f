@@ -1,0 +1,186 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backround" >
+
+    <RelativeLayout
+        style="@style/TitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_back"
+            android:clickable="true"
+            android:contentDescription="@string/app_name" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/imageBack"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp" >
+
+            <ImageView
+                android:id="@+id/imageNewsfeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/btn_newsfeed"
+                android:clickable="true"
+                android:contentDescription="@string/app_name"
+                android:gravity="center" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        style="@style/Body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical" >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_title3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="NOTIFICATIONS 4 0f 4"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg340"
+                    android:orientation="vertical"
+                    android:padding="10dp" >
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textIsSelectable="true"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="1"
+                        android:padding="5dp" >
+
+                        <ScrollView
+                            android:id="@+id/scroll_main"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" >
+
+                            <LinearLayout
+                                android:id="@+id/layout_main"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical" >
+                            </LinearLayout>
+                        </ScrollView>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_other"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight="1" >
+
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <LinearLayout
+                                    android:id="@+id/layout_other"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical" >
+                                </LinearLayout>
+                            </ScrollView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp" >
+
+                            <AutoCompleteTextView
+                                android:id="@+id/auto_content"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:layout_weight="1"
+                                android:hint="Start typing restaurant name"
+                                android:textColor="#000" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:padding="5dp" >
+
+                    <Button
+                        android:id="@+id/btn_done"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/btn_genaral1"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp"
+                        android:paddingTop="10dp"
+                        android:text="@string/btn_login_step_done"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>

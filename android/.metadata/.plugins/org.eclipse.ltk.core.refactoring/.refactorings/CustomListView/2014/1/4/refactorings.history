@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ListModel.java&apos; to &apos;TasteSync/src/com.adapter&apos;&#x0D;&#x0A;- Original project: &apos;CustomListView&apos;&#x0D;&#x0A;- Destination element: &apos;TasteSync/src/com.adapter&apos;&#x0D;&#x0A;- Original element: &apos;com.androidexample.customlistview.ListModel.java&apos;" description="Copy compilation unit" destination="=TasteSync/src&lt;com.adapter" element1="/src&lt;com.androidexample.customlistview{ListModel.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1390129419385" units="1" version="1.0"/>
+</session>
