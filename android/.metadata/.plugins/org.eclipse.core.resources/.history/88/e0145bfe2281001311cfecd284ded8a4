@@ -1,0 +1,38 @@
+package com.activity;
+
+import java.util.ArrayList;
+
+import com.adapter.Adapterrecommandations;
+import com.adapter.recommandations;
+import com.tastesync.R;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class Recommandations1Activity extends Activity {
+	
+	TextView tv_title;
+	Adapterrecommandations adapter;
+	public ArrayList<recommandations> CustomListViewValuesArr = new ArrayList<recommandations>();
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_recommandations1);
+		init();
+		handle();
+	}
+
+	private void init() {
+		// TODO Auto-generated method stub
+		tv_title = (TextView)findViewById(R.id.tv_title1);
+	}
+
+	private void handle() {
+		// TODO Auto-generated method stub
+		tv_title.setText(""+adapter.getCount());
+	}
+
+}

@@ -1,0 +1,76 @@
+package com.activity;
+
+import com.tastesync.MainActivity;
+import com.tastesync.R;
+
+import android.R.string;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class FistLoginActivity extends Activity {
+	AutoCompleteTextView au_cuisine, au_restaurant1, au_restaurant2,
+			au_restaurant3, au_restaurant4, au_restaurant5;
+	Button btn_done;
+
+	String[] cuisine = {"African","Asian","European","Oceanian","Americas"};
+	String[] restaurants = {"New American restaurants","BBQ & Soul food restaurants","Best pizza restaurants","Jewish Delicatessens","British & Irish restaurants"};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_firstlogin);
+		init();
+		hanlde();
+	}
+
+	private void init() {
+		// TODO Auto-generated method stub
+		btn_done = (Button) findViewById(R.id.btn_login_single_done);
+		au_cuisine = (AutoCompleteTextView) findViewById(R.id.auto_login_single_cusine);
+		au_restaurant1 = (AutoCompleteTextView) findViewById(R.id.auto_login_single_restaurant_1);
+		au_restaurant2 = (AutoCompleteTextView) findViewById(R.id.auto_login_single_restaurant_2);
+		au_restaurant3 = (AutoCompleteTextView) findViewById(R.id.auto_login_single_restaurant_3);
+		au_restaurant4 = (AutoCompleteTextView) findViewById(R.id.auto_login_single_restaurant_4);
+		au_restaurant5 = (AutoCompleteTextView) findViewById(R.id.auto_login_single_restaurant_5);
+	}
+
+	private void hanlde() {
+		// TODO Auto-generated method stub
+		btn_done.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if (CheckNotnull()) {
+					Intent mIntent = new Intent(FistLoginActivity.this,
+							MainActivity.class);
+					startActivity(mIntent);
+				} else {
+					Toast.makeText(FistLoginActivity.this,
+							"Please Insert full info", 1000).show();
+				}
+			}
+		});
+		au_restaurant1.setAdapter(new ArrayAdapter<String>(this,
+				android.R.layout.simple_dropdown_item_1line, restaurants));
+		au_cuisine.setAdapter(new ArrayAdapter<String>(this,
+				android.R.layout.simple_dropdown_item_1line, cuisine));
+	}
+
+	private boolean CheckNotnull() {
+		if ((au_cuisine != null) && (au_restaurant1 != null)
+				&& (au_restaurant2 != null) && (au_restaurant3 != null)
+				&& (au_restaurant4 != null) && (au_restaurant5 != null))
+			return true;
+		else {
+			return false;
+		}
+	}
+}

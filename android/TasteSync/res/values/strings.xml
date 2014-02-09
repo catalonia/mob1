@@ -66,7 +66,7 @@
     <!-- Wellcome -->
 
     <string name="txt_skip">Skip this > </string>
-    <string name="txt_wellcome_tastesync">Wellcome to TasteSync!</string>
+    <string name="txt_welcome_tastesync">Welcome to TasteSync!</string>
     <string name="txt_wellcome_notification_1">We will never post to your wall without your permission</string>
     <string name="txt_wellcome_or">OR</string>
     <string name="txt_wellcome_create_profile">Create a Profile</string>

@@ -20,6 +20,6 @@
         android:layout_centerHorizontal="true"
         android:text="Restaurants"
         android:textColor="#FFFFFF"
-        android:textSize="13dip"/>
+        android:textSize="11dip"/>
 
 </RelativeLayout>

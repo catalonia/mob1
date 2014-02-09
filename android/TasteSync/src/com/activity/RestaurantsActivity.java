@@ -3,7 +3,7 @@ package com.activity;
 import java.util.ArrayList;
 
 import com.adapter.Database_Taste;
-import com.adapter.MyAdapterString;
+import com.adapter.AdapterRestaurant;
 import com.adapter.restaurant;
 import com.tastesync.R;
 
@@ -20,7 +20,7 @@ import android.app.Activity;
 public class RestaurantsActivity extends Activity {
 
 	public ListView lsData;
-	public MyAdapterString arrayAdapter;
+	public AdapterRestaurant arrayAdapter;
 	public ArrayList<restaurant> arrayList;
 	private Database_Taste dbManager;
 	private EditText edSearch;
@@ -35,7 +35,7 @@ public class RestaurantsActivity extends Activity {
 
 		lsData = (ListView) findViewById(R.id.lv_find_restaurant);
 
-		arrayAdapter = new MyAdapterString(this, list);
+		arrayAdapter = new AdapterRestaurant(this, list);
 		lsData.setAdapter(arrayAdapter);
 		lsData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
