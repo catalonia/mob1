@@ -108,7 +108,6 @@
     if (indexPath.row ==0) {
         FeedCell *cell = (FeedCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier1];
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(FeedCell *) [[[NSBundle mainBundle ] loadNibNamed:@"FeedCell" owner:self options:nil] objectAtIndex:0];
             
             
@@ -129,7 +128,6 @@
         FeedDetailCell *cell = (FeedDetailCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier2];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(FeedDetailCell *) [[[NSBundle mainBundle ] loadNibNamed:@"FeedDetailCell" owner:self options:nil] objectAtIndex:0];
             
             
@@ -146,7 +144,6 @@
           CommentCell *cell = (CommentCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier3];
           
           if (cell==nil) {
-              NSLog(@"cell is nil");
               cell =(CommentCell *) [[[NSBundle mainBundle ] loadNibNamed:@"CommentCell" owner:self options:nil] objectAtIndex:0];
               
               

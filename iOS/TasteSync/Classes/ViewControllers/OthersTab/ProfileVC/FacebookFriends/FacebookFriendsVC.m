@@ -163,7 +163,6 @@
         FriendFilterCell *cell = (FriendFilterCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(FriendFilterCell *) [[[NSBundle mainBundle ] loadNibNamed:@"FriendFilterCell" owner:self options:nil] objectAtIndex:0];
             
             
@@ -181,7 +180,6 @@
         FriendProfileCell *cell = (FriendProfileCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell = (FriendProfileCell *) [[[NSBundle mainBundle ] loadNibNamed:@"FriendProfileCell" owner:self options:nil] objectAtIndex:0];
             
             
@@ -201,7 +199,6 @@
         FriendProfileCell *cell = (FriendProfileCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(FriendProfileCell *) [[[NSBundle mainBundle ] loadNibNamed:@"FriendProfileCell" owner:self options:nil] objectAtIndex:0];
             
             

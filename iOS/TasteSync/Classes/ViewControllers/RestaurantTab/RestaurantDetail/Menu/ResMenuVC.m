@@ -194,7 +194,6 @@ restaurantObj=_restaurantObj;
     ResMenuCell *cell = (ResMenuCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
     
     if (cell==nil) {
-        NSLog(@"cell is nil");
         cell =(ResMenuCell *) [[[NSBundle mainBundle ] loadNibNamed:@"ResMenuCell" owner:self options:nil] objectAtIndex:0];
         
         

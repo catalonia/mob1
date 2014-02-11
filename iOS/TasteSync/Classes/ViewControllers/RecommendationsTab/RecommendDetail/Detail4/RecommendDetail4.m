@@ -248,7 +248,6 @@ arrDataRestaurant=_arrDataRestaurant;
         Detail4Cell *cell = (Detail4Cell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(Detail4Cell *) [[[NSBundle mainBundle ] loadNibNamed:@"Detail4Cell" owner:self options:nil] objectAtIndex:0];
             
             

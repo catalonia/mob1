@@ -160,7 +160,6 @@ typedef enum _TFSelect
     viewFilter2.hidden = YES;
     [self initData];
     [self initUI];
-    _storeOldValue = [self getLinkRequest];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -231,7 +230,8 @@ typedef enum _TFSelect
             _restaurantSearch = NO;
             lbTypingRestaurant.hidden = NO;
             tfRestaurant.text = @"";
-            
+            detailLabel.text = @"New York - NY";
+            _storeOldValue = [self getLinkRequest];
             _arrData = [[NSMutableArray alloc] initWithArray:[CommonHelpers appDelegate].arrayRestaurant];
             numberPage = [CommonHelpers appDelegate].numberPage;
             [tbvResult reloadData];
@@ -559,7 +559,7 @@ typedef enum _TFSelect
     {
         viewFilterExtends.hidden = YES;
         viewFilterSmall.hidden = NO;
-        [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 100, tbvResult.frame.size.width, tbvResult.contentSize.height)];
+        [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 136, tbvResult.frame.size.width, tbvResult.contentSize.height)];
         scrollViewMain.contentSize = CGSizeMake(320, tbvResult.contentSize.height + DELTAHEIGHT);
     }
 }
@@ -760,7 +760,6 @@ typedef enum _TFSelect
             LoadDataCell *cell = (LoadDataCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
             
             if (cell==nil) {
-                NSLog(@"cell is nil");
                 cell =(LoadDataCell *) [[[NSBundle mainBundle ] loadNibNamed:@"LoadDataCell" owner:self options:nil] objectAtIndex:0];
             }
             return cell;
@@ -770,7 +769,6 @@ typedef enum _TFSelect
         RestaurantCell *cell = (RestaurantCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(RestaurantCell *) [[[NSBundle mainBundle ] loadNibNamed:@"RestaurantCell" owner:self options:nil] objectAtIndex:0];
         }
         
@@ -806,7 +804,6 @@ typedef enum _TFSelect
         AskCell *cell = (AskCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(AskCell *) [[[NSBundle mainBundle ] loadNibNamed:CellIndentifier owner:self options:nil] objectAtIndex:0];
         }
         AskObject* obj = [arrayFilterBoxData objectAtIndex:indexPath.row];
@@ -863,7 +860,6 @@ typedef enum _TFSelect
             LoadDataCell *cell = (LoadDataCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
             
             if (cell==nil) {
-                NSLog(@"cell is nil");
                 cell =(LoadDataCell *) [[[NSBundle mainBundle ] loadNibNamed:@"LoadDataCell" owner:self options:nil] objectAtIndex:0];
             }
             return cell.frame.size.height;
@@ -873,7 +869,6 @@ typedef enum _TFSelect
         RestaurantCell *cell = (RestaurantCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell = (RestaurantCell *) [[[NSBundle mainBundle ] loadNibNamed:@"RestaurantCell" owner:self options:nil] objectAtIndex:0];
         }
         TSGlobalObj *obj = [_arrData objectAtIndex:indexPath.row];
@@ -896,7 +891,6 @@ typedef enum _TFSelect
         static NSString *CellIndentifier = @"AskCell";
         AskCell *cell = (AskCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(AskCell *) [[[NSBundle mainBundle ] loadNibNamed:@"AskCell" owner:self options:nil] objectAtIndex:0];
         }
         return cell.frame.size.height;
@@ -1289,6 +1283,8 @@ typedef enum _TFSelect
         button2.tag = 0;
         [self doneAction:button2];
         
+        _storeOldValue = [self getLinkRequest];
+        
         [self resizeDetailText];
         
         
@@ -1394,10 +1390,10 @@ typedef enum _TFSelect
         
     }
     
-    titleView.frame = CGRectMake(titleView.frame.origin.x, titleView.frame.origin.y, titleView.frame.size.width, labelHeight.height + 12);
-    detailLabel.frame = CGRectMake(detailLabel.frame.origin.x, detailLabel.frame.origin.y, detailLabel.frame.size.width, labelHeight.height + 12);
+    titleView.frame = CGRectMake(titleView.frame.origin.x, titleView.frame.origin.y, titleView.frame.size.width, labelHeight.height + 48);
+    detailLabel.frame = CGRectMake(detailLabel.frame.origin.x, detailLabel.frame.origin.y, detailLabel.frame.size.width, labelHeight.height + 10);
     
-    viewMain.frame = CGRectMake(viewMain.frame.origin.x, -53 + labelHeight.height - 7, viewMain.frame.size.width, viewMain.frame.size.height);
+    viewMain.frame = CGRectMake(viewMain.frame.origin.x, -53 + labelHeight.height - 19, viewMain.frame.size.width, viewMain.frame.size.height);
     
 }
 

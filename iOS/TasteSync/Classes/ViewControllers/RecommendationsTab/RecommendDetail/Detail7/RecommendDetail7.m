@@ -368,7 +368,6 @@ arrDataFilter=_arrDataFilter;
         AddRestaurantCell *cell = (AddRestaurantCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(AddRestaurantCell *) [[[NSBundle mainBundle ] loadNibNamed:@"AddRestaurantCell" owner:self options:nil] objectAtIndex:0];
             
             

@@ -84,11 +84,12 @@
 -(void)reloadDownData:(UIView*)view Type:(RecommendationType)type;
 {
     _view = view;
-    [self reloadUpData:1 view:view Type:type];
+
     AppDelegate* deleate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     if(type == RecommendationNotification)
     {
+        [self reloadUpData:1 view:view Type:type];
         self.arrData = [[NSMutableArray alloc]initWithArray:deleate.arrayNotification];
         int index = self.arrData.count;
         NSString* link = [NSString stringWithFormat:@"recolist?userid=%@&paginationid=%d",[UserDefault userDefault].userID, index/50 + 1];
@@ -761,26 +762,13 @@
             obj.user = user;
             
             indexLoad = i;
-            [self.arrDataReadShuffle addObject:obj];
+            [self.arrDataShuffle addObject:obj];
             //[NSThread detachNewThreadSelector:@selector(loadImageData) toTarget:self withObject:nil];
             i++;
         }
-        NSLog(@"finish");
-        if (self.arrDataShuffle.count > 0) {
-            NotificationObj* objData = [self.arrDataShuffle objectAtIndex:(self.arrDataShuffle.count - 1)];
-            NSString* str2 = [NSString stringWithFormat:@"%@",objData.linkId];
-            for (int j = self.arrDataReadShuffle.count - 1; j >= 0; j-- ) {
-                NotificationObj*obj = [self.arrDataReadShuffle objectAtIndex:j];
-                NSString* str1 = [NSString stringWithFormat:@"%@",obj.linkId];
-                if (![str1 isEqualToString:str2]) {
-                    [self.arrDataShuffle addObject:obj];
-                }
-                else
-                    break;
-            }
-            deleate.arrayShuffle = [[NSMutableArray alloc]initWithArray:_arrDataShuffle];
-            [self.delegate getDataSuccess:RecommendationShuffle];
-        }
+        deleate.arrayShuffle = [[NSMutableArray alloc]initWithArray:_arrDataShuffle];
+        [self.delegate getDataSuccess:RecommendationShuffle];
+        
     }
     if (key == 9) {
         AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];

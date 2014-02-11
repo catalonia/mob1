@@ -149,7 +149,6 @@
     FeedCell *cell = (FeedCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
     
     if (cell==nil) {
-        NSLog(@"cell is nil");
         cell =(FeedCell *) [[[NSBundle mainBundle ] loadNibNamed:@"FeedCell" owner:self options:nil] objectAtIndex:0];
         cell.delegate = self;
         cell.tag = indexPath.row;

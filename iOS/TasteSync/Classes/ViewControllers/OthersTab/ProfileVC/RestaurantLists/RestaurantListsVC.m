@@ -224,7 +224,6 @@
         RestaurantProfileCell *cell = (RestaurantProfileCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(RestaurantProfileCell *) [[[NSBundle mainBundle ] loadNibNamed:@"RestaurantProfileCell" owner:self options:nil] objectAtIndex:0];
             
             
@@ -246,7 +245,6 @@
         RestaurantProfileCell *cell = (RestaurantProfileCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(RestaurantProfileCell *) [[[NSBundle mainBundle ] loadNibNamed:@"RestaurantProfileCell" owner:self options:nil] objectAtIndex:0];
         }
         

@@ -143,7 +143,6 @@ restaurantObj=_restaurantObj;
     ResRecommendCell *cell = (ResRecommendCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
     
     if (cell==nil) {
-        NSLog(@"cell is nil");
         cell =(ResRecommendCell *) [[[NSBundle mainBundle ] loadNibNamed:@"ResRecommendCell" owner:self options:nil] objectAtIndex:0];
     }
     ResRecommendObj *obj = [_arrData objectAtIndex:indexPath.row];
@@ -160,7 +159,6 @@ restaurantObj=_restaurantObj;
     ResRecommendCell *cell = (ResRecommendCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
     
     if (cell==nil) {
-        NSLog(@"cell is nil");
         cell =(ResRecommendCell *) [[[NSBundle mainBundle ] loadNibNamed:@"ResRecommendCell" owner:self options:nil] objectAtIndex:0];
     }
     

@@ -22,7 +22,7 @@
     __weak IBOutlet UIScrollView *scrollViewMain;
     __weak IBOutlet UIImageView *ivAvatar;
     __weak IBOutlet UILabel *lbNotifications,*lbPoint,*lbName,*lbSortMsg,*lbReplyto;
-    __weak IBOutlet UITextView *tvLongMsg;
+    __weak IBOutlet UILabel *tvLongMsg;
     UITextView *tvMsg;
     
     __weak IBOutlet UITableView *tbvFilter,*tbvResult;
@@ -30,6 +30,7 @@
     __weak IBOutlet UIButton *cantHelpButton;
     __weak IBOutlet UIButton *buttonSent;
     __weak IBOutlet UIButton *buttonShuffle;
+    __weak IBOutlet UIView *navibarView;
     UITextField *cTextField;
     GlobalNotification *glNotif ;
     NotificationObj *currentNotif;
@@ -38,6 +39,7 @@
     TextView* textView;
     NSString* requestText;
     BOOL isShuffle;
+    CGFloat heightText;
 }
 
 
@@ -132,6 +134,7 @@ arrDataFilter=_arrDataFilter;;
                     buttonSent.hidden = NO;
                     buttonSent.frame = CGRectMake(167, buttonSent.frame.origin.y, buttonSent.frame.size.width, buttonSent.frame.size.height);
                     cantHelpButton.hidden = NO;
+                    navibarView.hidden = NO;
                 }
             }
             else
@@ -140,6 +143,31 @@ arrDataFilter=_arrDataFilter;;
         }
        
         tvLongMsg.text = _notificationObj.description;
+        CGSize labelHeight;
+        NSString *aLabelTextString = tvLongMsg.text;
+        UIFont *aLabelFont = tvLongMsg.font;
+        CGFloat aLabelSizeWidth = tvLongMsg.frame.size.width;
+        if (SYSTEM_VERSION_LESS_THAN(iOS7_0)) {
+            labelHeight = [aLabelTextString sizeWithFont:aLabelFont
+                                       constrainedToSize:CGSizeMake(aLabelSizeWidth, MAXFLOAT)
+                                           lineBreakMode:NSLineBreakByWordWrapping];
+        }
+        else if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(iOS7_0)) {
+            labelHeight = [aLabelTextString boundingRectWithSize:CGSizeMake(aLabelSizeWidth, MAXFLOAT)
+                                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                                      attributes:@{
+                                                                   NSFontAttributeName : aLabelFont
+                                                                   }
+                                                         context:nil].size;
+            
+        }
+        
+        view1.frame = CGRectMake(view1.frame.origin.x, view1.frame.origin.y, view1.frame.size.width, labelHeight.height + 75);
+        tvLongMsg.frame = CGRectMake(tvLongMsg.frame.origin.x, tvLongMsg.frame.origin.y, tvLongMsg.frame.size.width, labelHeight.height + 10);
+        
+        view4.frame = CGRectMake(view4.frame.origin.x, 108 + labelHeight.height - 19, view4.frame.size.width, view4.frame.size.height);
+        heightText = labelHeight.height;
+        
         lbNotifications.text = [NSString stringWithFormat:@"NOTIFICATION %d of %d",_indexOfNotification,_totalNotification];
          lbReplyto.text = [NSString stringWithFormat:@"Reply to %@",_notificationObj.user.name];
     }
@@ -224,9 +252,26 @@ arrDataFilter=_arrDataFilter;;
 }
 - (IBAction)actionShuffle:(id)sender
 {
+    tvMsg.text = @"";
+    [self hideKeyBoard];
     [CommonHelpers appDelegate].currentShuffle++;
-    self.notificationObj = [[CommonHelpers appDelegate].arrayShuffle objectAtIndex:[CommonHelpers appDelegate].currentShuffle];
-    [self viewDidLoad];
+    
+    if ([CommonHelpers appDelegate].currentShuffle >= [CommonHelpers appDelegate].arrayShuffle.count) {
+        if ([CommonHelpers appDelegate].currentShuffle/20 == [CommonHelpers appDelegate].numberPageShuffle) {
+            [CommonHelpers showInfoAlertWithTitle:@"TasteSync" message:@"Full" delegate:self tag:10];
+        }
+        else
+        {
+            [self.delegate nextReload:self.view];
+            self.notificationObj = [[CommonHelpers appDelegate].arrayShuffle objectAtIndex:[CommonHelpers appDelegate].currentShuffle];
+            [self viewDidLoad];
+        }
+    }
+    else
+    {
+        self.notificationObj = [[CommonHelpers appDelegate].arrayShuffle objectAtIndex:[CommonHelpers appDelegate].currentShuffle];
+        [self viewDidLoad];
+    }
 }
 - (IBAction)actionSend:(id)sender
 {
@@ -351,11 +396,18 @@ arrDataFilter=_arrDataFilter;;
     [request setFormPostValue:self.notificationObj.linkId forKey:@"recorequestid"];
     [request startFormRequest];
     
-    [self.global.recomendationDelegate reloadRecomendation];
-    [self.navigationController popViewControllerAnimated:YES];
+    
     
 }
-
+- (IBAction)actionAllButton:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:NO];
+    
+}
+- (IBAction)actionOthersTab:(id)sender
+{
+    [[[CommonHelpers appDelegate] tabbarBaseVC] actionOthers];
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -388,7 +440,6 @@ arrDataFilter=_arrDataFilter;;
         AddRestaurantCell *cell = (AddRestaurantCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(AddRestaurantCell *) [[[NSBundle mainBundle ] loadNibNamed:@"AddRestaurantCell" owner:self options:nil] objectAtIndex:0];
             
             
@@ -514,9 +565,13 @@ arrDataFilter=_arrDataFilter;;
     }
     else
     {
-        if (buttonIndex ==1) {
-            [[CommonHelpers appDelegate] showLoginDialog];
+        if (alertView.tag == 10) {
+            [self.navigationController popViewControllerAnimated:NO];
         }
+        else
+            if (buttonIndex ==1) {
+                [[CommonHelpers appDelegate] showLoginDialog];
+            }
     }
     
 }
@@ -583,7 +638,6 @@ arrDataFilter=_arrDataFilter;;
 {
     
     [cTextField resignFirstResponder];
-    [tvLongMsg resignFirstResponder];
     [scrollViewMain setContentOffset:CGPointZero];
     [tvMsg resignFirstResponder];
 }
@@ -719,10 +773,17 @@ arrDataFilter=_arrDataFilter;;
     if (key == 2) {
         NSDictionary* dic = [response objectFromJSONString];
         NSString* str = [dic objectForKey:@"successMsg"];
-        if (str != nil) {
-            //[self gotoDetailNotification:[glNotif gotoNextNotification] atIndex:glNotif.index];
-            [self.navigationController popViewControllerAnimated:NO];
-            [self.delegate gotoNextNotify:[glNotif gotoNextNotification] index:glNotif.index];
+        
+        if (isShuffle) {
+            [self actionShuffle:nil];
+        }
+        else
+        {
+            if (str != nil) {
+                //[self gotoDetailNotification:[glNotif gotoNextNotification] atIndex:glNotif.index];
+                [self.navigationController popViewControllerAnimated:NO];
+                [self.delegate gotoNextNotify:[glNotif gotoNextNotification] index:glNotif.index];
+            }
         }
     }
     if (key == 3) {
@@ -744,6 +805,16 @@ arrDataFilter=_arrDataFilter;;
             }
         }
         
+    }
+    if (key == 4) {
+        if (isShuffle) {
+            [self actionShuffle:nil];
+        }
+        else
+        {
+            [self.global.recomendationDelegate reloadRecomendation];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 
@@ -768,7 +839,7 @@ arrDataFilter=_arrDataFilter;;
 }
 -(void)beginEditting
 {
-     [scrollViewMain setContentOffset:CGPointMake(0, 165) animated:YES];
+     [scrollViewMain setContentOffset:CGPointMake(0, 165 + heightText - 19 -10) animated:YES];
 }
 
 #pragma mark Thread
@@ -781,5 +852,6 @@ arrDataFilter=_arrDataFilter;;
     }
     
 }
+
 
 @end

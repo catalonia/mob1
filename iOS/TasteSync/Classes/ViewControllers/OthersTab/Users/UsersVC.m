@@ -187,7 +187,6 @@ arrDataFriends=_arrDataFriends;
         UserCell2 *cell = (UserCell2 *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(UserCell2 *) [[[NSBundle mainBundle ] loadNibNamed:@"UserCell2" owner:self options:nil] objectAtIndex:0];
             
             
@@ -206,7 +205,6 @@ arrDataFriends=_arrDataFriends;
         FriendFilterCell *cell = (FriendFilterCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(FriendFilterCell *) [[[NSBundle mainBundle ] loadNibNamed:@"FriendFilterCell" owner:self options:nil] objectAtIndex:0];
             
             

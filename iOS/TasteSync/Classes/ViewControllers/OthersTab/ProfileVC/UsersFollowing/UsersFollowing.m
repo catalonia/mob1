@@ -183,7 +183,6 @@
         UserProfileCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil) {
             if (cell==nil) {
-                NSLog(@"cell is nil");
                 cell =(UserProfileCell *) [[[NSBundle mainBundle ] loadNibNamed:@"UserProfileCell" owner:self options:nil] objectAtIndex:0];
                 
                 
@@ -205,7 +204,6 @@
         FriendFilterCell *cell = (FriendFilterCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(FriendFilterCell *) [[[NSBundle mainBundle ] loadNibNamed:@"FriendFilterCell" owner:self options:nil] objectAtIndex:0];
             
             

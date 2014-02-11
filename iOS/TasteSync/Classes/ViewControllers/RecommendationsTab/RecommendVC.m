@@ -200,7 +200,6 @@
         NotificationCell *cell = (NotificationCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(NotificationCell *) [[[NSBundle mainBundle ] loadNibNamed:@"NotificationCell" owner:self options:nil] objectAtIndex:0];
             
             
@@ -237,7 +236,6 @@
     if (indexPath.row < _arrData.count) {
         NotificationCell *cell = (NotificationCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(NotificationCell *) [[[NSBundle mainBundle ] loadNibNamed:@"NotificationCell" owner:self options:nil] objectAtIndex:0];
         }
         
@@ -293,7 +291,11 @@
 }
 
 # pragma mark - Others
-
+-(int)nextReload:(UIView*)view
+{
+    [glNotif reloadDownData:view Type:RecommendationShuffle];
+    return [CommonHelpers appDelegate].arrayShuffle.count;
+}
 - (void) gotoDetailNotification:(NotificationObj *) obj atIndex:(int) index;
 {
     debug(@"gotoDetailNotification");

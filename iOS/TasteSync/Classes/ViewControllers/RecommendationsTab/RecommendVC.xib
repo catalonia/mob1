@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecommendVC">
             <connections>
-                <outlet property="helpButton" destination="v5r-hm-d7A" id="2fN-qo-3L8"/>
                 <outlet property="lbNotifications" destination="34" id="35"/>
                 <outlet property="notifycationButton" destination="pR8-d5-QtA" id="Bvd-Mp-WFf"/>
                 <outlet property="shuffleButton" destination="6Lm-l9-x6v" id="z92-wa-jdV"/>
@@ -25,10 +24,10 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pR8-d5-QtA">
-                            <rect key="frame" x="62" y="7" width="60" height="30"/>
+                            <rect key="frame" x="84" y="7" width="72" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
-                            <state key="normal" title="All" backgroundImage="bt_55.png">
+                            <state key="normal" title="All" backgroundImage="rounded_orange.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -40,7 +39,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6Lm-l9-x6v">
-                            <rect key="frame" x="130" y="7" width="60" height="30"/>
+                            <rect key="frame" x="164" y="7" width="72" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                             <state key="normal" title="Shuffle" backgroundImage="bt_55.png">
@@ -54,39 +53,24 @@
                                 <action selector="actionShuffleButton:" destination="-1" eventType="touchUpInside" id="B2c-At-iyU"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="v5r-hm-d7A">
-                            <rect key="frame" x="198" y="7" width="60" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="37" userLabel="Button - others tab">
+                            <rect key="frame" x="10" y="7" width="30" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
-                            <state key="normal" title="Help" backgroundImage="bt_55.png">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" image="ic_tab_myprofile.png">
+                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="disabled" backgroundImage="bt_55.png"/>
-                            <state key="selected" backgroundImage="bt_55.png"/>
-                            <state key="highlighted" backgroundImage="bt_55.png"/>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                             <connections>
-                                <action selector="actionHelpButton:" destination="-1" eventType="touchUpInside" id="JAF-Zv-g1V"/>
+                                <action selector="actionOthersTab:" destination="-1" eventType="touchUpInside" id="39"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="37" userLabel="Button - others tab">
-                    <rect key="frame" x="10" y="7" width="30" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" image="ic_tab_myprofile.png">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="actionOthersTab:" destination="-1" eventType="touchUpInside" id="39"/>
-                    </connections>
-                </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="38" userLabel="Button - newsfeed tab">
                     <rect key="frame" x="280" y="8" width="32" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -130,5 +114,6 @@
         <image name="bt_55.png" width="55" height="28"/>
         <image name="ic_tab_myprofile.png" width="30" height="30"/>
         <image name="ic_tab_newsfeed.png" width="32" height="28"/>
+        <image name="rounded_orange.png" width="120" height="17"/>
     </resources>
 </document>

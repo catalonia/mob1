@@ -92,7 +92,6 @@ numberOfLikes=_numberOfLikes;
     UserCell *cell = (UserCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
     
     if (cell==nil) {
-        NSLog(@"cell is nil");
         cell =(UserCell *) [[[NSBundle mainBundle ] loadNibNamed:@"UserCell" owner:self options:nil] objectAtIndex:0];
         
         

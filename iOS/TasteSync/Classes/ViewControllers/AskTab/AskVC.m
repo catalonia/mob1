@@ -487,7 +487,6 @@
         AskCell *cell = (AskCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(AskCell *) [[[NSBundle mainBundle ] loadNibNamed:CellIndentifier owner:self options:nil] objectAtIndex:0];
         }
         AskObject* obj = [_arrDataFilter objectAtIndex:indexPath.row];
@@ -535,7 +534,6 @@
         static NSString *CellIndentifier = @"AskCell";
         AskCell *cell = (AskCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
         if (cell==nil) {
-            NSLog(@"cell is nil");
             cell =(AskCell *) [[[NSBundle mainBundle ] loadNibNamed:@"AskCell" owner:self options:nil] objectAtIndex:0];
         }
         return cell.frame.size.height;

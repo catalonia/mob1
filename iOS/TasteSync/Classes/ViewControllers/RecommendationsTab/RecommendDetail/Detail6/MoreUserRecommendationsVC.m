@@ -84,7 +84,6 @@
     RecommendationCell *cell = (RecommendationCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
     
     if (cell==nil) {
-        NSLog(@"cell is nil");
         cell =(RecommendationCell *) [[[NSBundle mainBundle ] loadNibNamed:@"RecommendationCell" owner:self options:nil] objectAtIndex:0];
     }
     
@@ -100,7 +99,6 @@
     RecommendationCell *cell = (RecommendationCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
     
     if (cell==nil) {
-        NSLog(@"cell is nil");
         cell =(RecommendationCell *) [[[NSBundle mainBundle ] loadNibNamed:@"RecommendationCell" owner:self options:nil] objectAtIndex:0];
     }
     

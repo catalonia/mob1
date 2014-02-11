@@ -155,7 +155,6 @@ restaurantObj=_restaurantObj;
     ResPhotoCell *cell = (ResPhotoCell *)[tableView dequeueReusableCellWithIdentifier:CellIndentifier];
     
     if (cell==nil) {
-        NSLog(@"cell is nil");
         cell =(ResPhotoCell *) [[[NSBundle mainBundle ] loadNibNamed:@"ResPhotoCell" owner:self options:nil] objectAtIndex:0];
         
         
