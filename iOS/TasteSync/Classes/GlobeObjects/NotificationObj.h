@@ -52,6 +52,7 @@ typedef enum
 @property (nonatomic, strong) NSString* linkId;
 
 @property (nonatomic, strong) NSMutableArray* arrayRestaurant;
+@property (nonatomic, assign) BOOL follow;
 @property (nonatomic, assign) BOOL replied;
 @property (nonatomic, assign) BOOL unread;
 

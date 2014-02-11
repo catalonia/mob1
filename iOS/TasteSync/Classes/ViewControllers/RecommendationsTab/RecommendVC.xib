@@ -7,7 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecommendVC">
             <connections>
+                <outlet property="helpButton" destination="v5r-hm-d7A" id="2fN-qo-3L8"/>
                 <outlet property="lbNotifications" destination="34" id="35"/>
+                <outlet property="notifycationButton" destination="pR8-d5-QtA" id="Bvd-Mp-WFf"/>
+                <outlet property="shuffleButton" destination="6Lm-l9-x6v" id="z92-wa-jdV"/>
+                <outlet property="tbvShuffle" destination="Fja-J2-6Oc" id="qz8-T2-a9P"/>
                 <outlet property="tbvUnread" destination="19" id="31"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -32,6 +36,9 @@
                             <state key="disabled" backgroundImage="bt_55.png"/>
                             <state key="selected" backgroundImage="bt_55.png"/>
                             <state key="highlighted" backgroundImage="bt_55.png"/>
+                            <connections>
+                                <action selector="actionAllButton:" destination="-1" eventType="touchUpInside" id="rsK-07-CdO"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6Lm-l9-x6v">
                             <rect key="frame" x="130" y="7" width="60" height="30"/>
@@ -44,6 +51,9 @@
                             <state key="disabled" backgroundImage="bt_55.png"/>
                             <state key="selected" backgroundImage="bt_55.png"/>
                             <state key="highlighted" backgroundImage="bt_55.png"/>
+                            <connections>
+                                <action selector="actionShuffleButton:" destination="-1" eventType="touchUpInside" id="B2c-At-iyU"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="v5r-hm-d7A">
                             <rect key="frame" x="198" y="7" width="60" height="30"/>
@@ -56,6 +66,9 @@
                             <state key="disabled" backgroundImage="bt_55.png"/>
                             <state key="selected" backgroundImage="bt_55.png"/>
                             <state key="highlighted" backgroundImage="bt_55.png"/>
+                            <connections>
+                                <action selector="actionHelpButton:" destination="-1" eventType="touchUpInside" id="JAF-Zv-g1V"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -98,6 +111,16 @@
                     <connections>
                         <outlet property="dataSource" destination="-1" id="20"/>
                         <outlet property="delegate" destination="-1" id="21"/>
+                    </connections>
+                </tableView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Fja-J2-6Oc">
+                    <rect key="frame" x="0.0" y="48" width="320" height="383"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="41R-bE-kzr"/>
+                        <outlet property="delegate" destination="-1" id="vKB-xd-kyB"/>
                     </connections>
                 </tableView>
                 <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="34" userLabel="Label - lb notifications">

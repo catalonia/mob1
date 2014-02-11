@@ -21,7 +21,7 @@ NSString *const SessionStateChangedNotification = @"com.facebook.CFacebook:Sessi
 @implementation AppDelegate
 
 @synthesize tabbarBaseVC,window,delegate,arrDataFBFriends,
-arrayNotification,
+arrayNotification, arrayShuffle,
 askSubmited=_askSubmited;
 
 

@@ -9,13 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "NotificationObj.h"
 #import "CRequest.h"
+typedef enum
+{
+    RecommendationNotification = 1,
+    RecommendationShuffle = 2
+}RecommendationType;
 @protocol NotificationDelegate
--(void)getDataSuccess;
+-(void)getDataSuccess:(RecommendationType)type;;
 @end
 @interface GlobalNotification : NSObject<RequestDelegate>
 
 @property (nonatomic, assign) int total,unread,read, index;
 @property (nonatomic, strong) NSMutableArray *arrData,*arrDataRead;
+@property (nonatomic, strong) NSMutableArray *arrDataShuffle,*arrDataReadShuffle;
 @property (nonatomic, strong) NotificationObj *notifObj;
 @property (nonatomic, assign) BOOL isSend;
 @property (nonatomic, assign) id<NotificationDelegate> delegate;
@@ -24,12 +30,9 @@
 
 - (NotificationObj *) gotoNextNotification;
 
-- (void) addObject:(NotificationObj *) obj;
-
--(void)requestData:(UIView*)view;
--(void)reloadUpData:(int)pageReload view:(UIView*)view;
--(void)reloadDownData:(UIView*)view;
--(void)reloadDownDataToNotifycation:(int)countNumber View:(UIView*)view;
-
--(void)requestRestaurantData:(UIView*)view;
+-(void)requestData:(UIView*)view Type:(RecommendationType)type;
+-(void)reloadUpData:(int)pageReload view:(UIView*)view Type:(RecommendationType)type;
+-(void)reloadDownData:(UIView*)view Type:(RecommendationType)type;
+-(void)reloadDownDataToNotifycation:(int)countNumber View:(UIView*)view Type:(RecommendationType)type;
+-(void)requestRestaurantData:(UIView*)view Type:(RecommendationType)type;
 @end

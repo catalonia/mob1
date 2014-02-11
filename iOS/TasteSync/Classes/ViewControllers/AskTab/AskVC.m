@@ -115,8 +115,10 @@
         else
         {
             GlobalNotification *globalNotification = [[GlobalNotification alloc] initWithALlType];
-            [globalNotification requestData:self.view];
-            [globalNotification requestRestaurantData:self.view];
+            [globalNotification requestData:self.view Type:RecommendationNotification];
+            [globalNotification requestRestaurantData:self.view Type:RecommendationNotification];
+            [globalNotification requestData:self.view Type:RecommendationShuffle];
+            [globalNotification requestRestaurantData:self.view Type:RecommendationShuffle];
         }
         isLoad = YES;
     }

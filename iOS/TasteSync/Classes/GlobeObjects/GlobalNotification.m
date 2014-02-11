@@ -31,44 +31,83 @@
     self = [super init];
     if (self) {
         self.arrData = [[NSMutableArray alloc] init];
-        self.arrDataRead = [[NSMutableArray alloc] init ];
+        self.arrDataRead = [[NSMutableArray alloc] init];
+        self.arrDataShuffle = [[NSMutableArray alloc] init];
+        self.arrDataReadShuffle = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
--(void)requestData:(UIView*)view
+-(void)requestData:(UIView*)view Type:(RecommendationType)type
 {
     _view = view;
-    NSString* link = [NSString stringWithFormat:@"recolist?userid=%@&paginationid=1",[UserDefault userDefault].userID];
-    CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:1 WithView:view];
-    request.delegate = self;
-    [request startFormRequest];
+    if(type == RecommendationNotification)
+    {
+        NSString* link = [NSString stringWithFormat:@"recolist?userid=%@&paginationid=1",[UserDefault userDefault].userID];
+        CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:1 WithView:view];
+        request.delegate = self;
+        [request startFormRequest];
+    }
+    else
+    {
+        CRequest* request = [[CRequest alloc]initWithURL:@"shufflerecorequests" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:6 WithView:view];
+        [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
+        [request setFormPostValue:@"1" forKey:@"paginationid"];
+        request.delegate = self;
+        [request startFormRequest];
+    }
 }
 
--(void)reloadUpData:(int)pageload view:(UIView*)view
+-(void)reloadUpData:(int)pageload view:(UIView*)view Type:(RecommendationType)type;
 {
     _view = view;
     AppDelegate* deleate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    self.arrData = [[NSMutableArray alloc]initWithArray:deleate.arrayNotification];
-    NSString* link = [NSString stringWithFormat:@"recolist?userid=%@&paginationid=%d",[UserDefault userDefault].userID, pageload];
-    CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:2 WithView:view];
-    request.delegate = self;
-    [request startFormRequest];
+    if(type == RecommendationNotification)
+    {
+
+        self.arrData = [[NSMutableArray alloc]initWithArray:deleate.arrayNotification];
+        NSString* link = [NSString stringWithFormat:@"recolist?userid=%@&paginationid=%d",[UserDefault userDefault].userID, pageload];
+        CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:2 WithView:view];
+        request.delegate = self;
+        [request startFormRequest];
+    }
+    else
+    {
+        self.arrDataShuffle = [[NSMutableArray alloc]initWithArray:deleate.arrayShuffle];
+        CRequest* request = [[CRequest alloc]initWithURL:@"shufflerecorequests" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:7 WithView:view];
+        [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
+        [request setFormPostValue:[NSString stringWithFormat:@"%d",pageload] forKey:@"paginationid"];
+        request.delegate = self;
+        [request startFormRequest];
+    }
 }
--(void)reloadDownData:(UIView*)view
+-(void)reloadDownData:(UIView*)view Type:(RecommendationType)type;
 {
     _view = view;
-    [self reloadUpData:1 view:view];
+    [self reloadUpData:1 view:view Type:type];
     AppDelegate* deleate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    self.arrData = [[NSMutableArray alloc]initWithArray:deleate.arrayNotification];
-    int index = self.arrData.count;
-    NSString* link = [NSString stringWithFormat:@"recolist?userid=%@&paginationid=%d",[UserDefault userDefault].userID, index/50 + 1];
-    CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:3 WithView:view];
-    request.delegate = self;
-    [request startFormRequest];
     
+    if(type == RecommendationNotification)
+    {
+        self.arrData = [[NSMutableArray alloc]initWithArray:deleate.arrayNotification];
+        int index = self.arrData.count;
+        NSString* link = [NSString stringWithFormat:@"recolist?userid=%@&paginationid=%d",[UserDefault userDefault].userID, index/50 + 1];
+        CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:3 WithView:view];
+        request.delegate = self;
+        [request startFormRequest];
+    }
+    else
+    {
+        self.arrDataShuffle = [[NSMutableArray alloc]initWithArray:deleate.arrayNotification];
+        int index = self.arrData.count;
+        CRequest* request = [[CRequest alloc]initWithURL:@"shufflerecorequests" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:8 WithView:view];
+        [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
+        [request setFormPostValue:[NSString stringWithFormat:@"%d",index/20 + 1] forKey:@"paginationid"];
+        request.delegate = self;
+        [request startFormRequest];
+    }
 }
--(void)requestRestaurantData:(UIView*)view
+-(void)requestRestaurantData:(UIView*)view Type:(RecommendationType)type;
 {
     TSCityObj* _cityObj = [CommonHelpers setDefaultCityObj];
     NSString* link = [NSString stringWithFormat:@"recosrestaurantsearchresults?userid=%@&restaurantid=%@&neighborhoodid=%@&cityid=%@&statename=%@&cuisineidtier1idlist=%@&priceidlist=%@&rating=%@&savedflag=%@&favflag=%@&dealflag=%@&chainflag=%@&paginationid=%@",[UserDefault userDefault].userID,@"",@"", _cityObj.uid, _cityObj.stateName,@"",@"",@"",@"",@"",@"",@"",@"1"];
@@ -76,44 +115,35 @@
     request.delegate = self;
     [request startFormRequest];
 }
--(void)startReload
+-(void)startReload:(RecommendationType)type
 {
-    NSString* link = [NSString stringWithFormat:@"recolist?userid=%@&paginationid=%d",[UserDefault userDefault].userID, self.pageLoad];
-    CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:4 WithView:_view];
-    request.delegate = self;
-    [request startFormRequest];
+    
+    if(type == RecommendationNotification)
+    {
+        NSString* link = [NSString stringWithFormat:@"recolist?userid=%@&paginationid=%d",[UserDefault userDefault].userID, self.pageLoad];
+        CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:4 WithView:_view];
+        request.delegate = self;
+        [request startFormRequest];
+    }
+    else
+    {
+        CRequest* request = [[CRequest alloc]initWithURL:@"shufflerecorequests" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:9 WithView:_view];
+        [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
+        [request setFormPostValue:[NSString stringWithFormat:@"%d",self.pageLoad] forKey:@"paginationid"];
+        request.delegate = self;
+        [request startFormRequest];
+    }
+    
+    
 }
 
--(void)reloadDownDataToNotifycation:(int)countNumber View:(UIView*)view
+-(void)reloadDownDataToNotifycation:(int)countNumber View:(UIView*)view Type:(RecommendationType)type;
 {
     _numberData = countNumber;
     _view = view;
-    [self startReload];
+    [self startReload:type];
     
 }
-- (void) addObject:(NotificationObj *) obj
-{
-    [self.arrData addObject:obj];
-    for (int i= 0; i< _arrData.count; i++) {
-        
-        NotificationObj *notifObj = [_arrData objectAtIndex:i];
-        
-        if (notifObj.read) {
-            [self.arrData insertObject:obj atIndex:i];
-            break;
-        }
-        
-        if (notifObj.type > obj.type) {
-            [self.arrData insertObject:obj atIndex:i];
-            break;
-        }
-        
-    }
-    self.total ++;
-    self.unread ++;
-    
-}
-
 - (NotificationObj *) gotoNextNotification
 {
     if (self.index < [self.arrData count]) {
@@ -226,10 +256,6 @@
             
             indexLoad = i;
             [self.arrData addObject:obj];
-            //[NSThread detachNewThreadSelector:@selector(loadImage) toTarget:self withObject:nil];
-            if (i == 0) {
-                self.notifObj = obj;
-            }
             i++;
         }
         deleate.arrayNotification = [[NSMutableArray alloc]initWithArray:_arrData];
@@ -341,12 +367,12 @@
             }
             if (i == self.arrDataRead.count) {
                 pageReload++;
-                [self reloadUpData:pageReload view:_view];
+                [self reloadUpData:pageReload view:_view Type:RecommendationNotification];
             }
             else
             {
                 deleate.arrayNotification = [[NSMutableArray alloc]initWithArray:_arrData];
-                [self.delegate getDataSuccess];
+                [self.delegate getDataSuccess:RecommendationNotification];
             }
         }
     }
@@ -454,7 +480,7 @@
                     break;
             }
             deleate.arrayNotification = [[NSMutableArray alloc]initWithArray:_arrData];
-            [self.delegate getDataSuccess];
+            [self.delegate getDataSuccess:RecommendationNotification];
         }
     }
     if (key == 4) {
@@ -553,10 +579,10 @@
         
         if (delegate.arrayNotification.count < _numberData) {
             self.pageLoad++;
-            [self startReload];
+            [self startReload:RecommendationNotification];
         }
         else
-            [self.delegate getDataSuccess];
+            [self.delegate getDataSuccess:RecommendationNotification];
         
     }
     if (key == 5) {
@@ -597,6 +623,216 @@
             [[CommonHelpers appDelegate].arrayRestaurant addObject:global];
         }
         //_arrData = _arrDataRestaurant;
+    }
+    if (key == 6) {
+        _arrDataShuffle = [[NSMutableArray alloc]init];
+        AppDelegate* deleate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        NSString* response = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",response);
+        
+        NSDictionary* dictionary = [response objectFromJSONString];
+        
+        [CommonHelpers appDelegate].numberPageShuffle = [[dictionary objectForKey:@"maxPaginationId"] intValue];
+        NSArray* array = [dictionary objectForKey:@"recoRequestShuffle"];
+        int i = 0;
+        for (NSDictionary* dic in array) {
+            NotificationObj *obj = [[NotificationObj alloc] init];
+            NSString* follow = [NSString stringWithFormat:@"%@",[dic objectForKey:@"recommendeeUserFolloweeFlag"]];
+            if ([follow isEqualToString:@"0"]) {
+                obj.follow = NO;
+            }
+            else
+            {
+                obj.follow = YES;
+            }
+            obj.linkId =  [NSString stringWithFormat:@"%@",[dic objectForKey:@"recorequestId"]];
+            UserObj *user = [[UserObj alloc] init];
+        
+            obj.description = [dic objectForKey:@"recorequestText"];
+            NSDictionary* dicObj = [dic objectForKey:@"recommendeeUser"];
+            user.name = [dicObj objectForKey:@"name"];
+            user.avatarUrl = [dicObj objectForKey:@"photo"];
+            user.uid = [dicObj objectForKey:@"userId"];
+            
+            obj.user = user;
+            
+            indexLoad = i;
+            [self.arrDataShuffle addObject:obj];
+            i++;
+        }
+        deleate.arrayShuffle = [[NSMutableArray alloc]initWithArray:_arrDataShuffle];
+    }
+    if (key == 7) {
+        AppDelegate* deleate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        NSString* response = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",response);
+        
+        self.arrDataReadShuffle = [[NSMutableArray alloc]init];
+        NSDictionary* dictionary = [response objectFromJSONString];
+        
+        [CommonHelpers appDelegate].numberPageShuffle = [[dictionary objectForKey:@"maxPaginationId"] intValue];
+        NSArray* array = [dictionary objectForKey:@"recoRequestShuffle"];
+        int i = 0;
+        for (NSDictionary* dic in array) {
+            NotificationObj *obj = [[NotificationObj alloc] init];
+            NSString* follow = [NSString stringWithFormat:@"%@",[dic objectForKey:@"recommendeeUserFolloweeFlag"]];
+            if ([follow isEqualToString:@"0"]) {
+                obj.follow = NO;
+            }
+            else
+            {
+                obj.follow = YES;
+            }
+            obj.linkId =  [NSString stringWithFormat:@"%@",[dic objectForKey:@"recorequestId"]];
+            UserObj *user = [[UserObj alloc] init];
+            
+            obj.description = [dic objectForKey:@"recorequestText"];
+            NSDictionary* dicObj = [dic objectForKey:@"recommendeeUser"];
+            user.name = [dicObj objectForKey:@"name"];
+            user.avatarUrl = [dicObj objectForKey:@"photo"];
+            user.uid = [dicObj objectForKey:@"userId"];
+            
+            obj.user = user;
+            
+            indexLoad = i;
+            [self.arrDataReadShuffle addObject:obj];
+            //[NSThread detachNewThreadSelector:@selector(loadImageData) toTarget:self withObject:nil];
+            i++;
+        }
+        NSLog(@"finish");
+        if (self.arrDataShuffle.count > 0) {
+            NotificationObj* objData = [self.arrDataShuffle objectAtIndex:0];
+            NSString* str2 = [NSString stringWithFormat:@"%@",objData.linkId];
+            i = 0;
+            for (NotificationObj*obj in self.arrDataReadShuffle) {
+                NSString* str1 = [NSString stringWithFormat:@"%@",obj.linkId];
+                if (![str1 isEqualToString:str2]) {
+                    [self.arrDataShuffle insertObject:obj atIndex:i];
+                    i++;
+                }
+                else
+                    break;
+            }
+            if (i == self.arrDataReadShuffle.count) {
+                pageReload++;
+                [self reloadUpData:pageReload view:_view Type:RecommendationShuffle];
+            }
+            else
+            {
+                deleate.arrayShuffle = [[NSMutableArray alloc]initWithArray:_arrDataShuffle];
+                [self.delegate getDataSuccess:RecommendationShuffle];
+            }
+        }
+    }
+    if (key == 8) {
+        AppDelegate* deleate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        self.arrDataReadShuffle = [[NSMutableArray alloc]init];
+        NSString* response = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",response);
+        
+        NSDictionary* dictionary = [response objectFromJSONString];
+        
+        [CommonHelpers appDelegate].numberPageShuffle = [[dictionary objectForKey:@"maxPaginationId"] intValue];
+        NSArray* array = [dictionary objectForKey:@"recoRequestShuffle"];
+        int i = 0;
+        for (NSDictionary* dic in array) {
+            NotificationObj *obj = [[NotificationObj alloc] init];
+            NSString* follow = [NSString stringWithFormat:@"%@",[dic objectForKey:@"recommendeeUserFolloweeFlag"]];
+            if ([follow isEqualToString:@"0"]) {
+                obj.follow = NO;
+            }
+            else
+            {
+                obj.follow = YES;
+            }
+            obj.linkId =  [NSString stringWithFormat:@"%@",[dic objectForKey:@"recorequestId"]];
+            UserObj *user = [[UserObj alloc] init];
+            
+            obj.description = [dic objectForKey:@"recorequestText"];
+            NSDictionary* dicObj = [dic objectForKey:@"recommendeeUser"];
+            user.name = [dicObj objectForKey:@"name"];
+            user.avatarUrl = [dicObj objectForKey:@"photo"];
+            user.uid = [dicObj objectForKey:@"userId"];
+            
+            obj.user = user;
+            
+            indexLoad = i;
+            [self.arrDataReadShuffle addObject:obj];
+            //[NSThread detachNewThreadSelector:@selector(loadImageData) toTarget:self withObject:nil];
+            i++;
+        }
+        NSLog(@"finish");
+        if (self.arrDataShuffle.count > 0) {
+            NotificationObj* objData = [self.arrDataShuffle objectAtIndex:(self.arrDataShuffle.count - 1)];
+            NSString* str2 = [NSString stringWithFormat:@"%@",objData.linkId];
+            for (int j = self.arrDataReadShuffle.count - 1; j >= 0; j-- ) {
+                NotificationObj*obj = [self.arrDataReadShuffle objectAtIndex:j];
+                NSString* str1 = [NSString stringWithFormat:@"%@",obj.linkId];
+                if (![str1 isEqualToString:str2]) {
+                    [self.arrDataShuffle addObject:obj];
+                }
+                else
+                    break;
+            }
+            deleate.arrayShuffle = [[NSMutableArray alloc]initWithArray:_arrDataShuffle];
+            [self.delegate getDataSuccess:RecommendationShuffle];
+        }
+    }
+    if (key == 9) {
+        AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        self.arrDataReadShuffle = [[NSMutableArray alloc]init];
+        NSString* response = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",response);
+        
+        NSDictionary* dictionary = [response objectFromJSONString];
+        
+        [CommonHelpers appDelegate].numberPageShuffle = [[dictionary objectForKey:@"maxPaginationId"] intValue];
+        NSArray* array = [dictionary objectForKey:@"recoRequestShuffle"];
+        int i = 0;
+        for (NSDictionary* dic in array) {
+            NotificationObj *obj = [[NotificationObj alloc] init];
+            NSString* follow = [NSString stringWithFormat:@"%@",[dic objectForKey:@"recommendeeUserFolloweeFlag"]];
+            if ([follow isEqualToString:@"0"]) {
+                obj.follow = NO;
+            }
+            else
+            {
+                obj.follow = YES;
+            }
+            obj.linkId =  [NSString stringWithFormat:@"%@",[dic objectForKey:@"recorequestId"]];
+            UserObj *user = [[UserObj alloc] init];
+            
+            obj.description = [dic objectForKey:@"recorequestText"];
+            NSDictionary* dicObj = [dic objectForKey:@"recommendeeUser"];
+            user.name = [dicObj objectForKey:@"name"];
+            user.avatarUrl = [dicObj objectForKey:@"photo"];
+            user.uid = [dicObj objectForKey:@"userId"];
+            
+            obj.user = user;
+            
+            indexLoad = i;
+            [self.arrDataReadShuffle addObject:obj];
+            //[NSThread detachNewThreadSelector:@selector(loadImageData) toTarget:self withObject:nil];
+            i++;
+        }
+        NSLog(@"finish");
+        for (int j = 0; j < self.arrDataReadShuffle.count; j++ ) {
+            NotificationObj*obj = [self.arrDataReadShuffle objectAtIndex:j];
+            if (delegate.arrayShuffle.count <= _numberData) {
+                [delegate.arrayShuffle addObject:obj];
+            }
+        }
+        
+        
+        if (delegate.arrayShuffle.count < _numberData) {
+            self.pageLoad++;
+            [self startReload:RecommendationShuffle];
+        }
+        else
+            [self.delegate getDataSuccess:RecommendationShuffle];
+        
     }
 }
 
