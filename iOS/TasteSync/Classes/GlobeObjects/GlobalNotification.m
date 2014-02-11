@@ -30,6 +30,7 @@
 {
     self = [super init];
     if (self) {
+        [CommonHelpers appDelegate].currentShuffle = 1;
         self.arrData = [[NSMutableArray alloc] init];
         self.arrDataRead = [[NSMutableArray alloc] init];
         self.arrDataShuffle = [[NSMutableArray alloc] init];
@@ -646,7 +647,7 @@
                 obj.follow = YES;
             }
             obj.linkId =  [NSString stringWithFormat:@"%@",[dic objectForKey:@"recorequestId"]];
-            obj.type = NotificationRecommendationsForYou;
+            obj.type = NotificationRecorequestNeeded;
             UserObj *user = [[UserObj alloc] init];
         
             obj.description = [dic objectForKey:@"recorequestText"];
@@ -685,7 +686,7 @@
                 obj.follow = YES;
             }
             obj.linkId =  [NSString stringWithFormat:@"%@",[dic objectForKey:@"recorequestId"]];
-            obj.type = NotificationRecommendationsForYou;
+            obj.type = NotificationRecorequestNeeded;
             UserObj *user = [[UserObj alloc] init];
             
             obj.description = [dic objectForKey:@"recorequestText"];
@@ -752,7 +753,7 @@
             UserObj *user = [[UserObj alloc] init];
             
             obj.description = [dic objectForKey:@"recorequestText"];
-            obj.type = NotificationRecommendationsForYou;
+            obj.type = NotificationRecorequestNeeded;
             NSDictionary* dicObj = [dic objectForKey:@"recommendeeUser"];
             user.name = [dicObj objectForKey:@"name"];
             user.avatarUrl = [dicObj objectForKey:@"photo"];
@@ -808,7 +809,7 @@
             UserObj *user = [[UserObj alloc] init];
             
             obj.description = [dic objectForKey:@"recorequestText"];
-            obj.type = NotificationRecommendationsForYou;
+            obj.type = NotificationRecorequestNeeded;
             NSDictionary* dicObj = [dic objectForKey:@"recommendeeUser"];
             user.name = [dicObj objectForKey:@"name"];
             user.avatarUrl = [dicObj objectForKey:@"photo"];

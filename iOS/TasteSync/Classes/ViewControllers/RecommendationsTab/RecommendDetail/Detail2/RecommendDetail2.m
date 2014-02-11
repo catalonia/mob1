@@ -29,6 +29,7 @@
     __weak IBOutlet UIButton *btFollow;
     __weak IBOutlet UIButton *cantHelpButton;
     __weak IBOutlet UIButton *buttonSent;
+    __weak IBOutlet UIButton *buttonShuffle;
     UITextField *cTextField;
     GlobalNotification *glNotif ;
     NotificationObj *currentNotif;
@@ -118,7 +119,12 @@ arrDataFilter=_arrDataFilter;;
         }
         else
         {
-            lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_4];
+            if (_notificationObj.type== TYPE_1) {
+                lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_1];
+            }
+            else
+                lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_4];
+            
         }
        
         tvLongMsg.text = _notificationObj.description;
@@ -176,9 +182,6 @@ arrDataFilter=_arrDataFilter;;
 {
     [[[CommonHelpers appDelegate] tabbarBaseVC] actionNewsfeed];
 }
-
-
-
 - (IBAction)actionBack:(id)sender
 {
     [self.global.recomendationDelegate reloadRecomendation];
@@ -201,6 +204,10 @@ arrDataFilter=_arrDataFilter;;
             });
         });
     }
+}
+- (IBAction)actionShuffle:(id)sender
+{
+    
 }
 - (IBAction)actionSend:(id)sender
 {
