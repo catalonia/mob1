@@ -37,6 +37,7 @@
     UserDefault *userDefault;
     TextView* textView;
     NSString* requestText;
+    BOOL isShuffle;
 }
 
 
@@ -72,6 +73,15 @@ arrDataFilter=_arrDataFilter;;
     return self;
 }
 
+- (id)initWithShuffle
+{
+    self = [super initWithNibName:@"RecommendDetail2" bundle:nil];
+    if (self) {
+        isShuffle = YES;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -101,18 +111,14 @@ arrDataFilter=_arrDataFilter;;
     
     [scrollViewMain setContentSize:CGSizeMake(320, 600)];
     
-    if (glNotif.isSend) {
-        view1.hidden = NO;
-
-    }
-    else
-    {
-        view1.hidden = YES;
-        [view2 setFrame:CGRectMake(0, view2.frame.origin.y-60, view2.frame.size.width, view2.frame.size.height)];
-    }
-
     if (_notificationObj) {
-        ivAvatar.image = _notificationObj.user.avatar;
+        if (_notificationObj.user.avatar != nil) {
+            ivAvatar.image = _notificationObj.user.avatar;
+        }
+        else
+        {
+            [NSThread detachNewThreadSelector:@selector(loadAvatar) toTarget:self withObject:nil];
+        }
         //NSString *firstCh = [_notificationObj.user.lastname substringToIndex:1];
         if (_notificationObj.type== TYPE_3) {
              lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_3];
@@ -121,6 +127,12 @@ arrDataFilter=_arrDataFilter;;
         {
             if (_notificationObj.type== TYPE_1) {
                 lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_1];
+                if (isShuffle) {
+                    buttonShuffle.hidden = NO;
+                    buttonSent.hidden = NO;
+                    buttonSent.frame = CGRectMake(167, buttonSent.frame.origin.y, buttonSent.frame.size.width, buttonSent.frame.size.height);
+                    cantHelpButton.hidden = NO;
+                }
             }
             else
                 lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_4];
@@ -148,10 +160,15 @@ arrDataFilter=_arrDataFilter;;
 {
     [super viewDidAppear:animated];
     if (_notificationObj.type == NotificationRecorequestNeeded) {
-        NSString* link = [NSString stringWithFormat:@"recorequest?userid=%@&recorequestid=%@", [UserDefault userDefault].userID, self.notificationObj.linkId];
-        CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:3 WithView:self.view];
-        request.delegate = self;
-        [request startFormRequest];
+        if (isShuffle) {
+            
+        }
+        else{
+            NSString* link = [NSString stringWithFormat:@"recorequest?userid=%@&recorequestid=%@", [UserDefault userDefault].userID, self.notificationObj.linkId];
+            CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:3 WithView:self.view];
+            request.delegate = self;
+            [request startFormRequest];
+        }
     }
     if (_notificationObj.type == NotificationMessageForYou) {
         NSString* link = [NSString stringWithFormat:@"recomsg?messageid=%@&recipientuserid=%@", self.notificationObj.linkId, [UserDefault userDefault].userID];
@@ -207,7 +224,9 @@ arrDataFilter=_arrDataFilter;;
 }
 - (IBAction)actionShuffle:(id)sender
 {
-    
+    [CommonHelpers appDelegate].currentShuffle++;
+    self.notificationObj = [[CommonHelpers appDelegate].arrayShuffle objectAtIndex:[CommonHelpers appDelegate].currentShuffle];
+    [self viewDidLoad];
 }
 - (IBAction)actionSend:(id)sender
 {
@@ -269,19 +288,36 @@ arrDataFilter=_arrDataFilter;;
                 [request startFormRequest];
             }
             if (self.notificationObj.type == NotificationRecorequestNeeded) {
-                CRequest* request = [[CRequest alloc]initWithURL:@"recoreqans" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:2 WithView:self.view];
-                request.delegate = self;
-                [request setFormPostValue:[UserDefault userDefault].userID          forKey:@"recommenderuserid"];
-                [request setFormPostValue:self.notificationObj.linkId                        forKey:@"recorequestid"];
-                [request setFormPostValue:tvMsg.text                                                forKey:@"replytext"];
-                [request setFormPostValue:listRestaurant                                          forKey:@"restaurantidlist"];
-                
-                NSLog(@"recommenderuserid: %@", [UserDefault userDefault].userID );
-                NSLog(@"recorequestid: %@", self.notificationObj.linkId);
-                NSLog(@"replytext: %@", tvMsg.text);
-                NSLog(@"restaurantidlist: %@", listRestaurant);
-                
-                [request startFormRequest];
+                if (isShuffle) {
+                    CRequest* request = [[CRequest alloc]initWithURL:@"shufflerecoreqans" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:2 WithView:self.view];
+                    request.delegate = self;
+                    [request setFormPostValue:[UserDefault userDefault].userID          forKey:@"userid"];
+                    [request setFormPostValue:self.notificationObj.linkId                        forKey:@"recorequestid"];
+                    [request setFormPostValue:tvMsg.text                                                forKey:@"replytext"];
+                    [request setFormPostValue:listRestaurant                                          forKey:@"restaurantidlist"];
+                    
+                    NSLog(@"userid: %@", [UserDefault userDefault].userID );
+                    NSLog(@"recorequestid: %@", self.notificationObj.linkId);
+                    NSLog(@"replytext: %@", tvMsg.text);
+                    NSLog(@"restaurantidlist: %@", listRestaurant);
+                    
+                    [request startFormRequest];
+                }
+                else{
+                    CRequest* request = [[CRequest alloc]initWithURL:@"recoreqans" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:2 WithView:self.view];
+                    request.delegate = self;
+                    [request setFormPostValue:[UserDefault userDefault].userID          forKey:@"recommenderuserid"];
+                    [request setFormPostValue:self.notificationObj.linkId                        forKey:@"recorequestid"];
+                    [request setFormPostValue:tvMsg.text                                                forKey:@"replytext"];
+                    [request setFormPostValue:listRestaurant                                          forKey:@"restaurantidlist"];
+                    
+                    NSLog(@"recommenderuserid: %@", [UserDefault userDefault].userID );
+                    NSLog(@"recorequestid: %@", self.notificationObj.linkId);
+                    NSLog(@"replytext: %@", tvMsg.text);
+                    NSLog(@"restaurantidlist: %@", listRestaurant);
+                    
+                    [request startFormRequest];
+                }
             }
         }
         
@@ -734,4 +770,16 @@ arrDataFilter=_arrDataFilter;;
 {
      [scrollViewMain setContentOffset:CGPointMake(0, 165) animated:YES];
 }
+
+#pragma mark Thread
+
+-(void)loadAvatar
+{
+    @autoreleasepool {
+        self.notificationObj.user.avatar = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.notificationObj.user.avatarUrl]]];
+        ivAvatar.image = self.notificationObj.user.avatar;
+    }
+    
+}
+
 @end

@@ -25,4 +25,6 @@
 @property (nonatomic, strong) NSMutableArray *arrData,*arrDataRestaurant,*arrDataFilter;
 @property (nonatomic, strong) CustomDelegate *global;
 
+- (id)initWithShuffle;
+
 @end

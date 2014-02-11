@@ -29,6 +29,8 @@
                 <outlet property="tbvFilter" destination="22" id="25"/>
                 <outlet property="tbvResult" destination="15" id="21"/>
                 <outlet property="tfRestaurant" destination="8" id="27"/>
+                <outlet property="titleImageView" destination="40" id="r0B-Yd-fR2"/>
+                <outlet property="titleView" destination="xK8-R0-aHr" id="7wf-Yy-ic6"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="viewChain" destination="OAj-dw-5hH" id="2Bm-66-Q6M"/>
                 <outlet property="viewFilterExtends" destination="45" id="82"/>
@@ -72,7 +74,7 @@
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg44.png" id="40">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="31"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New York, NY" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wKU-xs-hd3">
                                     <rect key="frame" x="15" y="0.0" width="270" height="31"/>

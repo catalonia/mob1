@@ -1241,6 +1241,7 @@ typedef enum _TFSelect
 
         detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"]];
         
+        [self resizeDetailText];
         
         
         [tbvResult reloadData];
@@ -1297,12 +1298,59 @@ typedef enum _TFSelect
         
         detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"]];
         
+        [self resizeDetailText];
+        
         numberPage = [CommonHelpers appDelegate].numberPage;
         _arrData = [[NSMutableArray alloc]initWithArray:[CommonHelpers appDelegate].arrayRestaurant];
         [tbvResult reloadData];
         tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
         scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
     }
+}
+
+-(void)resizeDetailText
+{
+    
+    CGSize labelHeight;
+    
+    
+    NSAssert(self, @"UILabel was nil");
+    
+    //Label text
+    NSString *aLabelTextString = detailLabel.text;
+    
+    //Label font
+    UIFont *aLabelFont = detailLabel.font;
+    
+    //Width of the Label
+    CGFloat aLabelSizeWidth = detailLabel.frame.size.width;
+    
+    
+    if (SYSTEM_VERSION_LESS_THAN(iOS7_0)) {
+        //version < 7.0
+        
+        labelHeight = [aLabelTextString sizeWithFont:aLabelFont
+                            constrainedToSize:CGSizeMake(aLabelSizeWidth, MAXFLOAT)
+                                lineBreakMode:NSLineBreakByWordWrapping];
+    }
+    else if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(iOS7_0)) {
+        //version >= 7.0
+        
+        //Return the calculated size of the Label
+        labelHeight = [aLabelTextString boundingRectWithSize:CGSizeMake(aLabelSizeWidth, MAXFLOAT)
+                                              options:NSStringDrawingUsesLineFragmentOrigin
+                                           attributes:@{
+                                                        NSFontAttributeName : aLabelFont
+                                                        }
+                                              context:nil].size;
+        
+    }
+    
+    titleView.frame = CGRectMake(titleView.frame.origin.x, titleView.frame.origin.y, titleView.frame.size.width, labelHeight.height + 12);
+    detailLabel.frame = CGRectMake(detailLabel.frame.origin.x, detailLabel.frame.origin.y, detailLabel.frame.size.width, labelHeight.height + 12);
+    
+    viewMain.frame = CGRectMake(viewMain.frame.origin.x, -53 + labelHeight.height - 7, viewMain.frame.size.width, viewMain.frame.size.height);
+    
 }
 
 -(IBAction)doneAction:(id)sender

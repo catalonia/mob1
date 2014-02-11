@@ -257,8 +257,6 @@
 		5E77770616D6035C00B0F363 /* SelfProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E7776B216D6035B00B0F363 /* SelfProfileVC.xib */; };
 		5E77770A16D6035C00B0F363 /* AboutTasteSyncVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7776BD16D6035C00B0F363 /* AboutTasteSyncVC.m */; };
 		5E77770B16D6035C00B0F363 /* AboutTasteSyncVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E7776BE16D6035C00B0F363 /* AboutTasteSyncVC.xib */; };
-		5E77770C16D6035C00B0F363 /* CellCustomAbout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7776C016D6035C00B0F363 /* CellCustomAbout.m */; };
-		5E77770D16D6035C00B0F363 /* CellCustomAbout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E7776C116D6035C00B0F363 /* CellCustomAbout.xib */; };
 		5E77770E16D6035C00B0F363 /* CellCustomSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7776C316D6035C00B0F363 /* CellCustomSetting.m */; };
 		5E77770F16D6035C00B0F363 /* CellCustomSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E7776C416D6035C00B0F363 /* CellCustomSetting.xib */; };
 		5E77771016D6035C00B0F363 /* ContactTasteSyncVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7776C716D6035C00B0F363 /* ContactTasteSyncVC.m */; };
@@ -705,6 +703,8 @@
 		E6A35595183F26E20027F222 /* arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = E6A35594183F26E20027F222 /* arrow_right.png */; };
 		E6AA9AC71823125800EE8ADA /* LoadDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AA9AC61823125800EE8ADA /* LoadDataCell.m */; };
 		E6AA9AC91823126500EE8ADA /* LoadDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AA9AC81823126500EE8ADA /* LoadDataCell.xib */; };
+		E6AD26AA18AA0431000AAC9E /* CellCustomAbout.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AD26A818AA0431000AAC9E /* CellCustomAbout.m */; };
+		E6AD26AB18AA0431000AAC9E /* CellCustomAbout.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AD26A918AA0431000AAC9E /* CellCustomAbout.xib */; };
 		E6B83DF4184B25E1001775E5 /* CustomDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B83DF3184B25E1001775E5 /* CustomDelegate.m */; };
 /* End PBXBuildFile section */
 
@@ -1018,9 +1018,6 @@
 		5E7776BC16D6035C00B0F363 /* AboutTasteSyncVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTasteSyncVC.h; sourceTree = "<group>"; };
 		5E7776BD16D6035C00B0F363 /* AboutTasteSyncVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTasteSyncVC.m; sourceTree = "<group>"; };
 		5E7776BE16D6035C00B0F363 /* AboutTasteSyncVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutTasteSyncVC.xib; sourceTree = "<group>"; };
-		5E7776BF16D6035C00B0F363 /* CellCustomAbout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellCustomAbout.h; path = ../../CellCustomAbout.h; sourceTree = "<group>"; };
-		5E7776C016D6035C00B0F363 /* CellCustomAbout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellCustomAbout.m; path = ../../CellCustomAbout.m; sourceTree = "<group>"; };
-		5E7776C116D6035C00B0F363 /* CellCustomAbout.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellCustomAbout.xib; path = ../../CellCustomAbout.xib; sourceTree = "<group>"; };
 		5E7776C216D6035C00B0F363 /* CellCustomSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellCustomSetting.h; path = TasteSync/Classes/ViewControllers/OthersTab/SettingVC/CellCustomSetting.h; sourceTree = SOURCE_ROOT; };
 		5E7776C316D6035C00B0F363 /* CellCustomSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellCustomSetting.m; path = TasteSync/Classes/ViewControllers/OthersTab/SettingVC/CellCustomSetting.m; sourceTree = SOURCE_ROOT; };
 		5E7776C416D6035C00B0F363 /* CellCustomSetting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellCustomSetting.xib; path = TasteSync/Classes/ViewControllers/OthersTab/SettingVC/CellCustomSetting.xib; sourceTree = SOURCE_ROOT; };
@@ -1556,6 +1553,9 @@
 		E6AA9AC51823125800EE8ADA /* LoadDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadDataCell.h; sourceTree = "<group>"; };
 		E6AA9AC61823125800EE8ADA /* LoadDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadDataCell.m; sourceTree = "<group>"; };
 		E6AA9AC81823126500EE8ADA /* LoadDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadDataCell.xib; sourceTree = "<group>"; };
+		E6AD26A718AA0431000AAC9E /* CellCustomAbout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellCustomAbout.h; path = TasteSync/Classes/ViewControllers/OthersTab/SettingVC/AboutTasteSyncVC/CellCustomAbout.h; sourceTree = SOURCE_ROOT; };
+		E6AD26A818AA0431000AAC9E /* CellCustomAbout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellCustomAbout.m; path = TasteSync/Classes/ViewControllers/OthersTab/SettingVC/AboutTasteSyncVC/CellCustomAbout.m; sourceTree = SOURCE_ROOT; };
+		E6AD26A918AA0431000AAC9E /* CellCustomAbout.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellCustomAbout.xib; path = TasteSync/Classes/ViewControllers/OthersTab/SettingVC/AboutTasteSyncVC/CellCustomAbout.xib; sourceTree = SOURCE_ROOT; };
 		E6B83DF2184B25E1001775E5 /* CustomDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDelegate.h; sourceTree = "<group>"; };
 		E6B83DF3184B25E1001775E5 /* CustomDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2745,9 +2745,9 @@
 		5E7FE43A16D746F100F976B4 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				5E7776BF16D6035C00B0F363 /* CellCustomAbout.h */,
-				5E7776C016D6035C00B0F363 /* CellCustomAbout.m */,
-				5E7776C116D6035C00B0F363 /* CellCustomAbout.xib */,
+				E6AD26A718AA0431000AAC9E /* CellCustomAbout.h */,
+				E6AD26A818AA0431000AAC9E /* CellCustomAbout.m */,
+				E6AD26A918AA0431000AAC9E /* CellCustomAbout.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -3642,6 +3642,7 @@
 				5E8D40EB16D36A4000FF5EEC /* RestaurantVC.xib in Resources */,
 				5E8D40F516D36A7700FF5EEC /* OthersTabVC.xib in Resources */,
 				5E8D438616D37DBB00FF5EEC /* ConfigProfileVC.xib in Resources */,
+				E6AD26AB18AA0431000AAC9E /* CellCustomAbout.xib in Resources */,
 				E65BBC41181B2F2E00C12751 /* RestaurantDetailVC.xib in Resources */,
 				5E98907816D47187003C305A /* AddRestaurantCell.xib in Resources */,
 				5E98907A16D47187003C305A /* FriendCell.xib in Resources */,
@@ -3691,7 +3692,6 @@
 				5E77770116D6035C00B0F363 /* PromptSignUpVC.xib in Resources */,
 				5E77770616D6035C00B0F363 /* SelfProfileVC.xib in Resources */,
 				5E77770B16D6035C00B0F363 /* AboutTasteSyncVC.xib in Resources */,
-				5E77770D16D6035C00B0F363 /* CellCustomAbout.xib in Resources */,
 				5E77770F16D6035C00B0F363 /* CellCustomSetting.xib in Resources */,
 				5E77771116D6035C00B0F363 /* ContactTasteSyncVC.xib in Resources */,
 				5E77771316D6035C00B0F363 /* NotificationSettingsVC.xib in Resources */,
@@ -4256,7 +4256,6 @@
 				5E77770516D6035C00B0F363 /* SelfProfileVC.m in Sources */,
 				E64F385E188D842100B990DA /* UsersFollowing.m in Sources */,
 				5E77770A16D6035C00B0F363 /* AboutTasteSyncVC.m in Sources */,
-				5E77770C16D6035C00B0F363 /* CellCustomAbout.m in Sources */,
 				E6964502182DF86E00A16B79 /* ContactObject.m in Sources */,
 				E6067A1E1833F35D0083D9E8 /* RecommendDetail4.m in Sources */,
 				5E77770E16D6035C00B0F363 /* CellCustomSetting.m in Sources */,
@@ -4283,6 +4282,7 @@
 				5E839B3D16E5A99E00597080 /* UserActivityObj.m in Sources */,
 				5E9E80C216F04EF1006526F3 /* CTImageViewDetail.m in Sources */,
 				5E9E80C316F04EF1006526F3 /* CTScrollView.m in Sources */,
+				E6AD26AA18AA0431000AAC9E /* CellCustomAbout.m in Sources */,
 				5E9E80C416F04EF1006526F3 /* CTZoomView.m in Sources */,
 				5E9E80C516F04EF1006526F3 /* PhotoVC.m in Sources */,
 				5EA9163E16F1C27800CEA77B /* RestaurantRecommendations2.m in Sources */,
@@ -4405,8 +4405,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Volumes/DATA/TasteSync_V1.0_2703/Flurry,
-					/Users/dsg/git/TasteSync_V1.0_2703/Flurry,
+					"$(SRCROOT)/Flurry",
+					"$(SRCROOT)/Flurry",
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4431,8 +4431,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Volumes/DATA/TasteSync_V1.0_2703/Flurry,
-					/Users/dsg/git/TasteSync_V1.0_2703/Flurry,
+					"$(SRCROOT)/Flurry",
+					"$(SRCROOT)/Flurry",
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";

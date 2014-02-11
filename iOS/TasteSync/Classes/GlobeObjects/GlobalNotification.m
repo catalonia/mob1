@@ -30,7 +30,6 @@
 {
     self = [super init];
     if (self) {
-        [CommonHelpers appDelegate].currentShuffle = 1;
         self.arrData = [[NSMutableArray alloc] init];
         self.arrDataRead = [[NSMutableArray alloc] init];
         self.arrDataShuffle = [[NSMutableArray alloc] init];

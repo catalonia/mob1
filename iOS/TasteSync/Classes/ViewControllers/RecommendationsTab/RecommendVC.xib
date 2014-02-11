@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13A476u" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -11,7 +11,6 @@
                 <outlet property="lbNotifications" destination="34" id="35"/>
                 <outlet property="notifycationButton" destination="pR8-d5-QtA" id="Bvd-Mp-WFf"/>
                 <outlet property="shuffleButton" destination="6Lm-l9-x6v" id="z92-wa-jdV"/>
-                <outlet property="tbvShuffle" destination="Fja-J2-6Oc" id="qz8-T2-a9P"/>
                 <outlet property="tbvUnread" destination="19" id="31"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -111,16 +110,6 @@
                     <connections>
                         <outlet property="dataSource" destination="-1" id="20"/>
                         <outlet property="delegate" destination="-1" id="21"/>
-                    </connections>
-                </tableView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Fja-J2-6Oc">
-                    <rect key="frame" x="0.0" y="48" width="320" height="383"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="41R-bE-kzr"/>
-                        <outlet property="delegate" destination="-1" id="vKB-xd-kyB"/>
                     </connections>
                 </tableView>
                 <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="34" userLabel="Label - lb notifications">

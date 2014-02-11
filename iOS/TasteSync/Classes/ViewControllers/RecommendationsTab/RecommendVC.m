@@ -16,13 +16,12 @@
 @interface RecommendVC ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UIAlertViewDelegate>
 {
     __weak IBOutlet UILabel *lbNotifications;
-    __weak IBOutlet UITableView *tbvUnread, *tbvShuffle;
+    __weak IBOutlet UITableView *tbvUnread;
     __weak IBOutlet UIButton *notifycationButton, *shuffleButton, *helpButton;
     UserDefault *userDefault;
     GlobalNotification *glNotif ;
     NotificationObj *currentNotif;
     int page,aNumberOfRow;
-    int pageShuffle,aNumberOfRowShuffle;
     BOOL aIsLoadPreviousNotif;
     BOOL isLoadShuffle;
 }
@@ -63,7 +62,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    tbvShuffle.hidden = YES;
     self.navigationController.navigationBarHidden = YES;
     [CommonHelpers setBackgroudImageForView:self.view];
     [self addPullToRefreshHeader];
@@ -81,7 +79,6 @@
         self.arrData = delegate.arrayNotification;
     }
     page = 1;
-    pageShuffle = 1;
     if(_arrData.count == 1)
     {
         [self gotoDetailNotification:[_arrData objectAtIndex:0] atIndex:0 ];
@@ -105,7 +102,6 @@
 {
     [super viewDidAppear:animated];
     aNumberOfRow = [CommonHelpers appDelegate].numberPageRecomendation;
-    aNumberOfRowShuffle = [CommonHelpers appDelegate].numberPageShuffle;
     NSLog(@"aNumberOfRow: %d",aNumberOfRow);
     
 }
@@ -121,10 +117,8 @@
     glNotif.isSend = FALSE;
     //[glNotif reOrder];
     lbNotifications.text = [NSString stringWithFormat:@"%d NOTIFICATIONS",_arrData.count];
-    if (isLoadShuffle)
-        [tbvShuffle reloadData];
-    else
-        [tbvUnread reloadData];
+    if (!isLoadShuffle)
+    [tbvUnread reloadData];
     
 }
 
@@ -135,18 +129,24 @@
     AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     isLoadShuffle = NO;
     self.arrData = delegate.arrayNotification;
-    tbvUnread.hidden = NO;
     [tbvUnread reloadData];
-    tbvShuffle.hidden = YES;
 }
 - (IBAction)actionShuffleButton:(id)sender
 {
     AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     self.arrData = delegate.arrayShuffle;
     isLoadShuffle = YES;
-    tbvUnread.hidden = YES;
-    tbvShuffle.hidden = NO;
-    [tbvShuffle reloadData];
+    
+    CustomDelegate* customdelegate = [[CustomDelegate alloc]init];
+    customdelegate.recomendationDelegate = self;
+    RecommendDetail2 *vc = [[RecommendDetail2 alloc] initWithShuffle];
+    vc.global = customdelegate;
+    vc.delegate = self;
+    vc.notificationObj = [delegate.arrayShuffle objectAtIndex:delegate.currentShuffle];
+    vc.indexOfNotification=index;
+    vc.totalNotification= glNotif.unread;
+    [self.navigationController pushViewController:vc animated:NO];
+    
 }
 - (IBAction)actionHelpButton:(id)sender
 {
@@ -276,14 +276,6 @@
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     float offset = (scrollView.contentOffset.y) - (scrollView.contentSize.height - scrollView.frame.size.height);
-    if (isLoadShuffle) {
-        if (offset >=0  && pageShuffle < aNumberOfRowShuffle) {
-            debug(@"Load More Data");
-            pageShuffle++;
-            [self loadMoreData];
-        }
-    }
-    else
         if (offset >=0  && page < aNumberOfRow) {
             debug(@"Load More Data");
             page++;
@@ -293,12 +285,7 @@
 
 - (void)loadMoreData
 {
-    if (isLoadShuffle) {
-        [glNotif reloadDownData:self.view Type:RecommendationShuffle];
-        [tbvShuffle reloadData];
-    }
-    else
-    {
+    if (!isLoadShuffle) {
         [glNotif reloadDownData:self.view Type:RecommendationNotification];
          [tbvUnread reloadData];
     }
@@ -436,15 +423,13 @@
     if (isLoading) {
         // Update the content inset, good for section headers
         if (scrollView.contentOffset.y > 0)
-            if (isLoadShuffle)
-                tbvShuffle.contentInset = UIEdgeInsetsZero;
-            else
+        {
+            if (!isLoadShuffle)
                 tbvUnread.contentInset = UIEdgeInsetsZero;
+        }
         else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
         {
-            if (isLoadShuffle)
-                tbvShuffle.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-            else
+            if (!isLoadShuffle)
                 tbvUnread.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
         }
     } else if (isDragging && scrollView.contentOffset.y < 0) {
@@ -481,9 +466,7 @@
     
     // Show the header
     [UIView animateWithDuration:0.3 animations:^{
-        if (isLoadShuffle)
-            tbvShuffle.contentInset = UIEdgeInsetsMake(REFRESH_HEADER_HEIGHT, 0, 0, 0);
-        else
+        if (!isLoadShuffle)
             tbvUnread.contentInset = UIEdgeInsetsMake(REFRESH_HEADER_HEIGHT, 0, 0, 0);
         refreshLabel.text = self.textLoading;
         refreshArrow.hidden = YES;
@@ -500,9 +483,7 @@
     
     // Hide the header
     [UIView animateWithDuration:0.3 animations:^{
-        if (isLoadShuffle)
-            tbvShuffle.contentInset = UIEdgeInsetsZero;
-        else
+        if (!isLoadShuffle)
             tbvUnread.contentInset = UIEdgeInsetsZero;
         [refreshArrow layer].transform = CATransform3DMakeRotation(M_PI * 2, 0, 0, 1);
     }
@@ -536,11 +517,6 @@
     if (type == RecommendationNotification) {
         _arrData = [NSMutableArray arrayWithArray:deleate.arrayNotification];
         [tbvUnread reloadData];
-    }
-    else
-    {
-        _arrData = [NSMutableArray arrayWithArray:deleate.arrayShuffle];
-        [tbvShuffle reloadData];
     }
     lbNotifications.text = [NSString stringWithFormat:@"%d NOTIFICATIONS",_arrData.count];
     [self stopLoading];

@@ -12,6 +12,13 @@
 #import "JSONKit.h"
 #import "AskObject.h"
 
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+#define iOS7_0 @"7.0"
+
 @interface RestaurantVC : UIViewController<UITableViewDataSource, UITableViewDelegate,RateCustomDelegate, UIScrollViewDelegate, RequestDelegate,UITextFieldDelegate>
 {
     __weak IBOutlet UITableView *tbvResult, *tbvFilter;
@@ -25,6 +32,8 @@
     __weak IBOutlet UIButton *btSaved, *btFavs, *btDeals, *btShow, *btHide;
     __weak IBOutlet UILabel *lbSaved, *lbFaved;
     __weak IBOutlet UILabel *detailLabel;
+    __weak IBOutlet UIView* titleView;
+    __weak IBOutlet UIView* titleImageView;
     
     int _rating;
     BOOL saved, favs , deals, restaurantChains, isOpenNow;
