@@ -16,7 +16,7 @@
 {
     int indexLoad;
     int nextLoad;
-    int pageReload;
+    int pageReload, pageShuffle;
     UIView* _view;
     int _numberData;
 }
@@ -98,8 +98,8 @@
     }
     else
     {
-        self.arrDataShuffle = [[NSMutableArray alloc]initWithArray:deleate.arrayNotification];
-        int index = self.arrData.count;
+        self.arrDataShuffle = [[NSMutableArray alloc]initWithArray:deleate.arrayShuffle];
+        int index = self.arrDataShuffle.count;
         CRequest* request = [[CRequest alloc]initWithURL:@"shufflerecorequests" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:8 WithView:view];
         [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
         [request setFormPostValue:[NSString stringWithFormat:@"%d",index/20 + 1] forKey:@"paginationid"];
@@ -646,6 +646,7 @@
                 obj.follow = YES;
             }
             obj.linkId =  [NSString stringWithFormat:@"%@",[dic objectForKey:@"recorequestId"]];
+            obj.type = NotificationRecommendationsForYou;
             UserObj *user = [[UserObj alloc] init];
         
             obj.description = [dic objectForKey:@"recorequestText"];
@@ -684,6 +685,7 @@
                 obj.follow = YES;
             }
             obj.linkId =  [NSString stringWithFormat:@"%@",[dic objectForKey:@"recorequestId"]];
+            obj.type = NotificationRecommendationsForYou;
             UserObj *user = [[UserObj alloc] init];
             
             obj.description = [dic objectForKey:@"recorequestText"];
@@ -714,8 +716,8 @@
                     break;
             }
             if (i == self.arrDataReadShuffle.count) {
-                pageReload++;
-                [self reloadUpData:pageReload view:_view Type:RecommendationShuffle];
+                pageShuffle++;
+                [self reloadUpData:pageShuffle view:_view Type:RecommendationShuffle];
             }
             else
             {
@@ -750,6 +752,7 @@
             UserObj *user = [[UserObj alloc] init];
             
             obj.description = [dic objectForKey:@"recorequestText"];
+            obj.type = NotificationRecommendationsForYou;
             NSDictionary* dicObj = [dic objectForKey:@"recommendeeUser"];
             user.name = [dicObj objectForKey:@"name"];
             user.avatarUrl = [dicObj objectForKey:@"photo"];
@@ -805,6 +808,7 @@
             UserObj *user = [[UserObj alloc] init];
             
             obj.description = [dic objectForKey:@"recorequestText"];
+            obj.type = NotificationRecommendationsForYou;
             NSDictionary* dicObj = [dic objectForKey:@"recommendeeUser"];
             user.name = [dicObj objectForKey:@"name"];
             user.avatarUrl = [dicObj objectForKey:@"photo"];

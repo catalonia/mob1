@@ -22,6 +22,7 @@
     GlobalNotification *glNotif ;
     NotificationObj *currentNotif;
     int page,aNumberOfRow;
+    int pageShuffle,aNumberOfRowShuffle;
     BOOL aIsLoadPreviousNotif;
     BOOL isLoadShuffle;
 }
@@ -80,6 +81,7 @@
         self.arrData = delegate.arrayNotification;
     }
     page = 1;
+    pageShuffle = 1;
     if(_arrData.count == 1)
     {
         [self gotoDetailNotification:[_arrData objectAtIndex:0] atIndex:0 ];
@@ -103,21 +105,8 @@
 {
     [super viewDidAppear:animated];
     aNumberOfRow = [CommonHelpers appDelegate].numberPageRecomendation;
+    aNumberOfRowShuffle = [CommonHelpers appDelegate].numberPageShuffle;
     NSLog(@"aNumberOfRow: %d",aNumberOfRow);
-//    if ([CommonHelpers appDelegate].reloadNotifycation) {
-//        [CommonHelpers appDelegate].reloadNotifycation = NO;
-//        AppDelegate* deleate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-//        glNotif.pageLoad = 1;
-//        deleate.arrayNotification = [[NSMutableArray alloc]init];
-//        if (isLoadShuffle) {
-//            [glNotif reloadDownDataToNotifycation:_arrData.count View:self.view Type:RecommendationShuffle];
-//        }
-//        else
-//            [glNotif reloadDownDataToNotifycation:_arrData.count View:self.view Type:RecommendationNotification];
-//        aNumberOfRow = [CommonHelpers appDelegate].numberPageRecomendation;
-//        NSLog(@"aNumberOfRow: %d",aNumberOfRow);
-//        //[tbvUnread reloadData];
-//    }
     
 }
 
@@ -132,7 +121,10 @@
     glNotif.isSend = FALSE;
     //[glNotif reOrder];
     lbNotifications.text = [NSString stringWithFormat:@"%d NOTIFICATIONS",_arrData.count];
-    [tbvUnread reloadData];
+    if (isLoadShuffle)
+        [tbvShuffle reloadData];
+    else
+        [tbvUnread reloadData];
     
 }
 
@@ -284,22 +276,32 @@
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     float offset = (scrollView.contentOffset.y) - (scrollView.contentSize.height - scrollView.frame.size.height);
-    
-    if (offset >=0  && page < aNumberOfRow) {
-        debug(@"Load More Data");
-        page++;
-        [self loadMoreData];
+    if (isLoadShuffle) {
+        if (offset >=0  && pageShuffle < aNumberOfRowShuffle) {
+            debug(@"Load More Data");
+            pageShuffle++;
+            [self loadMoreData];
+        }
     }
+    else
+        if (offset >=0  && page < aNumberOfRow) {
+            debug(@"Load More Data");
+            page++;
+            [self loadMoreData];
+        }
 }
 
 - (void)loadMoreData
 {
     if (isLoadShuffle) {
         [glNotif reloadDownData:self.view Type:RecommendationShuffle];
+        [tbvShuffle reloadData];
     }
     else
+    {
         [glNotif reloadDownData:self.view Type:RecommendationNotification];
-    [tbvUnread reloadData];
+         [tbvUnread reloadData];
+    }
 }
 
 # pragma mark - Others
@@ -533,11 +535,14 @@
     AppDelegate* deleate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     if (type == RecommendationNotification) {
         _arrData = [NSMutableArray arrayWithArray:deleate.arrayNotification];
+        [tbvUnread reloadData];
     }
     else
+    {
         _arrData = [NSMutableArray arrayWithArray:deleate.arrayShuffle];
+        [tbvShuffle reloadData];
+    }
     lbNotifications.text = [NSString stringWithFormat:@"%d NOTIFICATIONS",_arrData.count];
-    [tbvUnread reloadData];
     [self stopLoading];
 }
 
