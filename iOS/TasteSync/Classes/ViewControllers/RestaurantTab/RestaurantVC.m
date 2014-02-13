@@ -311,16 +311,6 @@ typedef enum _TFSelect
     titleView.hidden = YES;
     [self hideKeyBoard];
     filterExtendsShown = TRUE;
-    [UIView animateWithDuration:0.4
-                          delay:0
-                        options: UIViewAnimationCurveEaseIn
-                     animations:^{
-                         viewMain.frame=CGRectMake(viewMain.frame.origin.x,viewMain.frame.origin.y,viewMain.frame.size.width, viewMain.frame.size.height);
-                     }
-                     completion:^(BOOL finished){
-                         debug(@"move done");
-                         
-                     }];
     [self refreshView];
 }
 
@@ -329,16 +319,6 @@ typedef enum _TFSelect
     titleView.hidden = NO;
     filterExtendsShown = FALSE;
     _restaurantSearch = NO;
-    [UIView animateWithDuration:0.4
-                          delay:0
-                        options: UIViewAnimationCurveEaseIn
-                     animations:^{
-                         viewMain.frame=CGRectMake(viewMain.frame.origin.x,viewMain.frame.origin.y,viewMain.frame.size.width, viewMain.frame.size.height);
-                     }
-                     completion:^(BOOL finished){
-                         debug(@"move done");
-                         
-                     }];
     
     
     [self refreshView];
@@ -551,15 +531,15 @@ typedef enum _TFSelect
 {
     if (filterExtendsShown) {
         viewFilterExtends.hidden = NO;
-        viewFilterSmall.hidden = YES;
+        [viewMain setFrame:CGRectMake(viewMain.frame.origin.x, -53, viewMain.frame.size.width, viewMain.frame.size.height)];
         [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 450, tbvResult.frame.size.width, tbvResult.contentSize.height)];
         scrollViewMain.contentSize = CGSizeMake(320, tbvResult.contentSize.height + DELTAHEIGHT);
     }
     else
     {
         viewFilterExtends.hidden = YES;
-        viewFilterSmall.hidden = NO;
-        [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 136, tbvResult.frame.size.width, tbvResult.contentSize.height)];
+        [viewMain setFrame:CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, viewMain.frame.size.height)];
+        [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 0, tbvResult.frame.size.width, tbvResult.contentSize.height)];
         scrollViewMain.contentSize = CGSizeMake(320, tbvResult.contentSize.height + DELTAHEIGHT);
     }
 }
@@ -920,9 +900,38 @@ typedef enum _TFSelect
             lbTypingRestaurant.hidden = YES;
             restaurant = obj;
             [tbvResult reloadData];
-            tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
             scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
             [arrayResID addObject:obj.uid];
+            
+            for (AskObject* obj in arrayAmbience) {
+                obj.selected = NO;
+            }
+            for (AskObject* obj in arrayPrice) {
+                obj.selected = NO;
+            }
+            for (AskObject* obj in arrayWhoWithYou) {
+                obj.selected = NO;
+            }
+            for (AskObject* obj in arrayCity) {
+                obj.selected = NO;
+            }
+            for (AskObject* obj in arrayCuisine) {
+                obj.selected = NO;
+            }
+            for (AskObject* obj in arrayWhoWithYou) {
+                obj.selected = NO;
+            }
+            for (AskObject* obj in arrayRate) {
+                obj.selected = NO;
+            }
+            
+            cuisineDataImage.hidden = YES;
+            neighberhoodImage.hidden = YES;
+            ambienceImage.hidden = YES;
+            priceImage.hidden = YES;
+            whoareyouImage.hidden = YES;
+            rateImage.hidden = YES;
+            
         }
         else if (TFSelected == TFRegion)
         {
@@ -1267,7 +1276,7 @@ typedef enum _TFSelect
         detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"]];
         
         
-        [self addType:self.arrDataRegion ListID:[dicDetail objectForKey:@"cityid"]];
+        //[self addType:self.arrDataRegion ListID:[dicDetail objectForKey:@"cityid"]];
         [self addType:arrayCuisine ListID:[dicDetail objectForKey:@"cuisinetier1idlist"]];
         [self addType:arrayCuisine ListID:[dicDetail objectForKey:@"cuisinetier2idlist"]];
         [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"occasionidlist"]];
@@ -1393,8 +1402,8 @@ typedef enum _TFSelect
     titleView.frame = CGRectMake(titleView.frame.origin.x, titleView.frame.origin.y, titleView.frame.size.width, labelHeight.height + 48);
     detailLabel.frame = CGRectMake(detailLabel.frame.origin.x, detailLabel.frame.origin.y, detailLabel.frame.size.width, labelHeight.height + 10);
     
-    viewMain.frame = CGRectMake(viewMain.frame.origin.x, -53 + labelHeight.height - 19, viewMain.frame.size.width, viewMain.frame.size.height);
-    
+    viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, viewMain.frame.size.height);
+    [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 0, tbvResult.frame.size.width, tbvResult.contentSize.height)];
 }
 
 -(IBAction)doneAction:(id)sender
