@@ -29,7 +29,7 @@
     
     NSMutableArray* arrayTasteSyncID;
     int numberMessage, numberEmail;
-    
+    BOOL isRestaurant;
 }
 @end
 
@@ -52,8 +52,20 @@
     }
     return self;
 }
+-(id)initWithRestaurant:(NSString*)askString
+{
+    self = [super initWithNibName:@"AskContactVC" bundle:nil];
+    if (self) {
+        _askString = askString;
+        isRestaurant = YES;
+    }
+    return self;
+}
 -(void)viewDidAppear:(BOOL)animated
 {
+    if (isRestaurant) {
+        [self hideTabBar:self.tabBarController];
+    }
     NSDictionary *askhomeParams =
     [NSDictionary dictionaryWithObjectsAndKeys:
      [NSString stringWithFormat:@"%d",numberEmail]       , @"Email",
@@ -399,6 +411,9 @@
     }
     return cell.frame.size.height;
 }
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0];
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return _arrayData.count;
@@ -449,16 +464,30 @@
     
     if (obj.email.count > 0) {
         if (obj.tasteSyncID) {
-            CRequest* request = [[CRequest alloc]initWithURL:@"recoreqtscontact" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:3 WithView:self.view];
-            request.delegate = self;
-            [request setFormPostValue:_recorequestID forKey:@"recorequestid"];
-            [request setFormPostValue:obj.tasteSyncID forKey:@"assigneduserid"];
-            [request startFormRequest];
-            obj.isSendTasteSync = YES;
-            [_tableView reloadData];
-            
-            [arrayTasteSyncID addObject:obj.tasteSyncID];
-            
+            if (isRestaurant) {
+                CRequest* request = [[CRequest alloc]initWithURL:@"sendMessageToUser" RQType:RequestTypePost RQData:RequestDataUser RQCategory:ApplicationForm withKey:3 WithView:self.view];
+                request.delegate = self;
+                [request setFormPostValue:[UserDefault userDefault].userID forKey:@"senderID"];
+                [request setFormPostValue:obj.tasteSyncID forKey:@"recipientID"];
+                [request setFormPostValue:_askString forKey:@"content"];
+                [request startFormRequest];
+                obj.isSendTasteSync = YES;
+                [_tableView reloadData];
+                
+                [arrayTasteSyncID addObject:obj.tasteSyncID];
+            }
+            else
+            {
+                CRequest* request = [[CRequest alloc]initWithURL:@"recoreqtscontact" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:3 WithView:self.view];
+                request.delegate = self;
+                [request setFormPostValue:_recorequestID forKey:@"recorequestid"];
+                [request setFormPostValue:obj.tasteSyncID forKey:@"assigneduserid"];
+                [request startFormRequest];
+                obj.isSendTasteSync = YES;
+                [_tableView reloadData];
+                
+                [arrayTasteSyncID addObject:obj.tasteSyncID];
+            }
         }
         else
         {
@@ -632,9 +661,16 @@
      nil];
     [CommonHelpers implementFlurry:askhomeParams forKey:@"Ask_Contact" isBegin:YES];
     
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    [[[CommonHelpers appDelegate] tabbarBaseVC] actionRestaurantViaAskTab:_recorequestID];
+    if (isRestaurant) {
+        [self showTabBar:self.tabBarController];
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
+    else
+    {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [[[CommonHelpers appDelegate] tabbarBaseVC] actionRestaurantViaAskTab:_recorequestID];\
+        
+    }
 }
 -(BOOL)checkUserTasteSync:(ContactObject*)contactObj
 {
@@ -652,4 +688,42 @@
     
     return NO;
 }
+
+#pragma mark Tabbar
+- (void)showTabBar:(UITabBarController *)tabbarcontroller
+{
+    tabbarcontroller.tabBar.hidden = NO;
+    [UIView animateWithDuration:0.3 animations:^{
+        for (UIView *view in tabbarcontroller.view.subviews) {
+            if ([view isKindOfClass:[UITabBar class]]) {
+                [view setFrame:CGRectMake(view.frame.origin.x, [UIScreen mainScreen].bounds.size.height - 49.0f, view.frame.size.width, view.frame.size.height)];
+            }
+            else {
+                NSLog(@"view.frame.size.height-49.f: %f", view.frame.size.height);
+                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, [UIScreen mainScreen].bounds.size.height-49.f)];
+            }
+        }
+    } completion:^(BOOL finished) {
+        //do smth after animation finishes
+    }];
+}
+- (void)hideTabBar:(UITabBarController *)tabbarcontroller
+{
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        for (UIView *view in tabbarcontroller.view.subviews) {
+            if ([view isKindOfClass:[UITabBar class]]) {
+                [view setFrame:CGRectMake(view.frame.origin.x, [UIScreen mainScreen].bounds.size.height, view.frame.size.width, view.frame.size.height)];
+            }
+            else {
+                NSLog(@"view.frame.size.height-49.f: %f", view.frame.size.height);
+                [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, [UIScreen mainScreen].bounds.size.height)];
+            }
+        }
+    } completion:^(BOOL finished) {
+        //do smth after animation finishes
+        tabbarcontroller.tabBar.hidden = YES;
+    }];
+}
+
 @end

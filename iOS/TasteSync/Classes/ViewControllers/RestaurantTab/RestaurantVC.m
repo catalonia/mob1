@@ -17,6 +17,7 @@
 #import "AskObject.h"
 #import "AskCell.h"
 #import "AskContactCell.h"
+#import "AskContactVC.h"
 
 #define DELTAHEIGHT 170
 
@@ -331,7 +332,7 @@ typedef enum _TFSelect
         [tbvResult reloadData];
         tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
         scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
-        [self requestRestaurant];
+        [self requestRestaurant:@"restsearchresults" Key:4];
     }
     
     [arrayDictionary addObject:[self getDictionary]];
@@ -439,7 +440,7 @@ typedef enum _TFSelect
     return dictionary;
 }
 
--(void)requestRestaurant
+-(void)requestRestaurant:(NSString*)link Key:(int)key
 {
     
     tfRegion.text = @"";
@@ -448,7 +449,7 @@ typedef enum _TFSelect
     lbTypingRestaurant.hidden = NO;
     
     
-    CRequest* request = [[CRequest alloc]initWithURL:@"restsearchresults" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:4 WithView:self.view];
+    CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:key WithView:self.view];
     [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
     NSString* openFlag  = @"0";
     NSString* savedFlag = @"0";
@@ -503,11 +504,11 @@ typedef enum _TFSelect
         [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.stateName forKey:@"statename"];
     }
     
-    [request setFormPostValue:openFlag forKey:@"openNowFlag"];
-    [request setFormPostValue:savedFlag forKey:@"savedFlag"];
-    [request setFormPostValue:favFlag forKey:@"favFlag"];
-    [request setFormPostValue:@"0" forKey:@"dealFlag"];
-    [request setFormPostValue:chainFlag forKey:@"chainFlag"];
+    [request setFormPostValue:openFlag forKey:@"opennowflag"];
+    [request setFormPostValue:savedFlag forKey:@"savedflag"];
+    [request setFormPostValue:favFlag forKey:@"favflag"];
+    [request setFormPostValue:@"0" forKey:@"dealflag"];
+    [request setFormPostValue:chainFlag forKey:@"chainflag"];
     
     request.delegate = self;
     [request startFormRequest];
@@ -521,10 +522,10 @@ typedef enum _TFSelect
     NSLog(@"priceidlist: %@", [self getListType:GlobalDataPrice]);
     NSLog(@"themeidlist: %@", [self getListType:GlobalDataTheme]);
     
-    NSLog(@"openFlag: %@", openFlag);
-    NSLog(@"savedFlag: %@", savedFlag);
-    NSLog(@"favFlag: %@", favFlag);
-    NSLog(@"chainFlag: %@", chainFlag);
+    NSLog(@"openflag: %@", openFlag);
+    NSLog(@"savedflag: %@", savedFlag);
+    NSLog(@"favflag: %@", favFlag);
+    NSLog(@"chainflag: %@", chainFlag);
     
 }
 
@@ -697,7 +698,10 @@ typedef enum _TFSelect
     
 }
 
-
+-(IBAction)actionShare:(id)sender
+{
+    [self requestRestaurant:@"recotxt" Key:5];
+}
 
 
 #pragma mark - RateCustomDelegate
@@ -1167,7 +1171,7 @@ typedef enum _TFSelect
             
             if (currentPage <= numberPage) {
                 if (_notHomeScreen == NO) {
-                    [self requestRestaurant];
+                    [self requestRestaurant:@"restsearchresults" Key:4];
                 }
                 else
                     [self requestWithRecorequestID];
@@ -1375,6 +1379,14 @@ typedef enum _TFSelect
         [tbvResult reloadData];
         tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
         scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
+    }
+    if (key == 5) {
+        NSString* response = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"Response: %@",response);
+        NSDictionary* dicAll = [response objectFromJSONString];
+        AskContactVC* askContact = [[AskContactVC alloc]initWithRestaurant:[dicAll objectForKey:@"valueNameValue"]];
+        [self.navigationController pushViewController:askContact animated:NO];
+        
     }
 }
 
