@@ -112,7 +112,6 @@
             [cell initCellTest1:restaurantObj];
         }
             break;
-            
         case 2:
         {
             [cell initCellTest2:restaurantObj];
