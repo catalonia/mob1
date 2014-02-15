@@ -33,7 +33,7 @@
 @property (nonatomic, strong) NSString *errorMessage;
 @property (nonatomic, strong) NSMutableArray *arrayNotification, *arrayShuffle;
 @property (nonatomic, strong) NSMutableArray *arrayRestaurant;
-@property (nonatomic, assign) int numberPage, numberPageRecomendation, numberPageShuffle;
+@property (nonatomic, assign) int numberPage, numberPageRecomendation, numberPageShuffle, currentShuffle;
 
 @property (nonatomic, strong) CLLocationManager *currentLocation;
 @property (nonatomic, strong) CLLocation *location;

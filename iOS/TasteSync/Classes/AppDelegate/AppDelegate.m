@@ -87,10 +87,6 @@ askSubmited=_askSubmited;
             [self showAskTab];
             
         }
-        
-        
-    
-
     self.stillOnApp = YES;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

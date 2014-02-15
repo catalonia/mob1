@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="btFollow" destination="21" id="72"/>
                 <outlet property="buttonSent" destination="94" id="sPw-OB-eif"/>
+                <outlet property="buttonShuffle" destination="Kqq-ZR-2Ao" id="RS1-tO-TKb"/>
                 <outlet property="cantHelpButton" destination="o2z-ME-nxH" id="26M-7A-c2c"/>
                 <outlet property="ivAvatar" destination="16" id="41"/>
                 <outlet property="lbName" destination="17" id="36"/>
@@ -274,6 +275,21 @@
                                             <state key="highlighted" backgroundImage="rounded_orange.png"/>
                                             <connections>
                                                 <action selector="actionCantHelpPress" destination="-1" eventType="touchUpInside" id="dUP-kn-7RC"/>
+                                            </connections>
+                                        </button>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Kqq-ZR-2Ao">
+                                            <rect key="frame" x="98" y="213" width="124" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                            <state key="normal" title="Shuffle" backgroundImage="rounded_orange.png">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="disabled" title="Shuffle" backgroundImage="rounded_orange.png"/>
+                                            <state key="selected" title="Shuffle" backgroundImage="rounded_orange.png"/>
+                                            <state key="highlighted" title="Shuffle" backgroundImage="rounded_orange.png"/>
+                                            <connections>
+                                                <action selector="actionShuffle:" destination="-1" eventType="touchUpInside" id="AVb-oQ-n3W"/>
                                             </connections>
                                         </button>
                                     </subviews>
