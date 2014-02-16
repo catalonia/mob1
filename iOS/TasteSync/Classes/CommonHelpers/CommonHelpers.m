@@ -659,10 +659,10 @@ void debug(NSString *format, ...)
             filterString = [filterString stringByAppendingString:@" - New York, NY"];
         }
         else
-            filterString = [filterString stringByAppendingString:@", New York, NY"];
+            filterString = [filterString stringByAppendingString:@", New York - NY"];
     }
     else
-        filterString = [filterString stringByAppendingString:@"New York, NY"];
+        filterString = [filterString stringByAppendingString:@"New York - NY"];
     
     return filterString;
     

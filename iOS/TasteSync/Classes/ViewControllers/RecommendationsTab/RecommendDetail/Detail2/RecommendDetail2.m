@@ -291,7 +291,7 @@ arrDataFilter=_arrDataFilter;;
                 if (isShuffle) {
                     CRequest* request = [[CRequest alloc]initWithURL:@"shufflerecoreqans" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:2 WithView:self.view];
                     request.delegate = self;
-                    [request setFormPostValue:[UserDefault userDefault].userID          forKey:@"userid"];
+                    [request setFormPostValue:[UserDefault userDefault].userID          forKey:@"recommenderuserid"];
                     [request setFormPostValue:self.notificationObj.linkId                        forKey:@"recorequestid"];
                     [request setFormPostValue:tvMsg.text                                                forKey:@"replytext"];
                     [request setFormPostValue:listRestaurant                                          forKey:@"restaurantidlist"];

@@ -71,6 +71,8 @@ typedef enum _TFSelect
 - (void) initUI
 {
     
+    //TasteSync Recommendations for your search:
+    
     scrollViewMain.delegate = self;
     
     viewFilterExtends.hidden = YES;
@@ -306,6 +308,7 @@ typedef enum _TFSelect
 
 - (IBAction)actionFilter:(id)sender
 {
+    titleView.hidden = YES;
     [self hideKeyBoard];
     filterExtendsShown = TRUE;
     [UIView animateWithDuration:0.4
@@ -323,6 +326,7 @@ typedef enum _TFSelect
 
 - (IBAction)actionDoneFilter:(id)sender
 {
+    titleView.hidden = NO;
     filterExtendsShown = FALSE;
     _restaurantSearch = NO;
     [UIView animateWithDuration:0.4
@@ -368,6 +372,23 @@ typedef enum _TFSelect
         }
     }
     return ret;
+}
+
+-(void)addType:(NSMutableArray*)array ListID:(NSString*)list
+{
+    NSArray* arrayList = [list componentsSeparatedByString:@","];
+    
+   
+        for (NSString* string in arrayList) {
+             for (AskObject* global in array) {
+                 NSString* id1 = [NSString stringWithFormat:@"%@",global.object.uid];
+                 NSString* id2 = [NSString stringWithFormat:@"%@",string];
+                 if ([id1 isEqualToString:id2]) {
+                     global.selected = YES;
+                     
+                 }
+             }
+        }
 }
 
 -(NSString*)getLinkRequest
@@ -502,9 +523,19 @@ typedef enum _TFSelect
         [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.stateName forKey:@"statename"];
     }
     
+    
+    
     request.delegate = self;
     [request startFormRequest];
     
+    
+    NSLog(@"cuisinetier1idlist: %@", [self getListType:GlobalDataCuisine_1]);
+    NSLog(@"cuisinetier2idlist: %@", [self getListType:GlobalDataCuisine_2]);
+    NSLog(@"whoareyouwithidlist: %@", [self getListType:GlobalDataWhoAreUWith]);
+    NSLog(@"typeofrestaurantidList: %@", [self getListType:GlobalDataTypeOfRestaurant]);
+    NSLog(@"occasionidlist: %@", [self getListType:GlobalDataOccasion]);
+    NSLog(@"priceidlist: %@", [self getListType:GlobalDataPrice]);
+    NSLog(@"themeidlist: %@", [self getListType:GlobalDataTheme]);
 }
 
 -(void)requestWithRecorequestID
@@ -521,7 +552,7 @@ typedef enum _TFSelect
     if (filterExtendsShown) {
         viewFilterExtends.hidden = NO;
         viewFilterSmall.hidden = YES;
-        [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 482, tbvResult.frame.size.width, tbvResult.contentSize.height)];
+        [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 450, tbvResult.frame.size.width, tbvResult.contentSize.height)];
         scrollViewMain.contentSize = CGSizeMake(320, tbvResult.contentSize.height + DELTAHEIGHT);
     }
     else
@@ -818,8 +849,8 @@ typedef enum _TFSelect
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (tableView == _tableViewCuisine) {
-    cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0];
+    if (tableView == _tableViewCuisine || tableView == tbvFilter) {
+        cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0];
     }
 }
 
@@ -1155,13 +1186,13 @@ typedef enum _TFSelect
             
         }
         _arrDataFilter = [[NSMutableArray alloc]initWithArray:_arrDataRestaurant];
-        _arrData = [[NSMutableArray alloc]initWithArray:_arrDataRestaurant];
+        //_arrData = [[NSMutableArray alloc]initWithArray:_arrDataRestaurant];
         if (self.arrDataFilter.count>0) {
             tbvFilter.hidden = NO;
             [tbvFilter reloadData];
-            [tbvResult reloadData];
-            tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
-            scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
+            //[tbvResult reloadData];
+            //tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
+            //scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
         }
     }
     if (key == 2) {
@@ -1240,6 +1271,23 @@ typedef enum _TFSelect
         }
 
         detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"]];
+        
+        
+        [self addType:self.arrDataRegion ListID:[dicDetail objectForKey:@"cityid"]];
+        [self addType:arrayCuisine ListID:[dicDetail objectForKey:@"cuisinetier1idlist"]];
+        [self addType:arrayCuisine ListID:[dicDetail objectForKey:@"cuisinetier2idlist"]];
+        [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"occasionidlist"]];
+        [self addType:arrayPrice ListID:[dicDetail objectForKey:@"priceidlist"]];
+        [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"themeidlist"]];
+        [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"typeofrestaurantidList"]];
+        [self addType:arrayWhoWithYou ListID:[dicDetail objectForKey:@"whoareyouwithidlist"]];
+        [self addType:arrayCity ListID:[dicDetail objectForKey:@"neighborhoodid"]];
+        UIButton* button = [[UIButton alloc]init];
+        button.tag = 1;
+        [self doneAction:button];
+        UIButton* button2 = [[UIButton alloc]init];
+        button2.tag = 0;
+        [self doneAction:button2];
         
         [self resizeDetailText];
         
