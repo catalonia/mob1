@@ -503,7 +503,11 @@ typedef enum _TFSelect
         [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.stateName forKey:@"statename"];
     }
     
-    
+    [request setFormPostValue:openFlag forKey:@"openNowFlag"];
+    [request setFormPostValue:savedFlag forKey:@"savedFlag"];
+    [request setFormPostValue:favFlag forKey:@"favFlag"];
+    [request setFormPostValue:@"0" forKey:@"dealFlag"];
+    [request setFormPostValue:chainFlag forKey:@"chainFlag"];
     
     request.delegate = self;
     [request startFormRequest];
@@ -516,6 +520,12 @@ typedef enum _TFSelect
     NSLog(@"occasionidlist: %@", [self getListType:GlobalDataOccasion]);
     NSLog(@"priceidlist: %@", [self getListType:GlobalDataPrice]);
     NSLog(@"themeidlist: %@", [self getListType:GlobalDataTheme]);
+    
+    NSLog(@"openFlag: %@", openFlag);
+    NSLog(@"savedFlag: %@", savedFlag);
+    NSLog(@"favFlag: %@", favFlag);
+    NSLog(@"chainFlag: %@", chainFlag);
+    
 }
 
 -(void)requestWithRecorequestID
@@ -931,6 +941,13 @@ typedef enum _TFSelect
             priceImage.hidden = YES;
             whoareyouImage.hidden = YES;
             rateImage.hidden = YES;
+            
+            [arrDataFilterSelect removeAllObjects];
+            
+            detailLabel.text = @"New York - NY";
+            _storeOldValue = [self getLinkRequest];
+            
+            [self resizeDetailText];
             
         }
         else if (TFSelected == TFRegion)

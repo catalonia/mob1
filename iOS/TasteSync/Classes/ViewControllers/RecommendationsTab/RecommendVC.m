@@ -134,7 +134,6 @@
 - (IBAction)actionShuffleButton:(id)sender
 {
     AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    self.arrData = delegate.arrayShuffle;
     isLoadShuffle = YES;
     
     CustomDelegate* customdelegate = [[CustomDelegate alloc]init];
