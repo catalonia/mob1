@@ -1083,11 +1083,27 @@ typedef enum _TFSelect
     if (TFSelected == TFRestaurant) {
         _restaurantSearch =YES;
     }
-    [self searchLocal:[textField.text stringByReplacingCharactersInRange:range withString:string]];
+    NSString* searchText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTimer = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds*NSEC_PER_SEC);
+    dispatch_after(popTimer, dispatch_get_main_queue(), ^(void){
+        if ([searchText isEqualToString:tfRestaurant.text]) {
+            [self searchLocal:searchText];
+        }
+        //[NSThread detachNewThreadSelector:@selector(thread:) toTarget:self withObject:searchText];
+    });
     return YES;
     
 }
 
+-(void)thread:(id)obj
+{
+    NSString* text = (NSString*)obj;
+    if ([text isEqualToString:tfRestaurant.text]) {
+        [self searchLocal:tfRestaurant.text];
+    }
+    
+}
 
 #pragma mark - Others
 
