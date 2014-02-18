@@ -1084,7 +1084,7 @@ typedef enum _TFSelect
         _restaurantSearch =YES;
     }
     NSString* searchText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    double delayInSeconds = 2.0;
+    double delayInSeconds = TIMER_DELAY;
     dispatch_time_t popTimer = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds*NSEC_PER_SEC);
     dispatch_after(popTimer, dispatch_get_main_queue(), ^(void){
         if ([searchText isEqualToString:tfRestaurant.text]) {

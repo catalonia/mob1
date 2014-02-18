@@ -496,10 +496,30 @@ typedef enum _TextFieldSelect
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (TRUE) {
-        [self searchLocal:[textField.text stringByReplacingCharactersInRange:range withString:string]];
-    }
+    //[self searchLocal:[textField.text stringByReplacingCharactersInRange:range withString:string]];
     
+    NSString* searchText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    double delayInSeconds = TIMER_DELAY;
+    dispatch_time_t popTimer = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds*NSEC_PER_SEC);
+    dispatch_after(popTimer, dispatch_get_main_queue(), ^(void){
+        NSString* text;
+        if (textField == tfCusine) {
+            text = tfCusine.text;
+        }
+        if (textField == tfRestaurant1) {
+            text = tfRestaurant1.text;
+        }
+        if (textField == tfRestaurant2) {
+            text = tfRestaurant2.text;
+        }
+        if (textField == tfRestaurant3) {
+            text = tfRestaurant3.text;
+        }
+        if ([searchText isEqualToString:text]) {
+            [self searchLocal:searchText];
+        }
+        //[NSThread detachNewThreadSelector:@selector(thread:) toTarget:self withObject:searchText];
+    });
         
     return TRUE;
     
