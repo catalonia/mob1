@@ -35,6 +35,10 @@
     __weak IBOutlet UIView* titleView;
     __weak IBOutlet UIView* titleImageView;
     
+    __weak IBOutlet UIImageView* openNowImage, *chainImage;
+    
+    __weak IBOutlet UIView *textRoundView;
+    
     int _rating;
     BOOL saved, favs , deals, restaurantChains, isOpenNow;
     

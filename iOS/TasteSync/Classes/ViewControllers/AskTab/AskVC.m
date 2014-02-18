@@ -114,11 +114,11 @@
         }
         else
         {
+            [CommonHelpers appDelegate].arrayShuffle = [[NSMutableArray alloc]init];
             GlobalNotification *globalNotification = [[GlobalNotification alloc] initWithALlType];
             [globalNotification requestData:self.view Type:RecommendationNotification];
-            [globalNotification requestRestaurantData:self.view Type:RecommendationNotification];
-            [globalNotification requestData:self.view Type:RecommendationShuffle];
-            [globalNotification requestRestaurantData:self.view Type:RecommendationShuffle];
+            [globalNotification requestRestaurantData:self.view];
+
         }
         isLoad = YES;
     }

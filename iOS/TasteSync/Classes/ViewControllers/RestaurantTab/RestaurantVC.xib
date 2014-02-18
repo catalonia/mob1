@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13A476u" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -17,17 +17,20 @@
                 <outlet property="ambienceImage" destination="s7a-SP-VKj" id="eBM-y0-mSi"/>
                 <outlet property="btFavs" destination="49" id="86"/>
                 <outlet property="btSaved" destination="Y3p-T3-UoP" id="tBJ-W2-odZ"/>
+                <outlet property="chainImage" destination="DMn-eO-yxK" id="ZBj-Fr-Zku"/>
                 <outlet property="cuisineDataImage" destination="TTy-zX-BKM" id="5v6-5M-jSw"/>
                 <outlet property="detailLabel" destination="wKU-xs-hd3" id="11r-Pe-jqH"/>
                 <outlet property="lbFaved" destination="win-4M-MXg" id="6Xq-6b-wnN"/>
                 <outlet property="lbSaved" destination="h3H-8E-lcz" id="MAR-1p-FmJ"/>
                 <outlet property="lbTypingRestaurant" destination="39" id="42"/>
                 <outlet property="neighberhoodImage" destination="Yj0-Iq-cP5" id="zpr-4P-c1Z"/>
+                <outlet property="openNowImage" destination="w3p-ZE-99y" id="Eoo-8F-B6s"/>
                 <outlet property="priceImage" destination="Z1m-4q-F3O" id="7dJ-oN-bB5"/>
                 <outlet property="rateImage" destination="UoZ-Af-Xmr" id="ly5-pU-bFn"/>
                 <outlet property="scrollViewMain" destination="79" id="80"/>
                 <outlet property="tbvFilter" destination="22" id="25"/>
                 <outlet property="tbvResult" destination="15" id="21"/>
+                <outlet property="textRoundView" destination="dLn-dM-qGY" id="rQf-uv-tna"/>
                 <outlet property="tfRestaurant" destination="8" id="27"/>
                 <outlet property="titleImageView" destination="40" id="r0B-Yd-fR2"/>
                 <outlet property="titleView" destination="xK8-R0-aHr" id="7wf-Yy-ic6"/>
@@ -251,7 +254,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K6Z-D4-Kvc">
-                                            <rect key="frame" x="41" y="305" width="68" height="21"/>
+                                            <rect key="frame" x="44" y="305" width="68" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="13"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -347,24 +350,36 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show chains" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hxk-sT-JSl">
-                                            <rect key="frame" x="203" y="305" width="76" height="21"/>
+                                            <rect key="frame" x="194" y="305" width="76" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="13"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" id="SLe-0v-P4Q">
-                                            <rect key="frame" x="51" y="283" width="48" height="22"/>
+                                            <rect key="frame" x="57" y="268" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="open_now_black.png" id="w3p-ZE-99y">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <view contentMode="scaleToFill" id="OAj-dw-5hH">
-                                            <rect key="frame" x="217" y="280" width="48" height="22"/>
+                                            <rect key="frame" x="209" y="265" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="restaurant_chain_black.png" id="DMn-eO-yxK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Kwe-tp-iuz">
-                                            <rect key="frame" x="41" y="277" width="68" height="49"/>
+                                            <rect key="frame" x="46" y="275" width="68" height="49"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <state key="normal">
@@ -375,7 +390,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DwW-tM-PL2">
-                                            <rect key="frame" x="207" y="277" width="68" height="49"/>
+                                            <rect key="frame" x="198" y="274" width="68" height="49"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <state key="normal">
@@ -432,7 +447,12 @@
                     <rect key="frame" x="40" y="0.0" width="179" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="textfill133_45.png" id="9">
+                        <view contentMode="scaleToFill" id="dLn-dM-qGY">
+                            <rect key="frame" x="23" y="7" width="133" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="9">
                             <rect key="frame" x="23" y="7" width="133" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -599,6 +619,7 @@
         <image name="ic_saved.png" width="30" height="30"/>
         <image name="ic_tab_myprofile.png" width="30" height="30"/>
         <image name="icon-01b.png" width="60" height="60"/>
-        <image name="textfill133_45.png" width="133" height="45"/>
+        <image name="open_now_black.png" width="50" height="50"/>
+        <image name="restaurant_chain_black.png" width="50" height="50"/>
     </resources>
 </document>

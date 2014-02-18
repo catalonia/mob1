@@ -466,7 +466,7 @@ void debug(NSString *format, ...)
     
     if (![openNowFlag isKindOfClass:[NSNull class]]) {
         if ([[NSString stringWithFormat:@"%@",openNowFlag] isEqualToString:@"1"]) {
-            filterString = @"OpenNow";
+            filterString = @"Open Now";
         }
     }
     
@@ -475,7 +475,7 @@ void debug(NSString *format, ...)
             if (filterString.length != 0) {
                 filterString = [filterString stringByAppendingString:@", "];
             }
-            filterString = @"Faved";
+            filterString = [filterString stringByAppendingString:[NSString stringWithFormat:@"Favs"]];
         }
     }
     
@@ -484,16 +484,17 @@ void debug(NSString *format, ...)
             if (filterString.length != 0) {
                 filterString = [filterString stringByAppendingString:@", "];
             }
-            filterString = @"Saved";
+            filterString = [filterString stringByAppendingString:[NSString stringWithFormat:@"Saved"]];
         }
     }
     
     if (![chainFlag isKindOfClass:[NSNull class]]) {
-        if (filterString.length != 0) {
-            filterString = [filterString stringByAppendingString:@", "];
-        }
+        
         if ([[NSString stringWithFormat:@"%@",chainFlag] isEqualToString:@"1"]) {
-            filterString = @"Chain";
+            if (filterString.length != 0) {
+                filterString = [filterString stringByAppendingString:@", "];
+            }
+            filterString = [filterString stringByAppendingString:[NSString stringWithFormat:@"Chains"]];
         }
     }
     
@@ -527,7 +528,7 @@ void debug(NSString *format, ...)
             for (TSGlobalObj* global in arrayCuisine) {
                 if ([global.uid isEqualToString:str]) {
                     if (i == 0) {
-                        filterString = global.name;
+                        filterString = [filterString stringByAppendingString:[NSString stringWithFormat:@"%@", global.name]];
                     }
                     else
                     {
@@ -694,13 +695,13 @@ void debug(NSString *format, ...)
     
     if (filterString.length != 0) {
         if (![neighborhoodid isEqualToString:@""]) {
-            filterString = [filterString stringByAppendingString:@" - New York, NY"];
+            filterString = [filterString stringByAppendingString:@" - NYC"];
         }
         else
-            filterString = [filterString stringByAppendingString:@", New York - NY"];
+            filterString = [filterString stringByAppendingString:@", NYC"];
     }
     else
-        filterString = [filterString stringByAppendingString:@"New York - NY"];
+        filterString = [filterString stringByAppendingString:@"NYC"];
     
     return filterString;
     

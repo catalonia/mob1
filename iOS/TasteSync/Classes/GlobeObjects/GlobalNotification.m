@@ -108,7 +108,7 @@
         [request startFormRequest];
     }
 }
--(void)requestRestaurantData:(UIView*)view Type:(RecommendationType)type;
+-(void)requestRestaurantData:(UIView*)view;
 {
     TSCityObj* _cityObj = [CommonHelpers setDefaultCityObj];
     NSString* link = [NSString stringWithFormat:@"recosrestaurantsearchresults?userid=%@&restaurantid=%@&neighborhoodid=%@&cityid=%@&statename=%@&cuisineidtier1idlist=%@&priceidlist=%@&rating=%@&savedflag=%@&favflag=%@&dealflag=%@&chainflag=%@&paginationid=%@",[UserDefault userDefault].userID,@"",@"", _cityObj.uid, _cityObj.stateName,@"",@"",@"",@"",@"",@"",@"",@"1"];

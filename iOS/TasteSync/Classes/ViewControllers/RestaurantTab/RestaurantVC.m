@@ -148,6 +148,9 @@ typedef enum _TFSelect
 {
     [super viewDidLoad];
     
+    textRoundView.layer.cornerRadius = 5;
+    textRoundView.layer.masksToBounds = YES;
+    
     [CommonHelpers setBackgroudImageForView:self.view];
     [self.navigationController setNavigationBarHidden:YES];
     // Do any additional setup after loading the view from its nib.
@@ -231,7 +234,7 @@ typedef enum _TFSelect
             _restaurantSearch = NO;
             lbTypingRestaurant.hidden = NO;
             tfRestaurant.text = @"";
-            detailLabel.text = @"New York - NY";
+            detailLabel.text = @"NYC";
             _storeOldValue = [self getLinkRequest];
             _arrData = [[NSMutableArray alloc] initWithArray:[CommonHelpers appDelegate].arrayRestaurant];
             numberPage = [CommonHelpers appDelegate].numberPage;
@@ -487,7 +490,7 @@ typedef enum _TFSelect
     [request setFormPostValue:[self getListType:GlobalDataTypeOfRestaurant] forKey:@"typeofrestaurantidList"];
     [request setFormPostValue:[self getListType:GlobalDataOccasion]         forKey:@"occasionidlist"];
     [request setFormPostValue:[self getListType:GlobalDataRate]             forKey:@"rating"];
-    [request setFormPostValue:openFlag                                      forKey:@"openNowFlag"];
+    [request setFormPostValue:openFlag                                      forKey:@"opennownlag"];
     [request setFormPostValue:savedFlag                                     forKey:@"savedFlag"];
     [request setFormPostValue:favFlag                                       forKey:@"favFlag"];
     [request setFormPostValue:chainFlag                                     forKey:@"chainFlag"];
@@ -645,24 +648,24 @@ typedef enum _TFSelect
 {
     if (restaurantChains == NO) {
         restaurantChains = YES;
-        viewChain.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0];
+        chainImage.image = [UIImage imageNamed:@"resturant_chain_orange.png"];
     }
     else
     {
         restaurantChains = NO;
-        viewChain.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+        chainImage.image = [UIImage imageNamed:@"restaurant_chain_black.png"];
     }
 }
 - (IBAction)actionOpenNow:(id)sender
 {
     if (isOpenNow == NO) {
         isOpenNow = YES;
-        viewOpen.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0];
+        openNowImage.image = [UIImage imageNamed:@"open_now_orange.png"];
     }
     else
     {
         isOpenNow = NO;
-        viewOpen.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+        openNowImage.image = [UIImage imageNamed:@"open_now_black.png"];
     }
 }
 - (IBAction)actionSegmentControl:(id)sender
@@ -948,7 +951,7 @@ typedef enum _TFSelect
             
             [arrDataFilterSelect removeAllObjects];
             
-            detailLabel.text = @"New York - NY";
+            detailLabel.text = @"NYC";
             _storeOldValue = [self getLinkRequest];
             
             [self resizeDetailText];

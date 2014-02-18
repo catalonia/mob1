@@ -22,6 +22,10 @@
 		591CD161184FBB5A0022892A /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 591CD156184FBB590022892A /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		591CD162184FBB5A0022892A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 591CD159184FBB590022892A /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		593A25451864B119000C097A /* CityData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 593A25441864B119000C097A /* CityData.txt */; };
+		596F4F2218B04FE000F99046 /* open_now_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 596F4F1E18B04FE000F99046 /* open_now_black.png */; };
+		596F4F2318B04FE000F99046 /* open_now_orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 596F4F1F18B04FE000F99046 /* open_now_orange.png */; };
+		596F4F2418B04FE000F99046 /* restaurant_chain_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 596F4F2018B04FE000F99046 /* restaurant_chain_black.png */; };
+		596F4F2518B04FE000F99046 /* resturant_chain_orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 596F4F2118B04FE000F99046 /* resturant_chain_orange.png */; };
 		597A9D7518596D0000E72289 /* ic_favs_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 597A9D7118596D0000E72289 /* ic_favs_on.png */; };
 		597A9D7618596D0000E72289 /* ic_favs_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 597A9D7218596D0000E72289 /* ic_favs_on@2x.png */; };
 		597A9D7718596D0000E72289 /* ic_favs.png in Resources */ = {isa = PBXBuildFile; fileRef = 597A9D7318596D0000E72289 /* ic_favs.png */; };
@@ -739,6 +743,10 @@
 		591CD158184FBB590022892A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		591CD159184FBB590022892A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		593A25441864B119000C097A /* CityData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CityData.txt; sourceTree = "<group>"; };
+		596F4F1E18B04FE000F99046 /* open_now_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open_now_black.png; sourceTree = "<group>"; };
+		596F4F1F18B04FE000F99046 /* open_now_orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open_now_orange.png; sourceTree = "<group>"; };
+		596F4F2018B04FE000F99046 /* restaurant_chain_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = restaurant_chain_black.png; sourceTree = "<group>"; };
+		596F4F2118B04FE000F99046 /* resturant_chain_orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resturant_chain_orange.png; sourceTree = "<group>"; };
 		597A9D7118596D0000E72289 /* ic_favs_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_favs_on.png; sourceTree = "<group>"; };
 		597A9D7218596D0000E72289 /* ic_favs_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_favs_on@2x.png"; sourceTree = "<group>"; };
 		597A9D7318596D0000E72289 /* ic_favs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_favs.png; sourceTree = "<group>"; };
@@ -1923,6 +1931,10 @@
 		5E5F16B616DE025400852D6A /* restaurant */ = {
 			isa = PBXGroup;
 			children = (
+				596F4F1E18B04FE000F99046 /* open_now_black.png */,
+				596F4F1F18B04FE000F99046 /* open_now_orange.png */,
+				596F4F2018B04FE000F99046 /* restaurant_chain_black.png */,
+				596F4F2118B04FE000F99046 /* resturant_chain_orange.png */,
 				E6A3557C183F10000027F222 /* ic_bt_addedtomyfaves@2x.png */,
 				E6A3557D183F10000027F222 /* ic_bt_addtomyfaves@2x.png */,
 				E6A3557E183F10000027F222 /* ic_bt_levaveatip@2x.png */,
@@ -3691,6 +3703,7 @@
 				5E7776FD16D6035C00B0F363 /* ProfileVC.xib in Resources */,
 				5E77770116D6035C00B0F363 /* PromptSignUpVC.xib in Resources */,
 				5E77770616D6035C00B0F363 /* SelfProfileVC.xib in Resources */,
+				596F4F2418B04FE000F99046 /* restaurant_chain_black.png in Resources */,
 				5E77770B16D6035C00B0F363 /* AboutTasteSyncVC.xib in Resources */,
 				5E77770F16D6035C00B0F363 /* CellCustomSetting.xib in Resources */,
 				5E77771116D6035C00B0F363 /* ContactTasteSyncVC.xib in Resources */,
@@ -3808,6 +3821,7 @@
 				5E5F175A16DE025400852D6A /* frame1.png in Resources */,
 				5E5F175B16DE025400852D6A /* frame1@2x.png in Resources */,
 				E69BE571186749470073A936 /* icon-05.png in Resources */,
+				596F4F2218B04FE000F99046 /* open_now_black.png in Resources */,
 				5E5F176216DE025400852D6A /* ic_bt_deals.png in Resources */,
 				5E5F176316DE025400852D6A /* ic_bt_deals@2x.png in Resources */,
 				E6A1AAD0183BB731003E9992 /* AskCell.xib in Resources */,
@@ -3826,6 +3840,7 @@
 				5E5F177916DE025400852D6A /* ic_myfollowers@2x.png in Resources */,
 				5E5F177A16DE025400852D6A /* ic_peopleifollow.png in Resources */,
 				5E5F177B16DE025400852D6A /* ic_peopleifollow@2x.png in Resources */,
+				596F4F2518B04FE000F99046 /* resturant_chain_orange.png in Resources */,
 				5E5F177C16DE025400852D6A /* off.png in Resources */,
 				E696A0701848FDAE00C5C428 /* rounded_orange@2x.png in Resources */,
 				5E5F177D16DE025400852D6A /* off@2x.png in Resources */,
@@ -3993,6 +4008,7 @@
 				E696A07B1848FDAE00C5C428 /* date_tile@2x.png in Resources */,
 				5E7FE9C216E05B3600B60D74 /* box_browes@2x.png in Resources */,
 				5E7FE9CF16E05B9200B60D74 /* ic_call.png in Resources */,
+				596F4F2318B04FE000F99046 /* open_now_orange.png in Resources */,
 				5E7FE9D016E05B9200B60D74 /* ic_call@2x.png in Resources */,
 				E69BE577186749470073A936 /* icon-11.png in Resources */,
 				5E7FE9D116E05B9200B60D74 /* ic_directions.png in Resources */,

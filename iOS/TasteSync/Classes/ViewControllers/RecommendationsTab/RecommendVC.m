@@ -136,6 +136,10 @@
     AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     isLoadShuffle = YES;
     
+    if (delegate.arrayShuffle.count == 0) {
+        [glNotif requestData:self.view Type:RecommendationShuffle];
+    }
+    
     CustomDelegate* customdelegate = [[CustomDelegate alloc]init];
     customdelegate.recomendationDelegate = self;
     RecommendDetail2 *vc = [[RecommendDetail2 alloc] initWithShuffle];
