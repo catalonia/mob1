@@ -1294,7 +1294,7 @@ typedef enum _TFSelect
             cuisineTier2 = [dicDetail objectForKey:@"cuisineTier2idlist"];
         }
 
-        detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"]];
+        detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"] openNow:[dicDetail objectForKey:@"opennowflag"] FavedFlag:[dicDetail objectForKey:@"favflag"] SavedFlag:[dicDetail objectForKey:@"savedflag"] ChainFlag:[dicDetail objectForKey:@"chainflag"]];
         
         
         //[self addType:self.arrDataRegion ListID:[dicDetail objectForKey:@"cityid"]];
@@ -1370,7 +1370,7 @@ typedef enum _TFSelect
             cuisineTier2 = [dicDetail objectForKey:@"cuisineTier2idlist"];
         }
         
-        detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"]];
+        detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"] openNow:[dicDetail objectForKey:@"opennowflag"] FavedFlag:[dicDetail objectForKey:@"favflag"] SavedFlag:[dicDetail objectForKey:@"savedflag"] ChainFlag:[dicDetail objectForKey:@"chainflag"]];
         
         [self resizeDetailText];
         

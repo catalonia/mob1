@@ -73,5 +73,5 @@ void debug(NSString *format, ...);
 +(TSGlobalObj*)getDefaultCityObj;
 + (void)segmentedControChangeColor:(UISegmentedControl*)sender;
 +(void)implementFlurry:(NSDictionary*)dic forKey:(NSString*)key isBegin:(BOOL)status;
-+(NSString*)getFilterString:(NSString*)cityid cuisinetier1ID:(NSString*)cuisinetier1idlist  cuisinetier2ID:(NSString*)cuisinetier2idlist neighborhoodid:(NSString*)neighborhoodid occasionidlist:(NSString*)occasionidlist priceidlist:(NSString*)priceidlist themeidlist:(NSString*)themeidlist typeofrestaurantidList:(NSString*)typeofrestaurantidList whoareyouwithidlist:(NSString*)whoareyouwithidlist;
++(NSString*)getFilterString:(NSString*)cityid cuisinetier1ID:(NSString*)cuisinetier1idlist  cuisinetier2ID:(NSString*)cuisinetier2idlist neighborhoodid:(NSString*)neighborhoodid occasionidlist:(NSString*)occasionidlist priceidlist:(NSString*)priceidlist themeidlist:(NSString*)themeidlist typeofrestaurantidList:(NSString*)typeofrestaurantidList whoareyouwithidlist:(NSString*)whoareyouwithidlist openNow:(NSString*)openNowFlag FavedFlag:(NSString*)favflag SavedFlag:(NSString*)savedFlag ChainFlag:(NSString*)chainFlag;
 @end

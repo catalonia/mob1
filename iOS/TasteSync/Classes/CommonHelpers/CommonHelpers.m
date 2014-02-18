@@ -456,11 +456,46 @@ void debug(NSString *format, ...)
     }
 }
 
-+(NSString*)getFilterString:(NSString*)cityid cuisinetier1ID:(NSString*)cuisinetier1idlist  cuisinetier2ID:(NSString*)cuisinetier2idlist neighborhoodid:(NSString*)neighborhoodid occasionidlist:(NSString*)occasionidlist priceidlist:(NSString*)priceidlist themeidlist:(NSString*)themeidlist typeofrestaurantidList:(NSString*)typeofrestaurantidList whoareyouwithidlist:(NSString*)whoareyouwithidlist
+
++(NSString*)getFilterString:(NSString*)cityid cuisinetier1ID:(NSString*)cuisinetier1idlist  cuisinetier2ID:(NSString*)cuisinetier2idlist neighborhoodid:(NSString*)neighborhoodid occasionidlist:(NSString*)occasionidlist priceidlist:(NSString*)priceidlist themeidlist:(NSString*)themeidlist typeofrestaurantidList:(NSString*)typeofrestaurantidList whoareyouwithidlist:(NSString*)whoareyouwithidlist openNow:(NSString*)openNowFlag FavedFlag:(NSString*)favflag SavedFlag:(NSString*)savedFlag ChainFlag:(NSString*)chainFlag
 {
     
     
     NSString* filterString = @"";
+    
+    
+    if (![openNowFlag isKindOfClass:[NSNull class]]) {
+        if ([[NSString stringWithFormat:@"%@",openNowFlag] isEqualToString:@"1"]) {
+            filterString = @"OpenNow";
+        }
+    }
+    
+    if (![favflag isKindOfClass:[NSNull class]]) {
+        if ([[NSString stringWithFormat:@"%@",favflag] isEqualToString:@"1"]) {
+            if (filterString.length != 0) {
+                filterString = [filterString stringByAppendingString:@", "];
+            }
+            filterString = @"Faved";
+        }
+    }
+    
+    if (![savedFlag isKindOfClass:[NSNull class]]) {
+        if ([[NSString stringWithFormat:@"%@",savedFlag] isEqualToString:@"1"]) {
+            if (filterString.length != 0) {
+                filterString = [filterString stringByAppendingString:@", "];
+            }
+            filterString = @"Saved";
+        }
+    }
+    
+    if (![chainFlag isKindOfClass:[NSNull class]]) {
+        if (filterString.length != 0) {
+            filterString = [filterString stringByAppendingString:@", "];
+        }
+        if ([[NSString stringWithFormat:@"%@",chainFlag] isEqualToString:@"1"]) {
+            filterString = @"Chain";
+        }
+    }
     
     NSMutableArray* arrayCuisine = [[NSMutableArray alloc]init];
     for (TSGlobalObj* global in [CommonHelpers appDelegate].arrCuisine) {
@@ -483,6 +518,9 @@ void debug(NSString *format, ...)
     }
     
     if (![cuisinetier1idlist isEqualToString:@""]) {
+        if (filterString.length != 0) {
+            filterString = [filterString stringByAppendingString:@", "];
+        }
         int i = 0;
         NSArray* array = [cuisinetier1idlist componentsSeparatedByString:@","];
         for (NSString* str in array) {
