@@ -709,6 +709,8 @@
 		E6AA9AC91823126500EE8ADA /* LoadDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AA9AC81823126500EE8ADA /* LoadDataCell.xib */; };
 		E6AD26AA18AA0431000AAC9E /* CellCustomAbout.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AD26A818AA0431000AAC9E /* CellCustomAbout.m */; };
 		E6AD26AB18AA0431000AAC9E /* CellCustomAbout.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AD26A918AA0431000AAC9E /* CellCustomAbout.xib */; };
+		E6B1022318B90B0400DACFB0 /* fav-2.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B1022118B90B0400DACFB0 /* fav-2.png */; };
+		E6B1022418B90B0400DACFB0 /* save-2.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B1022218B90B0400DACFB0 /* save-2.png */; };
 		E6B83DF4184B25E1001775E5 /* CustomDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B83DF3184B25E1001775E5 /* CustomDelegate.m */; };
 /* End PBXBuildFile section */
 
@@ -1564,6 +1566,8 @@
 		E6AD26A718AA0431000AAC9E /* CellCustomAbout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellCustomAbout.h; path = TasteSync/Classes/ViewControllers/OthersTab/SettingVC/AboutTasteSyncVC/CellCustomAbout.h; sourceTree = SOURCE_ROOT; };
 		E6AD26A818AA0431000AAC9E /* CellCustomAbout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellCustomAbout.m; path = TasteSync/Classes/ViewControllers/OthersTab/SettingVC/AboutTasteSyncVC/CellCustomAbout.m; sourceTree = SOURCE_ROOT; };
 		E6AD26A918AA0431000AAC9E /* CellCustomAbout.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellCustomAbout.xib; path = TasteSync/Classes/ViewControllers/OthersTab/SettingVC/AboutTasteSyncVC/CellCustomAbout.xib; sourceTree = SOURCE_ROOT; };
+		E6B1022118B90B0400DACFB0 /* fav-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fav-2.png"; sourceTree = "<group>"; };
+		E6B1022218B90B0400DACFB0 /* save-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save-2.png"; sourceTree = "<group>"; };
 		E6B83DF2184B25E1001775E5 /* CustomDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDelegate.h; sourceTree = "<group>"; };
 		E6B83DF3184B25E1001775E5 /* CustomDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1931,6 +1935,8 @@
 		5E5F16B616DE025400852D6A /* restaurant */ = {
 			isa = PBXGroup;
 			children = (
+				E6B1022118B90B0400DACFB0 /* fav-2.png */,
+				E6B1022218B90B0400DACFB0 /* save-2.png */,
 				596F4F1E18B04FE000F99046 /* open_now_black.png */,
 				596F4F1F18B04FE000F99046 /* open_now_orange.png */,
 				596F4F2018B04FE000F99046 /* restaurant_chain_black.png */,
@@ -3991,6 +3997,7 @@
 				5E7FE9A816E04CD800B60D74 /* ic_followuser@2x.png in Resources */,
 				E697B4371845B34100279DE7 /* images.jpeg in Resources */,
 				5E7FE9A916E04CD800B60D74 /* ic_reportuser.png in Resources */,
+				E6B1022418B90B0400DACFB0 /* save-2.png in Resources */,
 				5E7FE9AA16E04CD800B60D74 /* ic_reportuser@2x.png in Resources */,
 				5E7FE9AB16E04CD800B60D74 /* ic_trustedfriend.png in Resources */,
 				E696A07C1848FDAE00C5C428 /* friends_tile@2x.png in Resources */,
@@ -4142,6 +4149,7 @@
 				E6A15AE8183EFBA800C738DA /* ic_bt_viewmenu.png in Resources */,
 				5E7829F316F7F18C00E6C1CD /* icon_114.png in Resources */,
 				E696A0551848FDAE00C5C428 /* group_tile@2x.png in Resources */,
+				E6B1022318B90B0400DACFB0 /* fav-2.png in Resources */,
 				5E7829FC16F7F79F00E6C1CD /* icon_72.png in Resources */,
 				5E7829FE16F7F79F00E6C1CD /* icon_144.png in Resources */,
 				5E7829FF16F7F79F00E6C1CD /* icon_512.png in Resources */,
