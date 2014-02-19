@@ -460,9 +460,6 @@
     if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT) {
         [self startLoading];
     }
-   
-
-   
 }
 
 - (void)startLoading {

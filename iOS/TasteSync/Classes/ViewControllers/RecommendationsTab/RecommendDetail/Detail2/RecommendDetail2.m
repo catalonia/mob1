@@ -132,8 +132,8 @@ arrDataFilter=_arrDataFilter;;
                 if (isShuffle) {
                     buttonShuffle.hidden = NO;
                     buttonSent.hidden = NO;
-                    buttonSent.frame = CGRectMake(167, buttonSent.frame.origin.y, buttonSent.frame.size.width, buttonSent.frame.size.height);
-                    cantHelpButton.hidden = NO;
+                    //buttonSent.frame = CGRectMake(167, buttonSent.frame.origin.y, buttonSent.frame.size.width, buttonSent.frame.size.height);
+                    cantHelpButton.hidden = YES;
                     navibarView.hidden = NO;
                 }
             }
@@ -678,7 +678,7 @@ arrDataFilter=_arrDataFilter;;
 
 - (void) addRestaurantCell:(AddRestaurantCell *)addRestaurantCell didChangeTextFieldWithString:(NSString *) aString
 {
-    [self searchLocal:aString];
+    //[self searchLocal:aString];
 }
 
 - (void) addRestaurantCell:(AddRestaurantCell *)addRestaurantCell didAction:(id)anObject tagAction:(int)aTag

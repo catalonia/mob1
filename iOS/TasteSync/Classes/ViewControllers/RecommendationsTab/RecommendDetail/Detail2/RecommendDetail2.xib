@@ -278,13 +278,13 @@
                             <rect key="frame" x="84" y="7" width="72" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
-                            <state key="normal" title="All" backgroundImage="bt_55.png">
+                            <state key="normal" title="Inbox" backgroundImage="bt_55.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="disabled" backgroundImage="bt_55.png"/>
-                            <state key="selected" backgroundImage="bt_55.png"/>
-                            <state key="highlighted" backgroundImage="bt_55.png"/>
+                            <state key="disabled" title="Inbox" backgroundImage="bt_55.png"/>
+                            <state key="selected" title="Inbox" backgroundImage="bt_55.png"/>
+                            <state key="highlighted" title="Inbox" backgroundImage="bt_55.png"/>
                             <connections>
                                 <action selector="actionAllButton:" destination="-1" eventType="touchUpInside" id="BkU-QJ-wB9"/>
                             </connections>

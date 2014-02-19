@@ -84,8 +84,6 @@
 
 - (void)textViewDidChangeSelection:(UITextView *)textView
 {
-   
-    //NSLog(@"- %d, %d", _textView.selectedRange.location, _textView.selectedRange.length);
     NSString* str = _textView.text;
     NSArray* array = [str componentsSeparatedByString:self.specialCharacter];
     int count = 0;
@@ -96,8 +94,6 @@
         }
     }
     if (count != 0) {
-        //
-        //NSString* searchText = [textField.text stringByReplacingCharactersInRange:range withString:string];
         double delayInSeconds = TIMER_DELAY;
         NSString* text = [array objectAtIndex:count];
         dispatch_time_t popTimer = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds*NSEC_PER_SEC);
@@ -114,13 +110,10 @@
             }
             if (count1 != 0) {
                 NSLog(@"Search: %@, %@",text, arraydefine[count1]);
-                if ([text isEqualToString:arraydefine[count1]]) {
+                if ([text isEqualToString:arraydefine[count1]] && ![text isEqualToString:@" before restaurant name"]) {
                     [self.delegate enterSearchObject:[array objectAtIndex:count]];
                 }
             }
-            
-            
-            //[NSThread detachNewThreadSelector:@selector(thread:) toTarget:self withObject:searchText];
         });
 
     }
