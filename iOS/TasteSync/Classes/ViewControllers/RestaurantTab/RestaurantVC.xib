@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RestaurantVC">
@@ -30,6 +30,7 @@
                 <outlet property="scrollViewMain" destination="79" id="80"/>
                 <outlet property="tbvFilter" destination="22" id="25"/>
                 <outlet property="tbvResult" destination="15" id="21"/>
+                <outlet property="textRoundView" destination="dLn-dM-qGY" id="rQf-uv-tna"/>
                 <outlet property="tfRestaurant" destination="8" id="27"/>
                 <outlet property="titleImageView" destination="40" id="r0B-Yd-fR2"/>
                 <outlet property="titleView" destination="xK8-R0-aHr" id="7wf-Yy-ic6"/>
@@ -446,6 +447,11 @@
                     <rect key="frame" x="40" y="0.0" width="179" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
+                        <view contentMode="scaleToFill" id="dLn-dM-qGY">
+                            <rect key="frame" x="23" y="7" width="133" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="9">
                             <rect key="frame" x="23" y="7" width="133" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

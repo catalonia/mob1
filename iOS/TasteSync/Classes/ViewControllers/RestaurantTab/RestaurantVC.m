@@ -148,6 +148,9 @@ typedef enum _TFSelect
 {
     [super viewDidLoad];
     
+    textRoundView.layer.cornerRadius = 5;
+    textRoundView.layer.masksToBounds = YES;
+    
     [CommonHelpers setBackgroudImageForView:self.view];
     [self.navigationController setNavigationBarHidden:YES];
     // Do any additional setup after loading the view from its nib.

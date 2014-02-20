@@ -100,9 +100,12 @@
     lbLongMsg.text = [NSString stringWithFormat:@"%@...more",obj.description];
     
     if (obj.type == TYPE_6) {
-        RestaurantObj* res = [obj.arrayRestaurant objectAtIndex:0];
-        lbLongMsg.text = [NSString stringWithFormat:@"%@...more",res.name];
-        btShowProfile.enabled = NO;
+        if (obj.arrayRestaurant.count > 0) {
+            RestaurantObj* res = [obj.arrayRestaurant objectAtIndex:0];
+            lbLongMsg.text = [NSString stringWithFormat:@"%@...more",res.name];
+            btShowProfile.enabled = NO;
+        }
+        
     }
     if (obj.type == TYPE_8) {
         //RestaurantObj* res = [obj.arrayRestaurant objectAtIndex:0];
