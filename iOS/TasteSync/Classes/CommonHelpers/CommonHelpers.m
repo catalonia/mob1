@@ -494,7 +494,7 @@ void debug(NSString *format, ...)
             if (filterString.length != 0) {
                 filterString = [filterString stringByAppendingString:@", "];
             }
-            filterString = [filterString stringByAppendingString:[NSString stringWithFormat:@"Chains"]];
+            filterString = [filterString stringByAppendingString:[NSString stringWithFormat:@"Include Chains"]];
         }
     }
     

@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="_searchText" destination="rrL-NK-eoW" id="Cff-7Q-5pz"/>
                 <outlet property="_tableView" destination="omA-0S-PZL" id="6li-ez-ceT"/>
+                <outlet property="titleText" destination="Lpb-A8-RIC" id="MGj-89-Kt5"/>
                 <outlet property="view" destination="NbK-X6-IaH" id="fne-iI-zXK"/>
             </connections>
         </placeholder>
@@ -52,7 +53,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="bg340.png" translatesAutoresizingMaskIntoConstraints="NO" id="jiU-7I-m5h">
-                            <rect key="frame" x="10" y="25" width="300" height="365"/>
+                            <rect key="frame" x="10" y="25" width="300" height="420"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         </imageView>
@@ -61,7 +62,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <subviews>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Contacts" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rrL-NK-eoW">
-                                    <rect key="frame" x="25" y="8" width="250" height="30"/>
+                                    <rect key="frame" x="25" y="50" width="250" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -71,7 +72,7 @@
                                     </connections>
                                 </textField>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="omA-0S-PZL">
-                                    <rect key="frame" x="10" y="46" width="280" height="309"/>
+                                    <rect key="frame" x="10" y="88" width="280" height="309"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                     <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -80,6 +81,13 @@
                                         <outlet property="delegate" destination="-1" id="pk7-ec-4Fc"/>
                                     </connections>
                                 </tableView>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Lpb-A8-RIC">
+                                    <rect key="frame" x="10" y="5" width="280" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                         </scrollView>

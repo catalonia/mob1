@@ -22,6 +22,8 @@
     NSMutableArray* _arrayTasteSyncUser;
     IBOutlet UITableView* _tableView;
     IBOutlet UITextField* _searchText;
+    __weak IBOutlet UILabel* titleText;
+    
     NSString* _askString;
     NSString* _recorequestID;
     ContactObject* _contactObj;
@@ -67,6 +69,7 @@
 {
     self = [super initWithNibName:@"AskContactVC" bundle:nil];
     if (self) {
+        _askString = @"";
         _restaurantObj = restaurantObj;
         isRestaurantDetail = YES;
     }
@@ -74,7 +77,7 @@
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-    if (isRestaurant) {
+    if (isRestaurant || isRestaurantDetail) {
         [self hideTabBar:self.tabBarController];
     }
     NSDictionary *askhomeParams =
@@ -140,6 +143,14 @@
         // iOS 4/5
         
         [self getPersonOutOfAddressBook];
+    }
+    
+    
+    if (isRestaurant) {
+        titleText.text = @"Ask around: Get your friends involved in your restaurant search";
+    }
+    if (isRestaurantDetail) {
+        titleText.text = @"Share your find with friends!";
     }
 }
 
@@ -683,6 +694,13 @@
      nil];
     [CommonHelpers implementFlurry:askhomeParams forKey:@"Ask_Contact" isBegin:YES];
     
+    
+    if (isRestaurantDetail)
+    {
+        [self showTabBar:self.tabBarController];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
     if (isRestaurant) {
         [self showTabBar:self.tabBarController];
         [self.navigationController popToRootViewControllerAnimated:NO];
@@ -690,7 +708,7 @@
     else
     {
         [self.navigationController popToRootViewControllerAnimated:YES];
-        [[[CommonHelpers appDelegate] tabbarBaseVC] actionRestaurantViaAskTab:_recorequestID];\
+        [[[CommonHelpers appDelegate] tabbarBaseVC] actionRestaurantViaAskTab:_recorequestID];
         
     }
 }

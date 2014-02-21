@@ -21,6 +21,7 @@
 #import "TSPhotoRestaurantObj.h"
 #import "PhotoVC.h"
 #import "AskContactVC.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface RestaurantDetailVC ()<UIScrollViewDelegate,ResShareViewDelegate,UIAlertViewDelegate>
 {
@@ -205,15 +206,24 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+-(void)captureImage
+{
+    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *imageView = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    NSData *imageData = UIImageJPEGRepresentation(imageView, 1.0 ); //you can use PNG too
+    [imageData writeToFile:@"background.jpeg" atomically:YES];
+}
 
 - (IBAction)actionShare:(id)sender
 {
     debug(@"actionShare");
     //[CommonHelpers showShareView:self andObj:_restaurantObj];
-    
-    AskContactVC* askContact = [[AskContactVC alloc]initWithRestaurant:@"I found a good restaurant"];
-    [self.navigationController pushViewController:askContact animated:NO];
+    [self captureImage];
+    //AskContactVC* askContact = [[AskContactVC alloc]initWithRestaurantDetail:_restaurantObj];
+    //[self.navigationController pushViewController:askContact animated:NO];
     
 }
 

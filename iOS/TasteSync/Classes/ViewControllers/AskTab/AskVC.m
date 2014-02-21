@@ -19,7 +19,7 @@
 #import "Reachability.h"
 #import "Flurry.h"
 
-@interface AskVC ()
+@interface AskVC ()<UIAlertViewDelegate>
 {
     NSMutableArray *arrDataAsk;
     NSMutableArray *arrayCuisine;
@@ -47,6 +47,7 @@
     
     
     int number_cuisine, number_neighborhood, number_ambience, number_whoareyou, number_price, number_recomendation;
+    NSString* recommendationText;
     AskObject* askNeiberhood;
 }
 
@@ -593,8 +594,10 @@
     if (key == 2) {
         number_recomendation = 1;
         NSDictionary* dic = [response objectFromJSONString];
-        AskRecommendationsVC *vc = [[AskRecommendationsVC alloc] initWithArrayData:arrDataAsk atLocation:region Reco_RequestID:[dic objectForKey:@"valueNameValue"]];
-        [self.navigationController pushViewController:vc animated:YES];
+        recommendationText = [dic objectForKey:@"valueNameValue"];
+        [CommonHelpers showInfoAlertWithTitle:@"TasteSync" message:@"Your query has been sent to a foodie. Their suggestions should be available in your Recommendations Inbox in a few minutes." delegate:self tag:0];
+        
+        
     }
 }
 
@@ -875,6 +878,7 @@
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
+    AskRecommendationsVC *vc = [[AskRecommendationsVC alloc] initWithArrayData:arrDataAsk atLocation:region Reco_RequestID:recommendationText];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
