@@ -241,6 +241,8 @@ typedef enum _TFSelect
             [tbvResult reloadData];
             tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
             scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
+            
+            
         }
         isRestaurantRequest = YES;
     }
@@ -335,6 +337,7 @@ typedef enum _TFSelect
         [tbvResult reloadData];
         tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
         scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
+        
         [self requestRestaurant:@"restsearchresults" Key:4];
     }
     
@@ -548,6 +551,7 @@ typedef enum _TFSelect
         [viewMain setFrame:CGRectMake(viewMain.frame.origin.x, -53, viewMain.frame.size.width, viewMain.frame.size.height)];
         [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 450, tbvResult.frame.size.width, tbvResult.contentSize.height)];
         scrollViewMain.contentSize = CGSizeMake(320, tbvResult.contentSize.height + DELTAHEIGHT);
+        
     }
     else
     {
@@ -555,6 +559,7 @@ typedef enum _TFSelect
         [viewMain setFrame:CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, viewMain.frame.size.height)];
         [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 0, tbvResult.frame.size.width, tbvResult.contentSize.height)];
         scrollViewMain.contentSize = CGSizeMake(320, tbvResult.contentSize.height + DELTAHEIGHT);
+        
     }
 }
 
@@ -601,13 +606,13 @@ typedef enum _TFSelect
 {
     if (saved) {
         saved = NO;
-        [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_saved.png"] forButton:btSaved];
+        [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"save-2.png"] forButton:btSaved];
         lbSaved.text = @"Save";
     }
     else
     {
         saved = YES;
-        [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_saved_on.png"] forButton:btSaved];
+        [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_saved.png"] forButton:btSaved];
         lbSaved.text = @"Saved";
         
     }
@@ -616,14 +621,14 @@ typedef enum _TFSelect
 {
     if (favs) {
         favs = NO;
-        [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_bt_addtomyfaves.png"] forButton:btFavs];
+        [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"fav-2.png"] forButton:btFavs];
         lbFaved.text = @"Favs";
         
     }
     else
     {
         favs = YES;
-        [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_bt_addedtomyfaves.png"] forButton:btFavs];
+        [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_bt_addtomyfaves.png"] forButton:btFavs];
         lbFaved.text = @"Favs";
         
     }
@@ -918,6 +923,7 @@ typedef enum _TFSelect
             restaurant = obj;
             [tbvResult reloadData];
             scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
+            
             [arrayResID addObject:obj.uid];
             
             for (AskObject* obj in arrayAmbience) {
@@ -1265,6 +1271,7 @@ typedef enum _TFSelect
             [tbvResult reloadData];
             tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
             scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
+            
         }
     }
     if (key == 3) {

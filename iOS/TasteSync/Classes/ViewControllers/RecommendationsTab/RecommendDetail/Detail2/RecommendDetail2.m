@@ -138,7 +138,10 @@ arrDataFilter=_arrDataFilter;;
                 }
             }
             else
+            {
+                buttonSent.hidden = NO;
                 lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_4];
+            }
             
         }
        

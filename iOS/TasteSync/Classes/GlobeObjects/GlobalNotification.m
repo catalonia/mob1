@@ -111,10 +111,48 @@
 -(void)requestRestaurantData:(UIView*)view;
 {
     TSCityObj* _cityObj = [CommonHelpers setDefaultCityObj];
-    NSString* link = [NSString stringWithFormat:@"recosrestaurantsearchresults?userid=%@&restaurantid=%@&neighborhoodid=%@&cityid=%@&statename=%@&cuisineidtier1idlist=%@&priceidlist=%@&rating=%@&savedflag=%@&favflag=%@&dealflag=%@&chainflag=%@&paginationid=%@",[UserDefault userDefault].userID,@"",@"", _cityObj.uid, _cityObj.stateName,@"",@"",@"",@"",@"",@"",@"",@"1"];
-    CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:5 WithView:view];
+    //NSString* link = [NSString stringWithFormat:@"recosrestaurantsearchresults?userid=%@&restaurantid=%@&neighborhoodid=%@&cityid=%@&statename=%@&cuisineidtier1idlist=%@&priceidlist=%@&rating=%@&savedflag=%@&favflag=%@&dealflag=%@&chainflag=%@&paginationid=%@",[UserDefault userDefault].userID,@"",@"", _cityObj.uid, _cityObj.stateName,@"",@"",@"",@"",@"",@"",@"",@"1"];
+    
+    
+    
+    CRequest* request = [[CRequest alloc]initWithURL:@"restsearchresults" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:5 WithView:view];
+    [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
+    NSString* openFlag  = @"0";
+    NSString* savedFlag = @"0";
+    NSString* favFlag   = @"0";
+    NSString* chainFlag = @"0";
+    
+    [request setFormPostValue:@""               forKey:@"cuisinetier1idlist"];
+    [request setFormPostValue:@""               forKey:@"cuisinetier2idlist"];
+    [request setFormPostValue:@""               forKey:@"priceidlist"];
+    [request setFormPostValue:@""               forKey:@"themeidlist"];
+    [request setFormPostValue:@""               forKey:@"whoareyouwithidlist"];
+    [request setFormPostValue:@""               forKey:@"typeofrestaurantidList"];
+    [request setFormPostValue:@""               forKey:@"occasionidlist"];
+    [request setFormPostValue:@""               forKey:@"rating"];
+    [request setFormPostValue:openFlag          forKey:@"opennownlag"];
+    [request setFormPostValue:savedFlag         forKey:@"savedflag"];
+    [request setFormPostValue:favFlag           forKey:@"favflag"];
+    [request setFormPostValue:@"0"              forKey:@"dealflag"];
+    [request setFormPostValue:chainFlag         forKey:@"chainflag"];
+    [request setFormPostValue:@"1"             forKey:@"paginationid"];
+    [request setFormPostValue:@""               forKey:@"neighborhoodid"];
+    [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.uid forKey:@"cityid"];
+    [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.stateName forKey:@"statename"];
+    
+    
+    
+    
     request.delegate = self;
     [request startFormRequest];
+    
+    
+    
+    
+    
+//    CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:5 WithView:view];
+//    request.delegate = self;
+//    [request startFormRequest];
 }
 -(void)startReload:(RecommendationType)type
 {
