@@ -7,6 +7,7 @@
 //
 
 #import "TextView.h"
+#import "CommonHelpers.h"
 
 #define OPENTAG @"<u>"
 #define CLOSETAG @"</u>"
@@ -95,7 +96,33 @@
         }
     }
     if (count != 0) {
-        [self.delegate enterSearchObject:[array objectAtIndex:count]];
+        //
+        //NSString* searchText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        double delayInSeconds = TIMER_DELAY;
+        NSString* text = [array objectAtIndex:count];
+        dispatch_time_t popTimer = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds*NSEC_PER_SEC);
+        dispatch_after(popTimer, dispatch_get_main_queue(), ^(void){
+            
+            NSArray* arraydefine = [_textView.text componentsSeparatedByString:self.specialCharacter];
+            NSString* str1 = _textView.text;
+            int count1 = 0;
+            for (int i = 0; i < _textView.selectedRange.location && _textView.selectedRange.location < 6000; i++) {
+                unichar c = [str1 characterAtIndex:i];
+                if (c == [self.specialCharacter characterAtIndex:0]) {
+                    count1++;
+                }
+            }
+            if (count1 != 0) {
+                NSLog(@"Search: %@, %@",text, arraydefine[count1]);
+                if ([text isEqualToString:arraydefine[count1]]) {
+                    [self.delegate enterSearchObject:[array objectAtIndex:count]];
+                }
+            }
+            
+            
+            //[NSThread detachNewThreadSelector:@selector(thread:) toTarget:self withObject:searchText];
+        });
+
     }
     
     if ([self checkLocation:_textView.selectedRange.location]) {
@@ -103,8 +130,8 @@
     }
     
 }
+
 - (void)textViewDidEndEditing:(UITextView *)textView{
-    NSLog(@"here");
     textView.contentOffset = CGPointMake(textView.contentOffset.x, textView.contentSize.height - 48);
 }
 -(void)addRestaurant:(RestaurantObj*)obj
@@ -141,7 +168,6 @@
         }
     }
     NSString* string = [array objectAtIndex:count];
-    NSLog(@"location: %d - length: %d", location, string.length);
     [self removeString:location Lenght:string.length + 1];
     
     int index = hight.endLocation;
@@ -214,7 +240,6 @@
 //    [_textView setValue: htmlStr forKey:@"contentToHTMLString"];
     _textView.text = htmlStr;
     //_textView.contentOffset = CGPointMake(_textView.contentOffset.x, _textView.contentSize.height - 48);
-    NSLog(@"htmlStr: %@, %@, %d",htmlStr, _textView.text, index);
     [_textView setSelectedRange:NSMakeRange(index,0)];
     [_textView becomeFirstResponder];
 }

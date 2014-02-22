@@ -829,12 +829,10 @@ arrDataFilter=_arrDataFilter;;
 }
 -(void)enterCharacter:(NSString *)text
 {
-    NSLog(@"Line: %f", textView.textView.contentSize.height);
     //[scrollViewMain setContentOffset:CGPointMake(0, 190) animated:YES];
 }
 -(void)enterSearchObject:(NSString *)text
 {
-    NSLog(@"%@",text);
     [self searchLocal:text];
 }
 -(void)beginEditting
