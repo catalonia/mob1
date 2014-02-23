@@ -20,6 +20,7 @@
 #import "LeaveATipVC.h"
 #import "TSPhotoRestaurantObj.h"
 #import "PhotoVC.h"
+#import "AskContactVC.h"
 
 @interface RestaurantDetailVC ()<UIScrollViewDelegate,ResShareViewDelegate,UIAlertViewDelegate>
 {
@@ -209,7 +210,11 @@
 - (IBAction)actionShare:(id)sender
 {
     debug(@"actionShare");
-    [CommonHelpers showShareView:self andObj:_restaurantObj];
+    //[CommonHelpers showShareView:self andObj:_restaurantObj];
+    
+    AskContactVC* askContact = [[AskContactVC alloc]initWithRestaurant:@"I found a good restaurant"];
+    [self.navigationController pushViewController:askContact animated:NO];
+    
 }
 
 - (IBAction)actionSave:(id)sender
@@ -388,6 +393,12 @@
         [rateCustom setRateMedium:_restaurantObj.rates];
         [view1 addSubview:rateCustom];
         rateCustom.allowedRate = NO;
+        
+        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(15, 55, 100, 30);
+        [button addTarget:self action:@selector(actionMore:) forControlEvents:UIControlEventTouchUpInside];
+        [view1 addSubview:button];
+        
     }
     
     scrollViewPhotos.delegate = self;

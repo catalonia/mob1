@@ -609,21 +609,12 @@
     </objects>
     <resources>
         <image name="Tick mark icon.png" width="30" height="30"/>
-        <image name="Tick mark icon.png" width="30" height="30"/>
-        <image name="Tick mark icon.png" width="30" height="30"/>
-        <image name="Tick mark icon.png" width="30" height="30"/>
-        <image name="Tick mark icon.png" width="30" height="30"/>
-        <image name="Tick mark icon.png" width="30" height="30"/>
         <image name="bg340.png" width="300" height="340"/>
         <image name="bg44.png" width="300" height="44"/>
         <image name="box2.png" width="259" height="9"/>
         <image name="bt_55 black.png" width="27" height="14"/>
-        <image name="bt_55 black.png" width="27" height="14"/>
-        <image name="bt_55 black.png" width="27" height="14"/>
         <image name="cuisine_popup_back.png" width="320" height="480"/>
         <image name="fav-2.png" width="50" height="50"/>
-        <image name="ic_bt_share.png" width="30" height="30"/>
-        <image name="ic_bt_share.png" width="30" height="30"/>
         <image name="ic_bt_share.png" width="30" height="30"/>
         <image name="ic_tab_myprofile.png" width="30" height="30"/>
         <image name="icon-01b.png" width="60" height="60"/>

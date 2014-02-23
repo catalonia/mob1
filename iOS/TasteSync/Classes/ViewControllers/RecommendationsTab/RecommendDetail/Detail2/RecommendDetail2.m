@@ -410,9 +410,6 @@ arrDataFilter=_arrDataFilter;;
     [request setFormPostValue:@"1" forKey:@"canthelpflag"];
     [request setFormPostValue:self.notificationObj.linkId forKey:@"recorequestid"];
     [request startFormRequest];
-    
-    
-    
 }
 - (IBAction)actionAllButton:(id)sender
 {

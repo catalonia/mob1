@@ -134,7 +134,7 @@
 - (IBAction)actionShuffleButton:(id)sender
 {
     AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    isLoadShuffle = YES;
+    //isLoadShuffle = YES;
     
     if (delegate.arrayShuffle.count == 0) {
         [glNotif requestData:self.view Type:RecommendationShuffle];

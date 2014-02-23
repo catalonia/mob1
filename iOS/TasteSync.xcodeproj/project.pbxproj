@@ -569,6 +569,7 @@
 		E6095ACF182D64B6006F6DF9 /* ResRecommendDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6095AC7182D64B6006F6DF9 /* ResRecommendDetailVC.xib */; };
 		E6095AD0182D64B6006F6DF9 /* ResRecommendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E6095AC9182D64B6006F6DF9 /* ResRecommendVC.m */; };
 		E6095AD1182D64B6006F6DF9 /* ResRecommendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6095ACA182D64B6006F6DF9 /* ResRecommendVC.xib */; };
+		E616CDDA18BA58D10007A511 /* shuffle_white.png in Resources */ = {isa = PBXBuildFile; fileRef = E616CDD918BA58D10007A511 /* shuffle_white.png */; };
 		E627B6EB181A36F000E1A8D0 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E627B6EA181A36F000E1A8D0 /* libresolv.dylib */; };
 		E627B6ED181A372100E1A8D0 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E627B6EC181A372100E1A8D0 /* ImageIO.framework */; };
 		E627B6EF181A3C7000E1A8D0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E627B6EE181A3C7000E1A8D0 /* CoreData.framework */; };
@@ -1405,6 +1406,7 @@
 		E6095AC8182D64B6006F6DF9 /* ResRecommendVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResRecommendVC.h; sourceTree = "<group>"; };
 		E6095AC9182D64B6006F6DF9 /* ResRecommendVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResRecommendVC.m; sourceTree = "<group>"; };
 		E6095ACA182D64B6006F6DF9 /* ResRecommendVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResRecommendVC.xib; sourceTree = "<group>"; };
+		E616CDD918BA58D10007A511 /* shuffle_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuffle_white.png; sourceTree = "<group>"; };
 		E627B6EA181A36F000E1A8D0 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		E627B6EC181A372100E1A8D0 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		E627B6EE181A3C7000E1A8D0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -2903,6 +2905,7 @@
 		5E8D3D0916D35B1B00FF5EEC /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				E616CDD918BA58D10007A511 /* shuffle_white.png */,
 				E696A0811849108C00C5C428 /* RepliedIcon@2x.png */,
 				E696A0821849108D00C5C428 /* UnreadMessage@2x.png */,
 				E696A0061848FD8D00C5C428 /* call icon.png */,
@@ -4083,6 +4086,7 @@
 				E69BE56C186749470073A936 /* icon-01.png in Resources */,
 				5EA0A79816E9C112005ADACB /* bg_report1@2x.png in Resources */,
 				5EA0A79916E9C112005ADACB /* bg_report2.png in Resources */,
+				E616CDDA18BA58D10007A511 /* shuffle_white.png in Resources */,
 				E69644FE182DF65800A16B79 /* AskContactCell.xib in Resources */,
 				5EA0A79A16E9C112005ADACB /* bg_report2@2x.png in Resources */,
 				E6AA9AC91823126500EE8ADA /* LoadDataCell.xib in Resources */,
