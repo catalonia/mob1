@@ -31,6 +31,8 @@
     __weak IBOutlet UIButton *buttonSent;
     __weak IBOutlet UIButton *buttonShuffle;
     __weak IBOutlet UIView *navibarView;
+    __weak IBOutlet UIImageView *imageView;
+    __weak IBOutlet UILabel *shuffleText;
     UITextField *cTextField;
     GlobalNotification *glNotif ;
     NotificationObj *currentNotif;
@@ -90,7 +92,17 @@ arrDataFilter=_arrDataFilter;;
     
     _notificationObj.unread = NO;
     
-    textView = [[TextView alloc]initWithFrame:CGRectMake(10, 15, 274, 122)];
+    if (isShuffle) {
+        imageView.frame = CGRectMake(imageView.frame.origin.x, 35, imageView.frame.size.width, imageView.frame.size.height);
+        tbvFilter.frame = CGRectMake(tbvFilter.frame.origin.x, 157, tbvFilter.frame.size.width, tbvFilter.frame.size.height);
+        shuffleText.hidden = NO;
+        shuffleText.text =  [NSString stringWithFormat:@"Your recommendation for %@",_notificationObj.user.name];
+        textView = [[TextView alloc]initWithFrame:CGRectMake(10, 22, 274, 110)];
+    }
+    else
+    {
+        textView = [[TextView alloc]initWithFrame:CGRectMake(10, 15, 274, 122)];
+    }
     textView.textView.font = [UIFont fontWithName:@"Avenir Medium" size:12.0];
     [textView.textView setBackgroundColor:[UIColor clearColor]];
     tvMsg = textView.textView;

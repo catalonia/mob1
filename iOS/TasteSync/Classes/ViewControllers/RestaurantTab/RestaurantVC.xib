@@ -48,7 +48,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="79">
-                    <rect key="frame" x="0.0" y="45" width="320" height="510"/>
+                    <rect key="frame" x="0.0" y="45" width="320" height="523"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="xK8-R0-aHr">
@@ -278,10 +278,10 @@
                                             <rect key="frame" x="25" y="103" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show chains" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hxk-sT-JSl">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Include chains" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hxk-sT-JSl">
                                             <rect key="frame" x="172" y="303" width="76" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="13"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -609,12 +609,21 @@
     </objects>
     <resources>
         <image name="Tick mark icon.png" width="30" height="30"/>
+        <image name="Tick mark icon.png" width="30" height="30"/>
+        <image name="Tick mark icon.png" width="30" height="30"/>
+        <image name="Tick mark icon.png" width="30" height="30"/>
+        <image name="Tick mark icon.png" width="30" height="30"/>
+        <image name="Tick mark icon.png" width="30" height="30"/>
         <image name="bg340.png" width="300" height="340"/>
         <image name="bg44.png" width="300" height="44"/>
         <image name="box2.png" width="259" height="9"/>
         <image name="bt_55 black.png" width="27" height="14"/>
+        <image name="bt_55 black.png" width="27" height="14"/>
+        <image name="bt_55 black.png" width="27" height="14"/>
         <image name="cuisine_popup_back.png" width="320" height="480"/>
         <image name="fav-2.png" width="50" height="50"/>
+        <image name="ic_bt_share.png" width="30" height="30"/>
+        <image name="ic_bt_share.png" width="30" height="30"/>
         <image name="ic_bt_share.png" width="30" height="30"/>
         <image name="ic_tab_myprofile.png" width="30" height="30"/>
         <image name="icon-01b.png" width="60" height="60"/>

@@ -241,7 +241,7 @@ typedef enum _TFSelect
             [tbvResult reloadData];
             tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
             scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
-            
+            viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
             
         }
         isRestaurantRequest = YES;
@@ -337,7 +337,7 @@ typedef enum _TFSelect
         [tbvResult reloadData];
         tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
         scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
-        
+        viewMain.frame = CGRectMake(viewMain.frame.origin.x, -53, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
         [self requestRestaurant:@"restsearchresults" Key:4];
     }
     
@@ -548,17 +548,17 @@ typedef enum _TFSelect
 {
     if (filterExtendsShown) {
         viewFilterExtends.hidden = NO;
-        [viewMain setFrame:CGRectMake(viewMain.frame.origin.x, -53, viewMain.frame.size.width, viewMain.frame.size.height)];
         [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 450, tbvResult.frame.size.width, tbvResult.contentSize.height)];
         scrollViewMain.contentSize = CGSizeMake(320, tbvResult.contentSize.height + DELTAHEIGHT);
+        viewMain.frame = CGRectMake(viewMain.frame.origin.x, -53, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
         
     }
     else
     {
         viewFilterExtends.hidden = YES;
-        [viewMain setFrame:CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, viewMain.frame.size.height)];
         [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 0, tbvResult.frame.size.width, tbvResult.contentSize.height)];
         scrollViewMain.contentSize = CGSizeMake(320, tbvResult.contentSize.height + DELTAHEIGHT);
+        viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
         
     }
 }
@@ -1271,7 +1271,7 @@ typedef enum _TFSelect
             [tbvResult reloadData];
             tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
             scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
-            
+            viewMain.frame = CGRectMake(viewMain.frame.origin.x, viewMain.frame.origin.y, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
         }
     }
     if (key == 3) {
@@ -1347,7 +1347,7 @@ typedef enum _TFSelect
         [tbvResult reloadData];
         tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
         scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
-        
+        viewMain.frame = CGRectMake(viewMain.frame.origin.x, viewMain.frame.origin.y, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
         
     }
     if (key == 4) {
@@ -1405,6 +1405,7 @@ typedef enum _TFSelect
         [tbvResult reloadData];
         tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
         scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
+        viewMain.frame = CGRectMake(viewMain.frame.origin.x, viewMain.frame.origin.y, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
     }
     if (key == 5) {
         NSString* response = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
@@ -1457,8 +1458,8 @@ typedef enum _TFSelect
     titleView.frame = CGRectMake(titleView.frame.origin.x, titleView.frame.origin.y, titleView.frame.size.width, labelHeight.height + 48);
     detailLabel.frame = CGRectMake(detailLabel.frame.origin.x, detailLabel.frame.origin.y, detailLabel.frame.size.width, labelHeight.height + 10);
     
-    viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, viewMain.frame.size.height);
     [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 0, tbvResult.frame.size.width, tbvResult.contentSize.height)];
+    viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
 }
 
 -(IBAction)doneAction:(id)sender
