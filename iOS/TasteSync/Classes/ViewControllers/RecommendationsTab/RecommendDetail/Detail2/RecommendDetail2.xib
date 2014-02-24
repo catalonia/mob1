@@ -11,6 +11,7 @@
                 <outlet property="buttonSent" destination="94" id="sPw-OB-eif"/>
                 <outlet property="buttonShuffle" destination="Kqq-ZR-2Ao" id="RS1-tO-TKb"/>
                 <outlet property="cantHelpButton" destination="o2z-ME-nxH" id="26M-7A-c2c"/>
+                <outlet property="imageShuffle" destination="GK7-Hu-GOO" id="U2a-se-eOP"/>
                 <outlet property="imageView" destination="84" id="JSX-Fj-bxQ"/>
                 <outlet property="ivAvatar" destination="16" id="41"/>
                 <outlet property="lbName" destination="17" id="36"/>
@@ -239,7 +240,7 @@
                                                 <action selector="actionShuffle:" destination="-1" eventType="touchUpInside" id="AVb-oQ-n3W"/>
                                             </connections>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shuffle_white.png" highlightedImage="shuffle_white.png" id="GK7-Hu-GOO">
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shuffle_white.png" highlightedImage="shuffle_white.png" id="GK7-Hu-GOO">
                                             <rect key="frame" x="146" y="223" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>

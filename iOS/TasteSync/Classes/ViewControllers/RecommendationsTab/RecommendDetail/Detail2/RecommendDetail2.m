@@ -33,6 +33,7 @@
     __weak IBOutlet UIView *navibarView;
     __weak IBOutlet UIImageView *imageView;
     __weak IBOutlet UILabel *shuffleText;
+    __weak IBOutlet UIImageView *imageShuffle;
     UITextField *cTextField;
     GlobalNotification *glNotif ;
     NotificationObj *currentNotif;
@@ -92,7 +93,7 @@ arrDataFilter=_arrDataFilter;;
     
     _notificationObj.unread = NO;
     
-    if (isShuffle) {
+    if (_notificationObj.type != TYPE_3) {
         imageView.frame = CGRectMake(imageView.frame.origin.x, 35, imageView.frame.size.width, imageView.frame.size.height);
         tbvFilter.frame = CGRectMake(tbvFilter.frame.origin.x, 157, tbvFilter.frame.size.width, tbvFilter.frame.size.height);
         shuffleText.hidden = NO;
@@ -135,11 +136,12 @@ arrDataFilter=_arrDataFilter;;
         }
         //NSString *firstCh = [_notificationObj.user.lastname substringToIndex:1];
         if (_notificationObj.type== TYPE_3) {
-             lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_3];
+            lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_3];
         }
         else
         {
             if (_notificationObj.type== TYPE_1) {
+                shuffleText.text =  [NSString stringWithFormat:@"Your recommendation for %@",_notificationObj.user.name];
                 lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_1];
                 if (isShuffle) {
                     buttonShuffle.hidden = NO;
@@ -147,12 +149,15 @@ arrDataFilter=_arrDataFilter;;
                     //buttonSent.frame = CGRectMake(167, buttonSent.frame.origin.y, buttonSent.frame.size.width, buttonSent.frame.size.height);
                     cantHelpButton.hidden = YES;
                     navibarView.hidden = NO;
+                    imageShuffle.hidden = NO;
+                    
                 }
             }
             else
             {
                 buttonSent.hidden = NO;
                 lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_4];
+                shuffleText.text =  [NSString stringWithFormat:@"Reply to %@",_notificationObj.user.name];
             }
             
         }

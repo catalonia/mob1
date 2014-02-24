@@ -25,7 +25,7 @@
     __weak IBOutlet UIScrollView* scrollMain;
     __weak IBOutlet UITableView* tbvFilter;
     NSMutableArray* _arrDataFilter;
-    
+    __weak IBOutlet UILabel* replyText;
 }
 
 - (IBAction)actionBack:(id)sender;
@@ -67,7 +67,7 @@ restaurantObj=_restaurantObj;
     }
     _arrData = [[NSMutableArray alloc]init];
     _arrDataFilter = [[NSMutableArray alloc]init];
-    textView = [[TextView alloc]initWithFrame:CGRectMake(13, 1, 232, 88)];
+    textView = [[TextView alloc]initWithFrame:CGRectMake(13, 15, 232, 88)];
     textView.textView.font = [UIFont fontWithName:@"Avenir Medium" size:12.0];
     [textView.textView setBackgroundColor:[UIColor clearColor]];
     textView.delegate = self;
@@ -258,7 +258,7 @@ restaurantObj=_restaurantObj;
         
         lbName.text = _restaurantObj.name;
         lbDetail.text = [CommonHelpers getInformationRestaurant:self.restaurantObj];
-        
+        replyText.text = [NSString stringWithFormat:@"Reply to %@",_replyRecomendationObj.userObj.name];
         lbTitle.text = _replyRecomendationObj.userObj.name;
         tvDetail.text = _replyRecomendationObj.replyText;
         
@@ -283,6 +283,7 @@ restaurantObj=_restaurantObj;
             else
             {
                 lbTitle.text = _resRecommendObj.user.name;
+                
                 tvDetail.text = _resRecommendObj.detail;
             }
             

@@ -692,16 +692,24 @@ void debug(NSString *format, ...)
     }
     
     if (![neighborhoodid isEqualToString:@""]) {
-        for (AskObject* global in [CommonHelpers appDelegate].arrayNeighberhood) {
-            if ([global.object.uid isEqualToString:neighborhoodid]) {
-                if (filterString.length != 0) {
-                    filterString = [filterString stringByAppendingString:[NSString stringWithFormat:@", %@", global.object.name]];
+        if (filterString.length != 0) {
+            filterString = [filterString stringByAppendingString:@", "];
+        }
+        int i = 0;
+        NSArray* array = [neighborhoodid componentsSeparatedByString:@","];
+        for (NSString* str in array) {
+            for (AskObject* global in [CommonHelpers appDelegate].arrayNeighberhood) {
+                if ([global.object.uid isEqualToString:str]) {
+                    if (i == 0) {
+                        filterString = [filterString stringByAppendingString:global.object.name];
+                    }
+                    else
+                    {
+                        filterString = [filterString stringByAppendingString:[NSString stringWithFormat:@", %@", global.object.name]];
+                    }
+                    i++;
+                    
                 }
-                else
-                {
-                    filterString = [filterString stringByAppendingString:[NSString stringWithFormat:@"%@", global.object.name]];
-                }
-                
             }
         }
     }

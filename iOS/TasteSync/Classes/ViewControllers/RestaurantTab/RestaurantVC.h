@@ -66,7 +66,6 @@
     __weak IBOutlet UIScrollView* _scrollPriceView;
     IBOutlet UIImageView* cuisineDataImage, *neighberhoodImage, *ambienceImage, *priceImage, *whoareyouImage, *rateImage;
     BOOL isCuisine, isRate;
-    AskObject* neighberhoodObject;
     AskObject* ratesObject;
 }
 

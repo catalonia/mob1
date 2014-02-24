@@ -48,7 +48,6 @@
     
     int number_cuisine, number_neighborhood, number_ambience, number_whoareyou, number_price, number_recomendation;
     NSString* recommendationText;
-    AskObject* askNeiberhood;
 }
 
 @end
@@ -352,6 +351,7 @@
         NSString* whoareyouList = @"";
         NSString* typeofrestaurantList = @"";
         NSString* occasionList = @"";
+        NSString* neiberhoodList = @"";
         
         CRequest* request = [[CRequest alloc]initWithURL:@"recosearch" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:2 WithView:self.view];
         [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
@@ -407,7 +407,12 @@
                     whoareyouList = [whoareyouList stringByAppendingFormat:@",%@", global.uid];
             }
             if (global.type == GlobalDataCity) {
-                region = global;
+                if (neiberhoodList.length == 0) {
+                    neiberhoodList = global.uid;
+                }
+                else
+                    neiberhoodList = [neiberhoodList stringByAppendingFormat:@",%@", global.uid];
+                
             }
             NSLog(@"%@ - %d - %@", global.name, global.type, global.uid);
         }
@@ -424,7 +429,7 @@
         //        [request setFormPostValue:@"occasionidlist" forKey:@"statename"];
         
         //        if (region.cityObj == nil) {
-        [request setFormPostValue:region.cityObj.neighbourhoodID forKey:@"neighborhoodid"];
+        [request setFormPostValue:neiberhoodList forKey:@"neighborhoodid"];
         [request setFormPostValue:region.cityObj.uid forKey:@"cityid"];
         [request setFormPostValue:region.cityObj.stateName forKey:@"statename"];
         
@@ -565,24 +570,24 @@
             obj.selected = !obj.selected;
             [_tableViewCuisine reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
         }
-        else
-        {
-            AskObject* obj = [_arrDataFilter objectAtIndex:indexPath.row];
-            if (obj.selected == YES) {
-                obj.selected = NO;
-                askNeiberhood = nil;
-            }
-            else
-            {
-                obj.selected = YES;
-                if (askNeiberhood != nil) {
-                    askNeiberhood.selected = NO;
-                }
-                askNeiberhood = obj;
-            }
-            
-            [_tableViewCuisine reloadData];
-        }
+//        else
+//        {
+//            AskObject* obj = [_arrDataFilter objectAtIndex:indexPath.row];
+//            if (obj.selected == YES) {
+//                obj.selected = NO;
+//                askNeiberhood = nil;
+//            }
+//            else
+//            {
+//                obj.selected = YES;
+//                if (askNeiberhood != nil) {
+//                    askNeiberhood.selected = NO;
+//                }
+//                askNeiberhood = obj;
+//            }
+//            
+//            [_tableViewCuisine reloadData];
+//        }
     }
 }
 
@@ -793,7 +798,7 @@
     _arrDataFilter = [[NSMutableArray alloc]initWithArray:arrayCity];
     [_tableViewCuisine reloadData];
     _cuisineView.hidden = NO;
-    isCuisine = NO;
+    isCuisine = YES;
     
     number_neighborhood++;
 }

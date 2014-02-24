@@ -241,7 +241,7 @@ typedef enum _TFSelect
             [tbvResult reloadData];
             tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
             scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
-            viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
+            //viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
             
         }
         isRestaurantRequest = YES;
@@ -502,17 +502,10 @@ typedef enum _TFSelect
     [request setFormPostValue:favFlag                                       forKey:@"favFlag"];
     [request setFormPostValue:chainFlag                                     forKey:@"chainFlag"];
     [request setFormPostValue:[NSString stringWithFormat:@"%d",currentPage]             forKey:@"paginationid"];
-    if (region.cityObj != nil) {
-        [request setFormPostValue:region.cityObj.neighbourhoodID forKey:@"neighborhoodid"];
-        [request setFormPostValue:region.cityObj.uid forKey:@"cityid"];
-        [request setFormPostValue:region.cityObj.stateName forKey:@"statename"];
-    }
-    else
-    {
-        [request setFormPostValue:@"" forKey:@"neighborhoodid"];
-        [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.uid forKey:@"cityid"];
-        [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.stateName forKey:@"statename"];
-    }
+    [request setFormPostValue:[self getListType:GlobalDataCity] forKey:@"neighborhoodid"];
+    [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.uid forKey:@"cityid"];
+    [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.stateName forKey:@"statename"];
+    
     
     [request setFormPostValue:openFlag forKey:@"opennowflag"];
     [request setFormPostValue:savedFlag forKey:@"savedflag"];
@@ -531,6 +524,7 @@ typedef enum _TFSelect
     NSLog(@"occasionidlist: %@", [self getListType:GlobalDataOccasion]);
     NSLog(@"priceidlist: %@", [self getListType:GlobalDataPrice]);
     NSLog(@"themeidlist: %@", [self getListType:GlobalDataTheme]);
+    NSLog(@"neighborhoodid: %@", [self getListType:GlobalDataCity]);
     
     NSLog(@"openflag: %@", openFlag);
     NSLog(@"savedflag: %@", savedFlag);
@@ -560,14 +554,11 @@ typedef enum _TFSelect
     else
     {
         viewFilterExtends.hidden = YES;
-        [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 0, tbvResult.frame.size.width, tbvResult.contentSize.height)];
+        [self resizeDetailText];
         scrollViewMain.contentSize = CGSizeMake(320, tbvResult.contentSize.height + DELTAHEIGHT);
-        viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
-        
+        //viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
     }
 }
-
-
 -(void)resizeSegmentsToFitTitles:(UISegmentedControl*)segCtrl {
     CGFloat totalWidths = 0;    // total of all label text widths
     NSUInteger nSegments = segCtrl.subviews.count;
@@ -1022,8 +1013,6 @@ typedef enum _TFSelect
                 if (isRate) {
                     ratesObject = nil;
                 }
-                else
-                    neighberhoodObject = nil;
             }
             else
             {
@@ -1033,13 +1022,6 @@ typedef enum _TFSelect
                         ratesObject.selected = NO;
                     }
                     ratesObject = obj;
-                }
-                else
-                {
-                    if (neighberhoodObject != nil) {
-                        neighberhoodObject.selected = NO;
-                    }
-                    neighberhoodObject = obj;
                 }
             }
             
@@ -1471,7 +1453,7 @@ typedef enum _TFSelect
     titleView.frame = CGRectMake(titleView.frame.origin.x, titleView.frame.origin.y, titleView.frame.size.width, labelHeight.height + 48);
     detailLabel.frame = CGRectMake(detailLabel.frame.origin.x, detailLabel.frame.origin.y, detailLabel.frame.size.width, labelHeight.height + 10);
     
-    [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 136 - labelHeight.height + 10 , tbvResult.frame.size.width, tbvResult.contentSize.height)];
+    [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, labelHeight.height + 110 , tbvResult.frame.size.width, tbvResult.contentSize.height)];
     viewMain.frame = CGRectMake(viewMain.frame.origin.x, -53, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
 }
 
@@ -1620,8 +1602,8 @@ typedef enum _TFSelect
             break;
         case 1:
             arrayFilterBoxData = [[NSMutableArray alloc]initWithArray:arrayCity];
-            isCuisine = NO;
-            isRate = NO;
+            isCuisine = YES;
+            //isRate = NO;
             break;
         case 2:
             arrayFilterBoxData = [[NSMutableArray alloc]initWithArray:arrayRate];
