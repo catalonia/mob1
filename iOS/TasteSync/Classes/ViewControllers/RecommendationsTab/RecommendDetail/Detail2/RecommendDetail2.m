@@ -793,6 +793,7 @@ arrDataFilter=_arrDataFilter;;
         {
             if (str != nil) {
                 //[self gotoDetailNotification:[glNotif gotoNextNotification] atIndex:glNotif.index];
+                [self.global.recomendationDelegate reloadRecomendation];
                 [self.navigationController popViewControllerAnimated:NO];
                 [self.delegate gotoNextNotify:[glNotif gotoNextNotification] index:glNotif.index];
             }

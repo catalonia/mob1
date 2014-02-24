@@ -103,7 +103,16 @@
     [super viewDidAppear:animated];
     aNumberOfRow = [CommonHelpers appDelegate].numberPageRecomendation;
     NSLog(@"aNumberOfRow: %d",aNumberOfRow);
-    
+    if ([CommonHelpers appDelegate].reloadNotifycation) {
+        [CommonHelpers appDelegate].reloadNotifycation = NO;
+        AppDelegate* deleate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        glNotif.pageLoad = _arrData.count/50;
+        deleate.arrayNotification = [[NSMutableArray alloc]init];
+        [glNotif reloadDownDataToNotifycation:_arrData.count View:self.view];
+        aNumberOfRow = [CommonHelpers appDelegate].numberPageRecomendation;
+        NSLog(@"aNumberOfRow: %d",aNumberOfRow);
+        //[tbvUnread reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -565,7 +574,7 @@
 -(void)reloadRecomendation
 {
     [CommonHelpers appDelegate].reloadNotifycation = YES;
-
+    //[glNotif reloadDownDataToNotifycation:[CommonHelpers appDelegate].arrayNotification View:self.view Type:RecommendationNotification];
     NSLog(@"abcieruodfiasdfhioasydfio");
 }
 

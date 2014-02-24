@@ -33,6 +33,6 @@ typedef enum
 -(void)requestData:(UIView*)view Type:(RecommendationType)type;
 -(void)reloadUpData:(int)pageReload view:(UIView*)view Type:(RecommendationType)type;
 -(void)reloadDownData:(UIView*)view Type:(RecommendationType)type;
--(void)reloadDownDataToNotifycation:(int)countNumber View:(UIView*)view Type:(RecommendationType)type;
+-(void)reloadDownDataToNotifycation:(int)countNumber View:(UIView*)view;
 -(void)requestRestaurantData:(UIView*)view;
 @end

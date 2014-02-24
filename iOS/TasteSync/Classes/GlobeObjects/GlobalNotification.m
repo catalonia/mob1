@@ -154,33 +154,22 @@
 //    request.delegate = self;
 //    [request startFormRequest];
 }
--(void)startReload:(RecommendationType)type
+-(void)startReload:(UIView*)view
 {
-    
-    if(type == RecommendationNotification)
-    {
         NSString* link = [NSString stringWithFormat:@"recolist?userid=%@&paginationid=%d",[UserDefault userDefault].userID, self.pageLoad];
         CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:4 WithView:_view];
         request.delegate = self;
         [request startFormRequest];
-    }
-    else
-    {
-        CRequest* request = [[CRequest alloc]initWithURL:@"shufflerecorequests" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:9 WithView:_view];
-        [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
-        [request setFormPostValue:[NSString stringWithFormat:@"%d",self.pageLoad] forKey:@"paginationid"];
-        request.delegate = self;
-        [request startFormRequest];
-    }
+    
     
     
 }
 
--(void)reloadDownDataToNotifycation:(int)countNumber View:(UIView*)view Type:(RecommendationType)type;
+-(void)reloadDownDataToNotifycation:(int)countNumber View:(UIView*)view;
 {
     _numberData = countNumber;
     _view = view;
-    [self startReload:type];
+    [self startReload:view];
     
 }
 - (NotificationObj *) gotoNextNotification
@@ -618,7 +607,7 @@
         
         if (delegate.arrayNotification.count < _numberData) {
             self.pageLoad++;
-            [self startReload:RecommendationNotification];
+            [self startReload:_view];
         }
         else
             [self.delegate getDataSuccess:RecommendationNotification];
@@ -858,7 +847,7 @@
         
         if (delegate.arrayShuffle.count < _numberData) {
             self.pageLoad++;
-            [self startReload:RecommendationShuffle];
+            [self startReload:_view];
         }
         else
             [self.delegate getDataSuccess:RecommendationShuffle];

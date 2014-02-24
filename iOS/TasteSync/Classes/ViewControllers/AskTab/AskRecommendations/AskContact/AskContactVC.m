@@ -30,6 +30,8 @@
     NSMutableArray* arrayTasteSyncID;
     int numberMessage, numberEmail;
     BOOL isRestaurant;
+    BOOL isRestaurantDetail;
+    RestaurantObj* _restaurantObj;
 }
 @end
 
@@ -58,6 +60,15 @@
     if (self) {
         _askString = askString;
         isRestaurant = YES;
+    }
+    return self;
+}
+-(id)initWithRestaurantDetail:(RestaurantObj*)restaurantObj
+{
+    self = [super initWithNibName:@"AskContactVC" bundle:nil];
+    if (self) {
+        _restaurantObj = restaurantObj;
+        isRestaurantDetail = YES;
     }
     return self;
 }
@@ -521,6 +532,17 @@
 -(void)sendEmailWithAddress:(ContactObject*)obj ForIndex:(int)index
 {
     NSString* htmlParse = [NSString stringWithFormat:@"%@ Which restaurant would you recommend?<br>%@<br>", _askString, @"Sent via Tastesync"];
+    if (isRestaurantDetail) {
+        htmlParse = @"Hey, Check out this restaurant I found on TasteSync";
+    }
+    
+//    <Screenshot>
+//    
+//    
+//    "Sent via TasteSync" <Logo>
+//    Download TasteSync from App Store
+    
+    
     NSMutableString *emailBody = [[NSMutableString alloc] initWithString:@""];
     [emailBody appendString:htmlParse];
     UIImage *emailImage = [CommonHelpers getImageFromName:@"icon_72.png"];

@@ -11,6 +11,7 @@
 #import "JSONKit.h"
 #import <MessageUI/MFMailComposeViewController.h>
 #import <MessageUI/MessageUI.h>
+#import "RestaurantObj.h"
 @protocol AskContactDelegate<NSObject>
 -(void)sendRequestData;
 @end
@@ -19,5 +20,6 @@
 @property(nonatomic,assign) id<AskContactDelegate> delegate;
 -(id)initWithAsk:(NSString*)askString WithRecoID:(NSString*)recoID;
 -(id)initWithRestaurant:(NSString*)askString;
+-(id)initWithRestaurantDetail:(RestaurantObj*)restaurantObj;
 
 @end
