@@ -11,6 +11,7 @@
 #import "RestaurantObj.h"
 #import "CRequest.h"
 #import "JSONKit.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface RestaurantDetailVC : UIViewController<RequestDelegate>
 

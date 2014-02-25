@@ -20,6 +20,6 @@
 @property(nonatomic,assign) id<AskContactDelegate> delegate;
 -(id)initWithAsk:(NSString*)askString WithRecoID:(NSString*)recoID;
 -(id)initWithRestaurant:(NSString*)askString;
--(id)initWithRestaurantDetail:(RestaurantObj*)restaurantObj;
+-(id)initWithRestaurantDetail:(RestaurantObj*)restaurantObj Image:(UIImage*)image;
 
 @end

@@ -15,6 +15,8 @@
 #import "Base64.h"
 #import "CommonHelpers.h"
 
+#define APPSTORE_LINK @"https://itunes.apple.com/us/app/tastesync-discover-restaurants/id789625304?ls=1&mt=8"
+
 @interface AskContactVC ()<AskContactCellDelegate>
 {
     NSMutableArray* _arrayData;
@@ -34,6 +36,7 @@
     BOOL isRestaurant;
     BOOL isRestaurantDetail;
     RestaurantObj* _restaurantObj;
+    UIImage* _imageScreenshot;
 }
 @end
 
@@ -65,10 +68,11 @@
     }
     return self;
 }
--(id)initWithRestaurantDetail:(RestaurantObj*)restaurantObj
+-(id)initWithRestaurantDetail:(RestaurantObj*)restaurantObj Image:(UIImage*)image
 {
     self = [super initWithNibName:@"AskContactVC" bundle:nil];
     if (self) {
+        _imageScreenshot = image;
         _askString = @"";
         _restaurantObj = restaurantObj;
         isRestaurantDetail = YES;
@@ -486,12 +490,15 @@
     
     if (obj.email.count > 0) {
         if (obj.tasteSyncID) {
-            if (isRestaurant) {
+            if (isRestaurant || isRestaurantDetail) {
                 CRequest* request = [[CRequest alloc]initWithURL:@"sendMessageToUser" RQType:RequestTypePost RQData:RequestDataUser RQCategory:ApplicationForm withKey:3 WithView:self.view];
                 request.delegate = self;
                 [request setFormPostValue:[UserDefault userDefault].userID forKey:@"senderID"];
                 [request setFormPostValue:obj.tasteSyncID forKey:@"recipientID"];
-                [request setFormPostValue:_askString forKey:@"content"];
+                if (isRestaurantDetail)
+                    [request setFormPostValue:[NSString stringWithFormat:@"Hey, Check out this restaurant I found on TasteSync: %@",_restaurantObj.name] forKey:@"content"];
+                else
+                    [request setFormPostValue:_askString forKey:@"content"];
                 [request startFormRequest];
                 obj.isSendTasteSync = YES;
                 [_tableView reloadData];
@@ -544,23 +551,31 @@
 {
     NSString* htmlParse = [NSString stringWithFormat:@"%@ Which restaurant would you recommend?<br>%@<br>", _askString, @"Sent via Tastesync"];
     if (isRestaurantDetail) {
-        htmlParse = @"Hey, Check out this restaurant I found on TasteSync";
+        htmlParse = @"Hey, Check out this restaurant I found on TasteSync<br>";
     }
-    
-//    <Screenshot>
-//    
-//    
-//    "Sent via TasteSync" <Logo>
-//    Download TasteSync from App Store
-    
-    
     NSMutableString *emailBody = [[NSMutableString alloc] initWithString:@""];
     [emailBody appendString:htmlParse];
-    UIImage *emailImage = [CommonHelpers getImageFromName:@"icon_72.png"];
+    UIImage *emailImage;
+    if (isRestaurantDetail)
+        emailImage = _imageScreenshot;
+    else
+        emailImage = [CommonHelpers getImageFromName:@"icon_72.png"];
     //Convert the image into data
     NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(emailImage)];
     NSString *base64String = [imageData base64EncodedString];
     [emailBody appendString:[NSString stringWithFormat:@"<p><b><img src='data:image/png;base64,%@'></b></p>",base64String]];
+    
+    if (isRestaurantDetail) {
+        [emailBody appendString:@"<br>Sent via TasteSync<br>"];
+        UIImage *emailImage2 = [CommonHelpers getImageFromName:@"icon_72.png"];
+        //Convert the image into data
+        NSData *imageData2 = [NSData dataWithData:UIImagePNGRepresentation(emailImage2)];
+        NSString *base64String2 = [imageData2 base64EncodedString];
+        [emailBody appendString:[NSString stringWithFormat:@"<p><b><img src='data:image/png;base64,%@'></b></p>",base64String2]];
+        
+        [emailBody appendString:[NSString stringWithFormat:@"<p><a href='%@'>Download TasteSync from App Store</p>",APPSTORE_LINK]];
+    }
+    
     MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
     controller.mailComposeDelegate = self;
     [controller setSubject:@"Need a restaurant recommendation"];
@@ -572,7 +587,15 @@
 -(void)sendMessageWithPhonenumber:(ContactObject*)obj ForIndex:(int)index
 {
     NSArray *recipents = [[NSArray alloc]initWithObjects:[obj.phone objectAtIndex:index], nil];
-    NSString *message = _askString;
+    NSString *message;
+    
+    if (isRestaurantDetail) {
+        message = [NSString stringWithFormat:@"Hey, Check out this restaurant I found on TasteSync: %@. Download TasteSync from App Store: %@", _restaurantObj.name, APPSTORE_LINK];
+    }
+    else
+    {
+        message = _askString;
+    }
     
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     messageController.messageComposeDelegate = self;
