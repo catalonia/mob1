@@ -878,7 +878,15 @@
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    AskRecommendationsVC *vc = [[AskRecommendationsVC alloc] initWithArrayData:arrDataAsk atLocation:region Reco_RequestID:recommendationText];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self performSelector:@selector(gotoRestaurant) withObject:nil afterDelay:1.0];
+    
+//    AskRecommendationsVC *vc = [[AskRecommendationsVC alloc] initWithArrayData:arrDataAsk atLocation:region Reco_RequestID:recommendationText];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
+
+-(void)gotoRestaurant
+{
+    [[[CommonHelpers appDelegate] tabbarBaseVC] actionRestaurantViaAskTab:recommendationText];
+}
+
 @end

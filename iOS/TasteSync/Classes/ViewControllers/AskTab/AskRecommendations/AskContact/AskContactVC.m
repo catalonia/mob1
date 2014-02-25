@@ -81,7 +81,7 @@
 }
 -(void)viewDidAppear:(BOOL)animated
 {
-    if (isRestaurant || isRestaurantDetail) {
+    if (isRestaurant) {
         [self hideTabBar:self.tabBarController];
     }
     NSDictionary *askhomeParams =
@@ -720,13 +720,12 @@
     
     if (isRestaurantDetail)
     {
-        [self showTabBar:self.tabBarController];
         [self.navigationController popViewControllerAnimated:YES];
         
     }
-    if (isRestaurant) {
+    else if (isRestaurant) {
         [self showTabBar:self.tabBarController];
-        [self.navigationController popToRootViewControllerAnimated:NO];
+        [self.navigationController popViewControllerAnimated:NO];
     }
     else
     {

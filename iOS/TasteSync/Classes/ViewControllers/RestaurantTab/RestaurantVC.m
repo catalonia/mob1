@@ -361,7 +361,7 @@ typedef enum _TFSelect
     return ret;
 }
 
--(void)addType:(NSMutableArray*)array ListID:(NSString*)list
+-(void)addType:(NSMutableArray*)array ListID:(NSString*)list Type:(GlobalDataType)type
 {
     NSArray* arrayList = [list componentsSeparatedByString:@","];
     
@@ -370,7 +370,7 @@ typedef enum _TFSelect
              for (AskObject* global in array) {
                  NSString* id1 = [NSString stringWithFormat:@"%@",global.object.uid];
                  NSString* id2 = [NSString stringWithFormat:@"%@",string];
-                 if ([id1 isEqualToString:id2]) {
+                 if ([id1 isEqualToString:id2] && global.object.type == type) {
                      global.selected = YES;
                      
                  }
@@ -1324,14 +1324,14 @@ typedef enum _TFSelect
         
         
         //[self addType:self.arrDataRegion ListID:[dicDetail objectForKey:@"cityid"]];
-        [self addType:arrayCuisine ListID:[dicDetail objectForKey:@"cuisinetier1idlist"]];
-        [self addType:arrayCuisine ListID:[dicDetail objectForKey:@"cuisinetier2idlist"]];
-        [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"occasionidlist"]];
-        [self addType:arrayPrice ListID:[dicDetail objectForKey:@"priceidlist"]];
-        [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"themeidlist"]];
-        [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"typeofrestaurantidList"]];
-        [self addType:arrayWhoWithYou ListID:[dicDetail objectForKey:@"whoareyouwithidlist"]];
-        [self addType:arrayCity ListID:[dicDetail objectForKey:@"neighborhoodid"]];
+        [self addType:arrayCuisine ListID:[dicDetail objectForKey:@"cuisinetier1idlist"] Type:GlobalDataCuisine_1];
+        [self addType:arrayCuisine ListID:[dicDetail objectForKey:@"cuisinetier2idlist"] Type:GlobalDataCuisine_2];
+        [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"occasionidlist"] Type:GlobalDataOccasion];
+        [self addType:arrayPrice ListID:[dicDetail objectForKey:@"priceidlist"] Type:GlobalDataPrice];
+        [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"themeidlist"] Type:GlobalDataTheme];
+        [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"typeofrestaurantidList"] Type:GlobalDataTypeOfRestaurant];
+        [self addType:arrayWhoWithYou ListID:[dicDetail objectForKey:@"whoareyouwithidlist"] Type:GlobalDataWhoAreUWith];
+        [self addType:arrayCity ListID:[dicDetail objectForKey:@"neighborhoodid"] Type:GlobalDataCity];
         UIButton* button = [[UIButton alloc]init];
         button.tag = 1;
         [self doneAction:button];
@@ -1345,6 +1345,9 @@ typedef enum _TFSelect
         
         
         [tbvResult reloadData];
+        
+        
+        
         tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
         scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
         viewMain.frame = CGRectMake(viewMain.frame.origin.x, viewMain.frame.origin.y, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
