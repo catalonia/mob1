@@ -56,10 +56,27 @@ restaurantObj=_restaurantObj;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    NSDictionary *params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     @""           , @"RestaurantID",
+     nil];
+    [CommonHelpers implementFlurry:params forKey:@"RestaurantPhoto" isBegin:YES];
+    
     NSString* photo_link = [NSString stringWithFormat:@"photos?userid=%@&restaurantid=%@",[UserDefault userDefault].userID, self.restaurantObj.uid];
     CRequest* photo_request = [[CRequest alloc]initWithURL:photo_link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:2 WithView:self.view];
     photo_request.delegate = self;
     [photo_request startFormRequest];
+}
+
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    NSDictionary *params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     _restaurantObj.uid           , @"RestaurantID",
+     nil];
+    [CommonHelpers implementFlurry:params forKey:@"RestaurantPhoto" isBegin:YES];
 }
 
 - (void)viewDidLoad
@@ -156,8 +173,6 @@ restaurantObj=_restaurantObj;
     
     if (cell==nil) {
         cell =(ResPhotoCell *) [[[NSBundle mainBundle ] loadNibNamed:@"ResPhotoCell" owner:self options:nil] objectAtIndex:0];
-        
-        
     }
     
     
@@ -186,6 +201,7 @@ restaurantObj=_restaurantObj;
 {
     
     PhotoVC *vc = [[PhotoVC alloc] initWithArrayPhotos:self.arrData AtIndex:anTag];
+    vc.restaurantObj = self.restaurantObj;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

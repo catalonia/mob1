@@ -213,6 +213,10 @@
 {
     //[self sendRequest];
 }
+-(void)numberClick:(int)countnumberEmail SMS:(int)countnumberSMS TSNumber:(int)countnumberTS
+{
+    
+}
 -(void)sendRequest
 {
     NSString* facebookID = @"";

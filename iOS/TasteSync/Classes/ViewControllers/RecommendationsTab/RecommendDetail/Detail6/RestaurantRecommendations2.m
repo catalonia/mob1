@@ -16,6 +16,7 @@
 @interface RestaurantRecommendations2 ()<UITableViewDelegate, UITableViewDataSource,RestaurantRecommendationDelegate>
 {
     __weak IBOutlet UILabel* askQuestion;
+    NSString* actionClick;
 }
 @end
 
@@ -53,6 +54,13 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    NSDictionary *recomentdationhomeParams =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     @""          , @"recoNotificationType",
+     @""          ,@"idBase",
+     @""          , @"Click",
+     nil];
+    [CommonHelpers implementFlurry:recomentdationhomeParams forKey:@"RecommendationsDetail" isBegin:YES];
     [self initData];
     NSString* link = [NSString stringWithFormat:@"recos4you?userid=%@&recorequestid=%@",[UserDefault userDefault].userID, self.notificationObj.linkId];
     CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:1 WithView:self.view];
@@ -64,10 +72,23 @@
 {
     [tbv reloadData];
 }
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    NSDictionary *recomentdationhomeParams =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     [NSString stringWithFormat:@"%d", _notificationObj.type]          , @"recoNotificationType",
+     _notificationObj.linkId          ,@"idBase",
+     actionClick          , @"Click",
+     nil];
+    [CommonHelpers implementFlurry:recomentdationhomeParams forKey:@"RecommendationsDetail" isBegin:YES];
+}
 #pragma mark - IBAction's Define
 
 - (IBAction)actionBack:(id)sender
 {
+    actionClick = @"Back";
     [self.global.recomendationDelegate reloadRecomendation];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -220,6 +241,7 @@
 }
 -(void)pressAtIndex:(int)index Reco:(ReplyRecomendationObj *)replyObject
 {
+    actionClick = @"Recommendation Rext Detail";
     ResRecommendDetailVC* detail = [[ResRecommendDetailVC alloc]initWithNibName:@"ResRecommendDetailVC" bundle:nil];
     detail.replyRecomendationObj = replyObject;
     
@@ -241,5 +263,9 @@
         detail.fromRecomendation = YES;
     }
     [self.navigationController pushViewController:detail animated:YES];
+}
+-(void)pressRestaurant
+{
+    actionClick = @"Restaurant Name";
 }
 @end

@@ -12,6 +12,7 @@
 
 @protocol RestaurantRecommendationDelegate <NSObject>
     -(void)pressAtIndex:(int)index Reco:(ReplyRecomendationObj* )replyObject;
+    -(void)pressRestaurant;
 
 @end
 @interface RestaurantRecommendationCell : UITableViewCell

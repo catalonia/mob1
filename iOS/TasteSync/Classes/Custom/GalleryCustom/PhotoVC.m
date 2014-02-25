@@ -37,6 +37,7 @@
     IBOutlet UILabel *lblImg;
     IBOutlet UIView *viewShare;
     BOOL isShowShare;
+    int numberImageSeen;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
@@ -74,6 +75,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    numberImageSeen = 1;
     if(/*IS_IPAD*/ FALSE)
     {
         size = 6;
@@ -110,6 +112,29 @@
     }
 
 }
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSDictionary *params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     @""           , @"RestaurantID",
+     @""           , @"NumberPhotoSeen",
+     nil];
+    [CommonHelpers implementFlurry:params forKey:@"RestaurantPhotoDetail" isBegin:YES];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    NSDictionary *params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     _restaurantObj.uid   , @"RestaurantID",
+     [NSString stringWithFormat:@"%d",numberImageSeen]                  , @"NumberPhotoSeen",
+     nil];
+    [CommonHelpers implementFlurry:params forKey:@"RestaurantPhotoDetail" isBegin:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -184,6 +209,7 @@
 
 - (void)handleSelectedIndex:(NSUInteger)index
 {
+    numberImageSeen++;
     if (arrayObjects != nil && arrayObjects.count != 0) {
         TSPhotoRestaurantObj *photoObj = [arrayObjects objectAtIndex:index];
         

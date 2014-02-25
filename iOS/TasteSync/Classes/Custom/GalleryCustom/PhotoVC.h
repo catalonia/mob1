@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RestaurantObj.h"
 @class CTScrollView;
 @class CTImageViewDetail;
 @class CTZoomView;
@@ -20,6 +21,7 @@
 //Main
 @property (nonatomic, strong) IBOutlet CTScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet CTZoomView *zoomView;
+@property (nonatomic, strong) RestaurantObj *restaurantObj;
 
 
 -(id)initWithArrayPhotos:(NSMutableArray*)arrayPhotos AtIndex:(NSUInteger)index;

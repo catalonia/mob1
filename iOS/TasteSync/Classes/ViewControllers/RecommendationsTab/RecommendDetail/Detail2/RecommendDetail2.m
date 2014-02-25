@@ -43,6 +43,7 @@
     NSString* requestText;
     BOOL isShuffle;
     CGFloat heightText;
+    NSString* actionClick;
 }
 
 
@@ -207,19 +208,17 @@ arrDataFilter=_arrDataFilter;;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    NSDictionary *recomentdationhomeParams =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     @""          , @"recoNotificationType",
+     @""          ,@"idBase",
+     @""          , @"Click",
+     nil];
+    [CommonHelpers implementFlurry:recomentdationhomeParams forKey:@"RecommendationsDetail" isBegin:YES];
+    
     if (_notificationObj.type == NotificationRecorequestNeeded) {
         if (isShuffle) {
             //Add flury
-            
-            NSDictionary *recomentdationhomeParams =
-            [NSDictionary dictionaryWithObjectsAndKeys:
-             @""          , @"maxPaginationId",
-             @""          ,@"unreadCounter",
-             @""          , @"recoNotificationType",
-             @""          , @"idBase",
-             @""          , @"RecommendationPosition",
-             nil];
-            [CommonHelpers implementFlurry:recomentdationhomeParams forKey:@"RecommendationsInbox" isBegin:YES];
         }
         else{
             NSString* link = [NSString stringWithFormat:@"recorequest?userid=%@&recorequestid=%@", [UserDefault userDefault].userID, self.notificationObj.linkId];
@@ -242,6 +241,18 @@ arrDataFilter=_arrDataFilter;;
     }
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    NSDictionary *recomentdationhomeParams =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+    [NSString stringWithFormat:@"%d",_notificationObj.type]          , @"recoNotificationType",
+    [NSString stringWithFormat:@"%@",_notificationObj.linkId]         ,@"idBase",
+     actionClick          , @"Click",
+     nil];
+    [CommonHelpers implementFlurry:recomentdationhomeParams forKey:@"RecommendationsDetail" isBegin:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -259,6 +270,7 @@ arrDataFilter=_arrDataFilter;;
 }
 - (IBAction)actionBack:(id)sender
 {
+    actionClick = @"Back";
     [self.global.recomendationDelegate reloadRecomendation];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -283,6 +295,7 @@ arrDataFilter=_arrDataFilter;;
 - (IBAction)actionShuffle:(id)sender
 {
     tvMsg.text = @"";
+    actionClick = @"Shuffle";
     [self hideKeyBoard];
     [CommonHelpers appDelegate].currentShuffle++;
     
@@ -306,7 +319,7 @@ arrDataFilter=_arrDataFilter;;
 - (IBAction)actionSend:(id)sender
 {
     [self hideKeyBoard];
-    
+    actionClick = @"Send Reply";
     NSString* listRestaurant = @"";
     for (RestaurantObj* obj in self.arrData) {
         if (obj.uid.length != 0) {
@@ -419,6 +432,7 @@ arrDataFilter=_arrDataFilter;;
 
 -(IBAction)actionCantHelpPress
 {
+
     CRequest* request = [[CRequest alloc]initWithURL:@"canthelp" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:4 WithView:self.view];
     request.delegate = self;
     [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
@@ -840,6 +854,7 @@ arrDataFilter=_arrDataFilter;;
         }
         else
         {
+            actionClick = @"Can't Help";
             [self.global.recomendationDelegate reloadRecomendation];
             [self.navigationController popViewControllerAnimated:YES];
         }

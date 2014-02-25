@@ -197,6 +197,7 @@
     UIButton* button = (UIButton*)sender;
     NSLog(@"%d",button.tag);
     if (self.haveRestaurant && button.tag == 0) {
+        [self.delegate pressRestaurant];
          [[[CommonHelpers appDelegate] tabbarBaseVC] actionSelectRestaurant:_restaurantObj selectedIndex:1];
     }
     else

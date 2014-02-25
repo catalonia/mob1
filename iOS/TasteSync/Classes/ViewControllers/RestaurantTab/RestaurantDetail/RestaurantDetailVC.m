@@ -22,7 +22,7 @@
 #import "PhotoVC.h"
 #import "AskContactVC.h"
 
-@interface RestaurantDetailVC ()<UIScrollViewDelegate,ResShareViewDelegate,UIAlertViewDelegate>
+@interface RestaurantDetailVC ()<UIScrollViewDelegate,ResShareViewDelegate,UIAlertViewDelegate,AskContactDelegate>
 {
     __weak IBOutlet UIScrollView *scrollViewPhotos,*scrollViewMain;
     __weak IBOutlet UIView *view1,*view2,*view3,*view4,*viewImage, *viewDeal;
@@ -45,6 +45,10 @@
     int _tagImage;
     CGFloat *offset;
     BOOL reloadThisPage;
+    
+    NSString* actionClick;
+    int numberEmailClick, numberSMSClick, numberTSClick;
+    
 }
 
 - (IBAction)actionQuestion:(id)sender;
@@ -162,6 +166,18 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    NSDictionary *params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     @""            , @"restaurant_id",
+     @""            , @"Click",
+     @""            , @"# of Email",
+     @""            , @"# of SMS",
+     @""            , @"# of TS message",
+     nil];
+    [CommonHelpers implementFlurry:params forKey:@"RestaurantDetail" isBegin:YES];
+    
+    
     if (isReload == NO) {
         [self hideTabBar:self.tabBarController];
         isReload = YES;
@@ -177,11 +193,26 @@
     
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    NSDictionary *params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     _restaurantObj.uid          , @"restaurant_id",
+     actionClick                 , @"Click",
+     numberEmailClick            , @"# of Email",
+     numberSMSClick              , @"# of SMS",
+     numberTSClick               , @"# of TS message",
+     nil];
+    [CommonHelpers implementFlurry:params forKey:@"RestaurantDetail" isBegin:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 # pragma mark - IBAction Define
 
@@ -229,6 +260,7 @@
 - (IBAction)actionSave:(id)sender
 {
     debug(@"actionSave");
+    actionClick = [actionClick stringByAppendingString:@",TryForLater"];
     if ([UserDefault userDefault].loginStatus == NotLogin) {
         [[CommonHelpers appDelegate] showLoginDialog];
     }
@@ -256,6 +288,7 @@
 - (IBAction)actionMore:(id)sender
 {
     debug(@"actionMore");
+    actionClick = [actionClick stringByAppendingString:@",Review and Tips"];
     ResRecommendVC *vc = [[ResRecommendVC alloc] initWithNibName:@"ResRecommendVC" bundle:nil];
     vc.resRecommendObj = resRecommendObj;
     vc.restaurantObj = _restaurantObj;
@@ -267,13 +300,15 @@
 
 - (IBAction)actionMenu:(id)sender
 {
-        debug(@"actionMenu");
-        ResMenuVC *vc = [[ResMenuVC alloc] initWithRestaurantObj:_restaurantObj];
-        [self.navigationController pushViewController:vc animated:YES];
+    debug(@"actionMenu");
+    actionClick = [actionClick stringByAppendingString:@",Menu"];
+    ResMenuVC *vc = [[ResMenuVC alloc] initWithRestaurantObj:_restaurantObj];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)actionMoreInfo:(id)sender
 {
+    actionClick = [actionClick stringByAppendingString:@",More"];
     debug(@"actionMoreInfo");
     ResMoreInfoVC *vc = [[ResMoreInfoVC alloc] initWithRestaurantObj:self.restaurantObj];
     [self.navigationController pushViewController:vc animated:YES];
@@ -283,6 +318,7 @@
 
 - (IBAction)actionQuestion:(id)sender
 {
+    actionClick = [actionClick stringByAppendingString:@"Ask"];
     ResQuestionVC *vc = [[ResQuestionVC alloc] initWithRestaurantObj:self.restaurantObj];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -305,6 +341,7 @@
 
 - (IBAction)actionAddToMyFavorites:(id)sender
 {
+    actionClick = [actionClick stringByAppendingString:@",Favs"];
     if ([UserDefault userDefault].loginStatus != NotLogin) {
         
         NSString* saveFavFlag = @"";
@@ -330,6 +367,7 @@
 
 - (IBAction)actionLeaveATip:(id)sender
 {
+    actionClick = [actionClick stringByAppendingString:@",LeaveATip"];
     LeaveATipVC *vc = [[LeaveATipVC alloc] initWithRestaurantObj:_restaurantObj];
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -337,6 +375,7 @@
 
 - (IBAction)actionMorePhoto:(id)sender
 {
+    actionClick = [actionClick stringByAppendingString:@",Photo"];
     ResPhotoVC* restPhoto = [[ResPhotoVC alloc]initWithArrayPhoto:_restaurantObj];
     [self.navigationController pushViewController:restPhoto animated:YES];
 }
@@ -727,6 +766,18 @@
         _userBuzz.avatar = image;
         _avatarImageView.image = image;
     }
+}
+
+#pragma mark Sent Contact Delegate
+-(void)sendRequestData
+{
+    
+}
+-(void)numberClick:(int)countnumberEmail SMS:(int)countnumberSMS TSNumber:(int)countnumberTS
+{
+    numberEmailClick = countnumberEmail;
+    numberSMSClick = countnumberSMS;
+    numberTSClick = countnumberTS;
 }
 
 @end

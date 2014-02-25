@@ -37,6 +37,8 @@
     BOOL isRestaurantDetail;
     RestaurantObj* _restaurantObj;
     UIImage* _imageScreenshot;
+    
+    int countnumberEmail, countnumberSMS, countnumberTS;
 }
 @end
 
@@ -86,9 +88,9 @@
     }
     NSDictionary *askhomeParams =
     [NSDictionary dictionaryWithObjectsAndKeys:
-     [NSString stringWithFormat:@"%d",numberEmail]       , @"Email",
-     [NSString stringWithFormat:@"%d",numberMessage]       , @"Message",
-     [NSString stringWithFormat:@"%@",@""]  , @"TasteSyncID",
+    [NSString     stringWithFormat:@"%d",numberEmail]       , @"Email",
+    [NSString     stringWithFormat:@"%d",numberMessage]     , @"Message",
+    [NSString     stringWithFormat:@"%@",@""]               , @"TasteSyncID",
      nil];
     [CommonHelpers implementFlurry:askhomeParams forKey:@"Ask_Contact" isBegin:YES];
     
@@ -138,8 +140,6 @@
                 } else {
                     // access granted
                     [self getPersonOutOfAddressBook];
-                    
-                    
                 }
             });
         });
@@ -478,6 +478,7 @@
     
 }
 -(void)pressButtonAtIndex:(int)index forcell:(UITableViewCell *)cell{
+    countnumberTS++;
     AskContactCell *_cell = (AskContactCell*)cell;
     NSIndexPath* indexPath = [_tableView indexPathForCell:_cell];
     ContactObject* obj = [_arrayData objectAtIndex:indexPath.row];
@@ -601,6 +602,7 @@
 
 -(void)sendEmail:(ContactObject*)obj
 {
+    countnumberEmail++;
     if (obj.email.count == 1) {
         [self sendEmailWithAddress:obj ForIndex:0];
         _contactObj = obj;
@@ -618,6 +620,7 @@
 }
 -(void)sendMessage:(ContactObject*)obj
 {
+    countnumberSMS++;
     if (obj.phone.count == 1) {
         [self sendMessageWithPhonenumber:obj ForIndex:0];
         _contactObj = obj;
@@ -689,6 +692,8 @@
 }
 -(IBAction)actionBack
 {
+    [self.delegate numberClick:countnumberEmail SMS:countnumberSMS TSNumber:countnumberTS];
+    
     NSString* str = @"";
     int count = 0;
     for (NSString* tastesyncID in arrayTasteSyncID) {

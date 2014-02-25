@@ -32,7 +32,7 @@
 
     GlobalNotification *glNotif ;
     NotificationObj *currentNotif;
-    
+    NSString* actionClick;
 
 }
 
@@ -107,6 +107,32 @@ arrDataRestaurant=_arrDataRestaurant;
     
 
 
+}
+
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSDictionary *recomentdationhomeParams =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     @""          , @"recoNotificationType",
+     @""          ,@"idBase",
+     @""          , @"Click",
+     nil];
+    [CommonHelpers implementFlurry:recomentdationhomeParams forKey:@"RecommendationsDetail" isBegin:YES];
+}
+
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    NSDictionary *recomentdationhomeParams =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     [NSString stringWithFormat:@"%d", _notificationObj.type]          , @"recoNotificationType",
+     _notificationObj.linkId          ,@"idBase",
+     actionClick          , @"Click",
+     nil];
+    [CommonHelpers implementFlurry:recomentdationhomeParams forKey:@"RecommendationsDetail" isBegin:YES];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -547,6 +573,9 @@ arrDataRestaurant=_arrDataRestaurant;
     NSIndexPath* index = [tbvResult indexPathForCell:cell];
     RestaurantObj* res = [_arrData objectAtIndex:index.row];
     NSLog(@"%d %d",index.row,liked);
+    
+    actionClick = @"Like";
+    
     CRequest* request = [[CRequest alloc]initWithURL:@"likesunlikes" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:3 WithView:self.view];
     [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
     [request setFormPostValue:res.uid forKey:@"restaurantid"];

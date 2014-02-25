@@ -14,6 +14,7 @@
 #import "RestaurantObj.h"
 @protocol AskContactDelegate<NSObject>
 -(void)sendRequestData;
+-(void)numberClick:(int)countnumberEmail SMS:(int)countnumberSMS TSNumber:(int)countnumberTS;
 @end
 @interface AskContactVC : UIViewController<UITableViewDataSource, UITableViewDelegate,RequestDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate,UIActionSheetDelegate,UITextFieldDelegate>
 
