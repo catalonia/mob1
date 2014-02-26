@@ -629,7 +629,6 @@ arrDataFilter=_arrDataFilter;;
 
 - (void) searchLocal:(NSString *)txt
 {
-    NSString *str = [NSString stringWithFormat:@"name MATCHES[cd] '%@.*'", [CommonHelpers trim:txt]];
     tbvFilter.hidden = YES;
     [self.arrDataFilter removeAllObjects];
     
@@ -648,26 +647,6 @@ arrDataFilter=_arrDataFilter;;
             [request startFormRequest];
             
             requestText = txt;
-        }
-    }
-    if (txt.length >= 1) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:str];
-        
-        NSArray *array = [self.arrDataRestaurant filteredArrayUsingPredicate:predicate];
-        if(array)
-        {
-            self.arrDataFilter = [NSMutableArray arrayWithArray:array];
-        }
-        
-        for (RestaurantObj *obj in _arrData) {
-            if ([_arrDataFilter containsObject:obj]) {
-                [self.arrDataFilter removeObject:obj];
-            }
-        }
-        
-        if (self.arrDataFilter.count>0) {
-            tbvFilter.hidden = NO;
-            [tbvFilter reloadData];
         }
     }
    
@@ -810,6 +789,11 @@ arrDataFilter=_arrDataFilter;;
             restaurantObj.isTipFlag                     =  [[dic objectForKey:@"userRestaurantTipFlag"]  isEqualToString:@"1"]?YES:NO;
             [_arrDataRestaurant addObject:restaurantObj];
         }
+        
+        self.arrDataFilter = [NSMutableArray arrayWithArray:self.arrDataRestaurant];
+        tbvFilter.hidden = NO;
+        [tbvFilter reloadData];
+        
     }
     if (key == 2) {
         NSDictionary* dic = [response objectFromJSONString];
