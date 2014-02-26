@@ -229,27 +229,25 @@
 - (IBAction)actionSave:(id)sender
 {
     debug(@"actionSave");
-    
-  
-        if ([UserDefault userDefault].loginStatus == NotLogin) {
-            [[CommonHelpers appDelegate] showLoginDialog];
-        }
+    if ([UserDefault userDefault].loginStatus == NotLogin) {
+        [[CommonHelpers appDelegate] showLoginDialog];
+    }
+    else
+    {
+        NSString* saveFlag = @"";
+        if (!_restaurantObj.isSaved)
+            saveFlag = @"1";
         else
-        {
-            NSString* saveFlag = @"";
-            if (!_restaurantObj.isSaved)
-                saveFlag = @"1";
-            else
-                saveFlag = @"0";
-            CRequest* request = [[CRequest alloc]initWithURL:@"save" RQType:RequestTypePost RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:3 WithView:self.view];
-            request.delegate = self;
-            [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
-            [request setFormPostValue:_restaurantObj.uid forKey:@"restaurantid"];
-            [request setFormPostValue:saveFlag forKey:@"userrestaurantsavedflag"];
-            [request startFormRequest];
-           
-
-        }
+            saveFlag = @"0";
+        CRequest* request = [[CRequest alloc]initWithURL:@"save" RQType:RequestTypePost RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:3 WithView:self.view];
+        request.delegate = self;
+        [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
+        [request setFormPostValue:_restaurantObj.uid forKey:@"restaurantid"];
+        [request setFormPostValue:saveFlag forKey:@"userrestaurantsavedflag"];
+        [request startFormRequest];
+        
+        
+    }
 
     
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13A476u" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -43,11 +43,17 @@
                             <action selector="pressButton:" destination="hYw-8C-8Jw" eventType="touchUpInside" id="VIT-22-x57"/>
                         </connections>
                     </button>
+                    <view contentMode="scaleToFill" id="r6r-1T-VKg">
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="_view" destination="r6r-1T-VKg" id="dCZ-Gf-jkh"/>
                 <outlet property="buttonleft" destination="MiK-sS-QgU" id="xLK-wz-4oJ"/>
                 <outlet property="buttonright" destination="wl4-sd-2a9" id="3tL-Pv-ea7"/>
                 <outlet property="name" destination="kKe-5c-Fub" id="a5i-lc-ErA"/>

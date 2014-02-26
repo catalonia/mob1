@@ -166,7 +166,6 @@
     ABAddressBookCreateWithOptions(NULL, &error);
     if (addressBook != nil)
     {
-        NSLog(@"Succesful.");
         
         NSArray *allContacts = (__bridge_transfer NSArray
                                 *)ABAddressBookCopyArrayOfAllPeople(addressBook);
@@ -194,7 +193,6 @@
             }
             
             person.name = fullName;
-            NSLog(@"name = %@ ", fullName);
             //email
             ABMultiValueRef emails = ABRecordCopyValue(contactPerson,
                                                        kABPersonEmailProperty);
@@ -204,7 +202,6 @@
             {
                 NSString *email = (__bridge_transfer NSString
                                    *)ABMultiValueCopyValueAtIndex(emails, j);
-                NSLog(@"email = %@ ", email);
                 if (j == 0)
                 {
                     [person.email addObject:email];
@@ -221,7 +218,6 @@
                                    *)ABMultiValueCopyValueAtIndex(phones, j);
                 NSString* mobileLabel = (__bridge_transfer NSString*)ABMultiValueCopyLabelAtIndex(phones, j);
                 if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel] || [mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel] || [mobileLabel isEqualToString:(NSString*)kABPersonPhoneMainLabel]) {
-                    NSLog(@"phone = %@ ", phone);
                     [person.phone addObject:phone];
                 }
             }
@@ -252,7 +248,6 @@
             }
         }
     }
-    NSLog(@"%@, %@",searchText, _searchText.text);
     [_tableView reloadData];
     return YES;
 }
@@ -761,7 +756,6 @@
                 [view setFrame:CGRectMake(view.frame.origin.x, [UIScreen mainScreen].bounds.size.height - 49.0f, view.frame.size.width, view.frame.size.height)];
             }
             else {
-                NSLog(@"view.frame.size.height-49.f: %f", view.frame.size.height);
                 [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, [UIScreen mainScreen].bounds.size.height-49.f)];
             }
         }
@@ -778,7 +772,6 @@
                 [view setFrame:CGRectMake(view.frame.origin.x, [UIScreen mainScreen].bounds.size.height, view.frame.size.width, view.frame.size.height)];
             }
             else {
-                NSLog(@"view.frame.size.height-49.f: %f", view.frame.size.height);
                 [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, [UIScreen mainScreen].bounds.size.height)];
             }
         }

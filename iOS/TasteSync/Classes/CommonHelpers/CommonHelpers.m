@@ -457,16 +457,29 @@ void debug(NSString *format, ...)
 }
 
 
-+(NSString*)getFilterString:(NSString*)cityid cuisinetier1ID:(NSString*)cuisinetier1idlist  cuisinetier2ID:(NSString*)cuisinetier2idlist neighborhoodid:(NSString*)neighborhoodid occasionidlist:(NSString*)occasionidlist priceidlist:(NSString*)priceidlist themeidlist:(NSString*)themeidlist typeofrestaurantidList:(NSString*)typeofrestaurantidList whoareyouwithidlist:(NSString*)whoareyouwithidlist openNow:(NSString*)openNowFlag FavedFlag:(NSString*)favflag SavedFlag:(NSString*)savedFlag ChainFlag:(NSString*)chainFlag
++(NSString*)getFilterString:(NSString*)cityid cuisinetier1ID:(NSString*)cuisinetier1idlist  cuisinetier2ID:(NSString*)cuisinetier2idlist neighborhoodid:(NSString*)neighborhoodid occasionidlist:(NSString*)occasionidlist priceidlist:(NSString*)priceidlist themeidlist:(NSString*)themeidlist typeofrestaurantidList:(NSString*)typeofrestaurantidList whoareyouwithidlist:(NSString*)whoareyouwithidlist openNow:(NSString*)openNowFlag FavedFlag:(NSString*)favflag SavedFlag:(NSString*)savedFlag ChainFlag:(NSString*)chainFlag Rate:(NSString*)rate
 {
     
     
     NSString* filterString = @"";
     
     
+    if (![rate isKindOfClass:[NSNull class]]) {
+        if (rate.length > 0) {
+            if ([rate intValue] < 5) {
+                filterString = [NSString stringWithFormat:@"%@+",rate];
+            }
+            else
+                filterString = rate;
+        }
+    }
+    
     if (![openNowFlag isKindOfClass:[NSNull class]]) {
         if ([[NSString stringWithFormat:@"%@",openNowFlag] isEqualToString:@"1"]) {
-            filterString = @"Open Now";
+            if (filterString.length != 0) {
+                filterString = [filterString stringByAppendingString:@", "];
+            }
+            filterString = [filterString stringByAppendingString:[NSString stringWithFormat:@"Open Now"]];
         }
     }
     

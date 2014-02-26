@@ -7,6 +7,7 @@
 //
 
 #import "AskContactCell.h"
+#import "RateCustom.h"
 
 @implementation AskContactCell
 
@@ -30,4 +31,16 @@
     UIButton* button = (UIButton*)sender;
     [self.delegate pressButtonAtIndex:button.tag forcell:self];
 }
+
+-(void)refreshView
+{
+    if (_askObject.object.type == GlobalDataRate) {
+        RateCustom *rateCustom = [[RateCustom alloc] initWithFrame:CGRectMake(15, 18, 30, 4)];
+        [rateCustom setRateMedium:_askObject.object.name.length];
+        [_view addSubview:rateCustom];
+        rateCustom.allowedRate = NO;
+        _name.text = @"";
+    }
+}
+
 @end

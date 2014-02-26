@@ -328,7 +328,12 @@ typedef enum _TFSelect
     
     
     [self refreshView];
+    [self performSelector:@selector(doneFilter) withObject:nil afterDelay:0.5];
     
+}
+
+-(void)doneFilter
+{
     NSString* linkRequest = [self getLinkRequest];
     if (![linkRequest isEqualToString:_storeOldValue]) {
         _storeOldValue = linkRequest;
@@ -342,7 +347,6 @@ typedef enum _TFSelect
     }
     
     [arrayDictionary addObject:[self getDictionary]];
-    
 }
 
 -(NSString*)getListType:(GlobalDataType)type
@@ -841,8 +845,10 @@ typedef enum _TFSelect
         cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.3];
         cell.name.text = obj.object.name;
         cell.name.textColor = [UIColor whiteColor];
+        cell.askObject = obj;
         //cell.name.font = [UIFont systemFontOfSize:14];
         cell.name.frame = CGRectMake(cell.name.frame.origin.x, cell.name.frame.origin.y, cell.name.frame.size.width + 20, cell.name.frame.size.height);
+        [cell refreshView];
         return cell;
     }
 }
@@ -1320,7 +1326,7 @@ typedef enum _TFSelect
             cuisineTier2 = [dicDetail objectForKey:@"cuisineTier2idlist"];
         }
 
-        detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"] openNow:[dicDetail objectForKey:@"opennowflag"] FavedFlag:[dicDetail objectForKey:@"favflag"] SavedFlag:[dicDetail objectForKey:@"savedflag"] ChainFlag:[dicDetail objectForKey:@"chainflag"]];
+        detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"] openNow:[dicDetail objectForKey:@"opennowflag"] FavedFlag:[dicDetail objectForKey:@"favflag"] SavedFlag:[dicDetail objectForKey:@"savedflag"] ChainFlag:[dicDetail objectForKey:@"chainflag"] Rate:[dicDetail objectForKey:@"rating"]];
         
         
         //[self addType:self.arrDataRegion ListID:[dicDetail objectForKey:@"cityid"]];
@@ -1399,7 +1405,7 @@ typedef enum _TFSelect
             cuisineTier2 = [dicDetail objectForKey:@"cuisineTier2idlist"];
         }
         
-        detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"] openNow:[dicDetail objectForKey:@"opennowflag"] FavedFlag:[dicDetail objectForKey:@"favflag"] SavedFlag:[dicDetail objectForKey:@"savedflag"] ChainFlag:[dicDetail objectForKey:@"chainflag"]];
+        detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"] openNow:[dicDetail objectForKey:@"opennowflag"] FavedFlag:[dicDetail objectForKey:@"favflag"] SavedFlag:[dicDetail objectForKey:@"savedflag"] ChainFlag:[dicDetail objectForKey:@"chainflag"] Rate:[dicDetail objectForKey:@"rating"]];
         
         [self resizeDetailText];
         
