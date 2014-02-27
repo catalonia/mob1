@@ -1467,7 +1467,7 @@ typedef enum _TFSelect
     titleView.frame = CGRectMake(titleView.frame.origin.x, titleView.frame.origin.y, titleView.frame.size.width, labelHeight.height + 48);
     detailLabel.frame = CGRectMake(detailLabel.frame.origin.x, detailLabel.frame.origin.y, detailLabel.frame.size.width, labelHeight.height + 10);
     
-    [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 0, tbvResult.frame.size.width, tbvResult.contentSize.height)];
+    [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 125 - labelHeight.height + 10 , tbvResult.frame.size.width, tbvResult.contentSize.height)];
     viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
 }
 
