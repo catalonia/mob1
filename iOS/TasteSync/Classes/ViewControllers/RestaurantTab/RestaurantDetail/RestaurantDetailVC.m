@@ -348,12 +348,12 @@
     [scrollViewMain setContentSize:CGSizeMake(320, 580)];
     if (_restaurantObj.isSaved) {
         [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_saved_on.png"] forButton:btSave];
-        lbSave.text = @"Saved";
+        lbSave.text = @"Try Later";
         
     }else
     {
         [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_saved.png"] forButton:btSave];
-        lbSave.text = @"Save";
+        lbSave.text = @"Try Later";
         
     }
     
@@ -671,7 +671,7 @@
         if (!_restaurantObj.isSaved) {
             
             [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_saved_on.png"] forButton:btSave];
-            lbSave.text = @"Saved";
+            lbSave.text = @"Try Later";
             _restaurantObj.isSaved = YES;
             
             
@@ -679,7 +679,7 @@
         else
         {
             [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_saved.png"] forButton:btSave];
-            lbSave.text = @"Save";
+            lbSave.text = @"Try Later";
             _restaurantObj.isSaved = NO;
         }
     }

@@ -611,13 +611,13 @@ typedef enum _TFSelect
     if (saved) {
         saved = NO;
         [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"save-2.png"] forButton:btSaved];
-        lbSaved.text = @"Save";
+        lbSaved.text = @"Try Later";
     }
     else
     {
         saved = YES;
         [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_saved.png"] forButton:btSaved];
-        lbSaved.text = @"Saved";
+        lbSaved.text = @"Try Later";
         
     }
 }
@@ -924,11 +924,15 @@ typedef enum _TFSelect
             TSGlobalObj *obj = [_arrDataFilter objectAtIndex:indexPath.row];
             [self.arrData removeAllObjects];
             [self.arrData addObject:obj];
-            tfRestaurant.text = obj.name;
-            lbTypingRestaurant.hidden = YES;
+            tfRestaurant.text = @"";
+            lbTypingRestaurant.hidden = NO;
             restaurant = obj;
             [tbvResult reloadData];
             scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
+            
+            titleView.hidden = YES;
+            viewMain.frame = CGRectMake(viewMain.frame.origin.x, -53, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
+            [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 56 , tbvResult.frame.size.width, tbvResult.contentSize.height)];
             
             [arrayResID addObject:obj.uid];
             
@@ -966,7 +970,7 @@ typedef enum _TFSelect
             detailLabel.text = @"NYC";
             _storeOldValue = [self getLinkRequest];
             
-            [self resizeDetailText];
+            //[self resizeDetailText];
             
         }
         else if (TFSelected == TFRegion)
@@ -1467,8 +1471,8 @@ typedef enum _TFSelect
     titleView.frame = CGRectMake(titleView.frame.origin.x, titleView.frame.origin.y, titleView.frame.size.width, labelHeight.height + 48);
     detailLabel.frame = CGRectMake(detailLabel.frame.origin.x, detailLabel.frame.origin.y, detailLabel.frame.size.width, labelHeight.height + 10);
     
-    [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 125 - labelHeight.height + 10 , tbvResult.frame.size.width, tbvResult.contentSize.height)];
-    viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
+    [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 136 - labelHeight.height + 10 , tbvResult.frame.size.width, tbvResult.contentSize.height)];
+    viewMain.frame = CGRectMake(viewMain.frame.origin.x, -53, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
 }
 
 -(IBAction)doneAction:(id)sender
