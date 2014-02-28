@@ -23,7 +23,8 @@
     NotificationObj *currentNotif;
     int page,aNumberOfRow;
     BOOL aIsLoadPreviousNotif;
-    BOOL isLoadShuffle;
+    NotificationObj *fluryObj;
+    int flurryIndex;
 }
 - (IBAction)actionContinueReading:(id)sender;
 - (IBAction)actionShowProfile:(id)sender;
@@ -101,6 +102,19 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    //Add flury
+    
+    NSDictionary *recomentdationhomeParams =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     @""          , @"maxPaginationId",
+     @""          ,@"unreadCounter",
+     @""          , @"recoNotificationType",
+     @""          , @"idBase",
+     @""          , @"RecommendationPosition",
+     nil];
+    [CommonHelpers implementFlurry:recomentdationhomeParams forKey:@"RecommendationsInbox" isBegin:YES];
+    
+    
     aNumberOfRow = [CommonHelpers appDelegate].numberPageRecomendation;
     NSLog(@"aNumberOfRow: %d",aNumberOfRow);
     if ([CommonHelpers appDelegate].reloadNotifycation) {
@@ -119,6 +133,15 @@
 {
     [super viewDidDisappear:animated];
  
+    NSDictionary *recomentdationhomeParams =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     [NSString stringWithFormat:@"%d",aNumberOfRow]            , @"maxPaginationId",
+     [NSString stringWithFormat:@"%d",[UIApplication sharedApplication].applicationIconBadgeNumber]            , @"unreadCounter",
+     [NSString stringWithFormat:@"%d",fluryObj.type]            , @"recoNotificationType",
+     fluryObj.linkId            , @"idBase",
+      [NSString stringWithFormat:@"%d",flurryIndex]            , @"RecommendationPosition",
+     nil];
+    [CommonHelpers implementFlurry:recomentdationhomeParams forKey:@"RecommendationsInbox" isBegin:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,7 +155,6 @@
     glNotif.isSend = FALSE;
     //[glNotif reOrder];
     lbNotifications.text = [NSString stringWithFormat:@"%d NOTIFICATIONS",_arrData.count];
-    if (!isLoadShuffle)
     [tbvUnread reloadData];
     
 }
@@ -142,7 +164,6 @@
 - (IBAction)actionAllButton:(id)sender
 {
     AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    isLoadShuffle = NO;
     self.arrData = delegate.arrayNotification;
     [tbvUnread reloadData];
 }
@@ -277,6 +298,8 @@
     NSLog(@"%d, %d", indexPath.row, aNumberOfRow);
     if (indexPath.row < _arrData.count) {
         NotificationObj *obj = [_arrData objectAtIndex:indexPath.row];
+        fluryObj = obj;
+        flurryIndex = indexPath.row;
         [self gotoDetailNotification:obj atIndex:indexPath.row];
     }
     else
@@ -302,10 +325,9 @@
 
 - (void)loadMoreData
 {
-    if (!isLoadShuffle) {
-        [glNotif reloadDownData:self.view Type:RecommendationNotification];
-         [tbvUnread reloadData];
-    }
+    [glNotif reloadDownData:self.view Type:RecommendationNotification];
+    [tbvUnread reloadData];
+    
 }
 
 # pragma mark - Others
@@ -445,13 +467,11 @@
         // Update the content inset, good for section headers
         if (scrollView.contentOffset.y > 0)
         {
-            if (!isLoadShuffle)
-                tbvUnread.contentInset = UIEdgeInsetsZero;
+            tbvUnread.contentInset = UIEdgeInsetsZero;
         }
         else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
         {
-            if (!isLoadShuffle)
-                tbvUnread.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+            tbvUnread.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
         }
     } else if (isDragging && scrollView.contentOffset.y < 0) {
         // Update the arrow direction and label
@@ -484,8 +504,7 @@
     
     // Show the header
     [UIView animateWithDuration:0.3 animations:^{
-        if (!isLoadShuffle)
-            tbvUnread.contentInset = UIEdgeInsetsMake(REFRESH_HEADER_HEIGHT, 0, 0, 0);
+        tbvUnread.contentInset = UIEdgeInsetsMake(REFRESH_HEADER_HEIGHT, 0, 0, 0);
         refreshLabel.text = self.textLoading;
         refreshArrow.hidden = YES;
         [refreshSpinner startAnimating];
@@ -501,8 +520,7 @@
     
     // Hide the header
     [UIView animateWithDuration:0.3 animations:^{
-        if (!isLoadShuffle)
-            tbvUnread.contentInset = UIEdgeInsetsZero;
+        tbvUnread.contentInset = UIEdgeInsetsZero;
         [refreshArrow layer].transform = CATransform3DMakeRotation(M_PI * 2, 0, 0, 1);
     }
                      completion:^(BOOL finished) {
@@ -521,11 +539,7 @@
     // This is just a demo. Override this method with your custom reload action.
     // Don't forget to call stopLoading at the end.
 //    [self reloadData];
-    if (isLoadShuffle) {
-        [glNotif reloadUpData:1 view:nil Type:RecommendationShuffle];
-    }
-    else
-        [glNotif reloadUpData:1 view:nil Type:RecommendationNotification];
+    [glNotif reloadUpData:1 view:nil Type:RecommendationNotification];
    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:6.0];
 }
 

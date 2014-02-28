@@ -209,7 +209,17 @@ arrDataFilter=_arrDataFilter;;
     [super viewDidAppear:animated];
     if (_notificationObj.type == NotificationRecorequestNeeded) {
         if (isShuffle) {
+            //Add flury
             
+            NSDictionary *recomentdationhomeParams =
+            [NSDictionary dictionaryWithObjectsAndKeys:
+             @""          , @"maxPaginationId",
+             @""          ,@"unreadCounter",
+             @""          , @"recoNotificationType",
+             @""          , @"idBase",
+             @""          , @"RecommendationPosition",
+             nil];
+            [CommonHelpers implementFlurry:recomentdationhomeParams forKey:@"RecommendationsInbox" isBegin:YES];
         }
         else{
             NSString* link = [NSString stringWithFormat:@"recorequest?userid=%@&recorequestid=%@", [UserDefault userDefault].userID, self.notificationObj.linkId];

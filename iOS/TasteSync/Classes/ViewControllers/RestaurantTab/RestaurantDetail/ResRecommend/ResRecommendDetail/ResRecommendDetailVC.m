@@ -279,6 +279,7 @@ restaurantObj=_restaurantObj;
                 replyView.hidden = NO;
                 lbTitle.text = _resRecommendObj.title;
                 tvDetail.text = [NSString stringWithFormat:@"%@ \n in response to your question - %@",_resRecommendObj.detail, _resRecommendObj.recotext];
+                replyText.text = [NSString stringWithFormat:@"Reply to %@",_resRecommendObj.user.name];
             }
             else
             {

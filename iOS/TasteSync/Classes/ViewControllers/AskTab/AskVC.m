@@ -28,7 +28,7 @@
     NSMutableArray *arrayPrice;
     NSMutableArray *arrayCity;
     
-    TSGlobalObj *region;
+
     NSString* cityLocal;
     BOOL isCuisine;
     BOOL isLoad;
@@ -73,7 +73,7 @@
     // Do any additional setup after loading the view from its nib.
     [self initUI];
     [self initData];
-    region = [CommonHelpers getDefaultCityObj];
+    //
     isLoad = NO;
 }
 - (void) viewWillAppear:(BOOL)animated
@@ -213,7 +213,14 @@
         [arrayPrice addObject:obj];
     }
     
-    [self getCityData];
+    arrayCity = [[NSMutableArray alloc]init];
+    
+    for (AskObject* global in [CommonHelpers appDelegate].arrayNeighberhood) {
+        AskObject* obj = [[AskObject alloc]init];
+        obj.selected = NO;
+        obj.object = global.object;
+        [arrayCity addObject:obj];
+    }
     
     _elementView.frame = CGRectMake(0, 44, self.view.frame.size.width, [UIScreen mainScreen].bounds.size.height - 44);
     [self.view addSubview:_elementView];
@@ -229,12 +236,6 @@
     [self.view addSubview:_cuisineView];
     _cuisineView.hidden = YES;
     [self configUI];
-}
-
--(void)getCityData
-{
-    arrayCity = [[NSMutableArray alloc]initWithArray:[CommonHelpers appDelegate].arrayNeighberhood];
-    //[self sortArray:arrayCity];
 }
 
 -(void)configUI
@@ -344,6 +345,8 @@
     }
     else
     {
+        TSGlobalObj *region;
+        region = [CommonHelpers getDefaultCityObj];
         NSString* cuisineList1 = @"";
         NSString* cuisineList2 = @"";
         NSString* priceList = @"";
