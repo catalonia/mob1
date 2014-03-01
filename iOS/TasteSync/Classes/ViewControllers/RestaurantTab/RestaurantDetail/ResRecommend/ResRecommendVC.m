@@ -18,7 +18,8 @@
     __weak IBOutlet UIButton *btAsk;
     __weak IBOutlet UIView *inforView;
     __weak IBOutlet UILabel *lbName, *lbDetail;
-    
+    int numberBuzzRecoList, numberBuzzTipList;
+    NSString* actionClick;
 }
 
 - (IBAction)actionQuestion:(id)sender;
@@ -49,11 +50,35 @@ restaurantObj=_restaurantObj;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    actionClick = @"";
+    NSDictionary *params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     @""            , @"restaurant_id",
+     @""            , @"RestaurantBuzzRecoList",
+     @""            , @"RestaurantBuzzTipList",
+     @""            , @"Click",
+     nil];
+    [CommonHelpers implementFlurry:params forKey:@"RestaurantReviewsAndTips" isBegin:YES];
+    
     NSString* link = [NSString stringWithFormat:@"buzzcomplete?userid=%@&restaurantid=%@",[UserDefault userDefault].userID,_restaurantObj.uid];
     CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:1 WithView:self.view];
     request.delegate = self;
     [request startFormRequest];
 }
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    NSDictionary *params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     _restaurantObj.uid            , @"restaurant_id",
+     [NSString stringWithFormat:@"%d",numberBuzzRecoList]            , @"RestaurantBuzzRecoList",
+     [NSString stringWithFormat:@"%d",numberBuzzTipList]             , @"RestaurantBuzzTipList",
+     actionClick            , @"Click",
+     nil];
+    [CommonHelpers implementFlurry:params forKey:@"RestaurantReviewsAndTips" isBegin:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -169,8 +194,17 @@ restaurantObj=_restaurantObj;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
     ResRecommendDetailVC *vc = [[ResRecommendDetailVC alloc] initWithNibName:@"ResRecommendDetailVC" bundle:nil];
     vc.resRecommendObj = [_arrData objectAtIndex:indexPath.row];
+    
+    if (vc.resRecommendObj.tipID == TipNone) {
+        actionClick = @"restaurantBuzzRecoList ";
+    }
+    else
+        actionClick = @"restaurantBuzzTipList";
+    
     vc.restaurantObj = _restaurantObj;
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -201,6 +235,7 @@ restaurantObj=_restaurantObj;
             obj.uid = [dicResponse objectForKey:@"replyId"];;
             obj.tipID = TipNone;
             [self.arrData addObject:obj];
+            numberBuzzRecoList++;
         }
         
         if (array.count == 0) {
@@ -209,6 +244,7 @@ restaurantObj=_restaurantObj;
         
         NSArray* arrayTips = [dicResponseData objectForKey:@"restaurantBuzzTipList"];
         for (NSDictionary* dicResponse in arrayTips) {
+            numberBuzzTipList++;
             UserObj *user = [[UserObj alloc] init];
             user.name = [NSString stringWithFormat:@"%@ %@", [dicResponse objectForKey:@"tipUserFirstName"], [dicResponse objectForKey:@"tipUserLastName"]];
             user.avatarUrl = [dicResponse objectForKey:@"tipUserPhoto"];

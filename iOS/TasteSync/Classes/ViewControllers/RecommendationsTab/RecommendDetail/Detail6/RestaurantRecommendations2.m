@@ -17,6 +17,10 @@
 {
     __weak IBOutlet UILabel* askQuestion;
     NSString* actionClick;
+    
+    __weak IBOutlet UIView* topView;
+    __weak IBOutlet UIView* bottomView;
+    
 }
 @end
 
@@ -238,7 +242,54 @@
         [self.arrData addObject:obj];
     }
     [tbv reloadData];
+    [self resizeLabel];
+    
 }
+
+-(void)resizeLabel
+{
+    CGSize labelHeight;
+    
+    
+    NSAssert(self, @"UILabel was nil");
+    
+    //Label text
+    NSString *aLabelTextString = askQuestion.text;
+    
+    //Label font
+    UIFont *aLabelFont = askQuestion.font;
+    
+    //Width of the Label
+    CGFloat aLabelSizeWidth = askQuestion.frame.size.width;
+    
+    
+    if (SYSTEM_VERSION_LESS_THAN(iOS7_0)) {
+        //version < 7.0
+        
+        labelHeight = [aLabelTextString sizeWithFont:aLabelFont
+                                   constrainedToSize:CGSizeMake(aLabelSizeWidth, MAXFLOAT)
+                                       lineBreakMode:NSLineBreakByWordWrapping];
+    }
+    else if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(iOS7_0)) {
+        //version >= 7.0
+        
+        //Return the calculated size of the Label
+        labelHeight = [aLabelTextString boundingRectWithSize:CGSizeMake(aLabelSizeWidth, MAXFLOAT)
+                                                     options:NSStringDrawingUsesLineFragmentOrigin
+                                                  attributes:@{
+                                                               NSFontAttributeName : aLabelFont
+                                                               }
+                                                     context:nil].size;
+        
+    }
+    
+    topView.frame = CGRectMake(topView.frame.origin.x, topView.frame.origin.y, topView.frame.size.width, askQuestion.frame.origin.y + labelHeight.height);
+    askQuestion.frame = CGRectMake(askQuestion.frame.origin.x, askQuestion.frame.origin.y, askQuestion.frame.size.width, labelHeight.height);
+    
+    bottomView.frame = CGRectMake(bottomView.frame.origin.x, topView.frame.origin.y + topView.frame.size.height + 12, bottomView.frame.size.width, bottomView.frame.size.height);
+    
+}
+
 -(void)pressAtIndex:(int)index Reco:(ReplyRecomendationObj *)replyObject
 {
     actionClick = @"Recommendation Rext Detail";

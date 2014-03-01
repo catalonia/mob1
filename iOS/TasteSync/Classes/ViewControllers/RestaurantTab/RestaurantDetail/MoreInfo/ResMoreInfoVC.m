@@ -24,6 +24,7 @@
     __weak IBOutlet UIScrollView* flagScroll;
     CLLocationCoordinate2D coordRestaurant;
     NSString* nameRestaurant;
+    NSString* actionClick;
 }
 
 - (IBAction)actionBack:(id)sender;
@@ -58,6 +59,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    actionClick = @"";
     _restaurantObj.website = @"";
     //self.navigationController.navigationBar.translucent = NO;
     [CommonHelpers setBackgroudImageForViewRestaurant:self.view];
@@ -76,10 +78,29 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    NSDictionary *params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     @""            , @"restaurant_id",
+     @""            , @"Click",
+     nil];
+    [CommonHelpers implementFlurry:params forKey:@"RestaurantMore" isBegin:YES];
+    
     NSString* link = [NSString stringWithFormat:@"extendedinfo?userid=%@&restaurantid=%@",[UserDefault userDefault].userID, self.restaurantObj.uid];
     CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:1 WithView:self.view];
     request.delegate = self;
     [request startFormRequest];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    NSDictionary *params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     _restaurantObj.uid            , @"restaurant_id",
+     actionClick            , @"Click",
+     nil];
+    [CommonHelpers implementFlurry:params forKey:@"RestaurantMore" isBegin:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,6 +128,8 @@
 
 -(void) displayLocation : (AddressAnnotation *) addAnnotation
 {
+    actionClick = @"Map";
+    
     MKCoordinateRegion region;
     MKCoordinateSpan span;
     span.latitudeDelta = 0.005;
@@ -163,11 +186,13 @@
 -(IBAction)callAction:(id)sender
 {
     NSLog(@"%@",self.restaurantObj.phone);
+    actionClick = @"Call";
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",self.restaurantObj.phone]];
     [[UIApplication sharedApplication] openURL:URL];
 }
 -(IBAction)gotoWebsite:(id)sender
 {
+    actionClick = @"Website";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_restaurantObj.website]];
 }
 

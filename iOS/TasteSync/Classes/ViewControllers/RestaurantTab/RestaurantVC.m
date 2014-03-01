@@ -239,9 +239,9 @@ typedef enum _TFSelect
             _arrData = [[NSMutableArray alloc] initWithArray:[CommonHelpers appDelegate].arrayRestaurant];
             numberPage = [CommonHelpers appDelegate].numberPage;
             [tbvResult reloadData];
-            tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
+            tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, 0, tbvResult.frame.size.width, tbvResult.contentSize.height);
             scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
-            //viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
+            viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
             
         }
         isRestaurantRequest = YES;
@@ -1453,8 +1453,8 @@ typedef enum _TFSelect
     titleView.frame = CGRectMake(titleView.frame.origin.x, titleView.frame.origin.y, titleView.frame.size.width, labelHeight.height + 48);
     detailLabel.frame = CGRectMake(detailLabel.frame.origin.x, detailLabel.frame.origin.y, detailLabel.frame.size.width, labelHeight.height + 10);
     
-    [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, labelHeight.height + 110 , tbvResult.frame.size.width, tbvResult.contentSize.height)];
-    viewMain.frame = CGRectMake(viewMain.frame.origin.x, -53, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
+    [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, labelHeight.height + 110 - 136, tbvResult.frame.size.width, tbvResult.contentSize.height)];
+    viewMain.frame = CGRectMake(viewMain.frame.origin.x, 83, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
 }
 
 -(IBAction)doneAction:(id)sender

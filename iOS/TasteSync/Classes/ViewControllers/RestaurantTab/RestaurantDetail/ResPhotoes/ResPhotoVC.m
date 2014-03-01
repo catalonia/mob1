@@ -20,6 +20,8 @@
     __weak IBOutlet UITableView *_tableView;
     __weak IBOutlet UILabel* lbTimeOpen;
     NSString* _urlImage;
+    BOOL isRequest;
+    
 }
 - (IBAction)actionBack:(id)sender;
 - (IBAction)actionShare:(id)sender;
@@ -62,10 +64,15 @@ restaurantObj=_restaurantObj;
      nil];
     [CommonHelpers implementFlurry:params forKey:@"RestaurantPhoto" isBegin:YES];
     
-    NSString* photo_link = [NSString stringWithFormat:@"photos?userid=%@&restaurantid=%@",[UserDefault userDefault].userID, self.restaurantObj.uid];
-    CRequest* photo_request = [[CRequest alloc]initWithURL:photo_link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:2 WithView:self.view];
-    photo_request.delegate = self;
-    [photo_request startFormRequest];
+    if (isRequest == NO) {
+        NSString* photo_link = [NSString stringWithFormat:@"photos?userid=%@&restaurantid=%@",[UserDefault userDefault].userID, self.restaurantObj.uid];
+        CRequest* photo_request = [[CRequest alloc]initWithURL:photo_link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:2 WithView:self.view];
+        photo_request.delegate = self;
+        [photo_request startFormRequest];
+        isRequest = YES;
+    }
+    
+    
 }
 
 

@@ -26,6 +26,9 @@
     __weak IBOutlet UITableView* tbvFilter;
     NSMutableArray* _arrDataFilter;
     __weak IBOutlet UILabel* replyText;
+    
+    NSString* restaurantID, *replyID, *actionClick;
+    
 }
 
 - (IBAction)actionBack:(id)sender;
@@ -55,6 +58,9 @@ restaurantObj=_restaurantObj;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    restaurantID = @"";
+    replyID = @"";
+    actionClick = @"";
     [CommonHelpers setBackgroudImageForViewRestaurant:self.view];
     [self configView];
     if (!self.fromRecomendation) {
@@ -80,6 +86,29 @@ restaurantObj=_restaurantObj;
     self.navigationController.navigationBarHidden = YES;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSDictionary *params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     @""            , @"restaurant_id",
+     @""            , @"replyId",
+     @""            , @"ClickSendReply",
+     nil];
+    [CommonHelpers implementFlurry:params forKey:@"RestaurantReviewsAndTipsDetail" isBegin:YES];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    NSDictionary *params =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     restaurantID            , @"restaurant_id",
+     replyID            , @"replyId",
+     actionClick            , @"ClickSendReply",
+     nil];
+    [CommonHelpers implementFlurry:params forKey:@"RestaurantReviewsAndTipsDetail" isBegin:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -100,6 +129,8 @@ restaurantObj=_restaurantObj;
 }
 - (IBAction)actionSentMessage:(id)sender
 {
+    actionClick = @"SentClick";
+    
     [UIView animateWithDuration:0.3 animations:^{
         [textView.textView resignFirstResponder];
         scrollMain.frame = CGRectMake(0, 44, scrollMain.frame.size.width, scrollMain.frame.size.height);
@@ -262,6 +293,8 @@ restaurantObj=_restaurantObj;
         lbTitle.text = _replyRecomendationObj.userObj.name;
         tvDetail.text = _replyRecomendationObj.replyText;
         
+        replyID = _replyRecomendationObj.uid;
+        restaurantID = _restaurantObj.uid;
         
         if (_replyRecomendationObj.userObj.avatar != nil) {
             _avatar.image = _replyRecomendationObj.userObj.avatar;
@@ -275,6 +308,8 @@ restaurantObj=_restaurantObj;
             lbName.text = _restaurantObj.name;
             lbDetail.text = [CommonHelpers getInformationRestaurant:self.restaurantObj];
             replyView.hidden = YES;
+            replyID = _resRecommendObj.uid;
+            restaurantID = _restaurantObj.uid;
             if (_resRecommendObj.tipID == TipNone) {
                 replyView.hidden = NO;
                 lbTitle.text = _resRecommendObj.title;
