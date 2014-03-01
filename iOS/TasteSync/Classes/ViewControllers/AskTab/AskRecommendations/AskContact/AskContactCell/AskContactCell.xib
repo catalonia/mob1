@@ -14,6 +14,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" id="r6r-1T-VKg">
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MiK-sS-QgU">
                         <rect key="frame" x="210" y="8" width="24" height="24"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -43,11 +48,6 @@
                             <action selector="pressButton:" destination="hYw-8C-8Jw" eventType="touchUpInside" id="VIT-22-x57"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" id="r6r-1T-VKg">
-                        <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </view>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>

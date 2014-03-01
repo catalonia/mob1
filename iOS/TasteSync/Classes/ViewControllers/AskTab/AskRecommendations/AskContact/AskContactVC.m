@@ -88,9 +88,9 @@
     }
     NSDictionary *askhomeParams =
     [NSDictionary dictionaryWithObjectsAndKeys:
-    [NSString     stringWithFormat:@"%d",numberEmail]       , @"Email",
-    [NSString     stringWithFormat:@"%d",numberMessage]     , @"Message",
-    [NSString     stringWithFormat:@"%@",@""]               , @"TasteSyncID",
+    @""     , @"Email",
+    @""     , @"Message",
+    @""     , @"TasteSyncID",
      nil];
     [CommonHelpers implementFlurry:askhomeParams forKey:@"Ask_Contact" isBegin:YES];
     
@@ -114,7 +114,13 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
+    NSDictionary *askhomeParams =
+    [NSDictionary dictionaryWithObjectsAndKeys:
+     [NSString     stringWithFormat:@"%d",numberEmail]       , @"Email",
+     [NSString     stringWithFormat:@"%d",numberMessage]     , @"Message",
+     [NSString     stringWithFormat:@"%@",@""]               , @"TasteSyncID",
+     nil];
+    [CommonHelpers implementFlurry:askhomeParams forKey:@"Ask_Contact" isBegin:YES];
 }
 
 - (void)viewDidLoad
