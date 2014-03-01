@@ -580,7 +580,11 @@
     
     MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
     controller.mailComposeDelegate = self;
-    [controller setSubject:@"Need a restaurant recommendation"];
+    if (isRestaurantDetail) {
+        [controller setSubject:@"Found this restaurant on TasteSync"];
+    }
+    else
+        [controller setSubject:@"Need a restaurant recommendation"];
     [controller setToRecipients:[NSArray arrayWithObjects:[obj.email objectAtIndex:index], nil]];
     [controller setMessageBody:emailBody isHTML:YES];
     if (controller)

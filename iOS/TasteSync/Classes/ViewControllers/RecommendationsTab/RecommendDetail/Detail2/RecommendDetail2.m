@@ -125,7 +125,7 @@ arrDataFilter=_arrDataFilter;;
     filterView = [[FilterRestaurant alloc] initWithFrame:CGRectMake(-320,0, 320, 480)];
     filterView.delegate = self;
     
-    [scrollViewMain setContentSize:CGSizeMake(320, 600)];
+    
     
     if (_notificationObj) {
         if (_notificationObj.user.avatar != nil) {
@@ -182,7 +182,7 @@ arrDataFilter=_arrDataFilter;;
                                                          context:nil].size;
             
         }
-        
+        [scrollViewMain setContentSize:CGSizeMake(320, 600 + labelHeight.height)];
         view1.frame = CGRectMake(view1.frame.origin.x, view1.frame.origin.y, view1.frame.size.width, labelHeight.height + 75);
         tvLongMsg.frame = CGRectMake(tvLongMsg.frame.origin.x, tvLongMsg.frame.origin.y, tvLongMsg.frame.size.width, labelHeight.height + 10);
         
