@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecommendDetail2">
             <connections>
+                <outlet property="backgroundImageView" destination="81" id="FYf-W4-e67"/>
                 <outlet property="btFollow" destination="21" id="72"/>
                 <outlet property="buttonSent" destination="94" id="sPw-OB-eif"/>
                 <outlet property="buttonShuffle" destination="Kqq-ZR-2Ao" id="RS1-tO-TKb"/>

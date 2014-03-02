@@ -44,6 +44,9 @@
     BOOL isShuffle;
     CGFloat heightText;
     NSString* actionClick;
+    
+    __weak IBOutlet UIImageView* backgroundImageView;
+    
 }
 
 
@@ -99,17 +102,17 @@ arrDataFilter=_arrDataFilter;;
         tbvFilter.frame = CGRectMake(tbvFilter.frame.origin.x, 157, tbvFilter.frame.size.width, tbvFilter.frame.size.height);
         shuffleText.hidden = NO;
         shuffleText.text =  [NSString stringWithFormat:@"Your recommendation for %@",_notificationObj.user.name];
-        textView = [[TextView alloc]initWithFrame:CGRectMake(10, 22, 274, 110)];
+        textView = [[TextView alloc]initWithFrame:CGRectMake(23, 31, 274, 116)];
     }
     else
     {
-        textView = [[TextView alloc]initWithFrame:CGRectMake(10, 15, 274, 122)];
+        textView = [[TextView alloc]initWithFrame:CGRectMake(23, 24, 274, 116)];
     }
     textView.textView.font = [UIFont fontWithName:@"Avenir Medium" size:12.0];
     [textView.textView setBackgroundColor:[UIColor clearColor]];
     tvMsg = textView.textView;
     textView.delegate = self;
-    [view4 addSubview:textView];
+    [view4 addSubview:textView.textView];
     
     requestText = @"";
     [CommonHelpers setBackgroudImageForView:self.view];
@@ -194,7 +197,7 @@ arrDataFilter=_arrDataFilter;;
     }
     
         self.arrDataRestaurant = [[NSMutableArray alloc] init ];
-    
+    [self resizeBackground:YES];
     
     if (!_arrData) {
         self.arrData = [[NSMutableArray alloc] init ];
@@ -755,6 +758,48 @@ arrDataFilter=_arrDataFilter;;
 
 #pragma mark - FilterRestaurantDelegate
 
+-(void)resizeBackground:(BOOL)isMinium
+{
+    if (isMinium) {
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, 42);
+        if (_notificationObj.type != TYPE_3)
+            textView.textView.frame = CGRectMake(23, 31, 274, 36);
+        else
+            textView.textView.frame = CGRectMake(23, 24, 274, 36);
+        
+        buttonSent.frame = CGRectMake(buttonSent.frame.origin.x, 95, buttonSent.frame.size.width, buttonSent.frame.size.height);
+        cantHelpButton.frame = CGRectMake(cantHelpButton.frame.origin.x, 95, cantHelpButton.frame.size.width, cantHelpButton.frame.size.height);
+        buttonShuffle.frame = CGRectMake(buttonShuffle.frame.origin.x, 143, buttonShuffle.frame.size.width, buttonShuffle.frame.size.height);
+        backgroundImageView.frame = CGRectMake(backgroundImageView.frame.origin.x, backgroundImageView.frame.origin.y, backgroundImageView.frame.size.width, 132);
+        imageShuffle.frame = CGRectMake(imageShuffle.frame.origin.x, 143, imageShuffle.frame.size.width, imageShuffle.frame.size.height);
+    }
+    else
+    {
+        if (_notificationObj.type != TYPE_3) {
+            imageView.frame = CGRectMake(imageView.frame.origin.x, 35, imageView.frame.size.width, 122);
+            tbvFilter.frame = CGRectMake(tbvFilter.frame.origin.x, 157, tbvFilter.frame.size.width, tbvFilter.frame.size.height);
+            textView.textView.frame = CGRectMake(23, 31, 274, 116);
+            
+            buttonSent.frame = CGRectMake(buttonSent.frame.origin.x, 182, buttonSent.frame.size.width, buttonSent.frame.size.height);
+            cantHelpButton.frame = CGRectMake(cantHelpButton.frame.origin.x, 182, cantHelpButton.frame.size.width, cantHelpButton.frame.size.height);
+            buttonShuffle.frame = CGRectMake(buttonShuffle.frame.origin.x, 230, buttonShuffle.frame.size.width, buttonShuffle.frame.size.height);
+            backgroundImageView.frame = CGRectMake(backgroundImageView.frame.origin.x, backgroundImageView.frame.origin.y, backgroundImageView.frame.size.width, 212);
+            imageShuffle.frame = CGRectMake(imageShuffle.frame.origin.x, 230, imageShuffle.frame.size.width, imageShuffle.frame.size.height);
+        }
+        else
+        {
+            imageView.frame = CGRectMake(imageView.frame.origin.x, 28, imageView.frame.size.width, 122);
+            textView.textView.frame = CGRectMake(23, 24, 274, 116);
+            
+            buttonSent.frame = CGRectMake(buttonSent.frame.origin.x, 175, buttonSent.frame.size.width, buttonSent.frame.size.height);
+            cantHelpButton.frame = CGRectMake(cantHelpButton.frame.origin.x, 175, cantHelpButton.frame.size.width, cantHelpButton.frame.size.height);
+            buttonShuffle.frame = CGRectMake(buttonShuffle.frame.origin.x, 223, buttonShuffle.frame.size.width, buttonShuffle.frame.size.height);
+            backgroundImageView.frame = CGRectMake(backgroundImageView.frame.origin.x, backgroundImageView.frame.origin.y, backgroundImageView.frame.size.width, 212);
+            imageShuffle.frame = CGRectMake(imageShuffle.frame.origin.x, 223, imageShuffle.frame.size.width, imageShuffle.frame.size.height);
+        }
+    }
+}
+
 - (void) filterRestaurant:(FilterRestaurant *)filterRestaurant didFinish:(id)anObj tag:(int)aTag
 {
     //    show restaurant in tbv
@@ -864,6 +909,7 @@ arrDataFilter=_arrDataFilter;;
 }
 -(void)beginEditting
 {
+    [self resizeBackground:NO];
      [scrollViewMain setContentOffset:CGPointMake(0, 165 + heightText - 19 -10) animated:YES];
 }
 

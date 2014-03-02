@@ -125,7 +125,7 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
-    textView.contentOffset = CGPointMake(textView.contentOffset.x, textView.contentSize.height - 48);
+    //textView.contentOffset = CGPointMake(textView.contentOffset.x, textView.contentSize.height - 48);
 }
 -(void)addRestaurant:(RestaurantObj*)obj
 {
