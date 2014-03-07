@@ -140,13 +140,13 @@ arrDataFilter=_arrDataFilter;;
         }
         //NSString *firstCh = [_notificationObj.user.lastname substringToIndex:1];
         if (_notificationObj.type== TYPE_3) {
-            lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_3];
+            lbName.text = [NSString stringWithFormat:@"%@ %@",_notificationObj.user.name, NO_TITLE_3];
         }
         else
         {
             if (_notificationObj.type== TYPE_1) {
                 shuffleText.text =  [NSString stringWithFormat:@"Your recommendation for %@",_notificationObj.user.name];
-                lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_1];
+                lbName.text = [NSString stringWithFormat:@"%@ %@",_notificationObj.user.name, NO_TITLE_1];
                 if (isShuffle) {
                     buttonShuffle.hidden = NO;
                     buttonSent.hidden = NO;
@@ -160,7 +160,7 @@ arrDataFilter=_arrDataFilter;;
             else
             {
                 buttonSent.hidden = NO;
-                lbName.text = [NSString stringWithFormat:@"%@. %@",_notificationObj.user.name, NO_TITLE_4];
+                lbName.text = [NSString stringWithFormat:@"%@ %@",_notificationObj.user.name, NO_TITLE_4];
                 shuffleText.text =  [NSString stringWithFormat:@"Reply to %@",_notificationObj.user.name];
             }
             
@@ -769,9 +769,9 @@ arrDataFilter=_arrDataFilter;;
         
         buttonSent.frame = CGRectMake(buttonSent.frame.origin.x, 95, buttonSent.frame.size.width, buttonSent.frame.size.height);
         cantHelpButton.frame = CGRectMake(cantHelpButton.frame.origin.x, 95, cantHelpButton.frame.size.width, cantHelpButton.frame.size.height);
-        buttonShuffle.frame = CGRectMake(buttonShuffle.frame.origin.x, 143, buttonShuffle.frame.size.width, buttonShuffle.frame.size.height);
+        buttonShuffle.frame = CGRectMake(buttonShuffle.frame.origin.x, 146, buttonShuffle.frame.size.width, buttonShuffle.frame.size.height);
         backgroundImageView.frame = CGRectMake(backgroundImageView.frame.origin.x, backgroundImageView.frame.origin.y, backgroundImageView.frame.size.width, 132);
-        imageShuffle.frame = CGRectMake(imageShuffle.frame.origin.x, 143, imageShuffle.frame.size.width, imageShuffle.frame.size.height);
+        imageShuffle.frame = CGRectMake(imageShuffle.frame.origin.x, 151, imageShuffle.frame.size.width, imageShuffle.frame.size.height);
     }
     else
     {
@@ -782,9 +782,9 @@ arrDataFilter=_arrDataFilter;;
             
             buttonSent.frame = CGRectMake(buttonSent.frame.origin.x, 182, buttonSent.frame.size.width, buttonSent.frame.size.height);
             cantHelpButton.frame = CGRectMake(cantHelpButton.frame.origin.x, 182, cantHelpButton.frame.size.width, cantHelpButton.frame.size.height);
-            buttonShuffle.frame = CGRectMake(buttonShuffle.frame.origin.x, 230, buttonShuffle.frame.size.width, buttonShuffle.frame.size.height);
+            buttonShuffle.frame = CGRectMake(buttonShuffle.frame.origin.x, 233, buttonShuffle.frame.size.width, buttonShuffle.frame.size.height);
             backgroundImageView.frame = CGRectMake(backgroundImageView.frame.origin.x, backgroundImageView.frame.origin.y, backgroundImageView.frame.size.width, 212);
-            imageShuffle.frame = CGRectMake(imageShuffle.frame.origin.x, 230, imageShuffle.frame.size.width, imageShuffle.frame.size.height);
+            imageShuffle.frame = CGRectMake(imageShuffle.frame.origin.x, 241, imageShuffle.frame.size.width, imageShuffle.frame.size.height);
         }
         else
         {
@@ -793,9 +793,9 @@ arrDataFilter=_arrDataFilter;;
             
             buttonSent.frame = CGRectMake(buttonSent.frame.origin.x, 175, buttonSent.frame.size.width, buttonSent.frame.size.height);
             cantHelpButton.frame = CGRectMake(cantHelpButton.frame.origin.x, 175, cantHelpButton.frame.size.width, cantHelpButton.frame.size.height);
-            buttonShuffle.frame = CGRectMake(buttonShuffle.frame.origin.x, 223, buttonShuffle.frame.size.width, buttonShuffle.frame.size.height);
+            buttonShuffle.frame = CGRectMake(buttonShuffle.frame.origin.x, 226, buttonShuffle.frame.size.width, buttonShuffle.frame.size.height);
             backgroundImageView.frame = CGRectMake(backgroundImageView.frame.origin.x, backgroundImageView.frame.origin.y, backgroundImageView.frame.size.width, 212);
-            imageShuffle.frame = CGRectMake(imageShuffle.frame.origin.x, 223, imageShuffle.frame.size.width, imageShuffle.frame.size.height);
+            imageShuffle.frame = CGRectMake(imageShuffle.frame.origin.x, 231, imageShuffle.frame.size.width, imageShuffle.frame.size.height);
         }
     }
 }
