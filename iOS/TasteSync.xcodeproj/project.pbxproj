@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5900188B18CE100D00043C19 /* Location-Direction icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5900188A18CE100D00043C19 /* Location-Direction icon.png */; };
+		5900188D18CE159A00043C19 /* dec20_icon app_reserved icon 2_30x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 5900188C18CE159A00043C19 /* dec20_icon app_reserved icon 2_30x30.png */; };
 		590B2A041831892600E9EA7A /* libFlurry_4.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 590B2A031831892600E9EA7A /* libFlurry_4.3.0.a */; };
 		59115A791854DE3800565D81 /* RestaurantVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 59115A781854DE3800565D81 /* RestaurantVC.m */; };
 		59115A7B1854E33B00565D81 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 59115A7A1854E33B00565D81 /* avatar.png */; };
@@ -716,6 +718,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5900188A18CE100D00043C19 /* Location-Direction icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Location-Direction icon.png"; sourceTree = "<group>"; };
+		5900188C18CE159A00043C19 /* dec20_icon app_reserved icon 2_30x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dec20_icon app_reserved icon 2_30x30.png"; sourceTree = "<group>"; };
 		590B2A021831892600E9EA7A /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		590B2A031831892600E9EA7A /* libFlurry_4.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.0.a; sourceTree = "<group>"; };
 		59115A781854DE3800565D81 /* RestaurantVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantVC.m; sourceTree = "<group>"; };
@@ -1937,6 +1941,8 @@
 		5E5F16B616DE025400852D6A /* restaurant */ = {
 			isa = PBXGroup;
 			children = (
+				5900188C18CE159A00043C19 /* dec20_icon app_reserved icon 2_30x30.png */,
+				5900188A18CE100D00043C19 /* Location-Direction icon.png */,
 				E6B1022118B90B0400DACFB0 /* fav-2.png */,
 				E6B1022218B90B0400DACFB0 /* save-2.png */,
 				596F4F1E18B04FE000F99046 /* open_now_black.png */,
@@ -3685,6 +3691,7 @@
 				E696A0841849108D00C5C428 /* UnreadMessage@2x.png in Resources */,
 				5E77762116D5F49700B0F363 /* FeedCell.xib in Resources */,
 				5E77762316D5F49700B0F363 /* UserCell.xib in Resources */,
+				5900188B18CE100D00043C19 /* Location-Direction icon.png in Resources */,
 				5E77762516D5F49700B0F363 /* ListLikesVC.xib in Resources */,
 				5E77762816D5F49700B0F363 /* CommentCell.xib in Resources */,
 				5E77762A16D5F49700B0F363 /* FeedDetailCell.xib in Resources */,
@@ -4075,6 +4082,7 @@
 				E696A0801848FDAE00C5C428 /* withfamily_tile@2x.png in Resources */,
 				5E7EF66416E8373D00945686 /* ic_bt_deal_filter@2x.png in Resources */,
 				5EA0A79416E9C112005ADACB /* arrow_dark.png in Resources */,
+				5900188D18CE159A00043C19 /* dec20_icon app_reserved icon 2_30x30.png in Resources */,
 				E696A0831849108D00C5C428 /* RepliedIcon@2x.png in Resources */,
 				E696A0741848FDAE00C5C428 /* nbrhood_popup_back.png in Resources */,
 				5EA0A79516E9C112005ADACB /* arrow_dark@2x.png in Resources */,
@@ -4381,8 +4389,8 @@
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
+				PROVISIONING_PROFILE = "4B9D85DD-1494-4729-B5C0-5E38413F3225";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4B9D85DD-1494-4729-B5C0-5E38413F3225";
 				SDKROOT = iphoneos7.0;
 			};
 			name = Debug;
@@ -4413,8 +4421,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
+				PROVISIONING_PROFILE = "4B9D85DD-1494-4729-B5C0-5E38413F3225";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4B9D85DD-1494-4729-B5C0-5E38413F3225";
 				SDKROOT = iphoneos7.0;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4439,8 +4447,8 @@
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3E40DECC-7245-4890-9308-B46FD35651E9";
-				"PROVISIONING_PROFILE[sdk=*]" = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
+				"PROVISIONING_PROFILE[sdk=*]" = "4B9D85DD-1494-4729-B5C0-5E38413F3225";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4B9D85DD-1494-4729-B5C0-5E38413F3225";
 				SDKROOT = iphoneos7.0;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -4464,8 +4472,8 @@
 				);
 				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BB31BB07-8E65-45A3-ADE6-B88BA77E51D4";
+				PROVISIONING_PROFILE = "4B9D85DD-1494-4729-B5C0-5E38413F3225";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4B9D85DD-1494-4729-B5C0-5E38413F3225";
 				SDKROOT = iphoneos7.0;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
