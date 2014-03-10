@@ -28,15 +28,15 @@
     __weak IBOutlet UILabel* replyText;
     
     NSString* restaurantID, *replyID, *actionClick;
-    
+    __weak IBOutlet UIButton *btAsk;
 }
 
 - (IBAction)actionBack:(id)sender;
 - (IBAction)actionShare:(id)sender;
 - (IBAction)actionLike:(id)sender;
 - (IBAction)actionFollow:(id)sender;
-- (IBAction)actionQuestion:(id)sender;
 - (IBAction)actionAvatar:(id)sender;
+- (IBAction)actionQuestion:(id)sender;
 
 @end
 
@@ -228,7 +228,6 @@ restaurantObj=_restaurantObj;
     if (_resRecommendObj.tipID != TipFrom4SQ)
         [[[CommonHelpers appDelegate] tabbarBaseVC] actionProfile:_resRecommendObj.user];
 }
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -285,6 +284,7 @@ restaurantObj=_restaurantObj;
             lbName.hidden = YES;
             lbDetail.hidden = YES;
             lbLikes.text = [NSString stringWithFormat:@"%d people like this.",_resRecommendObj.numberOfLikes];
+            
         }
         
         lbName.text = _restaurantObj.name;
@@ -292,10 +292,10 @@ restaurantObj=_restaurantObj;
         replyText.text = [NSString stringWithFormat:@"Reply to %@",_replyRecomendationObj.userObj.name];
         lbTitle.text = _replyRecomendationObj.userObj.name;
         tvDetail.text = _replyRecomendationObj.replyText;
-        
+         btAsk.hidden = NO;
         replyID = _replyRecomendationObj.uid;
         restaurantID = _restaurantObj.uid;
-        
+       
         if (_replyRecomendationObj.userObj.avatar != nil) {
             _avatar.image = _replyRecomendationObj.userObj.avatar;
         }
@@ -310,8 +310,10 @@ restaurantObj=_restaurantObj;
             replyView.hidden = YES;
             replyID = _resRecommendObj.uid;
             restaurantID = _restaurantObj.uid;
+            
             if (_resRecommendObj.tipID == TipNone) {
                 replyView.hidden = NO;
+                btAsk.hidden = NO;
                 lbTitle.text = _resRecommendObj.title;
                 tvDetail.text = [NSString stringWithFormat:@"%@ \n in response to your question - %@",_resRecommendObj.detail, _resRecommendObj.recotext];
                 replyText.text = [NSString stringWithFormat:@"Reply to %@",_resRecommendObj.user.name];
@@ -319,7 +321,7 @@ restaurantObj=_restaurantObj;
             else
             {
                 lbTitle.text = _resRecommendObj.user.name;
-                
+
                 tvDetail.text = _resRecommendObj.detail;
             }
             
@@ -333,6 +335,7 @@ restaurantObj=_restaurantObj;
     
     
 }
+
 -(void)loadimage
 {
     _avatar.image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_resRecommendObj.user.avatarUrl]]];

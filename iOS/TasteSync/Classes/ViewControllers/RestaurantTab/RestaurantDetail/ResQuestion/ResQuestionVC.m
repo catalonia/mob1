@@ -349,7 +349,9 @@ restaurantObj=_restaurantObj;
         
     }
 }
-
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0];
+}
 
 #pragma mark - UITextFieldDelegate
 
