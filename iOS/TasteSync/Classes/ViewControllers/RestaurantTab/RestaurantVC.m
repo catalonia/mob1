@@ -875,6 +875,7 @@ typedef enum _TFSelect
         }
         TSGlobalObj *obj = [_arrData objectAtIndex:indexPath.row];
         cell.isJustName = _restaurantSearch;
+        [cell initForView:obj.restaurantObj];
         return [cell getHeight:obj.restaurantObj];
     }
     if (tableView==tbvFilter)

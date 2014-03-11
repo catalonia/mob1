@@ -13,7 +13,6 @@
 
 @interface ResMoreInfoVC ()<MKMapViewDelegate>
 {
-    __weak IBOutlet MKMapView *mapView;
     __weak IBOutlet UIView *viewInfo;
     __weak IBOutlet UILabel* lbName;
     __weak IBOutlet UILabel* _phone;
@@ -22,8 +21,6 @@
     __weak IBOutlet UILabel* _lblTitle;
     __weak IBOutlet UIButton* gotolink;
     __weak IBOutlet UIScrollView* flagScroll;
-    CLLocationCoordinate2D coordRestaurant;
-    NSString* nameRestaurant;
     NSString* actionClick;
 }
 
@@ -126,62 +123,6 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
--(void) displayLocation : (AddressAnnotation *) addAnnotation
-{
-    actionClick = @"Map";
-    
-    MKCoordinateRegion region;
-    MKCoordinateSpan span;
-    span.latitudeDelta = 0.005;
-    span.longitudeDelta = 0.005;
-    
-    region.span = span;
-    region.center = addAnnotation.coordinate;
-    
-    [mapView addAnnotation:addAnnotation];
-    [mapView setRegion:region];
-    [mapView regionThatFits:region];
-    
-    
-}
-- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    
-    static NSString* AnnotationIdentifier = @"AnnotationIdentifier";
-    
-    MKPinAnnotationView* customPinView = [[MKPinAnnotationView alloc]
-                                           initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
-    customPinView.pinColor = MKPinAnnotationColorRed;
-    customPinView.animatesDrop = YES;
-    customPinView.canShowCallout = YES;
-    
-    UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [rightButton addTarget:self
-                    action:@selector(showDetails:)
-          forControlEvents:UIControlEventTouchUpInside];
-    customPinView.rightCalloutAccessoryView = rightButton;
-    
-    UIImageView *memorialIcon = [[UIImageView alloc] initWithImage:[CommonHelpers getImageFromName:@"googlemaps_pin.png"]];
-    customPinView.leftCalloutAccessoryView = memorialIcon;
-    
-    return customPinView;
-    
-    
-}
-
--(IBAction)showDetails:(id)sender
-{
-    Class mapItemClass = [MKMapItem class];
-    if (mapItemClass && [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
-    {
-        CLLocationCoordinate2D coordinate =
-        CLLocationCoordinate2DMake(coordRestaurant.latitude, coordRestaurant.longitude);
-        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate
-                                                       addressDictionary:nil];
-        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
-        [mapItem setName:nameRestaurant];
-        [mapItem openInMapsWithLaunchOptions:nil];
-    }
-}
 
 -(IBAction)callAction:(id)sender
 {
@@ -200,7 +141,7 @@
 {
     NSString* str = [NSString stringWithFormat:@"%@",name];
     if ([str isEqualToString:@"true"]) {
-        UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, flagScroll.contentSize.height+5, 300, 14)];
+        UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(10, flagScroll.contentSize.height+5, 300, 14)];
         label.font = [UIFont fontWithName:@"Avenir" size:12];
         label.text = [NSString stringWithFormat:@"%@: Yes", key];
         label.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0];
@@ -221,16 +162,14 @@
     _restaurantObj.address = [dic objectForKey:@"address"];
     NSString* website = [NSString stringWithFormat:@"%@",[dic objectForKey:@"website"]];
     if (![website isEqualToString:@""]) {
-        mapView.frame = CGRectMake(mapView.frame.origin.x, 90, mapView.frame.size.width, mapView.frame.size.height);
         _restaurantObj.website = website;
         _website.text = @"Visit Restaurant Website";
-        flagScroll.contentSize = CGSizeMake(flagScroll.frame.size.width, 300);
+        flagScroll.contentSize = CGSizeMake(flagScroll.frame.size.width, 82);
     }
     else{
-        mapView.frame = CGRectMake(mapView.frame.origin.x, 90, mapView.frame.size.width, mapView.frame.size.height);
         //viewInfo.frame = CGRectMake(viewInfo.frame.origin.x, 0, viewInfo.frame.size.width, viewInfo.frame.size.height);
         gotolink.enabled = NO;
-        flagScroll.contentSize = CGSizeMake(flagScroll.frame.size.width, 300);
+        flagScroll.contentSize = CGSizeMake(flagScroll.frame.size.width, 82);
     }
     [self addFlag:[dic objectForKey:@"healthyOptionsFlag"] Key:@"Healthy Options"];
     [self addFlag:[dic objectForKey:@"wifiFlag"] Key:@"Wifi"];
@@ -267,12 +206,6 @@
     [self addFlag:[dic objectForKey:@"roomPrivateFlag"] Key:@"Private Room"];
     [self addFlag:[dic objectForKey:@"seatingOutdoorFlag"] Key:@"Outdoor seating"];
     
-    
-    CLLocationCoordinate2D coordi = CLLocationCoordinate2DMake(self.restaurantObj.lattitude, self.restaurantObj.longtitude);
-    coordRestaurant = coordi;
-    nameRestaurant = [dic objectForKey:@"address"];
-    AddressAnnotation *restaurantPlace = [[AddressAnnotation alloc] initWithName:self.restaurantObj.name details:[dic objectForKey:@"address"] coordinate:coordi];
-    [self displayLocation:restaurantPlace];
 }
 
 

@@ -249,16 +249,6 @@ restaurantObj=_restaurantObj;
 {
     [_activityIndicate stopAnimating];
     [_activityIndicate removeFromSuperview];
-//    NSString *jsCommand = [NSString stringWithFormat:@"document.body.style.zoom = 5.0;"];
-//    [_webview stringByEvaluatingJavaScriptFromString:jsCommand];
-//    CGSize contentSize = theWebView.scrollView.contentSize;
-//    CGSize viewSize = self.view.bounds.size;
-//    
-//    float rw = viewSize.width / contentSize.width;
-//    
-//    theWebView.scrollView.minimumZoomScale = rw;
-//    theWebView.scrollView.maximumZoomScale = rw;
-//    theWebView.scrollView.zoomScale = rw;
 }
 
 @end

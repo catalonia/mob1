@@ -21,6 +21,8 @@
 #import "TSPhotoRestaurantObj.h"
 #import "PhotoVC.h"
 #import "AskContactVC.h"
+#import "ShowMapVC.h"
+#import "ShowWebVC.h"
 
 @interface RestaurantDetailVC ()<UIScrollViewDelegate,ResShareViewDelegate,UIAlertViewDelegate,AskContactDelegate>
 {
@@ -323,10 +325,9 @@
     actionClick = [actionClick stringByAppendingString:@"Reservation"];
 //    ResQuestionVC *vc = [[ResQuestionVC alloc] initWithRestaurantObj:self.restaurantObj];
 //    [self.navigationController pushViewController:vc animated:YES];
-    NSURL *url = [NSURL URLWithString:_restaurantObj.reservationUrl];
-    
-    if (![[UIApplication sharedApplication] openURL:url])
-        NSLog(@"%@%@",@"Failed to open url:",[url description]);
+    //NSURL *url = [NSURL URLWithString:_restaurantObj.reservationUrl];
+    ShowWebVC* web = [[ShowWebVC alloc]initWithURL:_restaurantObj.reservationUrl];
+    [self presentViewController:web animated:YES completion:nil];
     
 }
 
@@ -389,17 +390,9 @@
 
 -(IBAction)showDetails:(id)sender
 {
-    Class mapItemClass = [MKMapItem class];
-    if (mapItemClass && [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
-    {
-        CLLocationCoordinate2D coordinate =
-        CLLocationCoordinate2DMake(coordRestaurant.latitude, coordRestaurant.longitude);
-        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate
-                                                       addressDictionary:nil];
-        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
-        [mapItem setName:_restaurantObj.name];
-        [mapItem openInMapsWithLaunchOptions:nil];
-    }
+    actionClick = @"Map";
+    ShowMapVC* map = [[ShowMapVC alloc]initWithRestaurant:_restaurantObj];
+    [self.navigationController pushViewController:map animated:YES];
 }
 
 -(IBAction)callAction:(id)sender

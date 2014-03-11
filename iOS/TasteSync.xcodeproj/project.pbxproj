@@ -708,6 +708,10 @@
 		E6A35591183F1E280027F222 /* appBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E6A3558E183F1E280027F222 /* appBackground.jpg */; };
 		E6A35593183F234D0027F222 /* social-networks-foursquare.20131010231035.png in Resources */ = {isa = PBXBuildFile; fileRef = E6A35592183F234D0027F222 /* social-networks-foursquare.20131010231035.png */; };
 		E6A35595183F26E20027F222 /* arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = E6A35594183F26E20027F222 /* arrow_right.png */; };
+		E6A5829318CEA68900B7508A /* ShowMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A5829118CEA68900B7508A /* ShowMapVC.m */; };
+		E6A5829418CEA68900B7508A /* ShowMapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6A5829218CEA68900B7508A /* ShowMapVC.xib */; };
+		E6A5829818CEA69B00B7508A /* ShowWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A5829618CEA69B00B7508A /* ShowWebVC.m */; };
+		E6A5829918CEA69B00B7508A /* ShowWebVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6A5829718CEA69B00B7508A /* ShowWebVC.xib */; };
 		E6AA9AC71823125800EE8ADA /* LoadDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AA9AC61823125800EE8ADA /* LoadDataCell.m */; };
 		E6AA9AC91823126500EE8ADA /* LoadDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6AA9AC81823126500EE8ADA /* LoadDataCell.xib */; };
 		E6AD26AA18AA0431000AAC9E /* CellCustomAbout.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AD26A818AA0431000AAC9E /* CellCustomAbout.m */; };
@@ -1566,6 +1570,12 @@
 		E6A3558E183F1E280027F222 /* appBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = appBackground.jpg; sourceTree = "<group>"; };
 		E6A35592183F234D0027F222 /* social-networks-foursquare.20131010231035.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "social-networks-foursquare.20131010231035.png"; sourceTree = "<group>"; };
 		E6A35594183F26E20027F222 /* arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_right.png; sourceTree = "<group>"; };
+		E6A5829018CEA68900B7508A /* ShowMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowMapVC.h; sourceTree = "<group>"; };
+		E6A5829118CEA68900B7508A /* ShowMapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowMapVC.m; sourceTree = "<group>"; };
+		E6A5829218CEA68900B7508A /* ShowMapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowMapVC.xib; sourceTree = "<group>"; };
+		E6A5829518CEA69B00B7508A /* ShowWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowWebVC.h; sourceTree = "<group>"; };
+		E6A5829618CEA69B00B7508A /* ShowWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowWebVC.m; sourceTree = "<group>"; };
+		E6A5829718CEA69B00B7508A /* ShowWebVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowWebVC.xib; sourceTree = "<group>"; };
 		E6AA9AC51823125800EE8ADA /* LoadDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadDataCell.h; sourceTree = "<group>"; };
 		E6AA9AC61823125800EE8ADA /* LoadDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadDataCell.m; sourceTree = "<group>"; };
 		E6AA9AC81823126500EE8ADA /* LoadDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadDataCell.xib; sourceTree = "<group>"; };
@@ -2146,6 +2156,8 @@
 				5E7775CC16D5D69300B0F363 /* RestaurantDetailVC.h */,
 				599B8D3918242B2200BCAF4C /* RestaurantDetailVC.m */,
 				E65BBC40181B2F2E00C12751 /* RestaurantDetailVC.xib */,
+				E6A5828E18CEA64F00B7508A /* Map */,
+				E6A5828F18CEA64F00B7508A /* WebBrowser */,
 				5E7FE48116D776F000F976B4 /* LeaveATip */,
 				5E77757F16D5D69300B0F363 /* Menu */,
 				5E77758D16D5D69300B0F363 /* MoreInfo */,
@@ -3560,6 +3572,26 @@
 			path = AskObject;
 			sourceTree = "<group>";
 		};
+		E6A5828E18CEA64F00B7508A /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				E6A5829018CEA68900B7508A /* ShowMapVC.h */,
+				E6A5829118CEA68900B7508A /* ShowMapVC.m */,
+				E6A5829218CEA68900B7508A /* ShowMapVC.xib */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		E6A5828F18CEA64F00B7508A /* WebBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				E6A5829518CEA69B00B7508A /* ShowWebVC.h */,
+				E6A5829618CEA69B00B7508A /* ShowWebVC.m */,
+				E6A5829718CEA69B00B7508A /* ShowWebVC.xib */,
+			);
+			path = WebBrowser;
+			sourceTree = "<group>";
+		};
 		E6A63ACE186896C500F8D951 /* Detail7 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3819,6 +3851,7 @@
 				5E5F174916DE025400852D6A /* ic_star_on.png in Resources */,
 				5E5F174A16DE025400852D6A /* ic_star_on@2x.png in Resources */,
 				5E5F174B16DE025400852D6A /* icon.png in Resources */,
+				E6A5829918CEA69B00B7508A /* ShowWebVC.xib in Resources */,
 				5E5F174C16DE025400852D6A /* icon@2x.png in Resources */,
 				5E5F174D16DE025400852D6A /* no_avatar.png in Resources */,
 				5E5F174E16DE025400852D6A /* no_avatar@2x.png in Resources */,
@@ -4021,6 +4054,7 @@
 				5E7FE9BC16E054D600B60D74 /* ic_bt_search_on@2x.png in Resources */,
 				5E7FE9BD16E054D600B60D74 /* ic_bt_search.png in Resources */,
 				5E7FE9BE16E054D600B60D74 /* ic_bt_search@2x.png in Resources */,
+				E6A5829418CEA68900B7508A /* ShowMapVC.xib in Resources */,
 				5E7FE9C116E05B3600B60D74 /* box_browes.png in Resources */,
 				E696A07B1848FDAE00C5C428 /* date_tile@2x.png in Resources */,
 				5E7FE9C216E05B3600B60D74 /* box_browes@2x.png in Resources */,
@@ -4289,6 +4323,7 @@
 				5E7776FA16D6035C00B0F363 /* TasteSyncFriends.m in Sources */,
 				5E7776FC16D6035C00B0F363 /* ProfileVC.m in Sources */,
 				5E77770016D6035C00B0F363 /* PromptSignUpVC.m in Sources */,
+				E6A5829318CEA68900B7508A /* ShowMapVC.m in Sources */,
 				5E77770516D6035C00B0F363 /* SelfProfileVC.m in Sources */,
 				E64F385E188D842100B990DA /* UsersFollowing.m in Sources */,
 				5E77770A16D6035C00B0F363 /* AboutTasteSyncVC.m in Sources */,
@@ -4305,6 +4340,7 @@
 				5E77771A16D6035C00B0F363 /* SettingVC.m in Sources */,
 				5E77771C16D6035C00B0F363 /* SocialNetworksVC.m in Sources */,
 				E6962D5518413984002ABE74 /* SBJson4StreamWriter.m in Sources */,
+				E6A5829818CEA69B00B7508A /* ShowWebVC.m in Sources */,
 				5E77773D16D603DF00B0F363 /* UserCell2.m in Sources */,
 				5E77773F16D603DF00B0F363 /* UsersVC.m in Sources */,
 				5E7FE43516D705E000F976B4 /* TextStickView.m in Sources */,
