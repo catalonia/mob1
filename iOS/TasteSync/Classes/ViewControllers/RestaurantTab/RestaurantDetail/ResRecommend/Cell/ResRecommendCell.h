@@ -10,6 +10,12 @@
 #import "ResRecommendObj.h"
 #import "CommonHelpers.h"
 
+@protocol ResRecommendCellDelegate <NSObject>
+
+-(void)pressAskForCell:(UITableViewCell*)cell;
+
+@end
+
 @interface ResRecommendCell : UITableViewCell
 {
     __weak IBOutlet UILabel *lbtitle, *lbDetail,* lbNumberLike;
@@ -19,6 +25,8 @@
     __weak IBOutlet UILabel *detail;
     __weak IBOutlet UIImageView *detailImage;
 }
+
+@property(nonatomic,assign) id<ResRecommendCellDelegate> delegate;
 
 - (IBAction)actionLike:(id)sender;
 

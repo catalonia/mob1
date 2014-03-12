@@ -322,7 +322,7 @@
 
 - (IBAction)actionQuestion:(id)sender
 {
-    actionClick = [actionClick stringByAppendingString:@"Reservation"];
+    actionClick = [actionClick stringByAppendingString:@",Reservation"];
 //    ResQuestionVC *vc = [[ResQuestionVC alloc] initWithRestaurantObj:self.restaurantObj];
 //    [self.navigationController pushViewController:vc animated:YES];
     //NSURL *url = [NSURL URLWithString:_restaurantObj.reservationUrl];
@@ -390,15 +390,14 @@
 
 -(IBAction)showDetails:(id)sender
 {
-    actionClick = @"Map";
+    actionClick = [actionClick stringByAppendingString:@",Map"];
     ShowMapVC* map = [[ShowMapVC alloc]initWithRestaurant:_restaurantObj];
     [self.navigationController pushViewController:map animated:YES];
 }
 
 -(IBAction)callAction:(id)sender
 {
-    NSLog(@"%@",self.restaurantObj.phone);
-    actionClick = @"Call";
+    actionClick = [actionClick stringByAppendingString:@",Call"];
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",self.restaurantObj.phone]];
     [[UIApplication sharedApplication] openURL:URL];
 }

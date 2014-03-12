@@ -105,6 +105,10 @@
         [[[CommonHelpers appDelegate] tabbarBaseVC] actionProfile:resRecommendObj.user];
 }
 
+-(IBAction)askPress:(id)sender
+{
+    [self.delegate pressAskForCell:self];
+}
 -(void)loadAvatar
 {
     UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:resRecommendObj.user.avatarUrl]]];

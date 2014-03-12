@@ -12,7 +12,7 @@
 #import "ResQuestionVC.h"
 #import "RateCustom.h"
 
-@interface ResRecommendVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface ResRecommendVC ()<UITableViewDataSource,UITableViewDelegate,ResRecommendCellDelegate>
 {
     __weak IBOutlet UITableView *tbvRecommend;
     __weak IBOutlet UIButton *btAsk;
@@ -170,6 +170,7 @@ restaurantObj=_restaurantObj;
     if (cell==nil) {
         cell =(ResRecommendCell *) [[[NSBundle mainBundle ] loadNibNamed:@"ResRecommendCell" owner:self options:nil] objectAtIndex:0];
     }
+    cell.delegate = self;
     ResRecommendObj *obj = [_arrData objectAtIndex:indexPath.row];
     [cell initForCell:obj];
     
@@ -220,27 +221,30 @@ restaurantObj=_restaurantObj;
         [self.arrData removeAllObjects];
         NSDictionary* dicResponseData = [response objectFromJSONString];
         NSArray* array  = [dicResponseData objectForKey:@"restaurantBuzzRecoList"];
-        for (NSDictionary* dicResponse in array) {
-            NSDictionary* dic = [dicResponse objectForKey:@"recommenderUser"];
-            UserObj *user = [[UserObj alloc] init];
-            user.name = [dic objectForKey:@"name"];
-            user.avatarUrl = [dic objectForKey:@"photo"];
-            user.uid = [dic objectForKey:@"userId"];
-            ResRecommendObj *obj = [[ResRecommendObj alloc] init];
-            obj.user = user;
-            obj.numberOfLikes = 0;
-            obj.title = [NSString stringWithFormat:@"%@ recommended for you.", user.name];
-            obj.recotext = [dicResponse objectForKey:@"recorequestText"];
-            obj.detail = [dicResponse objectForKey:@"replyText"];
-            obj.uid = [dicResponse objectForKey:@"replyId"];;
-            obj.tipID = TipNone;
-            [self.arrData addObject:obj];
-            numberBuzzRecoList++;
+        if ([array isKindOfClass:[NSNull class]]) {
+            for (NSDictionary* dicResponse in array) {
+                NSDictionary* dic = [dicResponse objectForKey:@"recommenderUser"];
+                UserObj *user = [[UserObj alloc] init];
+                user.name = [dic objectForKey:@"name"];
+                user.avatarUrl = [dic objectForKey:@"photo"];
+                user.uid = [dic objectForKey:@"userId"];
+                ResRecommendObj *obj = [[ResRecommendObj alloc] init];
+                obj.user = user;
+                obj.numberOfLikes = 0;
+                obj.title = [NSString stringWithFormat:@"%@ recommended for you.", user.name];
+                obj.recotext = [dicResponse objectForKey:@"recorequestText"];
+                obj.detail = [dicResponse objectForKey:@"replyText"];
+                obj.uid = [dicResponse objectForKey:@"replyId"];;
+                obj.tipID = TipNone;
+                [self.arrData addObject:obj];
+                numberBuzzRecoList++;
+            }
+            
+            if (array.count == 0) {
+                btAsk.hidden = YES;
+            }
         }
         
-        if (array.count == 0) {
-            btAsk.hidden = YES;
-        }
         
         NSArray* arrayTips = [dicResponseData objectForKey:@"restaurantBuzzTipList"];
         for (NSDictionary* dicResponse in arrayTips) {
@@ -278,6 +282,13 @@ restaurantObj=_restaurantObj;
         [tbvRecommend reloadData];
     }
     
+}
+
+-(void)pressAskForCell:(UITableViewCell *)cell
+{
+    ResQuestionVC *vc = [[ResQuestionVC alloc] initWithNibName:@"ResQuestionVC" bundle:nil];
+    vc.restaurantObj = _restaurantObj;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
