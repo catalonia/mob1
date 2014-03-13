@@ -12,6 +12,7 @@
 @interface ResRecommendCell()
 {
     ResRecommendObj *resRecommendObj;
+    __weak IBOutlet UIButton* _askButton;
 }
 
 - (IBAction)actionAvatar:(id)sender;
@@ -29,10 +30,12 @@
         detail.text = [NSString stringWithFormat:@"in response to your question - %@", obj.recotext];
     }
     if (obj.tipID == TipFromTS) {
+        _askButton.hidden = YES;
         detail.text = @"via TasteSync";
         detailImage.image = [CommonHelpers getImageFromName:@"icon_57.png"];
     }
     if (obj.tipID == TipFrom4SQ) {
+        _askButton.hidden = YES;
         detail.text = @"via foursquare";//
         detailImage.image = [CommonHelpers getImageFromName:@"social-networks-foursquare.20131010231035.png"];
     }

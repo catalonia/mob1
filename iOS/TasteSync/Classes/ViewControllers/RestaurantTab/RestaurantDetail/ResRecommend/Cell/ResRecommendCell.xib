@@ -83,6 +83,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="_askButton" destination="UjF-NC-Teh" id="20h-qK-b0w"/>
                 <outlet property="activity" destination="SBL-0g-NVX" id="O3t-gN-ZKN"/>
                 <outlet property="detail" destination="fvq-GE-oFH" id="qh1-2d-env"/>
                 <outlet property="detailImage" destination="4QE-a9-HaZ" id="2IY-Ix-hQQ"/>
