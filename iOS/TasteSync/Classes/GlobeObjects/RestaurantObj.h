@@ -40,6 +40,7 @@ typedef enum
 @property (nonatomic, assign) BOOL isCheckin;
 @property (nonatomic, assign) BOOL isLike;
 @property (nonatomic, strong) NSString *imageUrl;
+@property (nonatomic, strong) NSString *reservationUrl;
 @property (nonatomic, strong) NSString *phone;
 @property (nonatomic, assign) BOOL userSavedFlag;
 @property (nonatomic, assign) BOOL userFavFlag;

@@ -48,7 +48,9 @@
     
     NSString* actionClick;
     int numberEmailClick, numberSMSClick, numberTSClick;
-    
+    CLLocationCoordinate2D coordRestaurant;
+    NSString* nameRestaurant;
+    __weak IBOutlet UIView *viewHeader, *viewCall, *viewMap;
 }
 
 - (IBAction)actionQuestion:(id)sender;
@@ -318,9 +320,14 @@
 
 - (IBAction)actionQuestion:(id)sender
 {
-    actionClick = [actionClick stringByAppendingString:@"Ask"];
-    ResQuestionVC *vc = [[ResQuestionVC alloc] initWithRestaurantObj:self.restaurantObj];
-    [self.navigationController pushViewController:vc animated:YES];
+    actionClick = [actionClick stringByAppendingString:@"Reservation"];
+//    ResQuestionVC *vc = [[ResQuestionVC alloc] initWithRestaurantObj:self.restaurantObj];
+//    [self.navigationController pushViewController:vc animated:YES];
+    NSURL *url = [NSURL URLWithString:_restaurantObj.reservationUrl];
+    
+    if (![[UIApplication sharedApplication] openURL:url])
+        NSLog(@"%@%@",@"Failed to open url:",[url description]);
+    
 }
 
 - (IBAction)actionDeal:(id)sender
@@ -378,6 +385,34 @@
     actionClick = [actionClick stringByAppendingString:@",Photo"];
     ResPhotoVC* restPhoto = [[ResPhotoVC alloc]initWithArrayPhoto:_restaurantObj];
     [self.navigationController pushViewController:restPhoto animated:YES];
+}
+
+-(IBAction)showDetails:(id)sender
+{
+    Class mapItemClass = [MKMapItem class];
+    if (mapItemClass && [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
+    {
+        CLLocationCoordinate2D coordinate =
+        CLLocationCoordinate2DMake(coordRestaurant.latitude, coordRestaurant.longitude);
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate
+                                                       addressDictionary:nil];
+        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+        [mapItem setName:_restaurantObj.name];
+        [mapItem openInMapsWithLaunchOptions:nil];
+    }
+}
+
+-(IBAction)callAction:(id)sender
+{
+    NSLog(@"%@",self.restaurantObj.phone);
+    actionClick = @"Call";
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",self.restaurantObj.phone]];
+    [[UIApplication sharedApplication] openURL:URL];
+}
+-(IBAction)gotoWebsite:(id)sender
+{
+    actionClick = @"Website";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_restaurantObj.website]];
 }
 
 # pragma mark - others
@@ -571,6 +606,16 @@
         self.restaurantObj.isSaved                      =  [[dicResponse objectForKey:@"userRestaurantSavedFlag"] isEqualToString:@"1"]?YES:NO;
         self.restaurantObj.isFavs                         =  [[dicResponse objectForKey:@"userRestaurantFavFlag"]  isEqualToString:@"1"]?YES:NO;
         self.restaurantObj.isTipFlag                     =  [[dicResponse objectForKey:@"userRestaurantTipFlag"]  isEqualToString:@"1"]?YES:NO;
+        NSString* reservationUrl = [dicResponse objectForKey:@"reservationUrl"];
+        if (![reservationUrl  isKindOfClass:[NSNull class]] && reservationUrl != nil) {
+            _restaurantObj.reservationUrl = reservationUrl;
+        }            
+        else
+        {
+            _lbAsk.hidden = YES;
+            btUserQuestion.hidden = YES;
+        }
+        
         [self configView];
         
         NSArray* dicPhoto = [dicResponse objectForKey:@"photoList"];
@@ -642,8 +687,7 @@
             }
             else
             {
-                btUserQuestion.hidden = YES;
-                _lbAsk.hidden = YES;
+
                 if(![arrayBuzzTipList isKindOfClass:[NSNull class]])
                 {
                     NSDictionary* dicUser = [arrayBuzzTipList objectAtIndex:0];
@@ -697,6 +741,9 @@
         
         self.restaurantObj.lattitude         = [[dicInfomation objectForKey:@"restaurantLat"] floatValue];
         self.restaurantObj.longtitude        = [[dicInfomation objectForKey:@"restaurantLong"] floatValue];
+        CLLocationCoordinate2D coordi = CLLocationCoordinate2DMake(self.restaurantObj.lattitude, self.restaurantObj.longtitude);
+        coordRestaurant = coordi;
+        
         self.restaurantObj.cityObj           = [[TSCityObj alloc]init];
         self.restaurantObj.cityObj.cityName  = [dicInfomation objectForKey:@"restaurantCity"];
         
@@ -705,6 +752,29 @@
         [self setupHorizontalScrollView];
     
         actionView.hidden = YES;
+        
+        
+        NSDictionary* dicExtendInfo = [dicResponse objectForKey:@"restaurantExtendInfoObj"];
+        if(![dicExtendInfo isKindOfClass:[NSNull class]] && dicExtendInfo != nil)
+        {
+            _restaurantObj.phone = [dicExtendInfo objectForKey:@"callPhoneNumber"];
+            nameRestaurant = [dic objectForKey:@"address"];
+            viewCall.hidden = NO;
+        }
+        else
+        {
+            viewMap.frame = CGRectMake((viewHeader.frame.size.width - viewMap.frame.size.width)/2, viewMap.frame.origin.y, viewMap.frame.size.width, viewMap.frame.size.height);
+            if (_restaurantObj.lattitude == 0 ||  _restaurantObj.longtitude == 0) {
+                viewMap.hidden = YES;
+                viewHeader.hidden = YES;
+            }
+        }
+        
+        if (_restaurantObj.lattitude != 0 && _restaurantObj.longtitude != 0) {
+            viewMap.hidden = NO;
+        }
+        
+        
     }
     if (key == 3) {
         if (!_restaurantObj.isSaved) {

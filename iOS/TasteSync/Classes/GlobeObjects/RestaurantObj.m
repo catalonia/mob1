@@ -44,6 +44,7 @@ cityObj = _cityObj,
 cuisineTier2 = _cuisineTier2,
 cuisineTier2Array = _cuisineTier2Array,
 liked = _liked,
+reservationUrl = _reservationUrl,
 
 deal = _deal,
  isOpenNow = _isOpenNow,
