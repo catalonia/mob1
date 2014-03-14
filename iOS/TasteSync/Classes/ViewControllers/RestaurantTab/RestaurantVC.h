@@ -32,7 +32,7 @@
     __weak IBOutlet UIImageView* openNowImage, *chainImage;
     
     __weak IBOutlet UIView *textRoundView;
-    
+    __weak IBOutlet UIView *filterView;
     int _rating;
     BOOL saved, favs , deals, restaurantChains, isOpenNow;
     

@@ -151,6 +151,8 @@ typedef enum _TFSelect
     textRoundView.layer.cornerRadius = 5;
     textRoundView.layer.masksToBounds = YES;
     textRoundView.frame = CGRectMake(textRoundView.frame.origin.x, textRoundView.frame.origin.y, 80, textRoundView.frame.size.height);
+    filterView.frame = CGRectMake(112, filterView.frame.origin.y, filterView.frame.size.width, filterView.frame.size.height);
+    
     
     [CommonHelpers setBackgroudImageForView:self.view];
     [self.navigationController setNavigationBarHidden:YES];
@@ -1042,7 +1044,12 @@ typedef enum _TFSelect
 {
     
     textField.text = @"";
-    textRoundView.frame = CGRectMake(textRoundView.frame.origin.x, textRoundView.frame.origin.y, 133, textRoundView.frame.size.height);
+    [UIView animateWithDuration:0.3 animations:^{
+        textRoundView.frame = CGRectMake(textRoundView.frame.origin.x, textRoundView.frame.origin.y, 133, textRoundView.frame.size.height);
+        filterView.frame = CGRectMake(155, filterView.frame.origin.y, filterView.frame.size.width, filterView.frame.size.height);
+    }];
+    
+    
     if (textField == tfRestaurant) {
         TFSelected = TFRestaurant;
         lbTypingRestaurant.hidden= YES;
@@ -1073,7 +1080,10 @@ typedef enum _TFSelect
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    textRoundView.frame = CGRectMake(textRoundView.frame.origin.x, textRoundView.frame.origin.y, 80, textRoundView.frame.size.height);
+    [UIView animateWithDuration:0.3 animations:^{
+        textRoundView.frame = CGRectMake(textRoundView.frame.origin.x, textRoundView.frame.origin.y, 80, textRoundView.frame.size.height);
+        filterView.frame = CGRectMake(112, filterView.frame.origin.y, filterView.frame.size.width, filterView.frame.size.height);
+    }];
 }
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField
