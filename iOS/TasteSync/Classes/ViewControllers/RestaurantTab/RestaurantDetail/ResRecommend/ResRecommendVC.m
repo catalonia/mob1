@@ -221,7 +221,7 @@ restaurantObj=_restaurantObj;
         [self.arrData removeAllObjects];
         NSDictionary* dicResponseData = [response objectFromJSONString];
         NSArray* array  = [dicResponseData objectForKey:@"restaurantBuzzRecoList"];
-        if ([array isKindOfClass:[NSNull class]]) {
+        if (![array isKindOfClass:[NSNull class]] && array != nil) {
             for (NSDictionary* dicResponse in array) {
                 NSDictionary* dic = [dicResponse objectForKey:@"recommenderUser"];
                 UserObj *user = [[UserObj alloc] init];

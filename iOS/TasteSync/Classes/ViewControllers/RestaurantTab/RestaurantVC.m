@@ -150,7 +150,7 @@ typedef enum _TFSelect
     
     textRoundView.layer.cornerRadius = 5;
     textRoundView.layer.masksToBounds = YES;
-    textRoundView.frame = CGRectMake(textRoundView.frame.origin.x, textRoundView.frame.origin.y, 80, textRoundView.frame.size.height);
+    textRoundView.frame = CGRectMake(textRoundView.frame.origin.x, textRoundView.frame.origin.y, 87, textRoundView.frame.size.height);
     filterView.frame = CGRectMake(112, filterView.frame.origin.y, filterView.frame.size.width, filterView.frame.size.height);
     
     
@@ -1082,7 +1082,7 @@ typedef enum _TFSelect
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     [UIView animateWithDuration:0.3 animations:^{
-        textRoundView.frame = CGRectMake(textRoundView.frame.origin.x, textRoundView.frame.origin.y, 80, textRoundView.frame.size.height);
+        textRoundView.frame = CGRectMake(textRoundView.frame.origin.x, textRoundView.frame.origin.y, 87, textRoundView.frame.size.height);
         filterView.frame = CGRectMake(112, filterView.frame.origin.y, filterView.frame.size.width, filterView.frame.size.height);
     }];
 }
