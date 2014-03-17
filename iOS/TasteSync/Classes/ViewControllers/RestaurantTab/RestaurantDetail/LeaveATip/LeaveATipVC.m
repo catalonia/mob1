@@ -334,10 +334,10 @@
 }
 -(BOOL)resShareViewDidShareViaFacebook
 {
-    return facebookSelected;
+    return YES;
 }
 -(BOOL)resShareViewDidShareViaTwitter
 {
-    return twitterSelected;
+    return YES;
 }
 @end
