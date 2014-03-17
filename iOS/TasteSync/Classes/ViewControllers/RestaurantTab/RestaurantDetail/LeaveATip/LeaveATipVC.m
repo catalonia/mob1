@@ -330,4 +330,8 @@
         }
     }
 }
+-(void)resShareViewDidShareViaFacebook
+{
+    
+}
 @end
