@@ -48,8 +48,8 @@
                         <action selector="actionBack:" destination="-1" eventType="touchUpInside" id="27"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="21" userLabel="Button - Newsfeed tab">
-                    <rect key="frame" x="280" y="8" width="32" height="28"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="21" userLabel="Button - Newsfeed tab">
+                    <rect key="frame" x="285" y="10" width="26" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" image="ic_bt_share.png">

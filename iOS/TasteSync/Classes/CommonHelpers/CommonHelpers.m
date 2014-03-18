@@ -245,10 +245,10 @@ void debug(NSString *format, ...)
 
 
 
-+ (void) showShareView:(id<ResShareViewDelegate>) delegate andObj:(id) obj;
++ (void) showShareView:(id<ResShareViewDelegate>) delegate andObj:(id) obj Title:(NSString*)title Subtitle:(NSString*)subtitle Content:(NSString*)content
 {
     ResShareView *shareView = [[ResShareView alloc] initWithFrame:CGRectZero];
-    [shareView shareRestaurant:obj andDelegate:delegate];
+    [shareView shareRestaurant:obj andDelegate:delegate Title:title Subtitle:subtitle Content:content];
 }
 
 + (NSDictionary*)getJSONUserObj:(UserObj*)user

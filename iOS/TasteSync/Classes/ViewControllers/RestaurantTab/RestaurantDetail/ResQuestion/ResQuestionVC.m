@@ -114,7 +114,7 @@ restaurantObj=_restaurantObj;
 
 - (IBAction)actionShare:(id)sender
 {
-    [CommonHelpers showShareView:nil andObj:_restaurantObj];
+    //[CommonHelpers showShareView:nil andObj:_restaurantObj];
 
 }
 

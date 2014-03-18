@@ -17,6 +17,11 @@
 @interface ResShareView()<UIAlertViewDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
 {
     MFMailComposeViewController *mailer;
+    NSString* _title;
+    NSString* _subtitle;
+    NSString* _content;
+    
+    
 }
 
 @end
@@ -41,11 +46,14 @@ delegate=_delegate;
 
 
 
-- (void) shareRestaurant:(RestaurantObj *) resObj andDelegate:(id<ResShareViewDelegate>) i_delegate;
+- (void) shareRestaurant:(RestaurantObj *) resObj andDelegate:(id<ResShareViewDelegate>) i_delegate Title:(NSString*)title Subtitle:(NSString*)subtitle Content:(NSString*)content
 
 {
     self.delegate = i_delegate;
     self.restaurantObj = resObj;
+    _title = title;
+    _subtitle = subtitle;
+    _content = content;
     
     [[[UIApplication sharedApplication] keyWindow] addSubview:self];    
    
@@ -115,11 +123,12 @@ delegate=_delegate;
 {
 
 //    ResShareFB *shareFbView = [[ResShareFB alloc] initWithFrame:CGRectZero];
-    if ([[[FBSession activeSession]permissions]indexOfObject:@"publish_actions"] == NSNotFound) {
-        
-        [CommonHelpers showInfoAlertWithTitle:@"TasteSync" message:@"Tastesync needs your permission to share on Facebook" delegate:nil tag:0];
-        
-    }else{
+//    if ([[[FBSession activeSession]permissions]indexOfObject:@"publish_actions"] == NSNotFound) {
+//        
+//        [CommonHelpers showInfoAlertWithTitle:@"TasteSync" message:@"Tastesync needs your permission to share on Facebook" delegate:nil tag:0];
+//        
+//    }else
+    {
         //[NSArray arrayWithObjects:@"publish_stream", nil]
         [FBSession openActiveSessionWithPublishPermissions:nil defaultAudience:FBSessionDefaultAudienceEveryone allowLoginUI:YES completionHandler:^(FBSession *session,
                                                                                                                                                        FBSessionState state, NSError *error) {
@@ -149,9 +158,9 @@ delegate=_delegate;
                 }
                 // If the Facebook app isn't available, show the Feed dialog as a fallback
                 else {
-                    NSDictionary* params = @{@"name": [NSString stringWithFormat:@"%@",_restaurantObj.name],
-                                             @"caption": @"Sent via TasteSync",
-                                             @"description": @"Live Restaurant recommendations from foodies that share your tastes",
+                    NSDictionary* params = @{@"name": _title,
+                                             @"caption": _subtitle,
+                                             @"description": _content,
                                              @"link": @"http://www.apple.com/osx/apps/app-store.html",
                                              @"picture": @"http://pbs.twimg.com/profile_images/3383334096/83e1ce2766040c82958c5f465ee07c48_reasonably_small.png"};
                     

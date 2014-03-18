@@ -52,7 +52,7 @@ void debug(NSString *format, ...);
 
 + (void) clearUserDefault;
 
-+ (void) showShareView:(id<ResShareViewDelegate>) delegate andObj:(id) obj;
++ (void) showShareView:(id<ResShareViewDelegate>) delegate andObj:(id) obj Title:(NSString*)title Subtitle:(NSString*)subtitle Content:(NSString*)content;
 
 + (NSDictionary*)getJSONUserObj:(UserObj*)user;
 

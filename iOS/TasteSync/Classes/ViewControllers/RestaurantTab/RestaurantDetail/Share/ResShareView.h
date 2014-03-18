@@ -42,7 +42,7 @@
 @property (nonatomic, strong) RestaurantObj *restaurantObj;
 @property (nonatomic, strong ) TWTweetComposeViewController *twtcontroller ;
 
-- (void) shareRestaurant:(RestaurantObj *) resObj andDelegate:(id<ResShareViewDelegate>) i_delegate;
+- (void) shareRestaurant:(RestaurantObj *) resObj andDelegate:(id<ResShareViewDelegate>) i_delegate Title:(NSString*)title Subtitle:(NSString*)subtitle Content:(NSString*)content;
 
 
 @end
