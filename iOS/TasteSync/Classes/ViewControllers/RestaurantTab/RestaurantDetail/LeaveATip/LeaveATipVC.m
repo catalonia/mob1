@@ -12,7 +12,7 @@
 #import "RateCustom.h"
 
 
-@interface LeaveATipVC ()<ResShareViewDelegate>
+@interface LeaveATipVC ()<ResShareViewDelegate,UIAlertViewDelegate>
 {
     BOOL facebookSelected, twitterSelected;
     __weak IBOutlet UILabel* lbTimeOpen;
@@ -328,7 +328,15 @@
         if (data != nil) {
             tvTip.text = @"";
             lbTvTip.hidden = NO;
-            [CommonHelpers showInfoAlertWithTitle:@"TasteSync" message:@"Success!" delegate:nil tag:0];
+            if (!facebookSelected) {
+                [CommonHelpers showInfoAlertWithTitle:@"TasteSync" message:@"Success! Tip shared on TasteSync" delegate:nil tag:0];
+            }
+            else
+            {
+                [CommonHelpers showInfoAlertWithTitle:@"TasteSync" message:@"Success! Tip shared on TasteSync and posted to your Facebook timeline" delegate:self tag:0];
+                
+                
+            }
         }
     }
 }
@@ -339,5 +347,9 @@
 -(BOOL)resShareViewDidShareViaTwitter
 {
     return YES;
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [CommonHelpers shareToFacebook:self andObj:_restaurantObj Title:_restaurantObj.name Subtitle:[NSString stringWithFormat:@"%@ shared a tip on TasteSync", [NSString stringWithFormat:@"%@ %@", [UserDefault userDefault].user.firstname, [UserDefault userDefault].user.lastname]] Content:[NSString stringWithFormat:@"%@. Download TasteSync from the App Store http://www.apple.com/osx/apps/app-store.html", tvTip.text]];
 }
 @end

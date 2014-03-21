@@ -78,7 +78,15 @@ delegate=_delegate;
                      }];
 
 }
-
+-(void)shareToFacebookRestaurant:(RestaurantObj *) resObj andDelegate:(id<ResShareViewDelegate>) i_delegate Title:(NSString*)title Subtitle:(NSString*)subtitle Content:(NSString*)content
+{
+    self.delegate = i_delegate;
+    self.restaurantObj = resObj;
+    _title = title;
+    _subtitle = subtitle;
+    _content = content;
+    [self actionShareViaFacebook:nil];
+}
 # pragma mark - IBAction's define
 
 - (IBAction)actionShareViaMessage:(id)sender

@@ -43,6 +43,6 @@
 @property (nonatomic, strong ) TWTweetComposeViewController *twtcontroller ;
 
 - (void) shareRestaurant:(RestaurantObj *) resObj andDelegate:(id<ResShareViewDelegate>) i_delegate Title:(NSString*)title Subtitle:(NSString*)subtitle Content:(NSString*)content;
-
+-(void)shareToFacebookRestaurant:(RestaurantObj *) resObj andDelegate:(id<ResShareViewDelegate>) i_delegate Title:(NSString*)title Subtitle:(NSString*)subtitle Content:(NSString*)content;
 
 @end

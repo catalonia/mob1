@@ -54,6 +54,8 @@ void debug(NSString *format, ...);
 
 + (void) showShareView:(id<ResShareViewDelegate>) delegate andObj:(id) obj Title:(NSString*)title Subtitle:(NSString*)subtitle Content:(NSString*)content;
 
++ (void) shareToFacebook:(id<ResShareViewDelegate>) delegate andObj:(id) obj Title:(NSString*)title Subtitle:(NSString*)subtitle Content:(NSString*)content;
+
 + (NSDictionary*)getJSONUserObj:(UserObj*)user;
 
 + (UserObj*)getUserObj:(NSDictionary*)dictionary;

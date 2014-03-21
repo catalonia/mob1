@@ -251,6 +251,12 @@ void debug(NSString *format, ...)
     [shareView shareRestaurant:obj andDelegate:delegate Title:title Subtitle:subtitle Content:content];
 }
 
++ (void) shareToFacebook:(id<ResShareViewDelegate>) delegate andObj:(id) obj Title:(NSString*)title Subtitle:(NSString*)subtitle Content:(NSString*)content;
+{
+    ResShareView *shareView = [[ResShareView alloc] initWithFrame:CGRectZero];
+    [shareView shareToFacebookRestaurant:obj andDelegate:delegate Title:title Subtitle:subtitle Content:content];
+}
+
 + (NSDictionary*)getJSONUserObj:(UserObj*)user
 {
     NSMutableDictionary* dic = [NSMutableDictionary dictionary];
