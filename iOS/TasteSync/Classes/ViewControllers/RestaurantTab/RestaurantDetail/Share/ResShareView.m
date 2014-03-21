@@ -121,13 +121,12 @@ delegate=_delegate;
 }
 - (IBAction)actionShareViaFacebook:(id)sender
 {
-
-//    ResShareFB *shareFbView = [[ResShareFB alloc] initWithFrame:CGRectZero];
-//    if ([[[FBSession activeSession]permissions]indexOfObject:@"publish_actions"] == NSNotFound) {
-//        
-//        [CommonHelpers showInfoAlertWithTitle:@"TasteSync" message:@"Tastesync needs your permission to share on Facebook" delegate:nil tag:0];
-//        
-//    }else
+    //ResShareFB *shareFbView = [[ResShareFB alloc] initWithFrame:CGRectZero];
+    //if ([[[FBSession activeSession]permissions]indexOfObject:@"publish_actions"] == NSNotFound) {
+    if (![self.delegate resShareViewDidShareViaFacebook]) {
+        [CommonHelpers showInfoAlertWithTitle:@"TasteSync" message:@"Tastesync needs your permission to share on Facebook" delegate:nil tag:0];
+        
+    }else
     {
         //[NSArray arrayWithObjects:@"publish_stream", nil]
         [FBSession openActiveSessionWithPublishPermissions:nil defaultAudience:FBSessionDefaultAudienceEveryone allowLoginUI:YES completionHandler:^(FBSession *session,
@@ -187,7 +186,7 @@ delegate=_delegate;
 }
 - (IBAction)actionShareViaTwitter:(id)sender
 {
-     
+     [self.delegate resShareViewDidShareViaTwitter];
     if (_restaurantObj) {
         NSString *msg = [NSString stringWithFormat:@"Check out this restaurant. I found on TasteSync: %@, get the TastSync app at %@ to...",TASTESYNC_URL,_restaurantObj.name];
         [self shareTwitter:msg image:nil linkUrl:nil];

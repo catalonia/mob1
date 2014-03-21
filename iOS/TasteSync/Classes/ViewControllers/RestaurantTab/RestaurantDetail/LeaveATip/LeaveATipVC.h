@@ -13,7 +13,7 @@
 
 @interface LeaveATipVC : UIViewController<UITextViewDelegate, RequestDelegate>
 {
-    __weak IBOutlet UILabel *lbRestaurantName, *lbRestaurantDetail, *lbTvTip;
+    __weak IBOutlet UILabel *lbRestaurantName, *lbRestaurantDetail, *lbTvTip, *shareFacebookLabel;
     __weak IBOutlet UITextView *tvTip;
     __weak IBOutlet UIView *btTipView;
     __weak IBOutlet UIButton *btSave;

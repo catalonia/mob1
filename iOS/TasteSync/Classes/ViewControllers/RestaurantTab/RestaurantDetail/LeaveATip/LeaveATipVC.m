@@ -140,11 +140,13 @@
     if (facebookSelected) {
         [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"facebook_off.png"] forButton:btFacebook];
         facebookSelected = NO;
+        shareFacebookLabel.text = @"Sharing Off";
     }
     else
     {
         [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"facebook.png"] forButton:btFacebook];
         facebookSelected = YES;
+        shareFacebookLabel.text = @"Sharing On";
     }
 }
 - (IBAction)actionShareTwitter:(id)sender
@@ -330,8 +332,12 @@
         }
     }
 }
--(void)resShareViewDidShareViaFacebook
+-(BOOL)resShareViewDidShareViaFacebook
 {
-    
+    return facebookSelected;
+}
+-(BOOL)resShareViewDidShareViaTwitter
+{
+    return twitterSelected;
 }
 @end

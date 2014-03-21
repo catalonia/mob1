@@ -15,13 +15,13 @@
 
 @optional
 
-- (void) resShareViewDidShareViaMessage;
-- (void) resShareViewDidShareViaMail;
-- (void) resShareViewDidShareViaFacebook;
-- (void) resShareViewDidShareViaDirections;
-- (void) resShareViewDidShareViaCall;
-- (void) resShareViewDidShareViaTwitter;
-- (void) resShareViewDidCancel;
+- (BOOL) resShareViewDidShareViaMessage;
+- (BOOL) resShareViewDidShareViaMail;
+- (BOOL) resShareViewDidShareViaFacebook;
+- (BOOL) resShareViewDidShareViaDirections;
+- (BOOL) resShareViewDidShareViaCall;
+- (BOOL) resShareViewDidShareViaTwitter;
+- (BOOL) resShareViewDidCancel;
 
 @end
 
