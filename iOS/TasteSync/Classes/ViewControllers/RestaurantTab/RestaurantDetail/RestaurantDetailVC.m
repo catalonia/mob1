@@ -27,7 +27,7 @@
 @interface RestaurantDetailVC ()<UIScrollViewDelegate,ResShareViewDelegate,UIAlertViewDelegate,AskContactDelegate>
 {
     __weak IBOutlet UIScrollView *scrollViewPhotos,*scrollViewMain;
-    __weak IBOutlet UIView *view1,*view2,*view3,*view4,*viewImage, *viewDeal;
+    __weak IBOutlet UIView *view1,*view2,*view3,*view4,*viewImage, *viewDeal, *viewTip;
     __weak IBOutlet UILabel *lbName,*lbDetail,*lbsortMSg,*lbLongMsg, *lbSave, *lbFav;
     __weak IBOutlet UIButton *btSave,*btUserQuestion,*btMore, *btMenu, *btMoreInfo,*btReviews,*btReserve,*btAddToMyFavorites , *btBack, *btRestaurant,*btAvatar;
     
@@ -411,7 +411,7 @@
 
 - (void) configView
 {
-    [scrollViewMain setContentSize:CGSizeMake(320, 580)];
+    [scrollViewMain setContentSize:CGSizeMake(320, 700)];
     if (_restaurantObj.isSaved) {
         [CommonHelpers setBackgroundImage:[CommonHelpers getImageFromName:@"ic_saved_on.png"] forButton:btSave];
         lbSave.text = @"Try Later";
@@ -679,35 +679,39 @@
             }
             else
             {
-
-                if(![arrayBuzzTipList isKindOfClass:[NSNull class]])
-                {
-                    NSDictionary* dicUser = [arrayBuzzTipList objectAtIndex:0];
-                    _userBuzz = [[UserObj alloc]init];
-                    lbLongMsg.text = [dicUser objectForKey:@"tipText"];
-                    lbsortMSg.text = [NSString stringWithFormat:@"%@ %@ left a tip", [dicUser objectForKey:@"tipUserFirstName"],[dicUser objectForKey:@"tipUserLastName"]];
-                    
-                    NSString* via = [NSString stringWithFormat:@"%@", [dicUser objectForKey:@"tipSource"]];
-                    if ([via isEqualToString:@"4SQ"]) {
-                        lbsortMSg.text = [lbsortMSg.text stringByAppendingString:@" via foursquare"];
-                        btAvatar.enabled = NO;
-                    }
-                    if ([via isEqualToString:@"TS"]) {
-                        lbsortMSg.text = [lbsortMSg.text stringByAppendingString:@" via TasteSync"];
-                    }
-                    _userBuzz.avatarUrl = [dicUser objectForKey:@"tipUserPhoto"];
-                    _userBuzz.uid = [dicUser objectForKey:@"tipUserId"];
-                    if (![_userBuzz.avatarUrl isKindOfClass:[NSNull class]]) {
-                        [NSThread detachNewThreadSelector:@selector(loadImageUserObj) toTarget:self withObject:nil];
-                    }
-                }
+                view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 120, view4.frame.size.width, view4.frame.size.height);
+                viewTip.frame = CGRectMake(viewTip.frame.origin.x, viewTip.frame.origin.y - 163, viewTip.frame.size.width, viewTip.frame.size.height);
+                viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 120, viewImage.frame.size.width, viewImage.frame.size.height);
+                view2.hidden = YES;
+            }
+            
+            if(![arrayBuzzTipList isKindOfClass:[NSNull class]])
+            {
+                NSDictionary* dicUser = [arrayBuzzTipList objectAtIndex:0];
+                _userBuzz = [[UserObj alloc]init];
+                lbLongMsg.text = [dicUser objectForKey:@"tipText"];
+                lbsortMSg.text = [NSString stringWithFormat:@"%@ %@ left a tip", [dicUser objectForKey:@"tipUserFirstName"],[dicUser objectForKey:@"tipUserLastName"]];
                 
-                else
-                {
-                    view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 120, view4.frame.size.width, view4.frame.size.height);
-                    viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 120, viewImage.frame.size.width, viewImage.frame.size.height);
-                    view2.hidden = YES;
+                NSString* via = [NSString stringWithFormat:@"%@", [dicUser objectForKey:@"tipSource"]];
+                if ([via isEqualToString:@"4SQ"]) {
+                    lbsortMSg.text = [lbsortMSg.text stringByAppendingString:@" via foursquare"];
+                    btAvatar.enabled = NO;
                 }
+                if ([via isEqualToString:@"TS"]) {
+                    lbsortMSg.text = [lbsortMSg.text stringByAppendingString:@" via TasteSync"];
+                }
+                _userBuzz.avatarUrl = [dicUser objectForKey:@"tipUserPhoto"];
+                _userBuzz.uid = [dicUser objectForKey:@"tipUserId"];
+                if (![_userBuzz.avatarUrl isKindOfClass:[NSNull class]]) {
+                    [NSThread detachNewThreadSelector:@selector(loadImageUserObj) toTarget:self withObject:nil];
+                }
+            }
+            
+            else
+            {
+                viewTip.hidden = YES;
+                view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 120, view4.frame.size.width, view4.frame.size.height);
+                viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 120, viewImage.frame.size.width, viewImage.frame.size.height);
             }
         }
         

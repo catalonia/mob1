@@ -48,9 +48,11 @@ askSubmited=_askSubmited;
         
 
         if ([UserDefault userDefault].isNotification != YES) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"TasteSync Would Like to Send You Push Notifications" message:MSG_NOTIFICATION delegate:self cancelButtonTitle:@"Don't Allow" otherButtonTitles:@"OK", nil];
-            alert.tag = 1;
-            [alert show];
+            //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"TasteSync Would Like to Send You Push Notifications" message:MSG_NOTIFICATION delegate:self cancelButtonTitle:@"Don't Allow" otherButtonTitles:@"OK", nil];
+            //alert.tag = 1;
+            //[alert show];
+            [UserDefault userDefault].isNotification = YES;
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
         }
         
         //[UserDefault userDefault].oauth_token = @"";
