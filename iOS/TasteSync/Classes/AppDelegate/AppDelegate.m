@@ -491,6 +491,7 @@ askSubmited=_askSubmited;
                             @"user_likes",
                             @"user_checkins",
                             @"user_photos",
+                            @"publish_actions",
                             nil];
     
 

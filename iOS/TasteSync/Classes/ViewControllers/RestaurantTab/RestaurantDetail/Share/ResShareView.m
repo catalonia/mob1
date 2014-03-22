@@ -85,7 +85,7 @@ delegate=_delegate;
     _title = title;
     _subtitle = subtitle;
     _content = content;
-    [self actionShareViaFacebook:nil];
+    [self shareFacebook];
 }
 # pragma mark - IBAction's define
 
@@ -126,6 +126,65 @@ delegate=_delegate;
         [CommonHelpers showInfoAlertWithTitle:APP_NAME message:@"Your devide doesn't support this function." delegate:nil tag:1];
     }
     
+}
+- (IBAction)shareFacebook
+{
+    //ResShareFB *shareFbView = [[ResShareFB alloc] initWithFrame:CGRectZero];
+    //if ([[[FBSession activeSession]permissions]indexOfObject:@"publish_actions"] == NSNotFound) {
+    if (![self.delegate resShareViewDidShareViaFacebook]) {
+        [CommonHelpers showInfoAlertWithTitle:@"TasteSync" message:@"Tastesync needs your permission to share on Facebook" delegate:nil tag:0];
+        
+    }else
+    {
+        
+        NSDictionary* params = @{@"name": _title,
+                                 @"caption": _subtitle,
+                                 @"description": _content,
+                                 @"link": @"http://www.apple.com/osx/apps/app-store.html",
+                                 @"picture": @"http://pbs.twimg.com/profile_images/3383334096/83e1ce2766040c82958c5f465ee07c48_reasonably_small.png"};
+        
+        if (FBSession.activeSession.isOpen)
+        {
+            [FBRequestConnection startWithGraphPath:@"/me/feed"
+                                         parameters:params
+                                         HTTPMethod:@"POST"
+                                  completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                                      if (!error) {
+                                          // Link posted successfully to Facebook
+                                          NSLog(@"Success");
+                                      } else {
+                                          // An error occurred, we need to handle the error
+                                          // See: https://developers.facebook.com/docs/ios/errors
+                                          NSLog(@"Error");
+                                      }
+                                  }];
+        } else {
+            
+            [FBSession.activeSession
+             requestNewPublishPermissions:[NSArray arrayWithObject:@"publish_actions"]
+             defaultAudience:FBSessionDefaultAudienceEveryone
+             completionHandler:^(FBSession *session, NSError *error) {
+                 if (error) {
+                 } else {
+                     [FBRequestConnection startWithGraphPath:@"/me/feed"
+                                                  parameters:params
+                                                  HTTPMethod:@"POST"
+                                           completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                                               if (!error) {
+                                                   // Link posted successfully to Facebook
+                                                   NSLog(@"Success");
+                                               } else {
+                                                   // An error occurred, we need to handle the error
+                                                   // See: https://developers.facebook.com/docs/ios/errors
+                                                   NSLog(@"Error");
+                                               }
+                                           }];
+                 }
+             }];
+        }
+        
+        
+    }
 }
 - (IBAction)actionShareViaFacebook:(id)sender
 {
