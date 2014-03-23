@@ -159,28 +159,29 @@ delegate=_delegate;
                                       }
                                   }];
         } else {
-            
-            [FBSession.activeSession
-             requestNewPublishPermissions:[NSArray arrayWithObject:@"publish_actions"]
-             defaultAudience:FBSessionDefaultAudienceEveryone
-             completionHandler:^(FBSession *session, NSError *error) {
-                 if (error) {
-                 } else {
-                     [FBRequestConnection startWithGraphPath:@"/me/feed"
-                                                  parameters:params
-                                                  HTTPMethod:@"POST"
-                                           completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                                               if (!error) {
-                                                   // Link posted successfully to Facebook
-                                                   NSLog(@"Success");
-                                               } else {
-                                                   // An error occurred, we need to handle the error
-                                                   // See: https://developers.facebook.com/docs/ios/errors
-                                                   NSLog(@"Error");
-                                               }
-                                           }];
-                 }
-             }];
+            FBSession* session = [FBSession activeSession];
+            FBSessionLoginBehavior behavior = FBSessionLoginBehaviorWithFallbackToWebView;
+            [session openWithBehavior:behavior completionHandler:^(FBSession *session, FBSessionState status,                             NSError *error) {
+                if (error) {
+                    
+                }
+                else
+                {
+                    [FBRequestConnection startWithGraphPath:@"/me/feed"
+                                                 parameters:params
+                                                 HTTPMethod:@"POST"
+                                          completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                                              if (!error) {
+                                                  // Link posted successfully to Facebook
+                                                  NSLog(@"Success");
+                                              } else {
+                                                  // An error occurred, we need to handle the error
+                                                  // See: https://developers.facebook.com/docs/ios/errors
+                                                  NSLog(@"Error");
+                                              }
+                                          }];
+                }
+            }];
         }
         
         

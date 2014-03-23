@@ -328,6 +328,7 @@
     if (key == 2) {
         if (data != nil) {
             tipString = tvTip.text;
+            [tvTip resignFirstResponder];
             tvTip.text = @"";
             lbTvTip.hidden = NO;
             if (!facebookSelected) {
