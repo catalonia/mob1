@@ -80,10 +80,10 @@
         self.arrData = delegate.arrayNotification;
     }
     page = 1;
-    if(_arrData.count == 1)
-    {
-        [self gotoDetailNotification:[_arrData objectAtIndex:0] atIndex:0 ];
-    }
+//    if(_arrData.count == 1)
+//    {
+//        [self gotoDetailNotification:[_arrData objectAtIndex:0] atIndex:0 ];
+//    }
     userDefault = [UserDefault userDefault];
     tbvUnread.separatorStyle = UITableViewCellSelectionStyleNone ;
     

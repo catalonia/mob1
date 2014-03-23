@@ -202,7 +202,7 @@
 }
 - (IBAction)actionNewsfeed:(id)sender
 {
-    [CommonHelpers showShareView:self andObj:_restaurantObj Title:_restaurantObj.name Subtitle:[NSString stringWithFormat:@"%@ shared a tip on TasteSync", [NSString stringWithFormat:@"%@ %@", [UserDefault userDefault].user.firstname, [UserDefault userDefault].user.lastname]] Content:[NSString stringWithFormat:@"%@. Download TasteSync from the App Store http://www.apple.com/osx/apps/app-store.html", tvTip.text]];
+    [CommonHelpers showShareView:self andObj:_restaurantObj Title:_restaurantObj.name Subtitle:[NSString stringWithFormat:@"%@ shared a tip on TasteSync", [NSString stringWithFormat:@"%@ %@", [UserDefault userDefault].user.firstname, [UserDefault userDefault].user.lastname]] Content:[NSString stringWithFormat:@"%@. Download TasteSync from the App Store", tvTip.text]];
 }
 - (IBAction)actionBack:(id)sender
 {
@@ -351,6 +351,6 @@
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [CommonHelpers shareToFacebook:self andObj:_restaurantObj Title:_restaurantObj.name Subtitle:[NSString stringWithFormat:@"%@ shared a tip on TasteSync", [NSString stringWithFormat:@"%@ %@", [UserDefault userDefault].user.firstname, [UserDefault userDefault].user.lastname]] Content:[NSString stringWithFormat:@"%@. Download TasteSync from the App Store http://www.apple.com/osx/apps/app-store.html", tipString]];
+    [CommonHelpers shareToFacebook:self andObj:_restaurantObj Title:_restaurantObj.name Subtitle:[NSString stringWithFormat:@"%@ shared a tip on TasteSync", [NSString stringWithFormat:@"%@ %@", [UserDefault userDefault].user.firstname, [UserDefault userDefault].user.lastname]] Content:[NSString stringWithFormat:@"%@. Download TasteSync from the App Store", tipString]];
 }
 @end

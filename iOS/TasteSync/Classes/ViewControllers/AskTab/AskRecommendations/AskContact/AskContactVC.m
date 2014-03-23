@@ -222,12 +222,12 @@
             {
                 NSString *phone = (__bridge_transfer NSString
                                    *)ABMultiValueCopyValueAtIndex(phones, j);
-                NSString* mobileLabel = (__bridge_transfer NSString*)ABMultiValueCopyLabelAtIndex(phones, j);
-                if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel] || [mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel] || [mobileLabel isEqualToString:(NSString*)kABPersonPhoneMainLabel]) {
+                //NSString* mobileLabel = (__bridge_transfer NSString*)ABMultiValueCopyLabelAtIndex(phones, j);
+                //if([mobileLabel isEqualToString:(NSString *)kABPersonPhoneMobileLabel] || [mobileLabel isEqualToString:(NSString*)kABPersonPhoneIPhoneLabel] || [mobileLabel isEqualToString:(NSString*)kABPersonPhoneMainLabel]) {
                     [person.phone addObject:phone];
-                }
+                //}
             }
-            if (person.email.count != 0 || person.email.count != 0) {
+            if (person.email.count != 0 || person.phone.count != 0) {
                 person.tasteSyncID = NO;
                 [_arrayContact addObject:person];
             }

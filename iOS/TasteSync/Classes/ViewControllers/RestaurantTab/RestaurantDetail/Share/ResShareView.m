@@ -140,7 +140,7 @@ delegate=_delegate;
         NSDictionary* params = @{@"name": _title,
                                  @"caption": _subtitle,
                                  @"description": _content,
-                                 @"link": @"http://www.apple.com/osx/apps/app-store.html",
+                                 @"link": @"http://bit.ly/OBJdBC",
                                  @"picture": @"http://pbs.twimg.com/profile_images/3383334096/83e1ce2766040c82958c5f465ee07c48_reasonably_small.png"};
         
         if (FBSession.activeSession.isOpen)
@@ -201,7 +201,7 @@ delegate=_delegate;
                                                                                                                                                        FBSessionState state, NSError *error) {
             if (FBSession.activeSession.isOpen && !error) {
                 id<FBOpenGraphAction> action = (id<FBOpenGraphAction>)[FBGraphObject graphObject];
-                [action setObject:@"http://www.apple.com/osx/apps/app-store.html"forKey:@"book"];
+                [action setObject:@"http://bit.ly/OBJdBC"forKey:@"book"];
                 
                 
                 
@@ -228,7 +228,7 @@ delegate=_delegate;
                     NSDictionary* params = @{@"name": _title,
                                              @"caption": _subtitle,
                                              @"description": _content,
-                                             @"link": @"http://www.apple.com/osx/apps/app-store.html",
+                                             @"link": @"http://bit.ly/OBJdBC",
                                              @"picture": @"http://pbs.twimg.com/profile_images/3383334096/83e1ce2766040c82958c5f465ee07c48_reasonably_small.png"};
                     
                     [FBWebDialogs presentFeedDialogModallyWithSession:nil

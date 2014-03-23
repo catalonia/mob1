@@ -210,7 +210,7 @@
 - (void)handleSelectedIndex:(NSUInteger)index
 {
     numberImageSeen++;
-    if (arrayObjects != nil && arrayObjects.count != 0) {
+    if (arrayObjects != nil && arrayObjects.count != 0 && index < arrayObjects.count) {
         TSPhotoRestaurantObj *photoObj = [arrayObjects objectAtIndex:index];
         
         //    int actualSize = size < photoObj.allowSize ? size : photoObj.allowSize;
