@@ -959,6 +959,10 @@
 #pragma mark TableViewDelegate & TableViewDatasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (_arrayData.count != 0)
+        tbvResult.hidden = NO;
+    else
+        tbvResult.hidden = YES;
     return _arrayData.count;
     
 }
@@ -995,6 +999,13 @@
     [_arrayData removeAllObjects];
     
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView!=tbvResult) {
+        cell.backgroundColor = [UIColor blackColor];
+    }
+}
+
 - (void) searchLocal:(NSString *)txt
 {
     //NSString *str = [NSString stringWithFormat:@"name MATCHES[cd] '%@.*'", [CommonHelpers trim:txt]];

@@ -469,6 +469,11 @@ arrDataFilter=_arrDataFilter;;
     }else
     {
         if (_arrDataFilter) {
+            if (_arrDataFilter.count != 0)
+                tbvFilter.hidden = NO;
+            else
+                tbvFilter.hidden = YES;
+            
             return _arrDataFilter.count;
         }
     }

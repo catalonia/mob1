@@ -79,8 +79,8 @@ arrDataFilter=_arrDataFilter;
     
     if([CommonHelpers isPhone5])
     {
-        tvLongMsg.frame = CGRectMake(tvLongMsg.frame.origin.x, tvLongMsg.frame.origin.y, tvLongMsg.frame.size.width, tvLongMsg.frame.size.height + 95);
-        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height + 95);
+        tvLongMsg.frame = CGRectMake(tvLongMsg.frame.origin.x, tvLongMsg.frame.origin.y, tvLongMsg.frame.size.width, tvLongMsg.frame.size.height);
+        imageView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.size.width, imageView.frame.size.height);
     }
     
     _notificationObj.unread = NO;
@@ -353,6 +353,11 @@ arrDataFilter=_arrDataFilter;
     }else
     {
         if (_arrDataFilter) {
+            if (_arrDataFilter.count == 0) {
+                tbvFilter.hidden = YES;
+            }
+            else
+                tbvFilter.hidden = NO;
             return _arrDataFilter.count;
         }
     }

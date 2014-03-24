@@ -363,6 +363,10 @@ arrDataFilter=_arrDataFilter;
     }else
     {
         if (_arrDataFilter) {
+            if (_arrDataFilter.count == 0)
+                tbvFilter.hidden = YES;
+            else
+                tbvFilter.hidden = NO;
             return _arrDataFilter.count;
         }
     }
