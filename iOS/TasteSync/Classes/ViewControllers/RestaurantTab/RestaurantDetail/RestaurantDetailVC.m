@@ -36,6 +36,10 @@
     UserObj* _userBuzz;
     __weak IBOutlet UILabel* lbOpenNow, *lbDeal;
     __weak IBOutlet UILabel* _lbMenu, *_lbMore, *_lbAsk;
+    
+    __weak IBOutlet UILabel *lbNameTip,*lbDetailTip,*lbTitleTip;
+    __weak IBOutlet UIImageView* _avatarTip;
+    
     BOOL isSaved, restaurantChains, isAddToMyFaves, isReload;
     ResShareView *shareView ;    
     ResRecommendObj *resRecommendObj ;
@@ -655,9 +659,10 @@
 
             
             if (![arrayBuzzRecoList isKindOfClass:[NSNull class]]) {
+                
                 NSDictionary* dicUser = [arrayBuzzRecoList objectAtIndex:0];
                 _userBuzz = [[UserObj alloc]init];
-                lbLongMsg.text = [dicUser objectForKey:@"tipText"];
+                lbLongMsg.text = [dicUser objectForKey:@"replyText"];
                 NSDictionary* dicObj = [dicUser objectForKey:@"recommenderUser"];
                 lbsortMSg.text = [NSString stringWithFormat:@"%@ recommended for you", [dicObj objectForKey:@"name"]];
                 
@@ -680,7 +685,7 @@
             else
             {
                 view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 120, view4.frame.size.width, view4.frame.size.height);
-                viewTip.frame = CGRectMake(viewTip.frame.origin.x, viewTip.frame.origin.y - 163, viewTip.frame.size.width, viewTip.frame.size.height);
+                viewTip.frame = CGRectMake(viewTip.frame.origin.x, viewTip.frame.origin.y - 120, viewTip.frame.size.width, viewTip.frame.size.height);
                 viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 120, viewImage.frame.size.width, viewImage.frame.size.height);
                 view2.hidden = YES;
             }
@@ -689,21 +694,21 @@
             {
                 NSDictionary* dicUser = [arrayBuzzTipList objectAtIndex:0];
                 _userBuzz = [[UserObj alloc]init];
-                lbLongMsg.text = [dicUser objectForKey:@"tipText"];
-                lbsortMSg.text = [NSString stringWithFormat:@"%@ %@ left a tip", [dicUser objectForKey:@"tipUserFirstName"],[dicUser objectForKey:@"tipUserLastName"]];
+                lbDetailTip.text = [dicUser objectForKey:@"tipText"];
+                lbNameTip.text = [NSString stringWithFormat:@"%@ %@ left a tip", [dicUser objectForKey:@"tipUserFirstName"],[dicUser objectForKey:@"tipUserLastName"]];
                 
                 NSString* via = [NSString stringWithFormat:@"%@", [dicUser objectForKey:@"tipSource"]];
                 if ([via isEqualToString:@"4SQ"]) {
-                    lbsortMSg.text = [lbsortMSg.text stringByAppendingString:@" via foursquare"];
+                    lbNameTip.text = [lbNameTip.text stringByAppendingString:@" via foursquare"];
                     btAvatar.enabled = NO;
                 }
                 if ([via isEqualToString:@"TS"]) {
-                    lbsortMSg.text = [lbsortMSg.text stringByAppendingString:@" via TasteSync"];
+                    lbNameTip.text = [lbNameTip.text stringByAppendingString:@" via TasteSync"];
                 }
-                _userBuzz.avatarUrl = [dicUser objectForKey:@"tipUserPhoto"];
-                _userBuzz.uid = [dicUser objectForKey:@"tipUserId"];
-                if (![_userBuzz.avatarUrl isKindOfClass:[NSNull class]]) {
-                    [NSThread detachNewThreadSelector:@selector(loadImageUserObj) toTarget:self withObject:nil];
+                //_userBuzz.avatarUrl = [dicUser objectForKey:@"tipUserPhoto"];
+                //_userBuzz.uid = [dicUser objectForKey:@"tipUserId"];
+                if (![[dicUser objectForKey:@"tipUserPhoto"] isKindOfClass:[NSNull class]]) {
+                    [NSThread detachNewThreadSelector:@selector(loadImageTipUserObj:) toTarget:self withObject:[dicUser objectForKey:@"tipUserPhoto"]];
                 }
             }
             
@@ -720,6 +725,7 @@
         }
         else
         {
+            viewTip.frame = CGRectMake(viewTip.frame.origin.x, viewTip.frame.origin.y - 46, viewTip.frame.size.width, viewTip.frame.size.height);
             view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 46, view4.frame.size.width, view4.frame.size.height);
             viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 46, viewImage.frame.size.width, viewImage.frame.size.height);
             view2.frame = CGRectMake(view2.frame.origin.x, view2.frame.origin.y - 46, view2.frame.size.width, view2.frame.size.height);
@@ -833,6 +839,15 @@
         _avatarImageView.image = image;
     }
 }
+
+-(void)loadImageTipUserObj:(NSString*)url
+{
+    @autoreleasepool {
+        UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
+        _avatarTip.image = image;
+    }
+}
+
 
 #pragma mark Sent Contact Delegate
 -(void)sendRequestData

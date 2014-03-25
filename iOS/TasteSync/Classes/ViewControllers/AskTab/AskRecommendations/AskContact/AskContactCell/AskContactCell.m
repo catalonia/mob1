@@ -39,7 +39,11 @@
         [rateCustom setRateMedium:_askObject.object.name.length];
         [_view addSubview:rateCustom];
         rateCustom.allowedRate = NO;
+        _name.frame = CGRectMake(_name.frame.origin.x + 90, _name.frame.origin.y + 6, _name.frame.size.width, _name.frame.size.height);
         _name.text = @"";
+        if (_askObject.object.name.length != 5) {
+            _name.text = @"+";
+        }
     }
 }
 

@@ -94,7 +94,9 @@ arrDataFilter=_arrDataFilter;;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    if (actionClick == nil) {
+        actionClick = @"";
+    }
     _notificationObj.unread = NO;
     
     if (_notificationObj.type != TYPE_3) {
@@ -247,9 +249,19 @@ arrDataFilter=_arrDataFilter;;
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    
+    NSString* type;
+    if (isShuffle) {
+        type = @"Shuffle";
+    }
+    else
+    {
+        type = [NSString stringWithFormat:@"%d",_notificationObj.type];
+    }
+    
     NSDictionary *recomentdationhomeParams =
     [NSDictionary dictionaryWithObjectsAndKeys:
-    [NSString stringWithFormat:@"%d",_notificationObj.type]          , @"recoNotificationType",
+            type  , @"recoNotificationType",
     [NSString stringWithFormat:@"%@",_notificationObj.linkId]         ,@"idBase",
      actionClick          , @"Click",
      nil];
@@ -273,7 +285,7 @@ arrDataFilter=_arrDataFilter;;
 }
 - (IBAction)actionBack:(id)sender
 {
-    actionClick = @"Back";
+    actionClick = [actionClick stringByAppendingString:@"Back,"];
     [self.global.recomendationDelegate reloadRecomendation];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -298,7 +310,7 @@ arrDataFilter=_arrDataFilter;;
 - (IBAction)actionShuffle:(id)sender
 {
     tvMsg.text = @"";
-    actionClick = @"Shuffle";
+    actionClick = [actionClick stringByAppendingString:@"Shuffle,"];
     [self hideKeyBoard];
     [CommonHelpers appDelegate].currentShuffle++;
     
@@ -322,7 +334,7 @@ arrDataFilter=_arrDataFilter;;
 - (IBAction)actionSend:(id)sender
 {
     [self hideKeyBoard];
-    actionClick = @"Send Reply";
+    actionClick = [actionClick stringByAppendingString:@"Send Reply,"];
     NSString* listRestaurant = @"";
     for (RestaurantObj* obj in self.arrData) {
         if (obj.uid.length != 0) {
@@ -888,7 +900,7 @@ arrDataFilter=_arrDataFilter;;
         }
         else
         {
-            actionClick = @"Can't Help";
+            actionClick = [actionClick stringByAppendingString:@"Can't Help"];
             [self.global.recomendationDelegate reloadRecomendation];
             [self.navigationController popViewControllerAnimated:YES];
         }

@@ -568,11 +568,10 @@
     }
     else
     {
-        if (isCuisine) {
-            AskObject* obj = [_arrDataFilter objectAtIndex:indexPath.row];
-            obj.selected = !obj.selected;
-            [_tableViewCuisine reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
-        }
+        AskObject* obj = [_arrDataFilter objectAtIndex:indexPath.row];
+        obj.selected = !obj.selected;
+        [_tableViewCuisine reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
+        
 //        else
 //        {
 //            AskObject* obj = [_arrDataFilter objectAtIndex:indexPath.row];
@@ -801,7 +800,7 @@
     _arrDataFilter = [[NSMutableArray alloc]initWithArray:arrayCity];
     [_tableViewCuisine reloadData];
     _cuisineView.hidden = NO;
-    isCuisine = YES;
+    isCuisine = NO;
     
     number_neighborhood++;
 }
