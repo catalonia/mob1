@@ -27,7 +27,7 @@
 @interface RestaurantDetailVC ()<UIScrollViewDelegate,ResShareViewDelegate,UIAlertViewDelegate,AskContactDelegate>
 {
     __weak IBOutlet UIScrollView *scrollViewPhotos,*scrollViewMain;
-    __weak IBOutlet UIView *view1,*view2,*view3,*view4,*viewImage, *viewDeal, *viewTip;
+    __weak IBOutlet UIView *view1,*view2,*view3,*view4,*viewImage, *viewDeal, *viewReomendation;
     __weak IBOutlet UILabel *lbName,*lbDetail,*lbsortMSg,*lbLongMsg, *lbSave, *lbFav;
     __weak IBOutlet UIButton *btSave,*btUserQuestion,*btMore, *btMenu, *btMoreInfo,*btReviews,*btReserve,*btAddToMyFavorites , *btBack, *btRestaurant,*btAvatar;
     
@@ -39,6 +39,7 @@
     
     __weak IBOutlet UILabel *lbNameTip,*lbDetailTip,*lbTitleTip;
     __weak IBOutlet UIImageView* _avatarTip;
+    __weak IBOutlet UIImageView* _backgroundReview;
     
     BOOL isSaved, restaurantChains, isAddToMyFaves, isReload;
     ResShareView *shareView ;    
@@ -633,7 +634,7 @@
         }
         else
         {
-            view4.frame = CGRectMake(view4.frame.origin.x, 278, view4.frame.size.width, view4.frame.size.height);
+            view4.frame = CGRectMake(view4.frame.origin.x, 278 + 118, view4.frame.size.width, view4.frame.size.height);
             viewImage.hidden = YES;
         }
         
@@ -656,7 +657,35 @@
             NSArray* arrayBuzzTipList;
             arrayBuzzRecoList = [dicBuzz objectForKey:@"restaurantBuzzRecoList"];
             arrayBuzzTipList = [dicBuzz objectForKey:@"restaurantBuzzTipList"];
-
+            
+            if(![arrayBuzzTipList isKindOfClass:[NSNull class]])
+            {
+                NSDictionary* dicUser = [arrayBuzzTipList objectAtIndex:0];
+                _userBuzz = [[UserObj alloc]init];
+                lbDetailTip.text = [dicUser objectForKey:@"tipText"];
+                lbNameTip.text = [NSString stringWithFormat:@"%@ %@ left a tip", [dicUser objectForKey:@"tipUserFirstName"],[dicUser objectForKey:@"tipUserLastName"]];
+                
+                NSString* via = [NSString stringWithFormat:@"%@", [dicUser objectForKey:@"tipSource"]];
+                if ([via isEqualToString:@"4SQ"]) {
+                    lbNameTip.text = [lbNameTip.text stringByAppendingString:@" via foursquare"];
+                    btAvatar.enabled = NO;
+                }
+                if ([via isEqualToString:@"TS"]) {
+                    lbNameTip.text = [lbNameTip.text stringByAppendingString:@" via TasteSync"];
+                }
+                //_userBuzz.avatarUrl = [dicUser objectForKey:@"tipUserPhoto"];
+                //_userBuzz.uid = [dicUser objectForKey:@"tipUserId"];
+                if (![[dicUser objectForKey:@"tipUserPhoto"] isKindOfClass:[NSNull class]]) {
+                    [NSThread detachNewThreadSelector:@selector(loadImageTipUserObj:) toTarget:self withObject:[dicUser objectForKey:@"tipUserPhoto"]];
+                }
+            }
+            
+            else
+            {
+                view2.hidden = YES;
+                view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 120, view4.frame.size.width, view4.frame.size.height);
+                viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 120, viewImage.frame.size.width, viewImage.frame.size.height);
+            }
             
             if (![arrayBuzzRecoList isKindOfClass:[NSNull class]]) {
                 
@@ -685,39 +714,11 @@
             else
             {
                 view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 120, view4.frame.size.width, view4.frame.size.height);
-                viewTip.frame = CGRectMake(viewTip.frame.origin.x, viewTip.frame.origin.y - 120, viewTip.frame.size.width, viewTip.frame.size.height);
                 viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 120, viewImage.frame.size.width, viewImage.frame.size.height);
-                view2.hidden = YES;
+                view3.hidden = YES;
             }
             
-            if(![arrayBuzzTipList isKindOfClass:[NSNull class]])
-            {
-                NSDictionary* dicUser = [arrayBuzzTipList objectAtIndex:0];
-                _userBuzz = [[UserObj alloc]init];
-                lbDetailTip.text = [dicUser objectForKey:@"tipText"];
-                lbNameTip.text = [NSString stringWithFormat:@"%@ %@ left a tip", [dicUser objectForKey:@"tipUserFirstName"],[dicUser objectForKey:@"tipUserLastName"]];
-                
-                NSString* via = [NSString stringWithFormat:@"%@", [dicUser objectForKey:@"tipSource"]];
-                if ([via isEqualToString:@"4SQ"]) {
-                    lbNameTip.text = [lbNameTip.text stringByAppendingString:@" via foursquare"];
-                    btAvatar.enabled = NO;
-                }
-                if ([via isEqualToString:@"TS"]) {
-                    lbNameTip.text = [lbNameTip.text stringByAppendingString:@" via TasteSync"];
-                }
-                //_userBuzz.avatarUrl = [dicUser objectForKey:@"tipUserPhoto"];
-                //_userBuzz.uid = [dicUser objectForKey:@"tipUserId"];
-                if (![[dicUser objectForKey:@"tipUserPhoto"] isKindOfClass:[NSNull class]]) {
-                    [NSThread detachNewThreadSelector:@selector(loadImageTipUserObj:) toTarget:self withObject:[dicUser objectForKey:@"tipUserPhoto"]];
-                }
-            }
             
-            else
-            {
-                viewTip.hidden = YES;
-                view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 120, view4.frame.size.width, view4.frame.size.height);
-                viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 120, viewImage.frame.size.width, viewImage.frame.size.height);
-            }
         }
         
         if (self.restaurantObj.isDeal) {
@@ -725,7 +726,7 @@
         }
         else
         {
-            viewTip.frame = CGRectMake(viewTip.frame.origin.x, viewTip.frame.origin.y - 46, viewTip.frame.size.width, viewTip.frame.size.height);
+            viewReomendation.frame = CGRectMake(viewReomendation.frame.origin.x, viewReomendation.frame.origin.y - 46, viewReomendation.frame.size.width, viewReomendation.frame.size.height);
             view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 46, view4.frame.size.width, view4.frame.size.height);
             viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 46, viewImage.frame.size.width, viewImage.frame.size.height);
             view2.frame = CGRectMake(view2.frame.origin.x, view2.frame.origin.y - 46, view2.frame.size.width, view2.frame.size.height);
