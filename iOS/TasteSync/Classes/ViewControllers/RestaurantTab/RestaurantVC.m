@@ -321,6 +321,7 @@ typedef enum _TFSelect
     [self hideKeyBoard];
     filterExtendsShown = TRUE;
     [self refreshView];
+    scrollViewMain.scrollEnabled = NO;
 }
 
 - (IBAction)actionDoneFilter:(id)sender
@@ -332,7 +333,6 @@ typedef enum _TFSelect
     
     [self refreshView];
     [self performSelector:@selector(doneFilter) withObject:nil afterDelay:0.5];
-    
 }
 
 -(void)doneFilter
@@ -350,6 +350,7 @@ typedef enum _TFSelect
     }
     
     [arrayDictionary addObject:[self getDictionary]];
+    scrollViewMain.scrollEnabled = YES;
 }
 
 -(NSString*)getListType:(GlobalDataType)type
@@ -548,14 +549,16 @@ typedef enum _TFSelect
 - (void) refreshView
 {
     if (filterExtendsShown) {
+        viewMain.frame = CGRectMake(viewMain.frame.origin.x, scrollViewMain.contentOffset.y - 53, viewMain.frame.size.width, viewMain.frame.size.height);
         viewFilterExtends.hidden = NO;
         [tbvResult setFrame:CGRectMake(tbvResult.frame.origin.x, 450, tbvResult.frame.size.width, tbvResult.contentSize.height)];
         scrollViewMain.contentSize = CGSizeMake(320, tbvResult.contentSize.height + DELTAHEIGHT);
-        viewMain.frame = CGRectMake(viewMain.frame.origin.x, -53, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
+        //viewMain.frame = CGRectMake(viewMain.frame.origin.x, -53, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
         
     }
     else
     {
+        viewMain.frame = CGRectMake(viewMain.frame.origin.x, - 53, viewMain.frame.size.width, viewMain.frame.size.height);
         viewFilterExtends.hidden = YES;
         [self resizeDetailText];
         scrollViewMain.contentSize = CGSizeMake(320, tbvResult.contentSize.height + DELTAHEIGHT);

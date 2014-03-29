@@ -29,7 +29,7 @@
     __weak IBOutlet UIScrollView *scrollViewPhotos,*scrollViewMain;
     __weak IBOutlet UIView *view1,*view2,*view3,*view4,*viewImage, *viewDeal, *viewReomendation;
     __weak IBOutlet UILabel *lbName,*lbDetail,*lbsortMSg,*lbLongMsg, *lbSave, *lbFav;
-    __weak IBOutlet UIButton *btSave,*btUserQuestion,*btMore, *btMenu, *btMoreInfo,*btReviews,*btReserve,*btAddToMyFavorites , *btBack, *btRestaurant,*btAvatar;
+    __weak IBOutlet UIButton *btSave,*btUserQuestion,*btMore, *btMenu, *btMoreInfo,*btReviews,*btReserve,*btAddToMyFavorites , *btBack, *btRestaurant,*btAvatar, *btNextRecomentdation;
     
     __weak IBOutlet UIView* actionView;
     __weak IBOutlet UIImageView* _avatarImageView;
@@ -634,7 +634,7 @@
         }
         else
         {
-            view4.frame = CGRectMake(view4.frame.origin.x, 278 + 118, view4.frame.size.width, view4.frame.size.height);
+            view4.frame = CGRectMake(view4.frame.origin.x, 278 + 75, view4.frame.size.width, view4.frame.size.height);
             viewImage.hidden = YES;
         }
         
@@ -683,8 +683,10 @@
             else
             {
                 view2.hidden = YES;
-                view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 120, view4.frame.size.width, view4.frame.size.height);
-                viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 120, viewImage.frame.size.width, viewImage.frame.size.height);
+                view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 95, view4.frame.size.width, view4.frame.size.height);
+                viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 95, viewImage.frame.size.width, viewImage.frame.size.height);
+                view3.frame = CGRectMake(view2.frame.origin.x, view2.frame.origin.y, view2.frame.size.width, view2.frame.size.height);
+                
             }
             
             if (![arrayBuzzRecoList isKindOfClass:[NSNull class]]) {
@@ -713,9 +715,19 @@
             }
             else
             {
-                view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 120, view4.frame.size.width, view4.frame.size.height);
-                viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 120, viewImage.frame.size.width, viewImage.frame.size.height);
+                view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 95, view4.frame.size.width, view4.frame.size.height);
+                viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 95, viewImage.frame.size.width, viewImage.frame.size.height);
                 view3.hidden = YES;
+            }
+            
+            
+            if (view3.isHidden != view2.isHidden) {
+                viewReomendation.frame = CGRectMake(viewReomendation.frame.origin.x, viewReomendation.frame.origin.y, viewReomendation.frame.size.width, 96);
+                btNextRecomentdation.frame = CGRectMake(btNextRecomentdation.frame.origin.x, (96 - btNextRecomentdation.frame.size.height)/2, btNextRecomentdation.frame.size.width, btNextRecomentdation.frame.size.height);
+            }
+            
+            if (view3.isHidden == YES && view2.isHidden == YES) {
+                viewReomendation.hidden = YES;
             }
             
             
@@ -726,10 +738,9 @@
         }
         else
         {
-            viewReomendation.frame = CGRectMake(viewReomendation.frame.origin.x, viewReomendation.frame.origin.y - 46, viewReomendation.frame.size.width, viewReomendation.frame.size.height);
-            view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 46, view4.frame.size.width, view4.frame.size.height);
-            viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 46, viewImage.frame.size.width, viewImage.frame.size.height);
-            view2.frame = CGRectMake(view2.frame.origin.x, view2.frame.origin.y - 46, view2.frame.size.width, view2.frame.size.height);
+            viewReomendation.frame = CGRectMake(viewReomendation.frame.origin.x, viewReomendation.frame.origin.y - 40, viewReomendation.frame.size.width, viewReomendation.frame.size.height);
+            view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 40, view4.frame.size.width, view4.frame.size.height);
+            viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 40, viewImage.frame.size.width, viewImage.frame.size.height);
             viewDeal.hidden = YES;
         }
         
