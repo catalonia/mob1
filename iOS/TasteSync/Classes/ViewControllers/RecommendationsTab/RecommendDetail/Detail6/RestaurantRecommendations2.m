@@ -283,7 +283,7 @@
         
     }
     
-    topView.frame = CGRectMake(topView.frame.origin.x, topView.frame.origin.y, topView.frame.size.width, askQuestion.frame.origin.y + labelHeight.height);
+    topView.frame = CGRectMake(topView.frame.origin.x, topView.frame.origin.y, topView.frame.size.width, askQuestion.frame.origin.y + labelHeight.height + 10);
     askQuestion.frame = CGRectMake(askQuestion.frame.origin.x, askQuestion.frame.origin.y, askQuestion.frame.size.width, labelHeight.height);
     
     bottomView.frame = CGRectMake(bottomView.frame.origin.x, topView.frame.origin.y + topView.frame.size.height + 12, bottomView.frame.size.width, bottomView.frame.size.height);

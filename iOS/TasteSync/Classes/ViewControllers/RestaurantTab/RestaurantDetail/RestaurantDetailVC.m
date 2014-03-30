@@ -685,7 +685,7 @@
                 view2.hidden = YES;
                 view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 95, view4.frame.size.width, view4.frame.size.height);
                 viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 95, viewImage.frame.size.width, viewImage.frame.size.height);
-                view3.frame = CGRectMake(view2.frame.origin.x, view2.frame.origin.y, view2.frame.size.width, view2.frame.size.height);
+                
                 
             }
             
@@ -718,6 +718,7 @@
                 view4.frame = CGRectMake(view4.frame.origin.x, view4.frame.origin.y - 95, view4.frame.size.width, view4.frame.size.height);
                 viewImage.frame = CGRectMake(viewImage.frame.origin.x, viewImage.frame.origin.y - 95, viewImage.frame.size.width, viewImage.frame.size.height);
                 view3.hidden = YES;
+                view2.frame = CGRectMake(view3.frame.origin.x, view3.frame.origin.y, view3.frame.size.width, view3.frame.size.height);
             }
             
             
