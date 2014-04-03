@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
+
+    <RelativeLayout
+        style="@style/TitleBar"
+        android:layout_width="match_parent" >
+
+        <Button
+            android:id="@+id/btn_done_listcontact"
+            android:layout_width="55dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bt_56"
+            android:text="Done"
+            android:textColor="@android:color/white"
+            android:fontFamily="Avenir"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        style="@style/Body"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg340"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:textSize="13dp"
+            android:text="Ask around: Get your friends involved in your restaurant search"
+            android:fontFamily="Avenir"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/edt_search_contact"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border_circle_edittext"
+            android:gravity="center"
+            android:hint=" Search"
+            android:fontFamily="Avenir"
+            android:textSize="16dp" />
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dp" >
+        </ListView>
+    </LinearLayout>
+
+</RelativeLayout>

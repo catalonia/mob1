@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background" >
+
+    <RelativeLayout
+        style="@style/TitleBar"
+        android:layout_width="match_parent" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/imageBack"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp" >
+
+            <ImageView
+                android:id="@+id/img_notification_setting_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:background="@drawable/ic_bt_back1"
+                android:clickable="true"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/imageBack"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp" >
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        style="@style/Body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp" >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="0dp" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg44"
+                    android:fontFamily="Avenir"
+                    android:gravity="center"
+                    android:text="Notification Settings"
+                    android:textColor="@android:color/white"
+                    android:textSize="22dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg340"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="10dp" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="Avenir"
+                        android:gravity="center"
+                        android:text="@string/txt_title_recommnedation"
+                        android:textColor="@android:color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top" >
+
+                        <TableRow
+                            android:gravity="center"
+                            android:padding="5dp" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="1dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:textColor="@android:color/white"
+                                android:textSize="16dp" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center"
+                                android:paddingRight="15dp" >
+
+                                <ImageView
+                                    android:id="@+id/cb_connection_facebook"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:background="@drawable/phone"
+                                    android:gravity="center" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center" >
+
+                                <ImageView
+                                    android:id="@+id/cb_connection_facebook"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:background="@drawable/message"
+                                    android:gravity="center" />
+                            </RelativeLayout>
+                        </TableRow>
+
+                        <TableRow
+                            android:gravity="center"
+                            android:padding="5dp" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="1dp"
+                                android:layout_weight="1"
+                                android:fontFamily="Avenir"
+                                android:gravity="center_vertical"
+                                android:text="@string/txt_title_recommnedation_1"
+                                android:textColor="@android:color/white"
+                                android:textSize="14dp" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center"
+                                android:paddingRight="15dp" >
+
+                                <CheckBox
+                                    android:id="@+id/cb_recommend_mobile_1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:button="@drawable/tich"
+                                    android:checked="true"
+                                    android:gravity="center" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center" >
+
+                                <CheckBox
+                                    android:id="@+id/cb_recommend_mail_1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:button="@drawable/tich"
+                                    android:gravity="center_vertical" />
+                            </RelativeLayout>
+                        </TableRow>
+
+                        <TableRow
+                            android:gravity="center"
+                            android:padding="5dp" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="1dp"
+                                android:layout_weight="1"
+                                android:fontFamily="Avenir"
+                                android:gravity="center_vertical"
+                                android:text="@string/txt_title_recommnedation_2"
+                                android:textColor="@android:color/white"
+                                android:textSize="14dp" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center"
+                                android:paddingRight="15dp" >
+
+                                <CheckBox
+                                    android:id="@+id/cb_recommend_mobile_2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:button="@drawable/tich"
+                                    android:checked="true"
+                                    android:gravity="center_vertical" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center" >
+
+                                <CheckBox
+                                    android:id="@+id/cb_recommend_mail_2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:button="@drawable/tich"
+                                    android:gravity="center_vertical" />
+                            </RelativeLayout>
+                        </TableRow>
+
+                        <TableRow
+                            android:gravity="center"
+                            android:padding="5dp" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="1dp"
+                                android:layout_weight="1"
+                                android:fontFamily="Avenir"
+                                android:gravity="center_vertical"
+                                android:text="@string/txt_title_recommnedation_3"
+                                android:textColor="@android:color/white"
+                                android:textSize="14dp" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center"
+                                android:paddingRight="15dp" >
+
+                                <CheckBox
+                                    android:id="@+id/cb_recommend_mobile_3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:button="@drawable/tich"
+                                    android:checked="true"
+                                    android:gravity="center_vertical" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center" >
+
+                                <CheckBox
+                                    android:id="@+id/cb_recommend_mail_3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:button="@drawable/tich"
+                                    android:gravity="center_vertical" />
+                            </RelativeLayout>
+                        </TableRow>
+
+                        <TableRow
+                            android:gravity="center"
+                            android:padding="5dp" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="1dp"
+                                android:layout_weight="1"
+                                android:fontFamily="Avenir"
+                                android:gravity="center_vertical"
+                                android:text="@string/txt_title_recommnedation_4"
+                                android:textColor="@android:color/white"
+                                android:textSize="14dp" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center"
+                                android:paddingRight="15dp" >
+
+                                <CheckBox
+                                    android:id="@+id/cb_recommend_mobile_4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:button="@drawable/tich"
+                                    android:checked="true"
+                                    android:gravity="center_vertical" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center" >
+
+                                <CheckBox
+                                    android:id="@+id/cb_recommend_mail_4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:button="@drawable/tich"
+                                    android:gravity="center_vertical" />
+                            </RelativeLayout>
+                        </TableRow>
+
+                        <TableRow
+                            android:gravity="center"
+                            android:padding="5dp" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="1dp"
+                                android:layout_weight="1"
+                                android:fontFamily="Avenir"
+                                android:gravity="center_vertical"
+                                android:text="@string/txt_title_recommnedation_5"
+                                android:textColor="@android:color/white"
+                                android:textSize="14dp" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center"
+                                android:paddingRight="15dp" >
+
+                                <CheckBox
+                                    android:id="@+id/cb_recommend_mobile_5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:button="@drawable/tich"
+                                    android:checked="true"
+                                    android:gravity="center_vertical" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center" >
+
+                                <CheckBox
+                                    android:id="@+id/cb_recommend_mail_5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:button="@drawable/tich"
+                                    android:gravity="center_vertical" />
+                            </RelativeLayout>
+                        </TableRow>
+
+                        <TableRow
+                            android:gravity="center"
+                            android:padding="5dp" >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="1dp"
+                                android:layout_weight="1"
+                                android:fontFamily="Avenir"
+                                android:gravity="center_vertical"
+                                android:text="@string/txt_title_recommnedation_6"
+                                android:textColor="@android:color/white"
+                                android:textSize="14dp" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center"
+                                android:paddingRight="15dp" >
+
+                                <CheckBox
+                                    android:id="@+id/cb_recommend_mobile_6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:button="@drawable/tich"
+                                    android:checked="true"
+                                    android:gravity="center_vertical" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="1dp"
+                                android:gravity="center" >
+
+                                <CheckBox
+                                    android:id="@+id/cb_recommend_mail_6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="1dp"
+                                    android:button="@drawable/tich"
+                                    android:gravity="center_vertical" />
+                            </RelativeLayout>
+                        </TableRow>
+                    </TableLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>

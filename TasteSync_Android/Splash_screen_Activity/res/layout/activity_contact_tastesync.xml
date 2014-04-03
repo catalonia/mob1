@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background" >
+
+    <RelativeLayout
+        style="@style/TitleBar"
+        android:layout_width="match_parent" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/imageBack"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp" >
+
+            <ImageView
+                android:id="@+id/img_contact_tastesync_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:background="@drawable/ic_bt_back1"
+                android:clickable="true"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/imageBack"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp" >
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        style="@style/Body"
+        android:id="@+id/layout_body_contact_taste"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/bg44"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/txt_title_contact"
+            android:textColor="@android:color/white"
+            android:fontFamily="Avenir"
+            android:textSize="22sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg"
+            android:orientation="vertical"
+            android:padding="20dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="4" >
+
+                <Button
+                    android:id="@+id/btn_contact_reportbugs"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_bt_reportbugs"
+                    android:clickable="true" />
+
+                <Button
+                    android:id="@+id/btn_contact_feedback"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_bt_feedback" />
+
+                <Button
+                    android:id="@+id/btn_contact_restaurantdata"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_bt_restaurantdata" />
+
+                <Button
+                    android:id="@+id/btn_contact_requestblogger"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_bt_requestblogger" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/ed_contact_text"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/bgbox"
+                android:gravity="top|left"
+                android:inputType="none"
+                android:padding="5dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_contact_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg44"
+            android:padding="10dp"
+            android:text="@string/txt_btn_submit"
+            android:textColor="@android:color/white"
+            android:textSize="18dp"
+            android:fontFamily="Avenir"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

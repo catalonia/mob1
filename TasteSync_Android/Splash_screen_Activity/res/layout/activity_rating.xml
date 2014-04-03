@@ -1,0 +1,77 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/nbrhood"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        style="@style/TitleBar"
+        android:layout_width="match_parent" >
+
+        <ImageView
+            android:id="@+id/imageProfile_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_profile"
+            android:clickable="true"
+            android:contentDescription="@string/app_name" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/imageBack"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp" >
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="right" >
+
+        <Button
+            android:id="@+id/btn_done_rating"
+            android:layout_width="45dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/border_circle_button"
+            android:fontFamily="Avenir"
+            android:gravity="center"
+            android:text="Done"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edt_rating"
+        android:layout_width="fill_parent"
+        android:layout_height="35dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border_circle_edittext"
+        android:fontFamily="Avenir"
+        android:gravity="center"
+        android:hint=" Search Rating"
+        android:textSize="16dp" />
+
+    <ListView
+        android:id="@+id/list_rating"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/white"
+        android:dividerHeight="1dp"
+        android:scrollingCache="false" >
+    </ListView>
+
+</LinearLayout>

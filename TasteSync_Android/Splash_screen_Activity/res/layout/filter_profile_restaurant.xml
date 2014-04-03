@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/btn_pro_res_filter_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_genaral1"
+            android:fontFamily="Avenir"
+            android:text="Done" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/btn_pro_res_filter_recommended"
+            android:layout_width="130dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_bt_recommended_on" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/btn_pro_res_filter_fav"
+            android:layout_width="130dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_bt_favs_on" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/btn_pro_res_filter_tip"
+            android:layout_width="130dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_bt_tips_on" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/btn_pro_res_filter_save"
+            android:layout_width="130dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_bt_saved125_on" />
+    </LinearLayout>
+
+</LinearLayout>

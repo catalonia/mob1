@@ -1,0 +1,387 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
+
+    <RelativeLayout
+        style="@style/TitleBar"
+        android:layout_width="match_parent" >
+
+        <ImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_profile"
+            android:clickable="true"
+            android:contentDescription="@string/app_name" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/imageBack"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp" >
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="70dp"
+        android:background="@android:color/white"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:id="@+id/layout_filter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal" >
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="1"
+                                android:orientation="horizontal" >
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+                                    android:src="@drawable/icon_filter" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="Avenir"
+                                    android:text="Filters"
+                                    android:textSize="20dp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical" >
+
+                                <Button
+                                    android:id="@+id/btn_done_filters"
+                                    android:layout_width="50dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:layout_marginRight="2dp"
+                                    android:layout_marginTop="5dp"
+                                    android:background="@drawable/border_circle_button"
+                                    android:fontFamily="Avenir"
+                                    android:text="Done"
+                                    android:textColor="@android:color/white" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical" >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:orientation="horizontal" >
+
+                                <RelativeLayout
+                                    android:id="@+id/layout_fiter_cusine"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:layout_marginRight="2dp"
+                                    android:layout_weight="1" >
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/black"
+                                        android:fontFamily="Avenir"
+                                        android:gravity="center"
+                                        android:text="Cuisine"
+                                        android:textColor="@color/white" />
+
+                                    <ImageView
+                                        android:id="@+id/img_tick_cusine"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_marginBottom="3dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:src="@drawable/tick"
+                                        android:visibility="gone" />
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/layout_fiter_ambience"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_weight="1" >
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/black"
+                                        android:fontFamily="Avenir"
+                                        android:gravity="center"
+                                        android:text="Ambience"
+                                        android:textColor="@color/white" />
+
+                                    <ImageView
+                                        android:id="@+id/img_tick_ambience"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_marginBottom="3dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:src="@drawable/tick"
+                                        android:visibility="gone" />
+                                </RelativeLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:orientation="horizontal" >
+
+                                <RelativeLayout
+                                    android:id="@+id/layout_fiter_neighborhood"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:layout_marginRight="2dp"
+                                    android:layout_weight="1" >
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/black"
+                                        android:fontFamily="Avenir"
+                                        android:gravity="center"
+                                        android:text="Neighborhood"
+                                        android:textColor="@color/white" />
+
+                                    <ImageView
+                                        android:id="@+id/img_tick_neighborhood"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_marginBottom="3dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:src="@drawable/tick"
+                                        android:visibility="gone" />
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/layout_fiter_who"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_weight="1" >
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/black"
+                                        android:fontFamily="Avenir"
+                                        android:gravity="center"
+                                        android:text="Who&apos;s With You"
+                                        android:textColor="@color/white" />
+
+                                    <ImageView
+                                        android:id="@+id/img_tick_who"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_marginBottom="3dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:src="@drawable/tick"
+                                        android:visibility="gone" />
+                                </RelativeLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:orientation="horizontal" >
+
+                                <RelativeLayout
+                                    android:id="@+id/layout_fiter_rating"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:layout_marginRight="2dp"
+                                    android:layout_weight="1" >
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/black"
+                                        android:fontFamily="Avenir"
+                                        android:gravity="center"
+                                        android:text="Rating"
+                                        android:textColor="@color/white" />
+
+                                    <ImageView
+                                        android:id="@+id/img_tick_rating"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_marginBottom="3dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:src="@drawable/tick"
+                                        android:visibility="gone" />
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/layout_fiter_price"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_weight="1" >
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/black"
+                                        android:fontFamily="Avenir"
+                                        android:gravity="center"
+                                        android:text="Price"
+                                        android:textColor="@color/white" />
+
+                                    <ImageView
+                                        android:id="@+id/img_tick_price"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_marginBottom="3dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:src="@drawable/tick"
+                                        android:visibility="gone" />
+                                </RelativeLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginTop="15dp"
+                            android:orientation="horizontal" >
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical" >
+
+                                <ImageView
+                                    android:id="@+id/img_try_later"
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:background="@drawable/ic_saved_black"
+                                    android:contentDescription="@string/app_name" />
+
+                                <TextView
+                                    android:id="@+id/tv_try_later"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="Avenir"
+                                    android:text="Try later" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical" >
+
+                                <ImageView
+                                    android:id="@+id/img_favos_filter"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="@drawable/ic_bt_addtomyfaves_black" />
+
+                                <TextView
+                                    android:id="@+id/tv_favos"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="Avenir"
+                                    android:text="Favs" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical" >
+
+                                <ImageView
+                                    android:id="@+id/img_include_chains"
+                                    android:layout_width="60dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="@drawable/include_chains_black" />
+
+                                <TextView
+                                    android:id="@+id/tv_include_chains"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="Avenir"
+                                    android:text="Include chains" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
