@@ -106,7 +106,7 @@
     [NSDictionary dictionaryWithObjectsAndKeys:
      [NSString stringWithFormat:@"%@",_recoRequestId]       , @"recorequestId",
      [NSString stringWithFormat:@"%d",numberAskPress]       , @"Click on Ask Friends",
-     [NSString stringWithFormat:@"%d",numberBrowsePress]  , @"Click on Browse our picks for you",
+     [NSString stringWithFormat:@"%d",numberBrowsePress]    , @"Click on Browse our picks for you",
      nil];
     [CommonHelpers implementFlurry:askhomeParams forKey:@"Ask_Confirmation" isBegin:NO];
 }

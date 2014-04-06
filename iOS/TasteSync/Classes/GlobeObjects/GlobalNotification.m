@@ -110,10 +110,6 @@
 }
 -(void)requestRestaurantData:(UIView*)view;
 {
-    TSCityObj* _cityObj = [CommonHelpers setDefaultCityObj];
-    //NSString* link = [NSString stringWithFormat:@"recosrestaurantsearchresults?userid=%@&restaurantid=%@&neighborhoodid=%@&cityid=%@&statename=%@&cuisineidtier1idlist=%@&priceidlist=%@&rating=%@&savedflag=%@&favflag=%@&dealflag=%@&chainflag=%@&paginationid=%@",[UserDefault userDefault].userID,@"",@"", _cityObj.uid, _cityObj.stateName,@"",@"",@"",@"",@"",@"",@"",@"1"];
-    
-    
     
     CRequest* request = [[CRequest alloc]initWithURL:@"restsearchresults" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:5 WithView:view];
     [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
@@ -139,20 +135,8 @@
     [request setFormPostValue:@""               forKey:@"neighborhoodid"];
     [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.uid forKey:@"cityid"];
     [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.stateName forKey:@"statename"];
-    
-    
-    
-    
     request.delegate = self;
     [request startFormRequest];
-    
-    
-    
-    
-    
-//    CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:5 WithView:view];
-//    request.delegate = self;
-//    [request startFormRequest];
 }
 -(void)startReload:(UIView*)view
 {

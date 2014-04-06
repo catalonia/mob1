@@ -1133,9 +1133,7 @@ typedef enum _TFSelect
     [self.arrDataFilter removeAllObjects];
     if (txt.length == 0) {
         return;
-        
     }
-    
     if (TFSelected == TFRestaurant) {
         //![txt isEqualToString:_restaurantGerenal] && 
         if (txt.length >= 1) {
@@ -1155,7 +1153,6 @@ typedef enum _TFSelect
                 [request setFormPostValue:region1.cityObj.uid forKey:@"cityid"];
             [request startFormRequest];
         }
-        
     }
     else if(TFSelected == TFRegion)
     {
@@ -1202,7 +1199,7 @@ typedef enum _TFSelect
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (scrollView != _tableViewPrice && scrollView != _tableViewCuisine) {
-        if(scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.frame.size.height)
+        if(scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.frame.size.height)
         {
             currentPage++;
             
@@ -1216,8 +1213,6 @@ typedef enum _TFSelect
             
         }
     }
-    
-    
 }
 
 #pragma mark response Data
@@ -1251,9 +1246,7 @@ typedef enum _TFSelect
         if (self.arrDataFilter.count>0) {
             tbvFilter.hidden = NO;
             [tbvFilter reloadData];
-            //[tbvResult reloadData];
-            //tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
-            //scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
+            
         }
     }
     if (key == 2) {
