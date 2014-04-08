@@ -14,4 +14,5 @@
 @property(nonatomic,strong) NSString* cityName;
 @property(nonatomic,strong) NSString* stateName;
 @property(nonatomic,strong) NSString* country;
+@property(nonatomic,strong) NSString* boroughId;
 @end

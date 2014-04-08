@@ -65,6 +65,12 @@ askSubmited=_askSubmited;
         [NSThread detachNewThreadSelector:@selector(requestData) toTarget:self withObject:nil];
         [NSThread detachNewThreadSelector:@selector(requestCity) toTarget:self withObject:nil];
 
+    
+    
+    //CRequest* request3 = [[CRequest alloc]initWithURL:@"locationsearchterms" RQType:RequestTypeGet RQData:RequestPopulate RQCategory:ApplicationForm withKey:3 WithView:nil];
+    //request3.delegate = self;
+    //[request3 startFormRequest];
+    
         if ([UserDefault userDefault].userID == nil) {
             [self showLogin];
         }
@@ -226,7 +232,7 @@ askSubmited=_askSubmited;
     {
         NSString* response = [CommonHelpers getCityString];
         
-        NSLog(@"Response: %@",response);
+        NSLog(@"requestCity: %@",response);
         
         NSArray* array = [response objectFromJSONString];
         
@@ -235,22 +241,41 @@ askSubmited=_askSubmited;
         for (NSDictionary* dic in array) {
             AskObject* askObject = [[AskObject alloc]init];
             TSGlobalObj* global = [[TSGlobalObj alloc]init];
-            global.uid = [NSString stringWithFormat:@"%@", [dic objectForKey:@"id"] ];
-            global.name = [dic objectForKey:@"name"];
             global.type = GlobalDataCity;
-            NSDictionary* name = [dic objectForKey:@"city"];
-            TSCityObj* cityObj = nil;
-            if (name != (id)[NSNull null]) {
-                cityObj = [[TSCityObj alloc]init];
-                cityObj.uid = [NSString stringWithFormat:@"%@", [name objectForKey:@"cityId"]];
-                if ([cityObj.uid isEqualToString:global.uid]) {
-                    cityObj.neighbourhoodID = @"";
-                }
-                else
-                    cityObj.neighbourhoodID = global.uid;
-                cityObj.country = [name objectForKey:@"country"];
-                cityObj.stateName = [name objectForKey:@"state"];
-                cityObj.cityName = [name objectForKey:@"city"];
+            TSCityObj* cityObj = [[TSCityObj alloc]init];
+            if (![[NSString stringWithFormat:@"%@", [dic objectForKey:@"neighborhoodId"]] isEqualToString:@""]) {
+                global.uid = [NSString stringWithFormat:@"%@", [dic objectForKey:@"neighborhoodId"] ];
+                global.name = [dic objectForKey:@"neighborhoodName"];
+                
+                cityObj.uid                 = [dic objectForKey:@"cityId"];
+                cityObj.country             = @"US";
+                cityObj.stateName           = [dic objectForKey:@"state"];
+                cityObj.cityName            = [dic objectForKey:@"neighborhoodName"];
+                cityObj.boroughId           = [dic objectForKey:@"boroughId"];
+                cityObj.neighbourhoodID     = [dic objectForKey:@"neighborhoodId"];
+            }
+            else if (![[NSString stringWithFormat:@"%@", [dic objectForKey:@"boroughId"]] isEqualToString:@""]) {
+                global.uid = [NSString stringWithFormat:@"%@", [dic objectForKey:@"boroughId"] ];
+                global.name = [dic objectForKey:@"boroughName"];
+                
+                cityObj.uid                 = [dic objectForKey:@"cityId"];
+                cityObj.country             = @"US";
+                cityObj.stateName           = [dic objectForKey:@"state"];
+                cityObj.cityName            = [dic objectForKey:@"boroughName"];
+                cityObj.boroughId           = [dic objectForKey:@"boroughId"];
+                cityObj.neighbourhoodID     = @"";
+            }
+            else{
+                global.uid = [NSString stringWithFormat:@"%@", [dic objectForKey:@"cityId"] ];
+                global.name = [dic objectForKey:@"cityName"];
+                
+                cityObj.uid                 = [dic objectForKey:@"cityId"];
+                cityObj.country             = @"US";
+                cityObj.stateName           = [dic objectForKey:@"state"];
+                cityObj.cityName            = [dic objectForKey:@"cityName"];
+                cityObj.boroughId           = @"";
+                cityObj.neighbourhoodID     = @"";
+                
             }
             global.cityObj = cityObj;
             askObject.object = global;
@@ -574,7 +599,7 @@ askSubmited=_askSubmited;
 -(void)responseData:(NSData *)data WithKey:(int)key UserData:(id)userData
 {
     NSString* response = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"%@",response);
+    NSLog(@"Response: %@",response);
     if (key == 2) {
         NSDictionary* dic = [response objectFromJSONString];
         NSArray* arrayFriend = [dic objectForKey:@"friendTasteSync"];

@@ -568,28 +568,20 @@
     }
     else
     {
+        
         AskObject* obj = [_arrDataFilter objectAtIndex:indexPath.row];
         obj.selected = !obj.selected;
         [_tableViewCuisine reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
-        
-//        else
-//        {
-//            AskObject* obj = [_arrDataFilter objectAtIndex:indexPath.row];
-//            if (obj.selected == YES) {
-//                obj.selected = NO;
-//                askNeiberhood = nil;
-//            }
-//            else
-//            {
-//                obj.selected = YES;
-//                if (askNeiberhood != nil) {
-//                    askNeiberhood.selected = NO;
-//                }
-//                askNeiberhood = obj;
-//            }
-//            
-//            [_tableViewCuisine reloadData];
-//        }
+        if (isCuisine == NO) {
+            if ([obj.object.uid isEqualToString:obj.object.cityObj.boroughId]) {
+                for (AskObject* data in _arrDataFilter) {
+                    if ([data.object.cityObj.boroughId isEqualToString:obj.object.uid]) {
+                        data.selected = obj.selected;
+                    }
+                }
+                [_tableViewCuisine reloadData];
+            }
+        }
     }
 }
 
