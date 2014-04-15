@@ -346,7 +346,7 @@ typedef enum _TFSelect
         tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
         scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
         viewMain.frame = CGRectMake(viewMain.frame.origin.x, -53, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
-        [self requestRestaurant:@"restsearchresults" Key:4];
+        [self requestRestaurant:@"restsearchresults12" Key:4];
     }
     
     [arrayDictionary addObject:[self getDictionary]];
@@ -364,6 +364,24 @@ typedef enum _TFSelect
             }
             else
                 ret = [ret stringByAppendingFormat:@",%@", global.uid];
+        }
+    }
+    return ret;
+}
+
+-(NSString*)getListType:(GlobalDataType)type CityType:(CityType)cityType
+{
+    NSString* ret = @"";
+    
+    for (TSGlobalObj* global in arrDataFilterSelect) {
+        if (global.type == type ) {
+            if (global.cityType == cityType) {
+                if (ret.length == 0) {
+                    ret = global.uid;
+                }
+                else
+                    ret = [ret stringByAppendingFormat:@",%@", global.uid];
+            }
         }
     }
     return ret;
@@ -506,7 +524,8 @@ typedef enum _TFSelect
     [request setFormPostValue:favFlag                                       forKey:@"favFlag"];
     [request setFormPostValue:chainFlag                                     forKey:@"chainFlag"];
     [request setFormPostValue:[NSString stringWithFormat:@"%d",currentPage]             forKey:@"paginationid"];
-    [request setFormPostValue:[self getListType:GlobalDataCity] forKey:@"neighborhoodid"];
+    [request setFormPostValue:[self getListType:GlobalDataCity CityType:CityNeighborhood] forKey:@"neighborhoodid"];
+    [request setFormPostValue:[self getListType:GlobalDataCity CityType:CityBorough] forKey:@"boroughidlist"];
     [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.uid forKey:@"cityid"];
     [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.stateName forKey:@"statename"];
     
@@ -528,7 +547,8 @@ typedef enum _TFSelect
     NSLog(@"occasionidlist: %@", [self getListType:GlobalDataOccasion]);
     NSLog(@"priceidlist: %@", [self getListType:GlobalDataPrice]);
     NSLog(@"themeidlist: %@", [self getListType:GlobalDataTheme]);
-    NSLog(@"neighborhoodid: %@", [self getListType:GlobalDataCity]);
+    NSLog(@"neighborhoodid: %@", [self getListType:GlobalDataCity CityType:CityNeighborhood]);
+    NSLog(@"boroughidlist: %@", [self getListType:GlobalDataCity CityType:CityBorough]);
     
     NSLog(@"openflag: %@", openFlag);
     NSLog(@"savedflag: %@", savedFlag);
@@ -839,7 +859,7 @@ typedef enum _TFSelect
             [cell.buttonright setImage:[CommonHelpers getImageFromName:@"Tick mark icon.png"] forState:UIControlStateHighlighted];
             [cell.buttonright setImage:[CommonHelpers getImageFromName:@"Tick mark icon.png"] forState:UIControlStateNormal];
         }
-        cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.3];
+        cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0];
         cell.name.text = obj.object.name;
         cell.name.textColor = [UIColor whiteColor];
         cell.askObject = obj;
@@ -1011,6 +1031,16 @@ typedef enum _TFSelect
             AskObject* obj = [arrayFilterBoxData objectAtIndex:indexPath.row];
             obj.selected = !obj.selected;
             [_tableViewCuisine reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
+            if (obj.object.type == GlobalDataCity) {
+                if ([obj.object.uid isEqualToString:obj.object.cityObj.boroughId]) {
+                    for (AskObject* data in arrayFilterBoxData) {
+                        if ([data.object.cityObj.boroughId isEqualToString:obj.object.uid]) {
+                            data.selected = obj.selected;
+                        }
+                    }
+                    [_tableViewCuisine reloadData];
+                }
+            }
         }
         else
         {
@@ -1205,7 +1235,7 @@ typedef enum _TFSelect
             
             if (currentPage <= numberPage) {
                 if (_notHomeScreen == NO) {
-                    [self requestRestaurant:@"restsearchresults" Key:4];
+                    [self requestRestaurant:@"restsearchresults12" Key:4];
                 }
                 else
                     [self requestWithRecorequestID];

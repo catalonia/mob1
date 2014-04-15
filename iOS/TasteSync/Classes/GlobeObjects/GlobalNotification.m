@@ -111,7 +111,7 @@
 -(void)requestRestaurantData:(UIView*)view;
 {
     
-    CRequest* request = [[CRequest alloc]initWithURL:@"restsearchresults" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:5 WithView:view];
+    CRequest* request = [[CRequest alloc]initWithURL:@"restsearchresults12" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:5 WithView:view];
     [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
     NSString* openFlag  = @"0";
     NSString* savedFlag = @"0";
@@ -133,6 +133,7 @@
     [request setFormPostValue:chainFlag         forKey:@"chainflag"];
     [request setFormPostValue:@"1"             forKey:@"paginationid"];
     [request setFormPostValue:@""               forKey:@"neighborhoodid"];
+    [request setFormPostValue:@""               forKey:@"boroughidlist"];
     [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.uid forKey:@"cityid"];
     [request setFormPostValue:[CommonHelpers getDefaultCityObj].cityObj.stateName forKey:@"statename"];
     request.delegate = self;

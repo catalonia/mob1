@@ -246,7 +246,7 @@ askSubmited=_askSubmited;
             if (![[NSString stringWithFormat:@"%@", [dic objectForKey:@"neighborhoodId"]] isEqualToString:@""]) {
                 global.uid = [NSString stringWithFormat:@"%@", [dic objectForKey:@"neighborhoodId"] ];
                 global.name = [dic objectForKey:@"neighborhoodName"];
-                
+                global.cityType = CityNeighborhood;
                 cityObj.uid                 = [dic objectForKey:@"cityId"];
                 cityObj.country             = @"US";
                 cityObj.stateName           = [dic objectForKey:@"state"];
@@ -255,6 +255,7 @@ askSubmited=_askSubmited;
                 cityObj.neighbourhoodID     = [dic objectForKey:@"neighborhoodId"];
             }
             else if (![[NSString stringWithFormat:@"%@", [dic objectForKey:@"boroughId"]] isEqualToString:@""]) {
+                global.cityType = CityBorough;
                 global.uid = [NSString stringWithFormat:@"%@", [dic objectForKey:@"boroughId"] ];
                 global.name = [dic objectForKey:@"boroughName"];
                 
@@ -268,7 +269,7 @@ askSubmited=_askSubmited;
             else{
                 global.uid = [NSString stringWithFormat:@"%@", [dic objectForKey:@"cityId"] ];
                 global.name = [dic objectForKey:@"cityName"];
-                
+                global.cityType = CityMain;
                 cityObj.uid                 = [dic objectForKey:@"cityId"];
                 cityObj.country             = @"US";
                 cityObj.stateName           = [dic objectForKey:@"state"];

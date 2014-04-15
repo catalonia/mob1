@@ -24,6 +24,13 @@ typedef enum GlobalDataType {
     
 } GlobalDataType;
 
+typedef enum CityType {
+    CityMain =  0,
+    CityNeighborhood  =   1,
+    CityBorough  =   2
+    
+} CityType;
+
 @interface TSGlobalObj : NSObject
 @property (nonatomic, strong) NSString* uid;
 @property (nonatomic, strong) NSString *name;
@@ -31,4 +38,5 @@ typedef enum GlobalDataType {
 @property (nonatomic, strong) TSCityObj *cityObj;
 @property (nonatomic, strong) RestaurantObj* restaurantObj;
 @property (nonatomic, assign) GlobalDataType type;
+@property (nonatomic, assign) CityType cityType;
 @end

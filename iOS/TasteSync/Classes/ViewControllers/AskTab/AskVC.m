@@ -355,8 +355,9 @@
         NSString* typeofrestaurantList = @"";
         NSString* occasionList = @"";
         NSString* neiberhoodList = @"";
+        NSString* boroughList = @"";
         
-        CRequest* request = [[CRequest alloc]initWithURL:@"recosearch" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:2 WithView:self.view];
+        CRequest* request = [[CRequest alloc]initWithURL:@"recosearch12" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:2 WithView:self.view];
         [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
         
         for (TSGlobalObj* global in arrDataAsk) {
@@ -410,15 +411,28 @@
                     whoareyouList = [whoareyouList stringByAppendingFormat:@",%@", global.uid];
             }
             if (global.type == GlobalDataCity) {
-                if (neiberhoodList.length == 0) {
-                    neiberhoodList = global.uid;
+                if (global.cityType == CityNeighborhood) {
+                    if (neiberhoodList.length == 0) {
+                        neiberhoodList = global.uid;
+                    }
+                    else
+                        neiberhoodList = [neiberhoodList stringByAppendingFormat:@",%@", global.uid];
                 }
-                else
-                    neiberhoodList = [neiberhoodList stringByAppendingFormat:@",%@", global.uid];
+                if (global.cityType == CityBorough) {
+                    if (boroughList.length == 0) {
+                        boroughList = global.uid;
+                    }
+                    else
+                        boroughList = [boroughList stringByAppendingFormat:@",%@", global.uid];
+                }
                 
             }
             NSLog(@"%@ - %d - %@", global.name, global.type, global.uid);
         }
+        
+        
+        
+        
         [request setFormPostValue:cuisineList1              forKey:@"cuisinetier1idlist"];
         [request setFormPostValue:cuisineList2              forKey:@"cuisineiier2idlist"];
         [request setFormPostValue:priceList                    forKey:@"priceidlist"];
@@ -433,9 +447,13 @@
         
         //        if (region.cityObj == nil) {
         [request setFormPostValue:neiberhoodList forKey:@"neighborhoodid"];
+        [request setFormPostValue:boroughList    forKey:@"boroughidlist"];
         [request setFormPostValue:region.cityObj.uid forKey:@"cityid"];
         [request setFormPostValue:region.cityObj.stateName forKey:@"statename"];
         
+        
+        NSLog(@"neiberhoodList: %@",neiberhoodList);
+        NSLog(@"boroughList: %@",boroughList);
         
         //        }//[self parseStateFromCityObj:region.name]
         //        else
@@ -581,6 +599,14 @@
                 }
                 [_tableViewCuisine reloadData];
             }
+            if (obj.object.cityType == CityNeighborhood) {
+                for (AskObject* data in _arrDataFilter) {
+                    if ([data.object.uid isEqualToString:obj.object.cityObj.boroughId]) {
+                        data.selected = NO;
+                    }
+                }
+                [_tableViewCuisine reloadData];
+            }
         }
     }
 }
@@ -666,9 +692,27 @@
     else
     {
         neighborhoodSelectImage.hidden = YES;
+        NSMutableArray* arrayBorough = [[NSMutableArray alloc]init];
+        for (AskObject* obj in arrayCity) {
+            if (obj.object.cityType == CityBorough) {
+                [arrayBorough addObject:obj];
+            }
+        }
         for (AskObject* obj in arrayCity) {
             if (obj.selected == YES && ![arrDataAsk containsObject:obj.object]) {
-                [arrDataAsk addObject:obj.object];
+                if (obj.object.cityType == CityNeighborhood) {
+                    BOOL check = YES;
+                    for (AskObject* data in arrayBorough) {
+                        if ([data.object.uid isEqualToString:obj.object.cityObj.boroughId]) {
+                            check = NO;
+                        }
+                    }
+                    if (check) {
+                        [arrDataAsk addObject:obj.object];
+                    }
+                }
+                else
+                    [arrDataAsk addObject:obj.object];
             }
             if (obj.selected == NO)
             {
