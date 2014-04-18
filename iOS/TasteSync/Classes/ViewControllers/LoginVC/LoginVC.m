@@ -321,7 +321,7 @@
             
             [CommonHelpers writeStringToFile:jsonFriendObj];
             
-            NSLog(@"%@",jsonFriendObj);
+            NSLog(@"jsonString: %@",jsonString);
             
             CRequest* request = [[CRequest alloc]initWithURL:@"submitLoginFacebook" RQType:RequestTypePost RQData:RequestDataUser RQCategory:ApplicationJson withKey:1 WithView:nil];
             request.delegate = self;

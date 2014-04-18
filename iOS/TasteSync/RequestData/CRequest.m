@@ -214,6 +214,7 @@
     [_request addRequestHeader:@"ts_oauth_token" value:oauth];
     //NSMutableDictionary* dic3 = [NSMutableDictionary dictionary];
     [_request addRequestHeader:@"identifierForVendor" value:[[currentDevice identifierForVendor] UUIDString] ];
+    NSLog(@"identifierForVendor: %@",[[currentDevice identifierForVendor] UUIDString]);
     [_formRequest addRequestHeader:@"identifierForVendor" value:[[currentDevice identifierForVendor] UUIDString] ];
 }
 -(void)setHeader:(HeaderType)type
