@@ -305,6 +305,24 @@
     selected = self.selectedIndex;
     cTabbar.selectedItem = restaurantItem;
 }
+
+- (void) actionRestaurantViaAskTabNotLogin:(NSString*)restaurant
+{
+    RestaurantVC *vc = [[RestaurantVC alloc] initWithNibName:@"RestaurantVC" bundle:nil];
+    vc.notHomeScreen = YES;
+    vc.restaurantViaAskTab = restaurant;
+    
+    NSArray *viewControllersArr = self.viewControllers;
+    if (viewControllersArr.count > 2) {
+        self.selectedViewController = [viewControllersArr objectAtIndex:2];
+        [(UINavigationController *)self.selectedViewController pushViewController:vc animated:YES];
+    }
+    
+    
+    selected = self.selectedIndex;
+    cTabbar.selectedItem = restaurantItem;
+}
+
 - (void) actionProfile:(UserObj *) user
 {
     

@@ -18,6 +18,7 @@
 #define RESTAURANT_REQUEST @"restaurant/"
 #define ASK_REQUEST @"ask/"
 #define POPULATE_REQUEST @"populate/"
+#define TOUR_REQUEST @"tour/"
 
 @interface CRequest()
 {
@@ -48,6 +49,8 @@
             _url = [_url stringByAppendingString:ASK_REQUEST];
         if (data == RequestPopulate)
             _url = [_url stringByAppendingString:POPULATE_REQUEST];
+        if (data == RequestTour)
+            _url = [_url stringByAppendingString:TOUR_REQUEST];
         _url = [_url stringByAppendingString:url];
         
         NSLog(@"url: %@", _url);
@@ -105,6 +108,8 @@
             _url = [_url stringByAppendingString:ASK_REQUEST];
         if (data == RequestPopulate)
             _url = [_url stringByAppendingString:POPULATE_REQUEST];
+        if (data == RequestTour)
+            _url = [_url stringByAppendingString:TOUR_REQUEST];
         _url = [_url stringByAppendingString:url];
         
         NSLog(@"url: %@", _url);
@@ -216,6 +221,11 @@
     [_request addRequestHeader:@"identifierForVendor" value:[[currentDevice identifierForVendor] UUIDString] ];
     NSLog(@"identifierForVendor: %@",[[currentDevice identifierForVendor] UUIDString]);
     [_formRequest addRequestHeader:@"identifierForVendor" value:[[currentDevice identifierForVendor] UUIDString] ];
+    
+    NSLog(@"ts_oauth_token: %@", oauth);
+    NSLog(@"identifierForVendor: %@", [[currentDevice identifierForVendor] UUIDString]);
+    NSLog(@"UserId: %@", [UserDefault userDefault].userID);
+    
 }
 -(void)setHeader:(HeaderType)type
 {

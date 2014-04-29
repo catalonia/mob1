@@ -65,10 +65,20 @@ restaurantObj=_restaurantObj;
     [CommonHelpers implementFlurry:params forKey:@"RestaurantPhoto" isBegin:YES];
     
     if (isRequest == NO) {
-        NSString* photo_link = [NSString stringWithFormat:@"photos?userid=%@&restaurantid=%@",[UserDefault userDefault].userID, self.restaurantObj.uid];
-        CRequest* photo_request = [[CRequest alloc]initWithURL:photo_link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:2 WithView:self.view];
-        photo_request.delegate = self;
-        [photo_request startFormRequest];
+        if ([UserDefault userDefault].loginStatus != NotLogin) {
+            NSString* photo_link = [NSString stringWithFormat:@"photos?userid=%@&restaurantid=%@",[UserDefault userDefault].userID, self.restaurantObj.uid];
+            CRequest* photo_request = [[CRequest alloc]initWithURL:photo_link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:2 WithView:self.view];
+            photo_request.delegate = self;
+            [photo_request startFormRequest];
+        }
+        else
+        {
+            NSString* photo_link = [NSString stringWithFormat:@"photos?restaurantid=%@", self.restaurantObj.uid];
+            CRequest* photo_request = [[CRequest alloc]initWithURL:photo_link RQType:RequestTypeGet RQData:RequestTour RQCategory:ApplicationForm withKey:2 WithView:self.view];
+            photo_request.delegate = self;
+            [photo_request startFormRequest];
+        }
+        
         isRequest = YES;
     }
     

@@ -30,7 +30,8 @@ typedef enum
     RequestDataUser = 1,
     RequestDataRestaurant = 2,
     RequestDataAsk = 3,
-    RequestPopulate = 4
+    RequestPopulate = 4,
+    RequestTour = 5
 }RequestData;
 
 typedef enum

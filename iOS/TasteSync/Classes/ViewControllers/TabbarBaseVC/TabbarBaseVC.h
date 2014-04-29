@@ -35,5 +35,5 @@ typedef enum
 - (void) actionRecommendationsShowMore:(RestaurantObj*)restaurantObj;
 - (void)gotoProfile:(UserObj*)obj;
 - (void) actionBackToSelectedIndex:(int) aSelectedIndex;
-
+- (void) actionRestaurantViaAskTabNotLogin:(NSString*)restaurant;
 @end

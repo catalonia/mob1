@@ -226,10 +226,16 @@ typedef enum _TFSelect
             tfRestaurant.text = @"";
             
             currentPage = 1;
-            NSString* link = [NSString stringWithFormat:@"recosidrestaurantsearchresults?userid=%@&recorequestid=%@&paginationid=%@",[UserDefault userDefault].userID,self.recorequestID,@"1"];
-            CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:3 WithView:self.view];
-            request.delegate = self;
-            [request startFormRequest];
+            if ([UserDefault userDefault].loginStatus != NotLogin) {
+                NSString* link = [NSString stringWithFormat:@"recosidrestaurantsearchresults?userid=%@&recorequestid=%@&paginationid=%@",[UserDefault userDefault].userID,self.recorequestID,@"1"];
+                CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:3 WithView:self.view];
+                request.delegate = self;
+                [request startFormRequest];
+            }
+            else
+            {
+                [self parseRestaurantData:self.restaurantViaAskTab];
+            }
             
         }
         else
@@ -1311,82 +1317,8 @@ typedef enum _TFSelect
     }
     if (key == 3) {
         NSLog(@"responseRestaurant: %@",response);
-        NSDictionary* dicAll = [response objectFromJSONString];
-        numberPage = [[dicAll objectForKey:@"maxPaginationId"] integerValue];
         
-        if (currentPage == 1) {
-            [CommonHelpers appDelegate].arrayRestaurant = [[NSMutableArray alloc]init];
-        }
-        
-        NSArray* array = [dicAll objectForKey:@"restaurantsSearchListTileObj"];
-        for (NSDictionary* dic in array) {
-            TSGlobalObj* global = [[TSGlobalObj alloc]init];
-            global.type = GlobalDataRestaurant;
-            
-            
-            
-            global.uid = [dic objectForKey:@"restaurantId"];
-            global.name = [dic objectForKey:@"restaurantName"];
-            
-            RestaurantObj* restaurantObj = [[RestaurantObj alloc]init];
-            
-            restaurantObj.uid =  [dic objectForKey:@"restaurantId"];
-            restaurantObj.name = [dic objectForKey:@"restaurantName"];
-            restaurantObj.cuisineTier2 = [dic objectForKey:@"cuisineTier2Name"];
-            restaurantObj.price     = [dic objectForKey:@"price"];
-            restaurantObj.deal      =  [dic objectForKey:@"restaurantDealFlag"];
-            restaurantObj.rates     = [[dic objectForKey:@"restaurantRating"] floatValue];
-            
-            restaurantObj.lattitude     = [[dic objectForKey:@"restaurantLat"] floatValue];
-            restaurantObj.longtitude    = [[dic objectForKey:@"restaurantLong"] floatValue];
-            restaurantObj.cityObj = [[TSCityObj alloc]init];
-            restaurantObj.cityObj.cityName = [dic objectForKey:@"restaurantCity"];
-            
-            global.restaurantObj = restaurantObj;
-            [_arrData addObject:global];
-            [[CommonHelpers appDelegate].arrayRestaurant addObject:global];
-        }
-        
-        
-        NSDictionary* dicDetail = [dicAll objectForKey:@"inputParams"];
-        NSString* cuisineTier2 = @"";
-        
-        if (![[dicDetail objectForKey:@"cuisineTier2idlist"] isKindOfClass:([NSNull class])]) {
-            cuisineTier2 = [dicDetail objectForKey:@"cuisineTier2idlist"];
-        }
-
-        detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"] openNow:[dicDetail objectForKey:@"opennowflag"] FavedFlag:[dicDetail objectForKey:@"favflag"] SavedFlag:[dicDetail objectForKey:@"savedflag"] ChainFlag:[dicDetail objectForKey:@"chainflag"] Rate:[dicDetail objectForKey:@"rating"]];
-        
-        
-        //[self addType:self.arrDataRegion ListID:[dicDetail objectForKey:@"cityid"]];
-        [self addType:arrayCuisine ListID:[dicDetail objectForKey:@"cuisinetier1idlist"] Type:GlobalDataCuisine_1];
-        [self addType:arrayCuisine ListID:[dicDetail objectForKey:@"cuisinetier2idlist"] Type:GlobalDataCuisine_2];
-        [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"occasionidlist"] Type:GlobalDataOccasion];
-        [self addType:arrayPrice ListID:[dicDetail objectForKey:@"priceidlist"] Type:GlobalDataPrice];
-        [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"themeidlist"] Type:GlobalDataTheme];
-        [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"typeofrestaurantidList"] Type:GlobalDataTypeOfRestaurant];
-        [self addType:arrayWhoWithYou ListID:[dicDetail objectForKey:@"whoareyouwithidlist"] Type:GlobalDataWhoAreUWith];
-        [self addType:arrayCity ListID:[dicDetail objectForKey:@"neighborhoodid"] Type:GlobalDataCity];
-        UIButton* button = [[UIButton alloc]init];
-        button.tag = 1;
-        [self doneAction:button];
-        UIButton* button2 = [[UIButton alloc]init];
-        button2.tag = 0;
-        [self doneAction:button2];
-        
-        _storeOldValue = [self getLinkRequest];
-        
-        [self resizeDetailText];
-        
-        
-        [tbvResult reloadData];
-        
-        
-        
-        tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
-        scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
-        viewMain.frame = CGRectMake(viewMain.frame.origin.x, viewMain.frame.origin.y, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
-        
+        [self parseRestaurantData:response];
     }
     if (key == 4) {
         NSString* response = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
@@ -1453,6 +1385,85 @@ typedef enum _TFSelect
         [self.navigationController pushViewController:askContact animated:NO];
         
     }
+}
+
+-(void)parseRestaurantData:(NSString*)restaurantData
+{
+    NSDictionary* dicAll = [restaurantData objectFromJSONString];
+    numberPage = [[dicAll objectForKey:@"maxPaginationId"] integerValue];
+    
+    if (currentPage == 1) {
+        [CommonHelpers appDelegate].arrayRestaurant = [[NSMutableArray alloc]init];
+    }
+    
+    NSArray* array = [dicAll objectForKey:@"restaurantsSearchListTileObj"];
+    for (NSDictionary* dic in array) {
+        TSGlobalObj* global = [[TSGlobalObj alloc]init];
+        global.type = GlobalDataRestaurant;
+        
+        
+        
+        global.uid = [dic objectForKey:@"restaurantId"];
+        global.name = [dic objectForKey:@"restaurantName"];
+        
+        RestaurantObj* restaurantObj = [[RestaurantObj alloc]init];
+        
+        restaurantObj.uid =  [dic objectForKey:@"restaurantId"];
+        restaurantObj.name = [dic objectForKey:@"restaurantName"];
+        restaurantObj.cuisineTier2 = [dic objectForKey:@"cuisineTier2Name"];
+        restaurantObj.price     = [dic objectForKey:@"price"];
+        restaurantObj.deal      =  [dic objectForKey:@"restaurantDealFlag"];
+        restaurantObj.rates     = [[dic objectForKey:@"restaurantRating"] floatValue];
+        
+        restaurantObj.lattitude     = [[dic objectForKey:@"restaurantLat"] floatValue];
+        restaurantObj.longtitude    = [[dic objectForKey:@"restaurantLong"] floatValue];
+        restaurantObj.cityObj = [[TSCityObj alloc]init];
+        restaurantObj.cityObj.cityName = [dic objectForKey:@"restaurantCity"];
+        
+        global.restaurantObj = restaurantObj;
+        [_arrData addObject:global];
+        [[CommonHelpers appDelegate].arrayRestaurant addObject:global];
+    }
+    
+    
+    NSDictionary* dicDetail = [dicAll objectForKey:@"inputParams"];
+    NSString* cuisineTier2 = @"";
+    
+    if (![[dicDetail objectForKey:@"cuisineTier2idlist"] isKindOfClass:([NSNull class])]) {
+        cuisineTier2 = [dicDetail objectForKey:@"cuisineTier2idlist"];
+    }
+    
+    detailLabel.text = [CommonHelpers getFilterString:[dicDetail objectForKey:@"cityid"] cuisinetier1ID:[dicDetail objectForKey:@"cuisinetier1idlist"]  cuisinetier2ID:cuisineTier2  neighborhoodid:[dicDetail objectForKey:@"neighborhoodid"]  occasionidlist:[dicDetail objectForKey:@"occasionidlist"]  priceidlist:[dicDetail objectForKey:@"priceidlist"]  themeidlist:[dicDetail objectForKey:@"themeidlist"]  typeofrestaurantidList:[dicDetail objectForKey:@"typeofrestaurantidList"]  whoareyouwithidlist:[dicDetail objectForKey:@"whoareyouwithidlist"] openNow:[dicDetail objectForKey:@"opennowflag"] FavedFlag:[dicDetail objectForKey:@"favflag"] SavedFlag:[dicDetail objectForKey:@"savedflag"] ChainFlag:[dicDetail objectForKey:@"chainflag"] Rate:[dicDetail objectForKey:@"rating"]];
+    
+    
+    //[self addType:self.arrDataRegion ListID:[dicDetail objectForKey:@"cityid"]];
+    [self addType:arrayCuisine ListID:[dicDetail objectForKey:@"cuisinetier1idlist"] Type:GlobalDataCuisine_1];
+    [self addType:arrayCuisine ListID:[dicDetail objectForKey:@"cuisinetier2idlist"] Type:GlobalDataCuisine_2];
+    [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"occasionidlist"] Type:GlobalDataOccasion];
+    [self addType:arrayPrice ListID:[dicDetail objectForKey:@"priceidlist"] Type:GlobalDataPrice];
+    [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"themeidlist"] Type:GlobalDataTheme];
+    [self addType:arrayAmbience ListID:[dicDetail objectForKey:@"typeofrestaurantidList"] Type:GlobalDataTypeOfRestaurant];
+    [self addType:arrayWhoWithYou ListID:[dicDetail objectForKey:@"whoareyouwithidlist"] Type:GlobalDataWhoAreUWith];
+    [self addType:arrayCity ListID:[dicDetail objectForKey:@"neighborhoodid"] Type:GlobalDataCity];
+    UIButton* button = [[UIButton alloc]init];
+    button.tag = 1;
+    [self doneAction:button];
+    UIButton* button2 = [[UIButton alloc]init];
+    button2.tag = 0;
+    [self doneAction:button2];
+    
+    _storeOldValue = [self getLinkRequest];
+    
+    [self resizeDetailText];
+    
+    
+    [tbvResult reloadData];
+    
+    
+    
+    tbvResult.frame = CGRectMake(tbvResult.frame.origin.x, tbvResult.frame.origin.y, tbvResult.frame.size.width, tbvResult.contentSize.height);
+    scrollViewMain.contentSize = CGSizeMake(scrollViewMain.contentSize.width, tbvResult.contentSize.height + DELTAHEIGHT);
+    viewMain.frame = CGRectMake(viewMain.frame.origin.x, viewMain.frame.origin.y, viewMain.frame.size.width, tbvResult.contentSize.height + 440);
 }
 
 -(void)resizeDetailText

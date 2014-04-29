@@ -76,17 +76,27 @@
 {
     [super viewDidAppear:animated];
     
-    NSDictionary *params =
-    [NSDictionary dictionaryWithObjectsAndKeys:
-     @""            , @"restaurant_id",
-     @""            , @"Click",
-     nil];
-    [CommonHelpers implementFlurry:params forKey:@"RestaurantMore" isBegin:YES];
+    if ([UserDefault userDefault].loginStatus != NotLogin) {
+        NSDictionary *params =
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         @""            , @"restaurant_id",
+         @""            , @"Click",
+         nil];
+        [CommonHelpers implementFlurry:params forKey:@"RestaurantMore" isBegin:YES];
+        
+        NSString* link = [NSString stringWithFormat:@"extendedinfo?userid=%@&restaurantid=%@",[UserDefault userDefault].userID, self.restaurantObj.uid];
+        CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:1 WithView:self.view];
+        request.delegate = self;
+        [request startFormRequest];
+    }
+    else
+    {
+        NSString* link = [NSString stringWithFormat:@"extendedinfo?restaurantid=%@", self.restaurantObj.uid];
+        CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestTour RQCategory:ApplicationForm withKey:1 WithView:self.view];
+        request.delegate = self;
+        [request startFormRequest];
+    }
     
-    NSString* link = [NSString stringWithFormat:@"extendedinfo?userid=%@&restaurantid=%@",[UserDefault userDefault].userID, self.restaurantObj.uid];
-    CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:1 WithView:self.view];
-    request.delegate = self;
-    [request startFormRequest];
 }
 
 -(void)viewDidDisappear:(BOOL)animated

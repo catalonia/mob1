@@ -96,17 +96,25 @@ restaurantObj=_restaurantObj;
 {
     [super viewDidAppear:animated];
     
-    NSDictionary *askhomeParams =
-    [NSDictionary dictionaryWithObjectsAndKeys:
-     @""           , @"RestaurantID",
-     nil];
-    [CommonHelpers implementFlurry:askhomeParams forKey:@"RestaurantMenu" isBegin:YES];
-    
-    NSString* link = [NSString stringWithFormat:@"menu?userid=%@&restaurantid=%@",[UserDefault userDefault].userID, self.restaurantObj.uid];
-    NSLog(@"%@, %@", [UserDefault userDefault].userID, self.restaurantObj.uid);
-    CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:1 WithView:self.view];
-    request.delegate = self;
-    [request startFormRequest];
+    if ([UserDefault userDefault].loginStatus != NotLogin) {
+        NSDictionary *askhomeParams =
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         @""           , @"RestaurantID",
+         nil];
+        [CommonHelpers implementFlurry:askhomeParams forKey:@"RestaurantMenu" isBegin:YES];
+        
+        NSString* link = [NSString stringWithFormat:@"menu?userid=%@&restaurantid=%@",[UserDefault userDefault].userID, self.restaurantObj.uid];
+        NSLog(@"%@, %@", [UserDefault userDefault].userID, self.restaurantObj.uid);
+        CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:1 WithView:self.view];
+        request.delegate = self;
+        [request startFormRequest];
+    }
+    else{
+         NSString* link = [NSString stringWithFormat:@"menu?restaurantid=%@", self.restaurantObj.uid];
+        CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestTour RQCategory:ApplicationForm withKey:1 WithView:self.view];
+        request.delegate = self;
+        [request startFormRequest];
+    }
 }
 
 -(void)viewDidDisappear:(BOOL)animated

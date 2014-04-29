@@ -50,20 +50,29 @@ restaurantObj=_restaurantObj;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    actionClick = @"";
-    NSDictionary *params =
-    [NSDictionary dictionaryWithObjectsAndKeys:
-     @""            , @"restaurant_id",
-     @""            , @"RestaurantBuzzRecoList",
-     @""            , @"RestaurantBuzzTipList",
-     @""            , @"Click",
-     nil];
-    [CommonHelpers implementFlurry:params forKey:@"RestaurantReviewsAndTips" isBegin:YES];
-    
-    NSString* link = [NSString stringWithFormat:@"buzzcomplete?userid=%@&restaurantid=%@",[UserDefault userDefault].userID,_restaurantObj.uid];
-    CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:1 WithView:self.view];
-    request.delegate = self;
-    [request startFormRequest];
+    if ([UserDefault userDefault].loginStatus != NotLogin) {
+        actionClick = @"";
+        NSDictionary *params =
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         @""            , @"restaurant_id",
+         @""            , @"RestaurantBuzzRecoList",
+         @""            , @"RestaurantBuzzTipList",
+         @""            , @"Click",
+         nil];
+        [CommonHelpers implementFlurry:params forKey:@"RestaurantReviewsAndTips" isBegin:YES];
+        
+        NSString* link = [NSString stringWithFormat:@"buzzcomplete?userid=%@&restaurantid=%@",[UserDefault userDefault].userID,_restaurantObj.uid];
+        CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:1 WithView:self.view];
+        request.delegate = self;
+        [request startFormRequest];
+    }
+    else
+    {
+        NSString* link = [NSString stringWithFormat:@"buzzcomplete?restaurantid=%@",_restaurantObj.uid];
+        CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestTour RQCategory:ApplicationForm withKey:1 WithView:self.view];
+        request.delegate = self;
+        [request startFormRequest];
+    }
 }
 
 -(void)viewDidDisappear:(BOOL)animated

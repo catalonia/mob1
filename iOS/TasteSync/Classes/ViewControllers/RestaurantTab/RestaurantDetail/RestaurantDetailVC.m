@@ -192,10 +192,19 @@
         isReload = YES;
     }
     if (reloadThisPage == NO) {
-        NSString* link = [NSString stringWithFormat:@"details?userid=%@&restaurantid=%@",[UserDefault userDefault].userID, self.restaurantObj.uid];
-        CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:1 WithView:self.view];
-        request.delegate = self;
-        [request startFormRequest];
+        if ([UserDefault userDefault].loginStatus != NotLogin) {
+            NSString* link = [NSString stringWithFormat:@"details?userid=%@&restaurantid=%@",[UserDefault userDefault].userID, self.restaurantObj.uid];
+            CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataRestaurant RQCategory:ApplicationForm withKey:1 WithView:self.view];
+            request.delegate = self;
+            [request startFormRequest];
+        }
+        else
+        {
+            NSString* link = [NSString stringWithFormat:@"details?restaurantid=%@", self.restaurantObj.uid];
+            CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestTour RQCategory:ApplicationForm withKey:1 WithView:self.view];
+            request.delegate = self;
+            [request startFormRequest];
+        }
     
         reloadThisPage = YES;
     }

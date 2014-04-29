@@ -65,6 +65,7 @@
 
 @property (nonatomic, strong) NSMutableArray *arrData, *arrDataFilter , *arrDataRestaurant , *arrDataRegion;
 @property (nonatomic,strong) NSString* recorequestID;
+@property (nonatomic,strong) NSString* restaurantViaAskTab;
 
 @property (nonatomic, assign) BOOL notHomeScreen;
 @property (nonatomic, assign) int rating;

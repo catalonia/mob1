@@ -114,10 +114,13 @@
         }
         else
         {
-            [CommonHelpers appDelegate].arrayShuffle = [[NSMutableArray alloc]init];
-            GlobalNotification *globalNotification = [[GlobalNotification alloc] initWithALlType];
-            [globalNotification requestData:self.view Type:RecommendationNotification];
-            [globalNotification requestRestaurantData:self.view];
+            if ([UserDefault userDefault].loginStatus != NotLogin) {
+                [CommonHelpers appDelegate].arrayShuffle = [[NSMutableArray alloc]init];
+                GlobalNotification *globalNotification = [[GlobalNotification alloc] initWithALlType];
+                [globalNotification requestData:self.view Type:RecommendationNotification];
+                [globalNotification requestRestaurantData:self.view];
+            }
+            
 
         }
         isLoad = YES;
@@ -357,8 +360,15 @@
         NSString* neiberhoodList = @"";
         NSString* boroughList = @"";
         
-        CRequest* request = [[CRequest alloc]initWithURL:@"recosearch12" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:2 WithView:self.view];
-        [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
+        CRequest* request;
+        if ([UserDefault userDefault].loginStatus == NotLogin) {
+            request = [[CRequest alloc]initWithURL:@"restsearchresults12" RQType:RequestTypePost RQData:RequestTour RQCategory:ApplicationForm withKey:2 WithView:self.view];
+        }
+        else
+        {
+            request = [[CRequest alloc]initWithURL:@"recosearch12" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:2 WithView:self.view];
+            [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
+        }
         
         for (TSGlobalObj* global in arrDataAsk) {
             if (global.type == GlobalDataCuisine_1 ) {
@@ -617,10 +627,17 @@
     NSString* response = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"%@",response);
     if (key == 2) {
-        number_recomendation = 1;
-        NSDictionary* dic = [response objectFromJSONString];
-        recommendationText = [dic objectForKey:@"valueNameValue"];
-        [CommonHelpers showInfoAlertWithTitle:@"TasteSync" message:@"Your query has been sent to a foodie. Their suggestions should be available in your Recommendations Inbox in a few minutes." delegate:self tag:0];
+        if ([UserDefault userDefault].loginStatus != NotLogin) {
+            number_recomendation = 1;
+            NSDictionary* dic = [response objectFromJSONString];
+            recommendationText = [dic objectForKey:@"valueNameValue"];
+            [CommonHelpers showInfoAlertWithTitle:@"TasteSync" message:@"Your query has been sent to a foodie. Their suggestions should be available in your Recommendations Inbox in a few minutes." delegate:self tag:0];
+        }
+        else
+        {
+            recommendationText = response;
+            [CommonHelpers showInfoAlertWithTitle:@"TasteSync" message:@"Your query has been sent to a foodie. Their suggestions should be available in your Recommendations Inbox in a few minutes." delegate:self tag:0];
+        }
         
         
     }
@@ -929,7 +946,13 @@
 
 -(void)gotoRestaurant
 {
-    [[[CommonHelpers appDelegate] tabbarBaseVC] actionRestaurantViaAskTab:recommendationText];
+    if ([UserDefault userDefault].loginStatus != NotLogin) {
+        [[[CommonHelpers appDelegate] tabbarBaseVC] actionRestaurantViaAskTab:recommendationText];
+    }
+    else
+    {
+        [[[CommonHelpers appDelegate] tabbarBaseVC] actionRestaurantViaAskTabNotLogin:recommendationText];
+    }
 }
 
 @end
