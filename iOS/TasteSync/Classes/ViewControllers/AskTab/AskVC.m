@@ -106,6 +106,12 @@
      nil];
     [CommonHelpers implementFlurry:askhomeParams forKey:@"Ask_Home" isBegin:YES];
     
+    
+    if ([UserDefault userDefault].loginStatus == NotLogin) {
+        GlobalNotification *globalNotification = [[GlobalNotification alloc] initWithALlType];
+        [globalNotification requestRestaurantNotLoginData:self.view];
+    }
+    
     if (isLoad == NO && [CommonHelpers appDelegate].isHaveError == NO) {
         Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
         NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
@@ -119,6 +125,7 @@
                 GlobalNotification *globalNotification = [[GlobalNotification alloc] initWithALlType];
                 [globalNotification requestData:self.view Type:RecommendationNotification];
                 [globalNotification requestRestaurantData:self.view];
+                
             }
             
 

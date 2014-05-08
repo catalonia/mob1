@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecommendDetail7">
             <connections>
                 <outlet property="btBack" destination="80" id="83"/>
+                <outlet property="imageBack" destination="cV2-Ys-SOT" id="xaX-XR-d4I"/>
                 <outlet property="imageView" destination="65" id="Afc-oe-qAh"/>
                 <outlet property="ivAvatar" destination="16" id="29"/>
                 <outlet property="lbName" destination="12" id="39"/>

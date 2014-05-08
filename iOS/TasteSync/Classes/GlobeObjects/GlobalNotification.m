@@ -50,11 +50,20 @@
     }
     else
     {
-        CRequest* request = [[CRequest alloc]initWithURL:@"shufflerecorequests" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:6 WithView:view];
-        [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
-        [request setFormPostValue:@"1" forKey:@"paginationid"];
-        request.delegate = self;
-        [request startFormRequest];
+        if ([UserDefault userDefault].loginStatus != NotLogin) {
+            CRequest* request = [[CRequest alloc]initWithURL:@"shufflerecorequests" RQType:RequestTypePost RQData:RequestDataAsk RQCategory:ApplicationForm withKey:6 WithView:view];
+            [request setFormPostValue:[UserDefault userDefault].userID forKey:@"userid"];
+            [request setFormPostValue:@"1" forKey:@"paginationid"];
+            request.delegate = self;
+            [request startFormRequest];
+        }
+        else
+        {
+            CRequest* request = [[CRequest alloc]initWithURL:@"shufflerecorequests" RQType:RequestTypePost RQData:RequestTour RQCategory:ApplicationForm withKey:6 WithView:view];
+            [request setFormPostValue:@"" forKey:@""];
+            request.delegate = self;
+            [request startFormRequest];
+        }
     }
 }
 
@@ -178,6 +187,14 @@
         self.isSend = FALSE;
     }
     return nil;
+}
+
+-(void)requestRestaurantNotLoginData:(UIView*)view
+{
+    NSString* link = [NSString stringWithFormat:@"recowelcome"];
+    CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestTour RQCategory:ApplicationForm withKey:10 WithView:_view];
+    request.delegate = self;
+    [request startFormRequest];
 }
 
 -(void)responseData:(NSData *)data WithKey:(int)key UserData:(id)userData
@@ -836,6 +853,37 @@
         }
         else
             [self.delegate getDataSuccess:RecommendationShuffle];
+        
+    }
+    if (key == 10) {
+        NSString* response = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSDictionary* dic = [response objectFromJSONString];
+        NSLog(@"%@",response);
+        //NSArray* array = [response objectFromJSONString];
+        NSLog(@"%@",response);
+        
+        self.arrDataRead = [[NSMutableArray alloc]init];
+        NSArray* array = [response objectFromJSONString];
+        self.total = [array count];
+        self.unread = [array count];
+        //self.read = 0;
+        int i = 0;
+        NotificationObj *obj = [[NotificationObj alloc] init];
+        obj.type = NotificationWelcome;
+        
+        NSString* unreadCounter = [dic objectForKey:@"unreadCounter"];
+        [CommonHelpers setBottomValue:unreadCounter];
+        
+        obj.description = [dic objectForKey:@"message"];
+        
+        
+        
+        obj.unread = NO;
+        obj.replied = NO;
+        indexLoad = i;
+        [self.arrDataRead addObject:obj];
+        AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        delegate.arrayNotification = [[NSMutableArray alloc]initWithArray:self.arrDataRead];
         
     }
 }

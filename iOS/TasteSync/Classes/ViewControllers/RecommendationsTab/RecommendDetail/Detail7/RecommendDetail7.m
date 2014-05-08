@@ -27,6 +27,7 @@
     __weak IBOutlet UITableView *tbvFilter,*tbvResult;
     __weak IBOutlet UIScrollView *scrollViewMain;
     __weak IBOutlet UIImageView *imageView;
+    __weak IBOutlet UIImageView *imageBack;
     __weak IBOutlet UIView *view1,*view2,*view3,*viewMsgSent,*viewMain;
     UITextField *cTextField;
     FilterRestaurant *filterView;
@@ -93,7 +94,7 @@ arrDataFilter=_arrDataFilter;
     userDefault = [UserDefault userDefault];
     
     if (userDefault.loginStatus == NotLogin) {
-        btBack.hidden = YES;
+        //btBack.hidden = YES;
     }
 
     if (glNotif.isSend) {     
@@ -163,10 +164,16 @@ arrDataFilter=_arrDataFilter;
 {
     [super viewDidAppear:animated];
     if (_notificationObj.type == NotificationWelcome) {
-        NSString* link = [NSString stringWithFormat:@"recowelcome?userid=%@", [UserDefault userDefault].userID];
-        CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:3 WithView:self.view];
-        request.delegate = self;
-        [request startFormRequest];
+        if ([UserDefault userDefault].loginStatus != NotLogin) {
+            NSString* link = [NSString stringWithFormat:@"recowelcome?userid=%@", [UserDefault userDefault].userID];
+            CRequest* request = [[CRequest alloc]initWithURL:link RQType:RequestTypeGet RQData:RequestDataAsk RQCategory:ApplicationForm withKey:3 WithView:self.view];
+            request.delegate = self;
+            [request startFormRequest];
+        }
+        else
+        {
+            tvLongMsg.text = self.notificationObj.description;
+        }
     }
 }
 
@@ -181,7 +188,8 @@ arrDataFilter=_arrDataFilter;
 
 - (IBAction)actionBack:(id)sender
 {
-    [self.global.recomendationDelegate reloadRecomendation];
+    if ([UserDefault userDefault].loginStatus != NotLogin)
+        [self.global.recomendationDelegate reloadRecomendation];
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)actionNewsfeedTab:(id)sender

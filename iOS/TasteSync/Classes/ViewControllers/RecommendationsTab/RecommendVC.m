@@ -89,7 +89,7 @@
     
     [self reloadData];
     if (userDefault.loginStatus == NotLogin) {
-        [self gotoDetailNotification:glNotif.notifObj atIndex:0];
+        //[self gotoDetailNotification:[[CommonHelpers appDelegate].arrayNotification objectAtIndex:0] atIndex:0];
     }
     else
     {
@@ -316,7 +316,7 @@
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     float offset = (scrollView.contentOffset.y) - (scrollView.contentSize.height - scrollView.frame.size.height);
-        if (offset >=0  && page < aNumberOfRow) {
+        if (offset >=0  && page < aNumberOfRow && [UserDefault userDefault].loginStatus != NotLogin) {
             debug(@"Load More Data");
             page++;
             [self loadMoreData];
@@ -492,7 +492,7 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (isLoading) return;
     isDragging = NO;
-    if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT) {
+    if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT && [UserDefault userDefault].loginStatus != NotLogin) {
         [self startLoading];
     }
 }
