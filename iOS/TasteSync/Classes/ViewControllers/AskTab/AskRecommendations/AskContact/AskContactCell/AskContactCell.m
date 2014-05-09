@@ -44,7 +44,14 @@
         if (_askObject.object.name.length != 5) {
             _name.text = @"+";
         }
+        
+    }
+    if (_askObject.object.cityObj != nil) {
+        if (![_askObject.object.cityObj.neighbourhoodID isEqualToString:@""]) {
+            _name.text = [NSString stringWithFormat:@"   %@", _askObject.object.name];
+        }
     }
 }
+
 
 @end

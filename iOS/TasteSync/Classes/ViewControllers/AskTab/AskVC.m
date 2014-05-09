@@ -563,11 +563,13 @@
             [cell.buttonright setImage:[CommonHelpers getImageFromName:@"Tick mark icon.png"] forState:UIControlStateHighlighted];
             [cell.buttonright setImage:[CommonHelpers getImageFromName:@"Tick mark icon.png"] forState:UIControlStateNormal];
         }
+        cell.askObject = obj;
         cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0];
         cell.name.text = obj.object.name;
         cell.name.textColor = [UIColor whiteColor];
         //cell.name.font = [UIFont systemFontOfSize:14];
         cell.name.frame = CGRectMake(cell.name.frame.origin.x, cell.name.frame.origin.y, cell.name.frame.size.width + 20, cell.name.frame.size.height);
+        [cell refreshView];
         return cell;
     }
 }
